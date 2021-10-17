@@ -2,3 +2,4 @@
 Mashehu kirtzono 
 dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 Hello World!
+to check later: do we need to put thisses in the constructer functions?
