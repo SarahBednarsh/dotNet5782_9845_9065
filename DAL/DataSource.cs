@@ -27,6 +27,7 @@ namespace DalObject
         internal static void Initialize() //not sure about access permissions
         {
             //fill later - page 7
+
         }
     }
 }
