@@ -12,6 +12,7 @@ namespace DalObject
         internal static Customer[] Customers = new Customer[100];
         internal static Parcel[] Parcels = new Parcel[1000];*/
         internal static List<Drone> Drones;
+        internal static List<DroneCharge> DroneCharges;
         internal static List<Station> Stations;
         internal static List<Customer> Customers;
         internal static List<Parcel> Parcels;

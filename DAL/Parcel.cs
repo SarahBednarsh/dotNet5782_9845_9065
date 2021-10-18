@@ -33,7 +33,8 @@ namespace IDAL
                 this.Requested = requested;
                 this.DroneId = droneId;
                 this.Scheduled = DateTime.Now;
-                
+                this.PickedUp = DateTime.Now; // not nullable, what to do?
+                this.Delivered = DateTime.Now; //kanal
             }
             public int Id { get; set; }
             public int SenderId { get; set; }
@@ -47,7 +48,7 @@ namespace IDAL
             public DateTime Delivered { get; set; }
             public override string ToString()
             {
-                return string.Format("Id: {0}, Name: {1}, Phone: {2}, Longitude: {3}, Latitude: {4}", Id, Name, Phone, Longitude, Lattitude);
+                return string.Format("Id: {0}, SenderId: {1}, TargetId: {2}, Weight: {3}, Priority: {4}, Requested: {5}, DroneId: {6}, Scheduled: {7}, PickedUp: {8}, Delivered: {9}", Id, SenderId, TargetId, Weight, Priority, Requested, DroneId, Scheduled, PickedUp, Delivered);
             }
         }
     }
