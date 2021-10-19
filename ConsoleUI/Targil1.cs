@@ -1,19 +1,22 @@
 ﻿using System;
+using DalObject;//do we need this?
+using IDAL.DO;
 namespace ConsoleUI
 {
     public enum Actions { Exit, Add, Update, View, List }
     public enum Data { Station = 1, Drone, Customer, Parcel }
+    
     class Targil1
     {
         static void Main(string[] args)
         {
+            DalObject.DalObject project = new DalObject.DalObject();
             Console.WriteLine("Enter 1 for adding an entity" +
                 "Enter 2 for updating an entity " +
                 "Enter 3 for displaying an entity" +
                 "Enter 4 for displaying a list of entities" +
                 "Enter 0 for Exit" +
                 "");
-
             Actions option = (Actions)Console.Read();
             Data specific;//will be used to decide what action to do in a specific category
             switch (option)
@@ -22,6 +25,7 @@ namespace ConsoleUI
                     Console.WriteLine("Bye bye!");
                     break;
                 case Actions.Add:
+                    int id; string name; string phone;double longitude;double latitude;
                     Console.WriteLine("Enter 1 to add a station" +
                 "Enter 2 to add a drone" +
                 "Enter 3 to add a customer" +
@@ -30,10 +34,31 @@ namespace ConsoleUI
                     specific = (Data)Console.Read();
                     switch (specific)
                     {
-                        case Data.Station:
-                            Console.WriteLine("enter ");
+                        case Data.Station://public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
+                            Console.WriteLine("Enter id:");
+                            id = Console.Read();
+                            Console.WriteLine("Enter name:");
+                            name = Console.ReadLine();
+                            Console.WriteLine("Enter phone number:");
+                            phone = Console.ReadLine();
+                            Console.WriteLine("Enter longitude:");
+                            longitude = Console.Read();
+                            Console.WriteLine("Enter latitude:");
+                            latitude = Console.Read();
+                            project.AddCustomer(id, name, phone, longitude, latitude);
                             break;
-                        case Data.Drone:
+                        case Data.Drone://public void AddDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
+                            Console.WriteLine("Enter id:");
+                            id = Console.Read();
+                            Console.WriteLine("Enter model:");
+                            string model = Console.ReadLine();
+                            Console.WriteLine("Enter maximum weight- 1 for light, 2 for medium, 3 for heavy:");
+                            WeightCategories maxWeight = (WeightCategories)Console.Read();
+                            Console.WriteLine("Enter battey:");
+                            double battery = Console.Read();
+                            //Console.WriteLine("Enter latitude:");
+                            //double latitude = Console.Read();
+                            //project.AddCustomer(id, name, phone, longitude, latitude);
                             break;
                         case Data.Customer:
                             break;
