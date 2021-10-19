@@ -55,8 +55,8 @@ namespace DalObject
         public void PickUpParcel(int parcelId/*, int droneId*/)
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
-            if (indexParcel == -1)
-                return;
+            //if (indexParcel == -1)
+            //    return;
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.PickedUp = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
