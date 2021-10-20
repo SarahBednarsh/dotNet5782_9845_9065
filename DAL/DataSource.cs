@@ -26,6 +26,21 @@ namespace DalObject
         }
         internal static void Initialize() //not sure about access permissions
         {
+            //Random r = new Random();
+            //for (int i = 1; i < 3; i++)
+            //{
+            //    DataSource.Stations.Add(new Station(i,r.Next(),r.NextDouble(),r.NextDouble(),r.Next()));
+            //}
+            //for (int i = 1; i < 6; i++)
+            //{
+            //    DataSource.Drones.Add(new Drone(i, ));
+            //}
+            //Liorah is this how we're supposed to do it? what do you put in the string categories?
+
+
+
+
+
             //fill later - page 7
 
         }
