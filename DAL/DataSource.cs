@@ -26,8 +26,31 @@ namespace DalObject
         }
         internal static void Initialize() //not sure about access permissions
         {
-            Random rand = new Random();
-            Customers.Add(new Customer(rand.Next()+100000000, "Jonathan Johnson", rand.Next()+1000000000, rand.NextDouble())
+            Random r = new Random();
+            for (int i = 0; i < 2; i++)
+            {
+                DataSource.Stations.Add(new Station(r.Next(1000,10000), r.Next(), r.NextDouble(), r.NextDouble(), r.Next(1,10)));//so it is a realistic number of chargeslos, and it might be full eventually
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                DataSource.Drones.Add(new Drone(r.Next(100,1000),"model"+i,(WeightCategories)r.Next(1,3), (DroneStatuses)r.Next(1, 3),r.NextDouble()));
+            }
+            string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi","Bilbo Baggins","Paul","Joseph","Yoram","Devorah","Simcha" };
+            for (int i = 0; i < 10; i++)
+            {
+                DataSource.Customers.Add(new Customer(r.Next(100000000, 1000000000), names[i], r.Next(520000000, 529999999).ToString(), r.NextDouble(), r.NextDouble()));
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                DataSource.Parcels.Add(new Parcel(++Config.RunningParcelNumber,)
+            }
+            //Liorah is this how we're supposed to do it? what do you put in the string categories?
+
+
+
+
+
+            //fill later - page 7
 
         }
     }
