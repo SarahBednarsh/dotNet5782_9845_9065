@@ -38,18 +38,13 @@ namespace DAL
             Degrees = (int)pos % 360;
             Minutes = (int)(pos * 60) % 60;
             Seconds = (int)(pos * 60 * 60) % 60;
-           
         }
-        public static Sexagesimal Parse(double pos, String direction)
-        {
-            return new Sexagesimal(pos, direction);
-        }
-        public static int ParseInt(Sexagesimal sexagesimal)
+        public int ParseInt()
         {
             int factor = 1;
-            if (sexagesimal.Direction == Directions.S || sexagesimal.Direction == Directions.W)
+            if (Direction == Directions.S || Direction == Directions.W)
                 factor = -1;
-            return factor * (int)(sexagesimal.Degrees + (double)sexagesimal.Minutes / 60 + (double)sexagesimal.Seconds / 3600);
+            return factor * (int)(Degrees + (double)Minutes / 60 + (double)Seconds / 3600);
         }
         public override string ToString()
         {
