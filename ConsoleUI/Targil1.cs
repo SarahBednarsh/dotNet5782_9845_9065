@@ -4,9 +4,6 @@ using DalObject;//do we need this?
 using IDAL.DO;
 namespace ConsoleUI
 {
-    public enum Actions { Exit, Add, Update, View, List }
-    public enum Data { Station = 1, Drone, Customer, Parcel, ParcelNotAttributed, StationsWithAvailableChargers }
-    public enum UpdateOption { Attribute = 1, Pickup, Ship, SendToCharge }
     class Targil1
     {
         static void Main(string[] args)

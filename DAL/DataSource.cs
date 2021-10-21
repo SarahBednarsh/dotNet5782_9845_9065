@@ -42,7 +42,7 @@ namespace DalObject
             }
             for (int i = 0; i < 10; i++)
             {
-                DataSource.Parcels.Add(new Parcel(++Config.RunningParcelNumber,)
+                DataSource.Parcels.Add(new Parcel(++DataSource.Config.RunningParcelNumber, Customers[i].Id, Customers[9 - i].Id, (WeightCategories)r.Next(1, 3), (Priorities)r.Next(1, 3), DateTime.Today, Drones[i % 5].Id));
             }
             //Liorah is this how we're supposed to do it? what do you put in the string categories?
 
