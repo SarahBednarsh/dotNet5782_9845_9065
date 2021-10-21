@@ -26,7 +26,8 @@ namespace DalObject
         }
         internal static void Initialize() //not sure about access permissions
         {
-            //fill later - page 7
+            Random rand = new Random();
+            Customers.Add(new Customer(rand.Next()+100000000, "Jonathan Johnson", rand.Next()+1000000000, rand.NextDouble())
 
         }
     }
