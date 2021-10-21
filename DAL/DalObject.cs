@@ -11,6 +11,7 @@ namespace DalObject
 
         public DalObject()
         {
+            
             DataSource.Initialize();
         }
         public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)

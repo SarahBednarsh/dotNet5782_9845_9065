@@ -11,11 +11,11 @@ namespace DalObject
         internal static Station[] Stations = new Station[5];
         internal static Customer[] Customers = new Customer[100];
         internal static Parcel[] Parcels = new Parcel[1000];*/
-        internal static List<Drone> Drones;
-        internal static List<DroneCharge> DroneCharges;
-        internal static List<Station> Stations;
-        internal static List<Customer> Customers;
-        internal static List<Parcel> Parcels;
+        internal static List<Drone> Drones = new List<Drone>();
+        internal static List<DroneCharge> DroneCharges = new List<DroneCharge>();
+        internal static List<Station> Stations = new List<Station>();
+        internal static List<Customer> Customers = new List<Customer>();
+        internal static List<Parcel> Parcels = new List<Parcel>();
         internal class Config
         {
             /*internal int FirstDroneIndex = 0;
@@ -26,6 +26,7 @@ namespace DalObject
         }
         internal static void Initialize() //not sure about access permissions
         {
+           
             Random r = new Random();
             for (int i = 0; i < 2; i++)
             {

@@ -15,13 +15,14 @@ namespace ConsoleUI
             Actions option;
             do
             {
-                Console.WriteLine("Enter 1 for adding an entity" +
-                    "Enter 2 for updating an entity " +
-                    "Enter 3 for displaying an entity" +
-                    "Enter 4 for displaying a list of entities" +
+                Console.WriteLine("Enter 1 for adding an entity\n" +
+                    "Enter 2 for updating an entity\n" +
+                    "Enter 3 for displaying an entity\n" +
+                    "Enter 4 for displaying a list of entities\n" +
                     "Enter 0 for Exit" +
                     "");
                 option = (Actions)Console.Read();
+                Console.WriteLine((int)option);
                 Data specific;//will be used to decide what action to do in a specific category
                 switch (option)
                 {
