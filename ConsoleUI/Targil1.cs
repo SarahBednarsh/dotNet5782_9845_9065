@@ -41,9 +41,12 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter ID:");
                                 //id = Console.Read();
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Enter name:");
+                                Console.WriteLine("Enter name (number):");
                                 //int numName = Console.Read();
-                                int numName = Convert.ToInt32(Console.ReadLine());
+                                int numName;
+                                Int32.TryParse(Console.ReadLine(), out numName);//handle entering a string (I think tryparse should be used)
+                                //Console.WriteLine(numName);
+                                //int numName = Convert.ToInt32(Console.ReadLine());//handle entering a string (I think tryparse should be used)
                                 Console.WriteLine("Enter longitude:");
                                 //longitude = Console.Read();
                                 longitude = Convert.ToDouble(Console.ReadLine());
@@ -84,9 +87,9 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter target ID:");
                                 int targetId = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter weight of parcel- 1 for light, 2 for medium, 3 for heavy:");
-                                WeightCategories weight = (WeightCategories)Console.Read();
+                                WeightCategories weight = (WeightCategories)Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter priority of parcel- 1 for normal, 2 for quick, 3 for emergency:");
-                                Priorities priority = (Priorities)Console.Read();
+                                Priorities priority = (Priorities)Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter drone ID:");
                                 int droneId = Convert.ToInt32(Console.ReadLine());
                                 project.AddParcel(senderId, targetId, weight, priority, DateTime.Now, droneId);
@@ -134,7 +137,7 @@ namespace ConsoleUI
                         break;
                     case Actions.View:
                         Console.WriteLine("Enter 1 to display a station, Enter 2 to display a drone, Enter 3 to display a customer, Enter 4 to display a parcel:");
-                        specific = (Data)Console.Read();
+                        specific = (Data)Convert.ToInt32(Console.ReadLine());
                         switch (specific)
                         {
                             case Data.Station:
@@ -164,7 +167,7 @@ namespace ConsoleUI
                         break;
                     case Actions.List:
                         Console.WriteLine("Enter 1 to display the list of stations, Enter 2 to display the list of drones, Enter 3 to display the list of customers, Enter 4 to display the list of parcels, Enter 5 to display parcels who aren't attributed to a drone, Enter 6 to display stations with available charging slots:");
-                        specific = (Data)Console.Read();
+                        specific = (Data)Convert.ToInt32(Console.ReadLine());
                         switch (specific)
                         {
                             case Data.Station:
