@@ -12,14 +12,14 @@ namespace IDAL
             {
                 this.Id = id;
                 this.Name = name;
-                this.Longitude = longitude;
-                this.Latitude = latitude;
+                this.Longitude = new Sexagesimal(longitude, "Longitude");
+                this.Latitude = new Sexagesimal(latitude, "Latitude");
                 this.ChargeSlots = chargeSlots;
             }
             public int Id { get; set; }
             public int Name { get; set; }
-            public double Longitude { get; set; }
-            public double Latitude { get; set; }
+            public Sexagesimal Longitude { get; set; }
+            public Sexagesimal Latitude { get; set; }
             public int ChargeSlots { get; set; }
             public override string ToString()
             {

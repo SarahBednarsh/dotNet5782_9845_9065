@@ -8,7 +8,6 @@ namespace DalObject
     public class DalObject
     {
         public DroneStatuses Delivering { get; private set; }
-
         public DalObject()
         {
             

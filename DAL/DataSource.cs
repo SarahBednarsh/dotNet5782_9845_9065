@@ -30,7 +30,7 @@ namespace DalObject
             Random r = new Random();
             for (int i = 0; i < 2; i++)
             {
-                DataSource.Stations.Add(new Station(r.Next(1000,10000), r.Next(), r.NextDouble(), r.NextDouble(), r.Next(1,10)));//so it is a realistic number of chargeslos, and it might be full eventually
+                DataSource.Stations.Add(new Station(r.Next(1000,10000), r.Next(), r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999), r.Next(1,10)));//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
             {
@@ -39,7 +39,7 @@ namespace DalObject
             string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi","Bilbo Baggins","Paul","Joseph","Yoram","Devorah","Simcha" };
             for (int i = 0; i < 10; i++)
             {
-                DataSource.Customers.Add(new Customer(r.Next(100000000, 1000000000), names[i], r.Next(520000000, 529999999).ToString(), r.NextDouble(), r.NextDouble()));
+                DataSource.Customers.Add(new Customer(r.Next(100000000, 1000000000), names[i], r.Next(520000000, 529999999).ToString(), r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)));
             }
             for (int i = 0; i < 10; i++)
             {
