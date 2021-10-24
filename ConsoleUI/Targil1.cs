@@ -123,7 +123,7 @@ namespace ConsoleUI
                             case UpdateOption.Ship:
                                 Console.WriteLine("Enter parcel ID to deliver:");
                                 Int32.TryParse(Console.ReadLine(), out parcelId);
-                                project.DeliverToCostumer(parcelId);
+                                project.DeliverToCustomer(parcelId);
                                 break;
                             case UpdateOption.SendToCharge:
                                 Console.WriteLine("Enter drone to charge:");

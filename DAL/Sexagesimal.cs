@@ -7,7 +7,6 @@ namespace IDAL
     namespace DO
     {
         public enum Directions { N, S, E, W }
-
         public class Sexagesimal
         {
             public int Degrees { get; set; }
@@ -21,7 +20,7 @@ namespace IDAL
                 Seconds = seconds;
                 Direction = direction;
             }
-            public Sexagesimal(double pos, String direction)
+            public Sexagesimal(double pos, String direction)//recieves a decimal coordinate and converts it to sexagesimal
             {
                 if (direction == "Longitude")
                 {
@@ -41,7 +40,7 @@ namespace IDAL
                 Minutes = (int)(pos * 60) % 60;
                 Seconds = (pos * 60 * 60) % 60;
             }
-            public double ParseDouble()
+            public double ParseDouble()//converts a sexagesimal coordinate to decimal
             {
                 int factor = 1;
                 if (Direction == Directions.S || Direction == Directions.W)
@@ -51,8 +50,6 @@ namespace IDAL
             public override string ToString()
             {
                 String direction = "N";
-                //if (Direction == Directions.N)
-                //    direction = "N";
                 if (Direction == Directions.S)
                     direction = "S";
                 if (Direction == Directions.E)

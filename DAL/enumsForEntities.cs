@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
+// enums for the new variables in DataSource
 namespace IDAL
 {
     namespace DO
