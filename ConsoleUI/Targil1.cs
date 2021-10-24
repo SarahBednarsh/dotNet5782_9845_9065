@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DalObject;//do we need this?
+using DalObject;
 using IDAL.DO;
 namespace ConsoleUI
 {
