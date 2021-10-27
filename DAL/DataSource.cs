@@ -20,24 +20,34 @@ namespace DalObject
         /// </summary>
         internal static void Initialize()
         {
-           
+
             Random r = new Random();
             for (int i = 0; i < 2; i++)
             {
-                DataSource.Stations.Add(new Station(r.Next(1000,10000), r.Next(), r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999), r.Next(1,10)));//so it is a realistic number of chargeslos, and it might be full eventually
+                Station station = new Station() { Id = r.Next(1000, 10000), Name = r.Next(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(1, 10) };
+                DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
             {
-                DataSource.Drones.Add(new Drone(r.Next(100,1000),"model"+i,(WeightCategories)r.Next(1,3), (DroneStatuses)r.Next(1, 3),r.NextDouble()));
+                Drone drone = new Drone() { Id = r.Next(100, 1000), Model = "model" + i, MaxWeight = (WeightCategories)r.Next(1, 3), Status = (DroneStatuses)r.Next(1, 3), Battery = r.NextDouble() };
+                DataSource.Drones.Add(drone);
             }
-            string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi","Bilbo Baggins","Paul","Joseph","Yoram","Devorah","Simcha" };
+            string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi", "Bilbo Baggins", "Paul", "Joseph", "Yoram", "Devorah", "Simcha" };
             for (int i = 0; i < 10; i++)
             {
-                DataSource.Customers.Add(new Customer(r.Next(100000000, 1000000000), names[i], r.Next(520000000, 529999999).ToString(), r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)));
+                Customer customer = new Customer() { Id = r.Next(100000000, 1000000000), Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
+                DataSource.Customers.Add(customer);
             }
+            DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
             for (int i = 0; i < 10; i++)
             {
-                DataSource.Parcels.Add(new Parcel(++DataSource.Config.RunningParcelNumber, Customers[i].Id, Customers[9 - i].Id, (WeightCategories)r.Next(1, 3), (Priorities)r.Next(1, 3), DateTime.Today, Drones[i % 5].Id));
+                DateTime start = new DateTime(2020, i, 1);
+                int forScheduled = r.Next(1, 25);
+                int forDelivered = forScheduled + 1;
+                int forPickedUp = forDelivered + 1;
+                Parcel parcel = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = Customers[i].Id, TargetId = Customers[9 - i].Id, Weight = (WeightCategories)r.Next(1, 3), Priority = (Priorities)r.Next(1, 3), Requested = DateTime.Today, DroneId = Drones[i % 5].Id , 
+                    Scheduled = start.AddDays(forScheduled), Delivered = start.AddDays(forDelivered), PickedUp = start.AddDays(forPickedUp) };
+                DataSource.Parcels.Add(parcel);
             }
         }
     }

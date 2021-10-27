@@ -9,14 +9,14 @@ namespace IDAL
     {
         public struct Customer
         {
-            public Customer(int id, string name, string phone, double longitude, double latitude)
-            {
-                this.Id = id;
-                this.Name = name;
-                this.Phone = phone;
-                this.Longitude = new Sexagesimal(longitude, "Longitude");
-                this.Latitude = new Sexagesimal(latitude, "Latitude");
-            }
+            //public Customer(int id, string name, string phone, double longitude, double latitude)
+            //{
+            //    this.Id = id;
+            //    this.Name = name;
+            //    this.Phone = phone;
+            //    this.Longitude = new Sexagesimal(longitude, "Longitude");
+            //    this.Latitude = new Sexagesimal(latitude, "Latitude");
+            //}
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }

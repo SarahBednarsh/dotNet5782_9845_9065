@@ -16,24 +16,24 @@ namespace DalObject
         //the following functions recieve input for an object and create it
         public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
         {
-            Station tempStation = new Station(id, name, longitude, latitude, chargeSlots);
+            Station tempStation = new Station() { Id = id, Name = name, Longitude = new Sexagesimal(longitude, "longitude"), Latitude = new Sexagesimal(latitude, "latitude"), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }
         public void AddDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
         {
-            Drone tempDrone = new Drone(id, model, maxWeight, status, battery);
+            Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, Status = status, Battery = battery };
             DataSource.Drones.Add(tempDrone);
 
         }
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
-            Customer tempCustomer = new Customer(id, name, phone, longitude, latitude);
+            Customer tempCustomer = new Customer() { Id = id, Name = name, Phone = phone, Longitude = new Sexagesimal(longitude, "longitude"), Latitude = new Sexagesimal(latitude, "latitude") };
             DataSource.Customers.Add(tempCustomer);
         }
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority,
                 DateTime requested, int droneId)
         {
-            Parcel temp = new Parcel(++DataSource.Config.RunningParcelNumber, senderId, targetId, weight, priority, requested, droneId);
+            Parcel temp = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = senderId, TargetId = targetId, Weight = weight, Priority = priority, Requested = requested, DroneId = droneId };
             DataSource.Parcels.Add(temp);
             return DataSource.Config.RunningParcelNumber;
         }
@@ -97,7 +97,7 @@ namespace DalObject
         /// <param name="stationId"></param>
         public void DroneToCharge(int droneId, int stationId)
         {
-            DataSource.DroneCharges.Add(new DroneCharge(droneId, stationId));
+            DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = stationId });
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
             Drone tempDrone = DataSource.Drones[indexDrone];

@@ -8,14 +8,14 @@ namespace IDAL
     {
         public struct Station
         {
-            public Station(int id, int name, double longitude, double latitude, int chargeSlots)
-            {
-                this.Id = id;
-                this.Name = name;
-                this.Longitude = new Sexagesimal(longitude, "Longitude");
-                this.Latitude = new Sexagesimal(latitude, "Latitude");
-                this.ChargeSlots = chargeSlots;
-            }
+            //public Station(int id, int name, double longitude, double latitude, int chargeSlots)
+            //{
+            //    this.Id = id;
+            //    this.Name = name;
+            //    this.Longitude = new Sexagesimal(longitude, "Longitude");
+            //    this.Latitude = new Sexagesimal(latitude, "Latitude");
+            //    this.ChargeSlots = chargeSlots;
+            //}
             public int Id { get; set; }
             public int Name { get; set; }
             public Sexagesimal Longitude { get; set; }
