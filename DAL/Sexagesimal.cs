@@ -20,6 +20,7 @@ namespace IDAL
                 Seconds = seconds;
                 Direction = direction;
             }
+
             public Sexagesimal(double pos, String direction)//recieves a decimal coordinate and converts it to sexagesimal
             {
                 if (direction == "Longitude")

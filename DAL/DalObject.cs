@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using IDAL.DO;
-
 namespace DalObject
 {
     public class DalObject

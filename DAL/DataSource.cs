@@ -39,12 +39,12 @@ namespace DalObject
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)//sarah update
             {
-                DateTime start = new DateTime(2020, i, 1);
+                DateTime start = new DateTime(2020, i + 1, 1);
                 int forScheduled = r.Next(1, 25);
-                int forDelivered = forScheduled + 1;
-                int forPickedUp = forDelivered + 1;
+                int forPickedUp = forScheduled + 1;
+                int forDelivered = forPickedUp + 1;
                 Parcel parcel = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = Customers[i].Id, TargetId = Customers[9 - i].Id, Weight = (WeightCategories)r.Next(1, 3), Priority = (Priorities)r.Next(1, 3), Requested = DateTime.Today, DroneId = Drones[i % 5].Id , 
                     Scheduled = start.AddDays(forScheduled), Delivered = start.AddDays(forDelivered), PickedUp = start.AddDays(forPickedUp) };
                 DataSource.Parcels.Add(parcel);

@@ -36,7 +36,7 @@ namespace ConsoleUI
                         specific = (Data)input;
                         switch (specific)
                         {
-                            case Data.Station://public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
+                            case Data.Station:
                                 Console.WriteLine("Enter ID:");
                                 Int32.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine("Enter name (number):");
@@ -51,7 +51,7 @@ namespace ConsoleUI
                                 Int32.TryParse(Console.ReadLine(), out chargeSlots);
                                 project.AddStation(id, numName, longitude, latitude, chargeSlots);
                                 break;
-                            case Data.Drone://public void AddDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
+                            case Data.Drone:
                                 Console.WriteLine("Enter ID:");
                                 Int32.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine("Enter model:");
@@ -64,7 +64,7 @@ namespace ConsoleUI
                                 Double.TryParse(Console.ReadLine(), out battery);
                                 project.AddDrone(id, model, maxWeight, DroneStatuses.Available, battery);
                                 break;
-                            case Data.Customer://public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
+                            case Data.Customer:
                                 Console.WriteLine("Enter ID:");
                                 Int32.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine("Enter name:");
@@ -77,7 +77,7 @@ namespace ConsoleUI
                                 Double.TryParse(Console.ReadLine(), out latitude);
                                 project.AddCustomer(id, name, phone, longitude, latitude);
                                 break;
-                            case Data.Parcel://public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority,DateTime requested, int droneId)
+                            case Data.Parcel:
                                 Console.WriteLine("Enter sender ID:");
                                 int senderId;
                                 Int32.TryParse(Console.ReadLine(), out senderId);
@@ -106,7 +106,7 @@ namespace ConsoleUI
                         UpdateOption updateoption = (UpdateOption)input;
                         switch (updateoption)
                         {
-                            case UpdateOption.Attribute://public void UpdateParcelsDrone(int parcelId, int droneId)
+                            case UpdateOption.Attribute:
                                 Console.WriteLine("Enter parcel ID:");
                                 int parcelId;
                                 Int32.TryParse(Console.ReadLine(), out parcelId);
@@ -196,6 +196,29 @@ namespace ConsoleUI
                                 break;
                             default:
                                 Console.WriteLine("ERROR");
+                                break;
+                        }
+                        break;
+                    case Actions.Calc:
+                        Console.WriteLine("Enter 1 to display distance from a customer, 2 to display distance from station\n");
+                        Int32.TryParse(Console.ReadLine(), out input);
+                        specific = (Data)input;
+                        Console.WriteLine("Enter ID:");
+                        Int32.TryParse(Console.ReadLine(), out id);
+                        Console.WriteLine("Enter longitude:");
+                        Double.TryParse(Console.ReadLine(), out longitude);
+                        Console.WriteLine("Enter latitude:");
+                        Double.TryParse(Console.ReadLine(), out latitude);
+                        Console.WriteLine("Distance is: ");
+                        switch (specific)
+                        {
+                            case Data.Station:
+                                Console.WriteLine(project.CalcDisFromStation(id, longitude, latitude));
+                                break;
+                            case Data.Drone:
+                                Console.WriteLine(project.CalcDisFromDrone(id, longitude, latitude));
+                                break;
+                            default:
                                 break;
                         }
                         break;

@@ -8,34 +8,7 @@ namespace IDAL
     {
         public struct Parcel
         {
-            //public Parcel(int id, int senderId, int targetId, WeightCategories weight, Priorities priority, 
-            //    DateTime requested, int droneId, DateTime scheduled, DateTime pickedUp, DateTime delivered)
-            //{
-            //    this.Id = id;
-            //    this.SenderId = senderId;
-            //    this.TargetId = targetId;
-            //    this.Weight = weight;
-            //    this.Priority = priority;
-            //    this.Requested = requested;
-            //    this.DroneId = droneId;
-            //    this.Scheduled = scheduled;
-            //    this.PickedUp = pickedUp;
-            //    this.Delivered = delivered;
-            //}
-            //public Parcel(int id, int senderId, int targetId, WeightCategories weight, Priorities priority, 
-            //    DateTime requested, int droneId)
-            //{
-            //    this.Id = id;
-            //    this.SenderId = senderId;
-            //    this.TargetId = targetId;
-            //    this.Weight = weight;
-            //    this.Priority = priority;
-            //    this.Requested = requested;
-            //    this.DroneId = droneId;
-            //    this.Scheduled = DateTime.Now;
-            //    this.PickedUp = DateTime.Now; // not nullable, what to do?
-            //    this.Delivered = DateTime.Now; //kanal
-            //}
+            
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int TargetId { get; set; }
