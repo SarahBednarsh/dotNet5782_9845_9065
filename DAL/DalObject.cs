@@ -191,11 +191,20 @@ namespace DalObject
             }
             return open;
         }
-        public double CalcDisFromStation(int id,double longitude,double latitude)
+        public double CalcDisFromStation(int id, double longitude, double latitude)
         {
-
+            Station station = this.SearchStation(id);
+            double deltalLongitude = station.Longitude.ParseDouble() - longitude;
+            double deltalLatitude = station.Latitude.ParseDouble() - latitude;
+            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
         }
-
+        public double CalcDisFromCustomer(int id, double longitude, double latitude)
+        {
+            Customer customer = this.SearchCustomer(id);
+            double deltalLongitude = customer.Longitude.ParseDouble() - longitude;
+            double deltalLatitude = customer.Latitude.ParseDouble() - latitude;
+            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
+        }
 
     }
 }

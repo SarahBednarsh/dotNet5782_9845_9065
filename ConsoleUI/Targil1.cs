@@ -19,6 +19,7 @@ namespace ConsoleUI
                     "Enter 2 for updating an entity\n" +
                     "Enter 3 for displaying an entity\n" +
                     "Enter 4 for displaying a list of entities\n" +
+                    "Enter 5 for calculating ditance from an entity\n" +
                     "Enter 0 for Exit");
                 int input;
                 Int32.TryParse(Console.ReadLine(), out input);
@@ -200,7 +201,7 @@ namespace ConsoleUI
                         }
                         break;
                     case Actions.Calc:
-                        Console.WriteLine("Enter 1 to display distance from a customer, 2 to display distance from station\n");
+                        Console.WriteLine("Enter 1 to display distance from a station, 3 to display distance from customer\n");
                         Int32.TryParse(Console.ReadLine(), out input);
                         specific = (Data)input;
                         Console.WriteLine("Enter ID:");
@@ -215,8 +216,8 @@ namespace ConsoleUI
                             case Data.Station:
                                 Console.WriteLine(project.CalcDisFromStation(id, longitude, latitude));
                                 break;
-                            case Data.Drone:
-                                Console.WriteLine(project.CalcDisFromDrone(id, longitude, latitude));
+                            case Data.Customer:
+                                Console.WriteLine(project.CalcDisFromCustomer(id, longitude, latitude));
                                 break;
                             default:
                                 break;
