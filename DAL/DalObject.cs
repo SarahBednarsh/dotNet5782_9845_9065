@@ -191,6 +191,10 @@ namespace DalObject
             }
             return open;
         }
+        public double CalcDisFromStation(int id,double longitude,double latitude)
+        {
+
+        }
 
 
     }
