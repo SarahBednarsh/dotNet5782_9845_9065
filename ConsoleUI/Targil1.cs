@@ -63,7 +63,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter battey:");
                                 double battery;
                                 Double.TryParse(Console.ReadLine(), out battery);
-                                project.AddDrone(id, model, maxWeight, DroneStatuses.Available, battery);
+                                project.AddDrone(id, model, maxWeight);
                                 break;
                             case Data.Customer:
                                 Console.WriteLine("Enter ID:");

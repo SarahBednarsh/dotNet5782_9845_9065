@@ -29,7 +29,7 @@ namespace DalObject
             }
             for (int i = 0; i < 5; i++)
             {
-                Drone drone = new Drone() { Id = r.Next(100, 1000), Model = "model" + i, MaxWeight = (WeightCategories)r.Next(1, 3), Status = (DroneStatuses)r.Next(1, 3), Battery = r.NextDouble() };
+                Drone drone = new Drone() { Id = r.Next(100, 1000), Model = "model" + i, MaxWeight = (WeightCategories)r.Next(1, 3) };
                 DataSource.Drones.Add(drone);
             }
             string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi", "Bilbo Baggins", "Paul", "Joseph", "Yoram", "Devorah", "Simcha" };
@@ -45,8 +45,19 @@ namespace DalObject
                 int forScheduled = r.Next(1, 25);
                 int forPickedUp = forScheduled + 1;
                 int forDelivered = forPickedUp + 1;
-                Parcel parcel = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = Customers[i].Id, TargetId = Customers[9 - i].Id, Weight = (WeightCategories)r.Next(1, 3), Priority = (Priorities)r.Next(1, 3), Requested = DateTime.Today, DroneId = Drones[i % 5].Id , 
-                    Scheduled = start.AddDays(forScheduled), Delivered = start.AddDays(forDelivered), PickedUp = start.AddDays(forPickedUp) };
+                Parcel parcel = new Parcel()
+                {
+                    Id = ++DataSource.Config.RunningParcelNumber,
+                    SenderId = Customers[i].Id,
+                    TargetId = Customers[9 - i].Id,
+                    Weight = (WeightCategories)r.Next(1, 3),
+                    Priority = (Priorities)r.Next(1, 3),
+                    Requested = DateTime.Today,
+                    DroneId = Drones[i % 5].Id,
+                    Scheduled = start.AddDays(forScheduled),
+                    Delivered = start.AddDays(forDelivered),
+                    PickedUp = start.AddDays(forPickedUp)
+                };
                 DataSource.Parcels.Add(parcel);
             }
         }

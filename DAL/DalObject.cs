@@ -6,7 +6,6 @@ namespace DalObject
 {
     public class DalObject
     {
-        public DroneStatuses Delivering { get; private set; }
         public DalObject()
         {
             DataSource.Initialize();
@@ -18,9 +17,9 @@ namespace DalObject
             Station tempStation = new Station() { Id = id, Name = name, Longitude = new Sexagesimal(longitude, "longitude"), Latitude = new Sexagesimal(latitude, "latitude"), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }
-        public void AddDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
+        public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
-            Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, Status = status, Battery = battery };
+            Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
 
         }
@@ -42,9 +41,7 @@ namespace DalObject
         /// </summary>
         public void UpdateParcelsDrone(int parcelId, int droneId)
         {
-            Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
-            if (requestedDrone.Status != DroneStatuses.Available)
-                return;
+            Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);       
 
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
@@ -68,7 +65,6 @@ namespace DalObject
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == tempParcel.DroneId);
             Drone tempDrone = DataSource.Drones[indexDrone];
-            tempDrone.Status = DroneStatuses.Delivering;
             DataSource.Drones[indexDrone] = tempDrone;
         }
         /// <summary>
@@ -86,7 +82,6 @@ namespace DalObject
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == tempParcel.DroneId);
             Drone tempDrone = DataSource.Drones[indexDrone];
-            tempDrone.Status = DroneStatuses.Available;
             DataSource.Drones[indexDrone] = tempDrone;
         }
         /// <summary>
@@ -100,7 +95,6 @@ namespace DalObject
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
             Drone tempDrone = DataSource.Drones[indexDrone];
-            tempDrone.Status = DroneStatuses.InMaintenance;
             DataSource.Drones[indexDrone] = tempDrone;
 
             int indexStation = DataSource.Stations.FindIndex(x => x.Id == stationId);
@@ -117,7 +111,6 @@ namespace DalObject
         {
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
             Drone tempDrone = DataSource.Drones[indexDrone];
-            tempDrone.Status = DroneStatuses.Available;
             DataSource.Drones[indexDrone] = tempDrone;
             int indexCharge = DataSource.DroneCharges.FindIndex(x => x.DroneId == droneId);
             int stationId = DataSource.DroneCharges[indexCharge].StationId;
@@ -127,7 +120,7 @@ namespace DalObject
             DataSource.Stations[indexStation] = tempStation;
             DataSource.DroneCharges.RemoveAt(indexCharge);
         }
-        
+
         //the following functions return a requested object
         public Station SearchStation(int stationId)
         {
