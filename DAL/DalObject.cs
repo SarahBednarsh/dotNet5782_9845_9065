@@ -160,7 +160,7 @@ namespace DalObject
         /// creates and returns a list of parcels without an attributed drone
         /// </summary>
         /// <returns></returns>
-        public List<Parcel> ParcelsWithNoDrone()
+        public IEnumerable<Parcel>/*List<Parcel>*/ ParcelsWithNoDrone()
         {
             List<Parcel> noDrone = new List<Parcel>();
             foreach (Parcel parcel in DataSource.Parcels)
