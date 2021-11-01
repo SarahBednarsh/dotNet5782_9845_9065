@@ -21,11 +21,11 @@ namespace IDAL
         public Drone SearchDrone(int droneId);
         public Customer SearchCustomer(int customerId);
         public Parcel SearchParcel(int parcelId);
-        public List<Station> YieldStation();
-        public List<Drone> YieldDrone();
-        public List<Customer> YieldCustomer();
-        public IEnumerable<Parcel>/*List<Parcel>*/ YieldParcel();
-        public List<Station> OpenChargeSlots();
+        public IEnumerable<Station> YieldStation();
+        public IEnumerable<Drone> YieldDrone();
+        public IEnumerable<Customer> YieldCustomer();
+        public IEnumerable<Parcel> YieldParcel();
+        public IEnumerable<Station> OpenChargeSlots();
         public double CalcDisFromStation(int id, double longitude, double latitude);
         public double CalcDisFromCustomer(int id, double longitude, double latitude);
 

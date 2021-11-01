@@ -140,19 +140,19 @@ namespace DalObject
         }
 
         //the following functions create a new object and return it
-        public List<Station> YieldStation()
+        public IEnumerable<Station> YieldStation()
         {
             return new List<Station>(DataSource.Stations);
         }
-        public List<Drone> YieldDrone()
+        public IEnumerable<Drone> YieldDrone()
         {
             return new List<Drone>(DataSource.Drones);
         }
-        public List<Customer> YieldCustomer()
+        public IEnumerable<Customer> YieldCustomer()
         {
             return new List<Customer>(DataSource.Customers);
         }
-        public List<Parcel> YieldParcel()
+        public IEnumerable<Parcel> YieldParcel()
         {
             return new List<Parcel>(DataSource.Parcels);
         }
