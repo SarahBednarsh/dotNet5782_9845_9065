@@ -5,7 +5,7 @@ using IDAL.DO; //is this allowed?
 
 namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
         public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots);
         public void AddDrone(int id, string model, WeightCategories maxWeight);
@@ -26,8 +26,10 @@ namespace IDAL
         public IEnumerable<Customer> YieldCustomer();
         public IEnumerable<Parcel> YieldParcel();
         public IEnumerable<Station> OpenChargeSlots();
+        public IEnumerable<Parcel> ParcelsWithNoDrone();
         public double CalcDisFromStation(int id, double longitude, double latitude);
         public double CalcDisFromCustomer(int id, double longitude, double latitude);
 
+        public IEnumerable<double> ReqPowerConsumption();
     }
 }

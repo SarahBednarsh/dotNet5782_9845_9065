@@ -4,14 +4,14 @@ using DalObject;
 using IDAL.DO;
 namespace ConsoleUI
 {
-    public enum Actions { Exit, Add, Update, View, List , Calc}
+    public enum Actions { Exit, Add, Update, View, List, Calc }
     public enum Data { Station = 1, Drone, Customer, Parcel, ParcelNotAttributed, StationsWithAvailableChargers }
     public enum UpdateOption { Attribute = 1, Pickup, Ship, SendToCharge }
     class Targil1
     {
         static void Main(string[] args)
         {
-            DalObject.DalObject project = new DalObject.DalObject();
+            IDAL.IDal project = new DalObject.DalObject();
             Actions option;
             do
             {
@@ -129,7 +129,7 @@ namespace ConsoleUI
                             case UpdateOption.SendToCharge:
                                 Console.WriteLine("Enter drone to charge:");
                                 Int32.TryParse(Console.ReadLine(), out droneId);
-                               Console.WriteLine("Select from the following list a station:");
+                                Console.WriteLine("Select from the following list a station:");
                                 Console.WriteLine(string.Join("\r\n", project.OpenChargeSlots()));
                                 int stationId;
                                 Int32.TryParse(Console.ReadLine(), out stationId);
@@ -178,22 +178,28 @@ namespace ConsoleUI
                         switch (specific)
                         {
                             case Data.Station:
-                                Console.WriteLine(string.Join("\r\n", project.YieldStation()));
+                                foreach (Station sta in project.YieldStation())
+                                    Console.WriteLine($"{sta}\r\n");
                                 break;
                             case Data.Drone:
-                                Console.WriteLine(string.Join("\r\n", project.YieldDrone()));
+                                foreach (Drone drone in project.YieldDrone())
+                                    Console.WriteLine($"{drone}\r\n");
                                 break;
                             case Data.Customer:
-                                Console.WriteLine(string.Join("\r\n", project.YieldCustomer()));
+                                foreach (Customer cust in project.YieldCustomer())
+                                    Console.WriteLine($"{cust}\r\n");
                                 break;
                             case Data.Parcel:
-                                Console.WriteLine(string.Join("\r\n", project.YieldParcel()));
+                                foreach (Parcel par in project.YieldParcel())
+                                    Console.WriteLine($"{par}\r\n");
                                 break;
                             case Data.ParcelNotAttributed:
-                                Console.WriteLine(string.Join("\r\n", project.ParcelsWithNoDrone()));
+                                foreach (Parcel par in project.ParcelsWithNoDrone())
+                                    Console.WriteLine($"{par}\r\n");
                                 break;
                             case Data.StationsWithAvailableChargers:
-                                Console.WriteLine(string.Join("\r\n", project.OpenChargeSlots()));
+                                foreach (Station cha in project.OpenChargeSlots())
+                                    Console.WriteLine($"{cha}\r\n");
                                 break;
                             default:
                                 Console.WriteLine("ERROR");
@@ -229,5 +235,8 @@ namespace ConsoleUI
                 }
             } while (option != 0);
         }
+
+
+
     }
 }
