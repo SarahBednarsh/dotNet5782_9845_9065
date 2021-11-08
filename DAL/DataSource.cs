@@ -14,11 +14,11 @@ namespace DalObject
         internal class Config
         {
             internal static int RunningParcelNumber = 0;
-            internal static bool available = true;
-            internal static bool light = false;
-            internal static bool medium = false;
-            internal static bool heavy = false;
-            internal static double chargingPace = 0;//should this be static??
+            internal static double available = 0;
+            internal static double light = 0;
+            internal static double medium = 0;
+            internal static double heavy = 0;
+            internal double chargingPace = 0;
         }
         /// <summary>
         /// initializes the datasource with random data
