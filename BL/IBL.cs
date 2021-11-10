@@ -6,5 +6,6 @@ namespace IBL
 {
     interface IBL
     {
+        //kol hametodot hadrooshot
     }
 }

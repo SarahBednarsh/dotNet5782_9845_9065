@@ -77,10 +77,10 @@ namespace DalObject
         }
         public IEnumerable<double> ReqPowerConsumption()
         {
-            yield return Convert.ToDouble(DataSource.Config.available);
-            yield return Convert.ToDouble(DataSource.Config.light);
-            yield return Convert.ToDouble(DataSource.Config.medium);
-            yield return Convert.ToDouble(DataSource.Config.heavy);
+            yield return DataSource.Config.available;
+            yield return DataSource.Config.light;
+            yield return DataSource.Config.medium;
+            yield return DataSource.Config.heavy;
             yield return DataSource.Config.chargingPace;
         }
 

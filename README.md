@@ -3,3 +3,7 @@ Mashehu kirtzono
 dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 Hello World!
 to check later: do we need to put thisses in the constructer functions?
+
+
+DAL: remember to add basic logic for handling the data lists
+BL: exceptions
