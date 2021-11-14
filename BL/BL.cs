@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DalObject;
 using IDAL;
 using IDAL.DO;
+using IBL.BO;
 
 namespace IBL
 {
@@ -15,7 +17,7 @@ namespace IBL
         internal static double light = 0;
         internal static double medium = 0;
         internal static double heavy = 0;
-        internal double chargingPace = 0;
+        internal static double chargingPace = 0;
 
         public BL()
         {
@@ -30,12 +32,21 @@ namespace IBL
             heavy = info.Current;
             info.MoveNext();
             chargingPace = info.Current;
-            IEnumerable<Parcel> parcels = dalAP.YieldParcel();
-            IEnumerable<Drone> drones = dalAP.YieldDrone();
-            foreach(Parcel parcel in parcels)
+            IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
+            IEnumerable<IDAL.DO.Drone> drones = dalAP.YieldDrone();
+            List<DroneToList> dronesBL = new List<DroneToList>();
+            foreach(IDAL.DO.Drone drone in drones)
             {
-                if(dalAP.SearchDrone(parcel.DroneId) /*exists*/)
-
+                dronesBL.Add(new DroneToList(drone));
+            }
+            foreach (DroneToList drone in dronesBL)
+            {
+                var droneParcels = parcels.Where(p => p.DroneId == drone.DroneInfo.Id && p.Delivered != DateTime.MinValue);
+                if (droneParcels.Count() == 1)//not sure about == 1
+                {
+                    drone.Status = DroneStatuses.Delivering;
+                    IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
+                }
             }
         }
 

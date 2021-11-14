@@ -69,7 +69,9 @@ namespace DalObject
         }
         public Drone SearchDrone(int droneId)
         {
-            return DataSource.Drones.Find(x => x.Id == droneId);
+            if(DataSource.Drones.Exists(x => x.Id == droneId))
+                return DataSource.Drones.Find(x => x.Id == droneId);
+            return new Drone() { Id = -1 };
         }
         public IEnumerable<Drone> YieldDrone()
         {
