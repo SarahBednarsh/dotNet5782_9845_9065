@@ -46,9 +46,28 @@ namespace IBL
                 {
                     drone.Status = DroneStatuses.Delivering;
                     IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
+                    if (parcel.PickedUp == DateTime.MinValue)
+                    {
+                       IDAL.DO.Station closestStation= getClosestStation
+                        drone.lattitude=
+                    }
                 }
             }
         }
-
+        private IDAL.DO.Station getClosestStation(IDAL.DO.Customer customer)
+        {
+            IEnumerable<IDAL.DO.Station> stations= dalAP.YieldStation();
+            double minDistance= stations.GetEnumerator().Current.location.CalcDis(customer.location);//will fill in
+            IDAL.DO.Station closest=stations.GetEnumerator().Current;
+            foreach (IDAL.DO.Station in stations)
+            {
+                if (minDistance > stations.GetEnumerator().Current.location.CalcDis(customer.location)) 
+                { 
+                    minDistance=stations.GetEnumerator().Current.location.CalcDis(customer.location);
+                    closest=stations.GetEnumerator().Current;
+                }
+            }
+            return closest;
+        }
     }
 }
