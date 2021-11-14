@@ -41,16 +41,21 @@ namespace IBL
             }
             foreach (DroneToList drone in dronesBL)
             {
-                var droneParcels = parcels.Where(p => p.DroneId == drone.DroneInfo.Id && p.Delivered != DateTime.MinValue);
+                var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != DateTime.MinValue);
                 if (droneParcels.Count() == 1)//not sure about == 1
                 {
                     drone.Status = DroneStatuses.Delivering;
                     IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
                     if (parcel.PickedUp == DateTime.MinValue)
                     {
-                       IDAL.DO.Station closestStation= getClosestStation
-                        drone.lattitude=
+                        IDAL.DO.Station closestStation= getClosestStation();
+                        drone.location=Station.location;
                     }
+                    else
+                    {
+                        drone.location=dalAP.YieldCustomer().Find(c=>c.Id==parcel.SenderId).location;
+                    }
+                    //make battery random between min to close charging station to max
                 }
             }
         }
