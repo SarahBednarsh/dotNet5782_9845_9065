@@ -13,8 +13,6 @@ namespace IBL
             public WeightCategories MaxWeight { get; set; }
             public double Battery { get; set; }
             public DroneStatuses Status { get; set; }
-            public IDAL.DO.Sexagesimal Longitude { get; set; }//should delete
-            public IDAL.DO.Sexagesimal Latitude { get; set; }//should delete
             public IDAL.DO.Coordinates Location  { get; set; }
             public int IdOfParcel;
             public DroneToList(IDAL.DO.Drone drone)
@@ -24,6 +22,10 @@ namespace IBL
                 MaxWeight = drone.MaxWeight;
                 Status = DroneStatuses.Available;
                 IdOfParcel = -1;
+            }
+            public override string ToString()
+            {
+                return base.ToString();
             }
         }
     }
