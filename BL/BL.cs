@@ -57,6 +57,26 @@ namespace IBL
                     }
                     //make battery random between min to close charging station to max
                 }
+                else
+                {
+                    Random r = new Random();
+                    if (r.Next(2)==1)//makes it be in maintenence
+                    {
+                        IEnumerable < IDAL.DO.Station> stations= dalAP.YieldStation();
+                        int index = r.Next(stations.Count());
+                        int counter = 0;
+                        foreach (IDAL.DO.Station station in stations)
+                        {
+                            if (counter==index)
+                            {
+                                drone.location = station.location;
+                                break;
+                            }
+                            counter++;
+                        }
+                        
+                    }
+                }
             }
         }
         private IDAL.DO.Station getClosestStation(IDAL.DO.Customer customer)
@@ -64,12 +84,12 @@ namespace IBL
             IEnumerable<IDAL.DO.Station> stations= dalAP.YieldStation();
             double minDistance= stations.GetEnumerator().Current.location.CalcDis(customer.location);//will fill in
             IDAL.DO.Station closest=stations.GetEnumerator().Current;
-            foreach (IDAL.DO.Station in stations)
+            foreach (IDAL.DO.Station station in stations)
             {
-                if (minDistance > stations.GetEnumerator().Current.location.CalcDis(customer.location)) 
+                if (minDistance > station.location.CalcDis(customer.location)) 
                 { 
-                    minDistance=stations.GetEnumerator().Current.location.CalcDis(customer.location);
-                    closest=stations.GetEnumerator().Current;
+                    minDistance=station.location.CalcDis(customer.location);
+                    closest = station;
                 }
             }
             return closest;
