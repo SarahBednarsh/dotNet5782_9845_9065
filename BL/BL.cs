@@ -39,6 +39,7 @@ namespace IBL
             {
                 dronesBL.Add(new DroneToList(drone));
             }
+            Random r = new Random();
             foreach (DroneToList drone in dronesBL)
             {
                 var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != DateTime.MinValue);
@@ -46,20 +47,19 @@ namespace IBL
                 {
                     drone.Status = DroneStatuses.Delivering;
                     IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
-                    if (parcel.PickedUp == DateTime.MinValue)
+                    if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                     {
-                        IDAL.DO.Station closestStation= getClosestStation();
-                        drone.location=Station.location;
+                        IDAL.DO.Cooridnates closestStationLocation= getClosestStation(dalAP.SearchCustomer(parcel.SenderId).location))
+                        drone.location=closestStationLocation;
                     }
                     else
                     {
                         drone.location=dalAP.YieldCustomer().Find(c=>c.Id==parcel.SenderId).location;
                     }
-                    //make battery random between min to close charging station to max
+                    drone.Battery = r.Next(0, 20);
                 }
                 else
                 {
-                    Random r = new Random();
                     if (r.Next(2)==1)//makes it be in maintenence
                     {
                         IEnumerable < IDAL.DO.Station> stations= dalAP.YieldStation();
@@ -97,20 +97,22 @@ namespace IBL
                                 counter++;
                             }
                         }
-                        drone.Battery=r.NextDouble()*                    }
+                        int batteryForTravel = drone.location.CalcDis(getClosestStation(drone.location)) * available;
+                        drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
+                    }
                 }
             }
         }
-        private IDAL.DO.Station getClosestStation(IDAL.DO.Customer customer)
+        private IDAL.DO.Station getClosestStation(Coordinates loc)
         {
             IEnumerable<IDAL.DO.Station> stations= dalAP.YieldStation();
-            double minDistance= stations.GetEnumerator().Current.location.CalcDis(customer.location);//will fill in
+            double minDistance= stations.GetEnumerator().Current.location.CalcDis(loc);//will fill in
             IDAL.DO.Station closest=stations.GetEnumerator().Current;
             foreach (IDAL.DO.Station station in stations)
             {
-                if (minDistance > station.location.CalcDis(customer.location)) 
+                if (minDistance > station.location.CalcDis(loc)) 
                 { 
-                    minDistance=station.location.CalcDis(customer.location);
+                    minDistance=station.location.CalcDis(loc);
                     closest = station;
                 }
             }
