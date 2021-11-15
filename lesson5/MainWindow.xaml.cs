@@ -24,5 +24,31 @@ namespace lesson5
         {
             InitializeComponent();
         }
+        private void brakes(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b != null)
+            {
+                System.Windows.MessageBox.Show("BRAKES");
+            }
+        }
+        private void slow(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b != null)
+            {
+                car.Margin = new Thickness(car.Margin.Left - 10, car.Margin.Top, car.Margin.Right, car.Margin.Bottom);
+            }
+        }
+
+        private void go(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b != null)
+            {
+                car.Margin = new Thickness(car.Margin.Left - 50, car.Margin.Top, car.Margin.Right, car.Margin.Bottom);
+            }
+        }
+
     }
 }

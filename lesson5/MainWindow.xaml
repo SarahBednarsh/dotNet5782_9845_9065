@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="red" Content="STOP" 
+        <Image x:Name="image" Source ="https://emojipedia-us.s3.amazonaws.com/source/skype/289/vertical-traffic-light_1f6a6.png " HorizontalAlignment="Left" Height="266" Margin="136,22,0,0" VerticalAlignment="Top" Width="167"></Image>
+        <Button x:Name="red" Content="STOP" HorizontalAlignment="Left" Margin="198,52,0,0" VerticalAlignment="Top" Height="25" Width="43" Background="{x:Null}" FontWeight="Bold" FontFamily="Arial Black" FontSize="11" BorderBrush="{x:Null}" Click="brakes"/>
+        <Button x:Name="yellow" Content="SLOW" HorizontalAlignment="Left" Margin="195,93,0,0" VerticalAlignment="Top" Height="24" Width="49" Background="{x:Null}" FontWeight="Bold" FontFamily="Arial Black" FontSize="11" BorderBrush="{x:Null}" Click="slow"/>
+        <Button x:Name="green" Content="GO" HorizontalAlignment="Left" Margin="204,140,0,0" VerticalAlignment="Top" Height="25" Width="30" IsDefault="True" Background="{x:Null}" FontFamily="Aharoni" FontSize="11" BorderBrush="{x:Null}" Click="go"/>
+        <Image x:Name="car" Source="C:\Users\liora\source\repos\dotNet5782_9845_9065\lesson5\205.jpg" Margin="455,140,-5,-25"/>
+
     </Grid>
 </Window>
