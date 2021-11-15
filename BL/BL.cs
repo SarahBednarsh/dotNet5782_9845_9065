@@ -74,8 +74,30 @@ namespace IBL
                             }
                             counter++;
                         }
-                        
+                        drone.Battery = r.NextDouble() / 5;
                     }
+                    else//drone is available
+                    {
+                        IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
+                        int numCustomerWithDeliveredParcel = 0;
+                        foreach (IDAL.DO.Customer customer in customers)
+                            if (hadAParcelDelivered(customer))
+                                numCustomerWithDeliveredParcel++;
+                        int index = r.Next(numCustomerWithDeliveredParcel);//customers that had parcels delivered to them
+                        int counter = 0;
+                        foreach (IDAL.DO.Customer customer in customers)
+                        {
+                            if (hadAParcelDelivered(customer))
+                            {
+                                if (counter == index)
+                                {
+                                    drone.location = customer.location;
+                                    break;
+                                }
+                                counter++;
+                            }
+                        }
+                        drone.Battery=r.NextDouble()*                    }
                 }
             }
         }
@@ -93,6 +115,15 @@ namespace IBL
                 }
             }
             return closest;
+        }
+        private bool hadAParcelDelivered(IDAL.DO.Customer customer)
+        {
+            foreach(IDAL.DO.Parcel parcel in dalAP.YieldParcel())
+            {
+                if ((parcel.Delivered != DateTime.MinValue) && (parcel.TargetId == customer.Id))
+                    return true;
+            }
+            return false;
         }
     }
 }
