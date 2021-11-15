@@ -49,12 +49,12 @@ namespace IBL
                     IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
                     if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                     {
-                        IDAL.DO.Cooridnates closestStationLocation= getClosestStation(dalAP.SearchCustomer(parcel.SenderId).location))
-                        drone.location=closestStationLocation;
+                        IDAL.DO.Coordinates closestStationLocation = getClosestStation(dalAP.SearchCustomer(parcel.SenderId).Location).Location;
+                        drone.Location=closestStationLocation;
                     }
                     else
                     {
-                        drone.location=dalAP.YieldCustomer().Find(c=>c.Id==parcel.SenderId).location;
+                        drone.Location=dalAP.YieldCustomer().Where(c=>c.Id==parcel.SenderId).GetEnumerator().Current.Location;
                     }
                     drone.Battery = r.Next(0, 20);
                 }
@@ -69,7 +69,7 @@ namespace IBL
                         {
                             if (counter==index)
                             {
-                                drone.location = station.location;
+                                drone.Location = station.Location;
                                 break;
                             }
                             counter++;
@@ -91,13 +91,13 @@ namespace IBL
                             {
                                 if (counter == index)
                                 {
-                                    drone.location = customer.location;
+                                    drone.Location = customer.Location;
                                     break;
                                 }
                                 counter++;
                             }
                         }
-                        int batteryForTravel = drone.location.CalcDis(getClosestStation(drone.location)) * available;
+                        int batteryForTravel = (int)(drone.Location.CalcDis(getClosestStation(drone.Location).Location) * available);
                         drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                     }
                 }
@@ -106,13 +106,13 @@ namespace IBL
         private IDAL.DO.Station getClosestStation(Coordinates loc)
         {
             IEnumerable<IDAL.DO.Station> stations= dalAP.YieldStation();
-            double minDistance= stations.GetEnumerator().Current.location.CalcDis(loc);//will fill in
+            double minDistance= stations.GetEnumerator().Current.Location.CalcDis(loc);//will fill in
             IDAL.DO.Station closest=stations.GetEnumerator().Current;
             foreach (IDAL.DO.Station station in stations)
             {
-                if (minDistance > station.location.CalcDis(loc)) 
+                if (minDistance > station.Location.CalcDis(loc)) 
                 { 
-                    minDistance=station.location.CalcDis(loc);
+                    minDistance=station.Location.CalcDis(loc);
                     closest = station;
                 }
             }

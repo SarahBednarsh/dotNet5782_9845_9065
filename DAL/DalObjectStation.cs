@@ -8,7 +8,7 @@ namespace DalObject
     {
         public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
         {
-            Station tempStation = new Station() { Id = id, Name = name, Longitude = new Sexagesimal(longitude, "longitude"), Latitude = new Sexagesimal(latitude, "latitude"), ChargeSlots = chargeSlots };
+            Station tempStation = new Station() { Id = id, Name = name, Location = new Coordinates(longitude, latitude), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }
         public Station SearchStation(int stationId)
@@ -32,9 +32,7 @@ namespace DalObject
         public double CalcDisFromStation(int id, double longitude, double latitude)
         {
             Station station = this.SearchStation(id);
-            double deltalLongitude = station.Longitude.ParseDouble() - longitude;
-            double deltalLatitude = station.Latitude.ParseDouble() - latitude;
-            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
+            return station.Location.CalcDis(new Coordinates(longitude, latitude));
         }
 
     }

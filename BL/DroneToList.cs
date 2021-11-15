@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO
+using IDAL.DO;
 namespace IBL
 {
     namespace BO
@@ -15,7 +15,7 @@ namespace IBL
             public DroneStatuses Status { get; set; }
             public IDAL.DO.Sexagesimal Longitude { get; set; }//should delete
             public IDAL.DO.Sexagesimal Latitude { get; set; }//should delete
-            public IDAL.DO.Coordinate location  { get; set; }
+            public IDAL.DO.Coordinates Location  { get; set; }
             public int IdOfParcel;
             public DroneToList(IDAL.DO.Drone drone)
             {

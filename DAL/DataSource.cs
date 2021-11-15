@@ -29,7 +29,7 @@ namespace DalObject
             Random r = new Random();
             for (int i = 0; i < 2; i++)
             {
-                Station station = new Station() { Id = r.Next(1000, 10000), Name = r.Next(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(1, 10) };
+                Station station = new Station() { Id = r.Next(1000, 10000), Name = r.Next(), Location = new Coordinates(r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)) };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
@@ -40,7 +40,7 @@ namespace DalObject
             string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi", "Bilbo Baggins", "Paul", "Joseph", "Yoram", "Devorah", "Simcha" };
             for (int i = 0; i < 10; i++)
             {
-                Customer customer = new Customer() { Id = r.Next(100000000, 1000000000), Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
+                Customer customer = new Customer() { Id = r.Next(100000000, 1000000000), Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Location = new Coordinates(r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)) };
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
@@ -49,7 +49,11 @@ namespace DalObject
                 DateTime start = new DateTime(2020, i + 1, 1);
                 int forScheduled = r.Next(1, 25);
                 int forPickedUp = forScheduled + 1;
-                int forDelivered = forPickedUp + 1;
+                DateTime delivered;
+                if (i % 2 == 0)
+                    delivered = start.AddDays(forPickedUp + 1);
+                else
+                    delivered = DateTime.MinValue;
                 Parcel parcel = new Parcel()
                 {
                     Id = ++DataSource.Config.RunningParcelNumber,
@@ -60,8 +64,8 @@ namespace DalObject
                     Requested = DateTime.Today,
                     DroneId = Drones[i % 5].Id,
                     Scheduled = start.AddDays(forScheduled),
-                    Delivered = start.AddDays(forDelivered),
-                    PickedUp = start.AddDays(forPickedUp)
+                    PickedUp = start.AddDays(forPickedUp),
+                    Delivered = delivered
                 };
                 DataSource.Parcels.Add(parcel);
             }

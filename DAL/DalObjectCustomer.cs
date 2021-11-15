@@ -9,7 +9,7 @@ namespace DalObject
     {
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
-            Customer tempCustomer = new Customer() { Id = id, Name = name, Phone = phone, Longitude = new Sexagesimal(longitude, "longitude"), Latitude = new Sexagesimal(latitude, "latitude") };
+            Customer tempCustomer = new Customer() { Id = id, Name = name, Phone = phone, Location = new Coordinates(longitude, latitude) };
             DataSource.Customers.Add(tempCustomer);
         }
 
@@ -24,10 +24,7 @@ namespace DalObject
         public double CalcDisFromCustomer(int id, double longitude, double latitude)
         {
             Customer customer = this.SearchCustomer(id);
-            double deltalLongitude = customer.Longitude.ParseDouble() - longitude;
-            double deltalLatitude = customer.Latitude.ParseDouble() - latitude;
-            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
+            return customer.Location.CalcDis(new Coordinates(longitude, latitude));
         }
-
     }
 }
