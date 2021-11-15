@@ -8,11 +8,15 @@ namespace DalObject
     {
         public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
         {
+            if (DataSource.Stations.Exists(x => x.Id == id))
+                return;
             Station tempStation = new Station() { Id = id, Name = name, Location = new Coordinates(longitude, latitude), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }
         public Station SearchStation(int stationId)
         {
+            //if (!DataSource.Stations.Exists(x => x.Id == stationId))
+               // return new Station(Id = 0);
             return DataSource.Stations.Find(x => x.Id == stationId);
         }
         public IEnumerable<Station> YieldStation()
@@ -31,7 +35,8 @@ namespace DalObject
         }
         public double CalcDisFromStation(int id, double longitude, double latitude)
         {
-            Station station = this.SearchStation(id);
+            Station station = SearchStation(id);
+            //deal with if doesn't exist
             return station.Location.CalcDis(new Coordinates(longitude, latitude));
         }
 
