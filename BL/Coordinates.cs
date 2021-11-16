@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IDAL.DO;
 
-namespace IDAL
+namespace IBL
 {
-    namespace DO
+    namespace BO
     {
         public class Coordinates
         {

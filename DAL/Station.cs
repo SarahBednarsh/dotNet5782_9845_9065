@@ -10,11 +10,12 @@ namespace IDAL
         {
             public int Id { get; set; }
             public int Name { get; set; }
-            public Coordinates Location { get; set; }
+            public Sexagesimal Longitude { get; set; }
+            public Sexagesimal Latitude { get; set; }
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return string.Format("Id: {0}, Name: {1}, Location: {2}, ChargeSlots: {3}", Id, Name, Location, ChargeSlots);
+                return string.Format("Id: {0}, Name: {1}, Longitude: {2}, Latitude: {3}, ChargeSlots: {4}", Id, Name, Longitude, Latitude, ChargeSlots);
             }
         }
     }

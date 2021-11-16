@@ -14,7 +14,7 @@ namespace IDAL
             public WeightCategories MaxWeight { get; set; }
             public override string ToString()
             {
-                return string.Format("Id: {0}, Model: {1}, MaxWeight: {2}, Status: {3}, Battery: {4}", Id, Model, MaxWeight);
+                return string.Format("Id: {0}, Model: {1}, MaxWeight: {2}", Id, Model, MaxWeight);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace DalObject
         {
             if (DataSource.Stations.Exists(x => x.Id == id))
                 return;
-            Station tempStation = new Station() { Id = id, Name = name, Location = new Coordinates(longitude, latitude), ChargeSlots = chargeSlots };
+            Station tempStation = new Station() { Id = id, Name = name, Longitude = new Sexagesimal(longitude, "Longitude"), Latitude = new Sexagesimal(latitude, "Latitude"), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }
         public Station SearchStation(int stationId)
@@ -37,7 +37,9 @@ namespace DalObject
         {
             Station station = SearchStation(id);
             //deal with if doesn't exist
-            return station.Location.CalcDis(new Coordinates(longitude, latitude));
+            double deltalLongitude = station.Longitude.ParseDouble() - longitude;
+            double deltalLatitude = station.Latitude.ParseDouble() - latitude;
+            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
         }
 
     }

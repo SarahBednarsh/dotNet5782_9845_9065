@@ -35,7 +35,7 @@ namespace IBL
             IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
             IEnumerable<IDAL.DO.Drone> drones = dalAP.YieldDrone();
             List<DroneToList> dronesBL = new List<DroneToList>();
-            foreach(IDAL.DO.Drone drone in drones)
+            foreach (IDAL.DO.Drone drone in drones)
             {
                 dronesBL.Add(new DroneToList(drone));
             }
@@ -49,25 +49,26 @@ namespace IBL
                     IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
                     if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                     {
-                        IDAL.DO.Coordinates closestStationLocation = getClosestStation(dalAP.SearchCustomer(parcel.SenderId).Location).Location;
-                        drone.Location=closestStationLocation;
+
+                        Coordinates closestStationLocation = GetClosestStation(dalAP.SearchCustomer(parcel.SenderId).Location).Location;
+                        drone.Location = closestStationLocation;
                     }
                     else
                     {
-                        drone.Location=dalAP.YieldCustomer().Where(c=>c.Id==parcel.SenderId).GetEnumerator().Current.Location;
+                        drone.Location = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).GetEnumerator().Current.Location;
                     }
                     drone.Battery = r.Next(0, 20);
                 }
                 else
                 {
-                    if (r.Next(2)==1)//makes it be in maintenence
+                    if (r.Next(2) == 1)//makes it be in maintenence
                     {
-                        IEnumerable < IDAL.DO.Station> stations= dalAP.YieldStation();
+                        IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                         int index = r.Next(stations.Count());
                         int counter = 0;
                         foreach (IDAL.DO.Station station in stations)
                         {
-                            if (counter==index)
+                            if (counter == index)
                             {
                                 drone.Location = station.Location;
                                 break;
@@ -97,22 +98,22 @@ namespace IBL
                                 counter++;
                             }
                         }
-                        int batteryForTravel = (int)(drone.Location.CalcDis(getClosestStation(drone.Location).Location) * available);
+                        int batteryForTravel = (int)(drone.Location.CalcDis(GetClosestStation(drone.Location).Location) * available);
                         drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                     }
                 }
             }
         }
-        private IDAL.DO.Station getClosestStation(Coordinates loc)
+        private BO.Station GetClosestStation(Coordinates loc)
         {
-            IEnumerable<IDAL.DO.Station> stations= dalAP.YieldStation();
-            double minDistance= stations.GetEnumerator().Current.Location.CalcDis(loc);//will fill in
-            IDAL.DO.Station closest=stations.GetEnumerator().Current;
-            foreach (IDAL.DO.Station station in stations)
+            IEnumerable<BO.Station> stations = this.YieldStation();
+            double minDistance = stations.GetEnumerator().Current.Location.CalcDis(loc);//will fill in
+            BO.Station closest = stations.GetEnumerator().Current;
+            foreach (BO.Station station in stations)
             {
-                if (minDistance > station.Location.CalcDis(loc)) 
-                { 
-                    minDistance=station.Location.CalcDis(loc);
+                if (minDistance > station.Location.CalcDis(loc))
+                {
+                    minDistance = station.Location.CalcDis(loc);
                     closest = station;
                 }
             }
@@ -120,7 +121,7 @@ namespace IBL
         }
         private bool hadAParcelDelivered(IDAL.DO.Customer customer)
         {
-            foreach(IDAL.DO.Parcel parcel in dalAP.YieldParcel())
+            foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
             {
                 if ((parcel.Delivered != DateTime.MinValue) && (parcel.TargetId == customer.Id))
                     return true;
