@@ -16,6 +16,11 @@ namespace IBL
                 Longitude = new Sexagesimal(longitude, "longitude");
                 Latitude = new Sexagesimal(latitude, "latitude");
             }
+            public Coordinates(Sexagesimal longitude, Sexagesimal latitude)
+            {
+                Longitude = longitude;
+                Latitude = latitude;
+            }
             public double CalcDis(Coordinates location)
             {
                 double deltalLongitude = location.Longitude.ParseDouble() - Longitude.ParseDouble();
