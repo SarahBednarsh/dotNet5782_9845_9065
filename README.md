@@ -10,7 +10,7 @@ cooridinates: combine longitude and latitude-create a class in DAL(we think), de
 initialize: change to Datetime.minval
 BL: exceptions, tostrings
 DAL: exceptions
-
+BO: figure out what should be in bo and what not
 
 Sarah: fix DroneToList, finish dealing with drones, add basic login in DAL- if in search drone doesn't exist return -1 and so on 
 Liorah: add cooridnates, fix initialize

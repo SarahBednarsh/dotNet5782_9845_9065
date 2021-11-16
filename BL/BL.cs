@@ -9,15 +9,17 @@ using IBL.BO;
 
 namespace IBL
 {
-    //should this be in namespace BO?
-    public partial class BL : IBL
+    namespace BO
     {
-        internal IDal dalAP; // DAL access point
-        internal static double available = 0;
-        internal static double light = 0;
-        internal static double medium = 0;
-        internal static double heavy = 0;
-        internal static double chargingPace = 0;
+        //should this be in namespace BO?
+        public partial class BL : IBL
+        {
+            internal IDal dalAP; // DAL access point
+            internal static double available = 0;
+            internal static double light = 0;
+            internal static double medium = 0;
+            internal static double heavy = 0;
+            internal static double chargingPace = 0;
 
         public BL()
         {
