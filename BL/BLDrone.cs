@@ -30,6 +30,10 @@ namespace IBL
                         minDistance = station.Location.CalcDis(drone.Location);
                 }
                 //if battery isnt enough to get there throw exception- or if t
+                //if it is:
+                //need to decide how to update it right- does search drone return hafnaya or whateveror is it a cpy? its a copy so what do we do
+               // dalAP.UpdateDrone()
+
             }
             public void ReleaseCharging(int droneId, int timeCharging) { }
             public void PickUpAParcel(int droneId) { }

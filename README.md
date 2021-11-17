@@ -17,4 +17,11 @@ Liorah: add cooridnates, fix initialize
 
 Liorah: fixed coordinates. should fix the IBL constructor. (consider using ligical entities instead of DAL entities)
 
+Questions for Nurit:
+1) how do we update things in dal- do we make a functions for each? or a function ans send all the parameters? or have a function that we each time enter different variables?
+2)
+
+
 May the odds be ever in our favor :)
+
+
