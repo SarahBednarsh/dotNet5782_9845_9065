@@ -20,8 +20,7 @@ namespace ConsoleUI_BL
                     "Enter 4 for displaying a list of entities\n" +
                     "Enter 5 for calculating ditance from an entity\n" +
                     "Enter 0 for Exit");
-                int input;
-                Int32.TryParse(Console.ReadLine(), out input);
+                Int32.TryParse(Console.ReadLine(), out int input);
                 option = (Actions)input;
                 switch (option)
                 {
@@ -38,7 +37,7 @@ namespace ConsoleUI_BL
                         SwitchView(bl);
                         break;
                     case Actions.List:
-                        SwitchList();
+                        SwitchList(bl);
                         break;
                     default:
                         Console.WriteLine("ERROR");

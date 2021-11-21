@@ -15,7 +15,7 @@ BO: figure out what should be in bo and what not
 Sarah: fix DroneToList, finish dealing with drones, add basic login in DAL- if in search drone doesn't exist return -1 and so on 
 Liorah: add cooridnates, fix initialize
 
-Liorah: fixed coordinates. should fix the IBL constructor. (consider using ligical entities instead of DAL entities)
+Liorah: fixed Location. should fix the IBL constructor. (consider using ligical entities instead of DAL entities)
 
 Questions for Nurit:
 1) how do we update things in dal- do we make a functions for each? or a function ans send all the parameters? or have a function that we each time enter different variables?
@@ -28,5 +28,6 @@ Notes:
 1. fix calcDis
 2. Organize targil1? optional
 3. Break BL constructor down to funcs
+4. Remove methods from Location
 
 

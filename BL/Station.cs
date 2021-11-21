@@ -10,7 +10,7 @@ namespace IBL
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public Coordinates Location { get; set; }
+            public Location Location { get; set; }
             public int OpenChargeSlots { get; set; }
             public List<DroneInCharge> Charging;
             public override string ToString()

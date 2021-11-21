@@ -11,7 +11,7 @@ namespace IBL
         {
             public int Id { get; set; }
             public double Battery { get; set; }
-            public Coordinates Location { get; set; }
+            public Location Location { get; set; }
             public override string ToString()
             {
                 return base.ToString();

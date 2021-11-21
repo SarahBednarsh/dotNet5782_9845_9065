@@ -33,7 +33,7 @@ namespace DalObject
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id ==Id))
                     Id = r.Next(1000, 10000);
-                Station station = new Station() { Id=Id, Name = r.Next(), Location = new Coordinates(r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)) };
+                Station station = new Station() { Id=Id, Name = r.Next(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude") , Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
@@ -50,7 +50,7 @@ namespace DalObject
                 Id = r.Next(100000000, 1000000000);
                 while (DataSource.Customers.Exists(x => x.Id == Id))
                     Id = r.Next(100000000, 1000000000);
-                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Location = new Coordinates(r.NextDouble() + r.Next(-999, 999), r.NextDouble() + r.Next(-999, 999)) };
+                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = new Sexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);

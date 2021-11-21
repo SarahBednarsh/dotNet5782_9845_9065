@@ -52,14 +52,14 @@ namespace IBL
                         if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                         {
                             IDAL.DO.Customer customer = dalAP.SearchCustomer(parcel.SenderId);
-                            IDAL.DO.Station closest = GetClosestStation(new Coordinates(customer.Longitude, customer.Latitude));
-                            Coordinates closestStationLocation = new Coordinates(closest.Longitude, closest.Latitude);
+                            IDAL.DO.Station closest = GetClosestStation(new Location(customer.Longitude, customer.Latitude));
+                            Location closestStationLocation = new Location(closest.Longitude, closest.Latitude);
                             drone.Location = closestStationLocation;
                         }
                         else
                         {
                             IDAL.DO.Customer customer = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).GetEnumerator().Current;
-                            drone.Location = new Coordinates(customer.Longitude, customer.Latitude);
+                            drone.Location = new Location(customer.Longitude, customer.Latitude);
                         }
                         drone.Battery = r.Next(0, 20);
                     }
@@ -74,7 +74,7 @@ namespace IBL
                             {
                                 if (counter == index)
                                 {
-                                    drone.Location = new Coordinates(station.Longitude, station.Latitude);
+                                    drone.Location = new Location(station.Longitude, station.Latitude);
                                     break;
                                 }
                                 counter++;
@@ -96,7 +96,7 @@ namespace IBL
                                 {
                                     if (counter == index)
                                     {
-                                        drone.Location = new Coordinates(customer.Longitude, customer.Latitude);
+                                        drone.Location = new Location(customer.Longitude, customer.Latitude);
                                         break;
                                     }
                                     counter++;
@@ -108,15 +108,15 @@ namespace IBL
                     }
                 }
             }
-            private IDAL.DO.Station GetClosestStation(Coordinates loc)
+            private IDAL.DO.Station GetClosestStation(Location loc)
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                Coordinates location = new Coordinates(stations.GetEnumerator().Current.Longitude, stations.GetEnumerator().Current.Latitude);
+                Location location = new Location(stations.GetEnumerator().Current.Longitude, stations.GetEnumerator().Current.Latitude);
                 double minDistance = location.CalcDis(loc);//will fill in
                 IDAL.DO.Station closest = stations.GetEnumerator().Current;
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    location = new Coordinates(station.Longitude, stations.GetEnumerator().Current.Latitude);
+                    location = new Location(station.Longitude, stations.GetEnumerator().Current.Latitude);
                     double dis = location.CalcDis(loc);
                     if (minDistance > dis)
                     {

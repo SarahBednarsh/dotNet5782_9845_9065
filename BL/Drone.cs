@@ -15,7 +15,7 @@ namespace IBL
             public double Battery { get; set; }
             public States State { get; set; }
             public ParcelInTransfer Parcel { get; set; }
-            public Coordinates Location { get; set; }
+            public Location Location { get; set; }
             public override string ToString()
             {
                 return base.ToString();

@@ -13,8 +13,8 @@ namespace IBL
             public Priorities Priority { get; set; }
             public CustomerInParcel Sender { get; set; }
             public CustomerInParcel Reciever { get; set; }
-            public Coordinates PickUp { get; set; }
-            public Coordinates Destination { get; set; }
+            public Location PickUp { get; set; }
+            public Location Destination { get; set; }
             public double Distance { get; set; }
             public override string ToString()
             {

@@ -60,9 +60,9 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter maximum weight- 1 for light, 2 for medium, 3 for heavy:");
                                 Int32.TryParse(Console.ReadLine(), out input);
                                 WeightCategories maxWeight = (WeightCategories)input;
-                                Console.WriteLine("Enter battey:");
-                                double battery;
-                                Double.TryParse(Console.ReadLine(), out battery);
+                                //Console.WriteLine("Enter battey:");
+                                //double battery;
+                                //Double.TryParse(Console.ReadLine(), out battery);
                                 project.AddDrone(id, model, maxWeight);
                                 break;
                             case Data.Customer:

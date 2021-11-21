@@ -13,13 +13,13 @@ namespace IBL
             public WeightCategories MaxWeight { get; set; }
             public double Battery { get; set; }
             public DroneStatuses Status { get; set; }
-            public IDAL.DO.Coordinates Location  { get; set; }
+            public Location Location  { get; set; }
             public int IdOfParcel;
             public DroneToList(IDAL.DO.Drone drone)
             {
                 Id = drone.Id;
                 Model = drone.Model;
-                MaxWeight = drone.MaxWeight;
+                MaxWeight = (WeightCategories)drone.MaxWeight;
                 Status = DroneStatuses.Available;
                 IdOfParcel = -1;
             }
