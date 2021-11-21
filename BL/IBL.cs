@@ -6,7 +6,7 @@ namespace IBL
 {
     namespace BO
     {
-        interface IBL
+        public interface IBL
         {
             public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots);
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging);

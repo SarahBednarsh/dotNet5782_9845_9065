@@ -7,7 +7,7 @@ to check later: do we need to put thisses in the constructer functions?
 
 DAL: remember to add basic logic for handling the data lists!!!
 cooridinates: combine longitude and latitude-create a class in DAL(we think), define a method calcDis which gets another location and returns distance, and combine lattitude and longitude everywhere-call them location
-initialize: change to Datetime.minval
+DONE initialize: change to Datetime.minval
 BL: exceptions, tostrings
 DAL: exceptions
 BO: figure out what should be in bo and what not
@@ -23,5 +23,10 @@ Questions for Nurit:
 
 
 May the odds be ever in our favor :)
+
+Notes:
+1. fix calcDis
+2. Organize targil1? optional
+3. Break BL constructor down to funcs
 
 

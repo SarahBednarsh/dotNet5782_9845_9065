@@ -7,9 +7,9 @@ namespace ConsoleUI
     public enum Actions { Exit, Add, Update, View, List, Calc }
     public enum Data { Station = 1, Drone, Customer, Parcel, ParcelNotAttributed, StationsWithAvailableChargers }
     public enum UpdateOption { Attribute = 1, Pickup, Ship, SendToCharge }
-    class Targil1
+    public class Targil1
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             IDAL.IDal project = new DalObject.DalObject();
             Actions option;
