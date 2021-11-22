@@ -37,11 +37,12 @@ namespace IBL
             public IEnumerable<Customer> YieldCustomer()
             {
                 IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
-                IEnumerable<Customer> newCustomers;
+                List<Customer> newCustomers = new List<Customer>();
                 foreach(IDAL.DO.Customer customer in customers)
                 {
-
+                    newCustomers.Add(createNewCustomer(customer));
                 }
+                return newCustomers;
             }
         }
     }
