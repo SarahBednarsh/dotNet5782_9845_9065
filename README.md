@@ -30,6 +30,7 @@ Notes:
 3. Break BL constructor down to funcs
 4. Remove methods from Location
 5. Empty input - how to handle
-6. Delete unnecessary funcs from ibl 
+6. Delete unnecessary funcs from ibl
+7. Also change sexagesimal - delete funcs, etc.
 
 
