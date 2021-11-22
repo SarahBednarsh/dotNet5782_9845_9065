@@ -52,14 +52,14 @@ namespace IBL
                         if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                         {
                             IDAL.DO.Customer customer = dalAP.SearchCustomer(parcel.SenderId);
-                            IDAL.DO.Station closest = GetClosestStation(new Location(customer.Longitude, customer.Latitude));
-                            Location closestStationLocation = new Location(closest.Longitude, closest.Latitude);
+                            IDAL.DO.Station closest = GetClosestStation(LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude));
+                            Location closestStationLocation = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
                             drone.Location = closestStationLocation;
                         }
                         else
                         {
                             IDAL.DO.Customer customer = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).GetEnumerator().Current;
-                            drone.Location = new Location(customer.Longitude, customer.Latitude);
+                            drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
                         }
                         drone.Battery = r.Next(0, 20);
                     }
@@ -74,7 +74,7 @@ namespace IBL
                             {
                                 if (counter == index)
                                 {
-                                    drone.Location = new Location(station.Longitude, station.Latitude);
+                                    drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
                                     break;
                                 }
                                 counter++;
@@ -96,13 +96,15 @@ namespace IBL
                                 {
                                     if (counter == index)
                                     {
-                                        drone.Location = new Location(customer.Longitude, customer.Latitude);
+                                        drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
                                         break;
                                     }
                                     counter++;
                                 }
                             }
-                            int batteryForTravel = (int)(drone.Location.CalcDis(GetClosestStation(drone.Location).Location) * available);
+                            IDAL.DO.Station closest = GetClosestStation(drone.Location);
+                            Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
+                            int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
                             drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                         }
                     }
@@ -111,13 +113,13 @@ namespace IBL
             private IDAL.DO.Station GetClosestStation(Location loc)
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                Location location = new Location(stations.GetEnumerator().Current.Longitude, stations.GetEnumerator().Current.Latitude);
-                double minDistance = location.CalcDis(loc);//will fill in
-                IDAL.DO.Station closest = stations.GetEnumerator().Current;
+                Location location = LocationStaticClass.InitializeLocation(stations.GetEnumerator().Current.Longitude, stations.GetEnumerator().Current.Latitude);
+                double minDistance = LocationStaticClass.CalcDis(location, loc);//will fill in
+                IDAL.DO.Station closest = stations.FirstOrDefault();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    location = new Location(station.Longitude, stations.GetEnumerator().Current.Latitude);
-                    double dis = location.CalcDis(loc);
+                    location = LocationStaticClass.InitializeLocation(station.Longitude, stations.GetEnumerator().Current.Latitude);
+                    double dis = LocationStaticClass.CalcDis(location, loc);
                     if (minDistance > dis)
                     {
                         minDistance = dis;

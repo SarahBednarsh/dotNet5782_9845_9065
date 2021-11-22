@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IBL
+namespace DAL
 {
-    namespace BO
+    namespace DO
     {
-        class DroneCharge
+        class DALExeptions
         {
         }
     }
