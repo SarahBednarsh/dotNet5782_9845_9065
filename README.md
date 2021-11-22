@@ -29,5 +29,7 @@ Notes:
 2. Organize targil1? optional
 3. Break BL constructor down to funcs
 4. Remove methods from Location
+5. Empty input - how to handle
+6. Delete unnecessary funcs from ibl 
 
 

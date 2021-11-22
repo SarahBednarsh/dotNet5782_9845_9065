@@ -9,9 +9,10 @@ namespace IBL
         public partial class BL
         {
             public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots) { }
-            public void UpdateStationInfo(int stationId) { }//not sure
+            public void UpdateStationInfo(int stationId, string name, int chargingSlots) { }//not sure
             public Station SearchStation(int stationId) { }
             public IEnumerable<Station> YieldStation() { }
+            public IEnumerable<Station> YieldStationAvailable() { }
         }
     }
 }

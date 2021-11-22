@@ -32,6 +32,10 @@ namespace IBL
             {
 
             }
+            public IEnumerable<Parcel> YieldParcelNotAttributed()
+            {
+
+            }
         }
     }
 }

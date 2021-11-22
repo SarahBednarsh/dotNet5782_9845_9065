@@ -12,7 +12,7 @@ namespace IBL
             {
 
             }
-            public void UpdateCustomerInfo(int customerId)//not sure
+            public void UpdateCustomerInfo(int customerId, string name, string phone)//not sure
             {
 
             }
