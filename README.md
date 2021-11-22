@@ -25,12 +25,16 @@ Questions for Nurit:
 May the odds be ever in our favor :)
 
 Notes:
-1. fix calcDis
-2. Organize targil1? optional
-3. Break BL constructor down to funcs
-4. Remove methods from Location and Sexagesimal
-5. Empty input - how to handle
-6. Delete unnecessary funcs from ibl
-7. Also change sexagesimal - delete funcs, etc.
+1. fix calcDis                                     V
+2. Organize targil1? optional                      X
+3. Break BL constructor down to funcs              ?
+4. Remove methods from Location and Sexagesimal    V
+5. Empty input - how to handle                     V
+6. Delete unnecessary funcs from ibl               V
+7. Also change sexagesimal - delete funcs, etc.    V
 
-
+Stuff to do:
+- Exceptions
+- Change to FirstOrDefault where we used enumerator
+- Add delete options to DAL
+- Exceptions: both BL and DAL
