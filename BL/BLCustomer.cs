@@ -22,14 +22,26 @@ namespace IBL
                 }
                 IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
                 //deal with if it doesnt exist
+                if (name!="")
+                    customer.Name = name;
+                if (phone != "")
+                    customer.Name = phone;
             }
             public Customer SearchCustomer(int customerId)
             {
-
+                IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
+                //if equals default exception
+                Customer BLcustomer = createNewCustomer(customer);
+                return BLcustomer;
             }
             public IEnumerable<Customer> YieldCustomer()
             {
+                IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
+                IEnumerable<Customer> newCustomers;
+                foreach(IDAL.DO.Customer customer in customers)
+                {
 
+                }
             }
         }
     }
