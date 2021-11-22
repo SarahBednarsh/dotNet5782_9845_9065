@@ -12,14 +12,6 @@ namespace IBL
             {
 
             }
-            public void PickUpSpecificParcel(int parcelId)
-            {
-
-            }
-            public void UpdateParcelsDrone(int parcelId, int droneId)
-            {
-
-            }
             public void DeliverAParcel(int droneId)
             {
             

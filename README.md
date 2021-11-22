@@ -28,7 +28,7 @@ Notes:
 1. fix calcDis
 2. Organize targil1? optional
 3. Break BL constructor down to funcs
-4. Remove methods from Location
+4. Remove methods from Location and Sexagesimal
 5. Empty input - how to handle
 6. Delete unnecessary funcs from ibl
 7. Also change sexagesimal - delete funcs, etc.

@@ -19,8 +19,6 @@ namespace IBL
             public void ReleaseCharging(int droneId, int timeCharging);
             public void AttributeAParcel(int droneId);
             public void PickUpAParcel(int droneId);
-            public void PickUpSpecificParcel(int parcelId);
-            public void UpdateParcelsDrone(int parcelId, int droneId);
             public void DeliverAParcel(int droneId);
             //with these we will among other things print a specific object
             public Station SearchStation(int stationId);
