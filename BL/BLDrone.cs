@@ -39,7 +39,7 @@ namespace IBL
             {
                 
             }
-            public void AttributeUpAParcel(int droneId) 
+            public void AttributeAParcel(int droneId) 
             { }
             public void PickUpAParcel(int droneId) { }
             public void DeliverAParcel(int droneId) { }

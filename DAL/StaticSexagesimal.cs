@@ -34,6 +34,10 @@ namespace IDAL
             {
                 return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = seconds, Direction = direction };
             }
+            public static Sexagesimal InitializeSexagesimal(Sexagesimal copy)
+            {
+                return InitializeSexagesimal(copy.Degrees, copy.Minutes, copy.Seconds, copy.Direction);
+            }
             public static double ParseDouble(Sexagesimal coordinate)//converts a sexagesimal coordinate to decimal
             {
                 int factor = 1;
