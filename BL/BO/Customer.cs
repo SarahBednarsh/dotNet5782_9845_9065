@@ -12,8 +12,8 @@ namespace IBL
             public string Name { get; set; }
             public string PhoneNum { get; set; }
             public Location Location { get; set; }
-            public List<Parcel> AtCustomer;
-            public List<Parcel> ToCustomer;
+            public List<ParcelAtCustomer> AtCustomer;
+            public List<ParcelAtCustomer> ToCustomer;
             public override string ToString()
             {
                 return base.ToString();
