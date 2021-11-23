@@ -44,23 +44,6 @@ namespace IBL
                 }
                 return newCustomers;
             }
-            public Customer createCustomer(IDAL.DO.Customer old)
-            {
-                Customer customer = new Customer();
-                customer.Id = old.Id;
-                customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
-                customer.Name = old.Name;
-                customer.PhoneNum = old.Phone;
-                List<ParcelAtCustomer> sentFromCustomer = new List<ParcelAtCustomer>();
-                List<ParcelAtCustomer> sentToCustomer = new List<ParcelAtCustomer>();
-                foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
-                {
-                    if (customer.Id == parcel.SenderId)//from this customer
-                    {
-                        sentFromCustomer.Add(createParcelAtCustomer(parcel.Id,parcel.Weight,parcel.Priority,parcel.))
-                    }
-                }
-            }
             public ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
             {
                 ParcelAtCustomer parcel = new ParcelAtCustomer();
@@ -72,6 +55,28 @@ namespace IBL
                 return parcel;
 
             }
+            public Customer createCustomer(IDAL.DO.Customer old)
+            {
+                
+                Customer customer = new Customer();
+                customer.Id = old.Id;
+                customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
+                customer.Name = old.Name;
+                customer.PhoneNum = old.Phone;
+                List<ParcelAtCustomer> sentFromCustomer = new List<ParcelAtCustomer>();
+                List<ParcelAtCustomer> sentToCustomer = new List<ParcelAtCustomer>();
+                foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
+                {
+                    if (customer.Id == parcel.SenderId)//from this customer
+                    {
+                        //find state
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, CustomerName = SearchCustomer(parcel.TargetId).Name};
+                        sentFromCustomer.Add(new ParcelAtCustomer { Id=customer.Id, Customer=tmp, Priority= (Priorities)parcel.Priority, State= ??, Weight= (WeightCategories)parcel.Weight}
+                    }
+                }
+            }
+            
+            
         }
     }
 }
