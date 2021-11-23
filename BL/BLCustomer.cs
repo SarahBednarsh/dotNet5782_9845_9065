@@ -25,7 +25,7 @@ namespace IBL
                 if (name!="")
                     customer.Name = name;
                 if (phone != "")
-                    customer.Name = phone;
+                    customer.Phone = phone;
             }
             public Customer SearchCustomer(int customerId)
             {
@@ -43,6 +43,16 @@ namespace IBL
                     newCustomers.Add(createNewCustomer(customer));
                 }
                 return newCustomers;
+            }
+            public Customer createNewCustomer(IDAL.DO.Customer old)
+            {
+                Customer customer = new Customer();
+                customer.Id = old.Id;
+                customer.Location= LocationStaticClass.InitializeLocation()
+
+
+
+
             }
         }
     }
