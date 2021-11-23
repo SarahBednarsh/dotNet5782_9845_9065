@@ -48,7 +48,9 @@ namespace IBL
             {
                 Customer customer = new Customer();
                 customer.Id = old.Id;
-                customer.Location= LocationStaticClass.InitializeLocation()
+                customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
+                customer.Name = old.Name;
+                customer.PhoneNum = old.Phone;
 
 
 
