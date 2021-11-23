@@ -63,17 +63,38 @@ namespace IBL
                 customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
                 customer.Name = old.Name;
                 customer.PhoneNum = old.Phone;
-                List<ParcelAtCustomer> sentFromCustomer = new List<ParcelAtCustomer>();
-                List<ParcelAtCustomer> sentToCustomer = new List<ParcelAtCustomer>();
+                customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
                 foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
                 {
                     if (customer.Id == parcel.SenderId)//from this customer
                     {
-                        //find state
+                        States state = States.Created;
+                        Parcel BLparcel = SearchParcel(parcel.Id);
+                        if (BLparcel.Delivery <= DateTime.Now)
+                            state = States.Delivered;
+                        else if (BLparcel.PickUp <= DateTime.Now)
+                            state = States.PickedUp;
+                        else if (BLparcel.Attribution <= DateTime.Now)
+                            state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, CustomerName = SearchCustomer(parcel.TargetId).Name};
-                        sentFromCustomer.Add(new ParcelAtCustomer { Id=customer.Id, Customer=tmp, Priority= (Priorities)parcel.Priority, State= ??, Weight= (WeightCategories)parcel.Weight}
+                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
+                    }
+                    if (customer.Id == parcel.TargetId)//from this customer
+                    {
+                        States state = States.Created;
+                        Parcel BLparcel = SearchParcel(parcel.Id);
+                        if (BLparcel.Delivery <= DateTime.Now)
+                            state = States.Delivered;
+                        else if (BLparcel.PickUp <= DateTime.Now)
+                            state = States.PickedUp;
+                        else if (BLparcel.Attribution <= DateTime.Now)
+                            state = States.Attributed;
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, CustomerName = SearchCustomer(parcel.SenderId).Name };
+                        customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
                     }
                 }
+
+
             }
             
             
