@@ -12,7 +12,9 @@ namespace IBL
             {
                 //if customer exists then exception-check if there is in dal
                 try
-                { dalAP.AddCustomer(id, name, phone, longitude, latitude); }
+                { 
+                    dalAP.AddCustomer(id, name, phone, longitude, latitude); 
+                }
                 catch(CustomerException exception)
                 {
                     throw new KeyAlreadyExists(string.Format("Customer with id {0} alreday exists", id), exception);
@@ -93,7 +95,7 @@ namespace IBL
                         else if (BLparcel.Attribution <= DateTime.Now)
                             state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, CustomerName = SearchCustomer(parcel.TargetId).Name};
-                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
+                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
                     }
                     if (customer.Id == parcel.TargetId)//to this customer
                     {
@@ -106,7 +108,7 @@ namespace IBL
                         else if (BLparcel.Attribution <= DateTime.Now)
                             state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, CustomerName = SearchCustomer(parcel.SenderId).Name };
-                        customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
+                        customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
                     }
                 }
                 return customer;
