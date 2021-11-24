@@ -53,9 +53,14 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
-            Console.WriteLine("Enter charging time:");
-            Int32.TryParse(Console.ReadLine(), out int timeCharging);
-            bl.ReleaseCharging(id, timeCharging);
+            Console.WriteLine("Enter charging time: ");
+            Console.WriteLine("Enter hours:");
+            Int32.TryParse(Console.ReadLine(), out int hours);
+            Console.WriteLine("Enter minutes:");
+            Int32.TryParse(Console.ReadLine(), out int minutes);
+            Console.WriteLine("Enter seconds:");
+            Int32.TryParse(Console.ReadLine(), out int seconds);
+            bl.ReleaseCharging(id, new TimeSpan(hours, minutes, seconds));
         }
         private static void UpdateAttribute(IBL.BO.IBL bl)
         {
