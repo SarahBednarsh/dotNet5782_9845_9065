@@ -39,3 +39,6 @@ Stuff to do:
 - Add delete options to DAL
 - Exceptions: both BL and DAL
 
+Functions in BL:
+Done:BLcustomer,BLparcel (deal with how to initialize drone null)
+To do: BLstation, BLdrone most
