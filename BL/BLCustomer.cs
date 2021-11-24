@@ -46,7 +46,7 @@ namespace IBL
                 }
                 return newCustomers;
             }
-            public ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
+            private ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
             {
                 ParcelAtCustomer parcel = new ParcelAtCustomer();
                 parcel.Id = id;
@@ -57,7 +57,7 @@ namespace IBL
                 return parcel;
 
             }
-            public Customer createCustomer(IDAL.DO.Customer old)
+            private Customer createCustomer(IDAL.DO.Customer old)
             {
                 
                 Customer customer = new Customer();
