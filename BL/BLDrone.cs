@@ -35,7 +35,7 @@ namespace IBL
                // dalAP.UpdateDrone()
 
             }
-            public void ReleaseCharging(int droneId, int timeCharging)
+            public void ReleaseCharging(int droneId, TimeSpan timeCharging)
             {
                 
             }

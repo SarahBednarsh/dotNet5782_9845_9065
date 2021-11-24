@@ -9,9 +9,17 @@ namespace DalObject
     {
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
+            if (DataSource.Customers.Exists(x => x.Id == id))
+                throw new DroneException("Drone to add  exists.");
             Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
 
+        }
+        public void DeleteDrone(int id)
+        {
+            if (!DataSource.Customers.Exists(x => x.Id == id))
+                throw new DroneException("Drone to delete does not exist.");
+            DataSource.Drones.Remove(DataSource.Drones.Find(x => x.Id == id));
         }
 
         /// <summary>
@@ -24,7 +32,7 @@ namespace DalObject
 
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
-                return;
+                throw new ParcelException("Parcel to update does not exist.");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.DroneId = droneId;
             DataSource.Parcels[indexParcel] = tempParcel;
@@ -40,10 +48,14 @@ namespace DalObject
             DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = stationId });
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            if (indexDrone == -1)
+                throw new DroneException("Drone to chatge does not exist.");
             Drone tempDrone = DataSource.Drones[indexDrone];
             DataSource.Drones[indexDrone] = tempDrone;
 
             int indexStation = DataSource.Stations.FindIndex(x => x.Id == stationId);
+            if (indexStation == -1)
+                throw new StationException("Station for charging does not exist.");
             Station tempStation = DataSource.Stations[indexStation];
             tempStation.ChargeSlots--;
             DataSource.Stations[indexStation] = tempStation;
@@ -57,9 +69,13 @@ namespace DalObject
         public void ReleaseCharging(int droneId)
         {
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            if (indexDrone == -1)
+                throw new DroneException("Drone to release does not exist.");
             Drone tempDrone = DataSource.Drones[indexDrone];
             DataSource.Drones[indexDrone] = tempDrone;
             int indexCharge = DataSource.DroneCharges.FindIndex(x => x.DroneId == droneId);
+            if (indexCharge == -1)
+                throw new DroneException("Drone was not in charging.");
             int stationId = DataSource.DroneCharges[indexCharge].StationId;
             int indexStation = DataSource.Stations.FindIndex(x => x.Id == stationId);
             Station tempStation = DataSource.Stations[indexStation];
@@ -69,9 +85,9 @@ namespace DalObject
         }
         public Drone SearchDrone(int droneId)
         {
-            if(DataSource.Drones.Exists(x => x.Id == droneId))
-                return DataSource.Drones.Find(x => x.Id == droneId);
-            return new Drone() { Id = -1 };
+            if (!DataSource.Customers.Exists(x => x.Id == droneId))
+                throw new DroneException("Drone does not exist.");
+            return DataSource.Drones.Find(x => x.Id == droneId);
         }
         public IEnumerable<Drone> YieldDrone()
         {

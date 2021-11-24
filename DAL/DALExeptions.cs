@@ -6,8 +6,9 @@ namespace DAL
 {
     namespace DO
     {
-        class DALExeptions
+        public class DALExeptions : Exception
         {
+
         }
     }
 }

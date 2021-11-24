@@ -13,6 +13,12 @@ namespace DalObject
             DataSource.Parcels.Add(temp);
             return DataSource.Config.RunningParcelNumber;
         }
+        public void DeleteParcel(int id)
+        {
+            if (!DataSource.Parcels.Exists(x => x.Id == id))
+                throw new ParcelException("Customer to delete does not exist.");
+            DataSource.Parcels.Remove(DataSource.Parcels.Find(x => x.Id == id));
+        }
 
         /// <summary>
         /// picks up a parcel- first updates the parcel pickup town, then finds the drone attributed to the 
@@ -22,7 +28,7 @@ namespace DalObject
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)//if parcel doesn't exist
-                return;
+                throw new ParcelException("Customer to pick up does not exist.");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.PickedUp = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
@@ -40,7 +46,7 @@ namespace DalObject
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
-                return;
+                throw new ParcelException("Customer to deliver does not exist.");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.Delivered = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
@@ -51,6 +57,8 @@ namespace DalObject
         }
         public Parcel SearchParcel(int parcelId)
         {
+            if (!DataSource.Parcels.Exists(x => x.Id == parcelId))
+                throw new ParcelException("Customer does not exist.");
             return DataSource.Parcels.Find(x => x.Id == parcelId);
         }
         public IEnumerable<Parcel> YieldParcel()
