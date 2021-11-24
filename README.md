@@ -40,5 +40,5 @@ Stuff to do:
 - Exceptions: both BL and DAL
 
 Functions in BL:
-Done:BLcustomer,BLparcel (deal with how to initialize drone null)
+Done:BLcustomer,BLparcel (deal with how to initialize drone null, add delivery
 To do: BLstation, BLdrone most
