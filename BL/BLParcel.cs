@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IDAL.DO;
 
 namespace IBL
 {
@@ -10,7 +11,14 @@ namespace IBL
         {
             public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority)
             {
-                dalAP.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority,DateTime.MinValue,???);
+                try
+                {
+                    dalAP.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority, DateTime.MinValue,???);
+                }
+                catch (ParcelException exception)
+                {
+                    throw new KeyAlreadyExists("Parcel alreday exists", exception);
+                }
             }
             public void DeliverAParcel(int droneId)
             {
@@ -18,10 +26,17 @@ namespace IBL
             }
             public Parcel SearchParcel(int parcelId)
             {
-                IDAL.DO.Parcel parcel = dalAP.SearchParcel(parcelId);
-                //if equals default exception
-                Parcel BLparcel = createParcel(parcel);
-                return BLparcel;
+                try
+                {
+                    IDAL.DO.Parcel parcel = dalAP.SearchParcel(parcelId);
+                    //if equals default exception
+                    Parcel BLparcel = createParcel(parcel);
+                    return BLparcel;
+                }
+                catch (ParcelException exception)
+                {
+                    throw new KeyDoesNotExist("Parcel does not exists", exception);
+                }
             }
             private Parcel createParcel(IDAL.DO.Parcel old)
             {

@@ -24,7 +24,8 @@ namespace IBL
             public void UpdateCustomerInfo(int customerId, string name, string phone)//not sure
             {
                 try
-                { IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
+                { 
+                    IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
                     //deal with if it doesnt exist
                     if (name != "")
                         customer.Name = name;
@@ -35,7 +36,7 @@ namespace IBL
                 }
                 catch (CustomerException exception)
                 {
-                    throw new KeyDoesNotExists(string.Format("Customer with id {0} does not exists", customerId), exception);
+                    throw new KeyDoesNotExist(string.Format("Customer with id {0} does not exists", customerId), exception);
                 }
             }
             public Customer SearchCustomer(int customerId)
@@ -49,7 +50,7 @@ namespace IBL
                 }
                 catch (CustomerException exception)
                 {
-                    throw new KeyDoesNotExists(string.Format("Customer with id {0} does not exists", customerId), exception);
+                    throw new KeyDoesNotExist(string.Format("Customer with id {0} does not exists", customerId), exception);
                 }
             }
             public IEnumerable<Customer> YieldCustomer()
