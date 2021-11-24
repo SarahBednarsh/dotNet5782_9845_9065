@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using IDAL.DO;
 namespace IBL
 {
     namespace BO
     {
         public partial class BL
         {
-            public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
+            public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
             {
                 //if customer exists then exception-check if there is in dal
                 dalAP.AddCustomer(id, name, phone, longitude, latitude);
@@ -26,6 +26,8 @@ namespace IBL
                     customer.Name = name;
                 if (phone != "")
                     customer.Phone = phone;
+                dalAP.RemoveCustomer(customerId);
+                dalAP.AddCustomer(customerId, customer.Name, customer.Phone, StaticSexagesimal.ParseDouble(customer.Longitude), StaticSexagesimal.ParseDouble(customer.Latitude));
             }
             public Customer SearchCustomer(int customerId)
             {
@@ -79,7 +81,7 @@ namespace IBL
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, CustomerName = SearchCustomer(parcel.TargetId).Name};
                         customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
                     }
-                    if (customer.Id == parcel.TargetId)//from this customer
+                    if (customer.Id == parcel.TargetId)//to this customer
                     {
                         States state = States.Created;
                         Parcel BLparcel = SearchParcel(parcel.Id);
@@ -93,10 +95,14 @@ namespace IBL
                         customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight };
                     }
                 }
-
-
+                return customer;
             }
             
+            public string printCustomer(int customerId)
+            {
+                Customer customer = SearchCustomer(customerId);
+                return customer.ToString();
+            }
             
         }
     }
