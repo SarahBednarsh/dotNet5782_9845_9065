@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
+using IDAL.DO;
 namespace IBL
 {
     namespace BO
@@ -11,9 +12,8 @@ namespace IBL
             public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
             {
                 dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
-                //not sure why it says in instructions about drone list
+                //not sure why it says in instructions about drone list, think we should ignore
             }
-
             public void UpdateStationInfo(int stationId, int name, int chargingSlots)
             {
                 Station station = SearchStation(stationId);
@@ -31,16 +31,47 @@ namespace IBL
             private Station CreateStation(IDAL.DO.Station old)
             {
                 Station station = new Station();
-
-
+                station.Id = old.Id;
+                station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
+                station.Name = old.Name;
+                station.OpenChargeSlots = old.ChargeSlots;
+                IEnumerable<Drone> drones = YieldDrone();
+                foreach(Drone drone in drones)
+                {
+                    if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
+                        station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
+                }
                 return station;
             }
-            public Station SearchStation(int stationId) { }
-            public IEnumerable<Station> YieldStation()//station to list
+            public Station SearchStation(int stationId)
             {
-
+                try
+                {
+                    IDAL.DO.Station station = dalAP.SearchStation(stationId);
+                    Station BLstation = CreateStation(station);
+                    return BLstation;
+                }
+                catch (StationException exception)
+                {
+                    throw new KeyDoesNotExist("Station does not exists", exception);
+                }
             }
-            public IEnumerable<Station> YieldStationAvailable() { }
+            public IEnumerable<Station> YieldStation()//station to list- no its not
+            {
+                IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
+                List<Station> newStations = new List<Station>();
+                foreach (IDAL.DO.Station station in stations)
+                {
+                    newStations.Add(CreateStation(station));
+                }
+                return newStations;
+            }
+            public IEnumerable<StationToList> ListStationAvailable()
+            {
+                return from station in YieldStation()
+                       where station.OpenChargeSlots > 0
+                       select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
+            }
         }
     }
 }

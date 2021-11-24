@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using IDAL.DO;
 
 namespace IBL
@@ -20,17 +21,14 @@ namespace IBL
                     throw new KeyAlreadyExists("Parcel alreday exists", exception);
                 }
             }
-            public void DeliverAParcel(int droneId)
-            {
-                
-            }
+            
             public Parcel SearchParcel(int parcelId)
             {
                 try
                 {
                     IDAL.DO.Parcel parcel = dalAP.SearchParcel(parcelId);
                     //if equals default exception
-                    Parcel BLparcel = createParcel(parcel);
+                    Parcel BLparcel = CreateParcel(parcel);
                     return BLparcel;
                 }
                 catch (ParcelException exception)
@@ -38,7 +36,7 @@ namespace IBL
                     throw new KeyDoesNotExist("Parcel does not exists", exception);
                 }
             }
-            private Parcel createParcel(IDAL.DO.Parcel old)
+            private Parcel CreateParcel(IDAL.DO.Parcel old)
             {
                 Parcel parcel = new Parcel();
                 parcel.Id = old.Id;
@@ -60,28 +58,15 @@ namespace IBL
                 List<Parcel> newParcels = new List<Parcel>();
                 foreach (IDAL.DO.Parcel parcel in parcels)
                 {
-                    newParcels.Add(createParcel(parcel));
+                    newParcels.Add(CreateParcel(parcel));
                 }
                 return newParcels;
             }
-            public IEnumerable<Parcel> YieldParcelNotAttributed()
+            public IEnumerable<ParcelToList> YieldParcelNotAttributed()
             {
-                IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
-                List<Parcel> newParcels = new List<Parcel>();
-                Parcel tmpParcel;
-                foreach (IDAL.DO.Parcel parcel in parcels)
-                {
-                    tmpParcel = createParcel(parcel);
-                    if (tmpParcel.Attribution<=DateTime.Now)
-                    newParcels.Add(tmpParcel);
-                }
-                return newParcels;
-
-            }
-            public string printParcel(int parcelId)
-            {
-                Parcel parcel = SearchParcel(parcelId);
-                return parcel.ToString();
+                return from parcel in YieldParcel()
+                       where parcel.Attribution < DateTime.Now
+                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, Sender = parcel.Sender.CustomerName };
             }
         }
     }

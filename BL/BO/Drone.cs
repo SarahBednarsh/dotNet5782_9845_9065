@@ -13,7 +13,7 @@ namespace IBL
             public string Model { get; set; }
             public WeightCategories MaxWeight { get; set; }
             public double Battery { get; set; }
-            public States State { get; set; }
+            public DroneStatuses Status {  get; set; }
             public ParcelInTransfer Parcel { get; set; }
             public Location Location { get; set; }
             public override string ToString()

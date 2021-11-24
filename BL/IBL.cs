@@ -32,6 +32,8 @@ namespace IBL
             public IEnumerable<Customer> YieldCustomer();
             public IEnumerable<Parcel> YieldParcel();
             public IEnumerable<Parcel> YieldParcelNotAttributed();
+            public IEnumerable<StationToList> ListStationAvailable();
+
         }
     }
 }

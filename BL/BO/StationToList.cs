@@ -8,7 +8,7 @@ namespace IBL
         public class StationToList
         {
             public int Id { get; set; }
-            public string Name { get; set; }
+            public int Name { get; set; }
             public int OpenChargeSlots { get; set; }
             public int UsedChargeSlots { get; set; }
             public override string ToString()
