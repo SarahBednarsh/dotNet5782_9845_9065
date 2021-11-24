@@ -11,30 +11,44 @@ namespace IBL
             public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
             {
                 //if customer exists then exception-check if there is in dal
-                dalAP.AddCustomer(id, name, phone, longitude, latitude);
+                try
+                { dalAP.AddCustomer(id, name, phone, longitude, latitude); }
+                catch(CustomerException exception)
+                {
+                    throw new KeyAlreadyExists(string.Format("Customer with id {0} alreday exists", id), exception);
+                }
 
             }
             public void UpdateCustomerInfo(int customerId, string name, string phone)//not sure
             {
-                if (name == "" && phone == "")
-                {
-                    //  throw Exception
+                try
+                { IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
+                    //deal with if it doesnt exist
+                    if (name != "")
+                        customer.Name = name;
+                    if (phone != "")
+                        customer.Phone = phone;
+                    dalAP.DeleteCustomer(customerId);
+                    dalAP.AddCustomer(customerId, customer.Name, customer.Phone, StaticSexagesimal.ParseDouble(customer.Longitude), StaticSexagesimal.ParseDouble(customer.Latitude));
                 }
-                IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
-                //deal with if it doesnt exist
-                if (name != "")
-                    customer.Name = name;
-                if (phone != "")
-                    customer.Phone = phone;
-                dalAP.RemoveCustomer(customerId);
-                dalAP.AddCustomer(customerId, customer.Name, customer.Phone, StaticSexagesimal.ParseDouble(customer.Longitude), StaticSexagesimal.ParseDouble(customer.Latitude));
+                catch (CustomerException exception)
+                {
+                    throw new KeyDoesNotExists(string.Format("Customer with id {0} does not exists", customerId), exception);
+                }
             }
             public Customer SearchCustomer(int customerId)
             {
-                IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
-                //if equals default exception
-                Customer BLcustomer = createCustomer(customer);
-                return BLcustomer;
+                try
+                {
+                    IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
+                    //if equals default exception
+                    Customer BLcustomer = createCustomer(customer);
+                    return BLcustomer;
+                }
+                catch (CustomerException exception)
+                {
+                    throw new KeyDoesNotExists(string.Format("Customer with id {0} does not exists", customerId), exception);
+                }
             }
             public IEnumerable<Customer> YieldCustomer()
             {
@@ -98,11 +112,6 @@ namespace IBL
                 return customer;
             }
             
-            public string printCustomer(int customerId)
-            {
-                Customer customer = SearchCustomer(customerId);
-                return customer.ToString();
-            }
             
         }
     }
