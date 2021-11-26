@@ -9,11 +9,12 @@ namespace IBL
         public class ParcelInTransfer
         {
             public int Id { get; set; }
-            public WeightCategories Weight { get; set; }
+            public bool PickedUpAlready { get; set; }
             public Priorities Priority { get; set; }
+            public WeightCategories Weight { get; set; }
             public CustomerInParcel Sender { get; set; }
             public CustomerInParcel Target { get; set; }
-            public Location PickUp { get; set; }
+            public Location PickUpLocation { get; set; }
             public Location Destination { get; set; }
             public double Distance { get; set; }
             public override string ToString()

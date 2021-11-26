@@ -12,7 +12,7 @@ namespace IBL
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging);
             public void AddCustomer(int id, string name, string phone, double longitude, double latitude);
             public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority);
-            public void UpdateDroneName(int droneId, string newName);
+            public void UpdateDroneModel(int droneId, string newModel);
             public void UpdateStationInfo(int stationId, int name, int chargingSlots);//not sure
             public void UpdateCustomerInfo(int customerId, string name, string phone);//not sure
             public void DroneToCharge(int droneId);

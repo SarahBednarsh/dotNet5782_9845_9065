@@ -52,6 +52,15 @@ namespace IBL
                 parcel.Delivery = DateTime.MinValue;
                 return parcel;
             }
+            private ParcelInTransfer CreateParcelInTransfer(int parcelId)
+            {
+                Parcel parcel = SearchParcel(parcelId);
+                return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready =??, Priority = parcel.Priority,
+                    Weight = parcel.Weight, Sender = parcel.Sender, Target = parcel.Target, PickUpLocation = SearchCustomer(parcel.Sender.Id).Location,
+                    Destination = SearchCustomer(parcel.Target.Id).Location,
+                    Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
+                //PickedUpAlready- is that by calculating this distance?
+            }
             public IEnumerable<Parcel> YieldParcel()
             {
                 IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();

@@ -5,7 +5,6 @@ using System.Text;
 using DalObject;
 using IDAL;
 using IDAL.DO;
-using IBL.BO;
 
 namespace IBL
 {
@@ -20,7 +19,7 @@ namespace IBL
             internal static double medium = 0;
             internal static double heavy = 0;
             internal static double chargingPace = 0;
-
+            internal List<DroneToList> dronesBL;
             public BL()
             {
                 dalAP = new DalObject.DalObject();
@@ -36,10 +35,11 @@ namespace IBL
                 chargingPace = info.Current;
                 IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
                 IEnumerable<IDAL.DO.Drone> drones = dalAP.YieldDrone();
-                List<DroneToList> dronesBL = new List<DroneToList>();
+                dronesBL = new List<DroneToList>();
                 foreach (IDAL.DO.Drone drone in drones)
                 {
-                    dronesBL.Add(new DroneToList(drone));
+                    //DroneToList tmp = new DroneToList() { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 };
+                    dronesBL.Add(new DroneToList { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 });          
                 }
                 Random r = new Random();
                 foreach (DroneToList drone in dronesBL)
@@ -110,6 +110,7 @@ namespace IBL
                     }
                 }
             }
+                    
             private IDAL.DO.Station GetClosestStation(Location loc)
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();

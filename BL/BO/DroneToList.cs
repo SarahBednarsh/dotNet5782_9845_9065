@@ -14,15 +14,7 @@ namespace IBL
             public double Battery { get; set; }
             public DroneStatuses Status { get; set; }
             public Location Location  { get; set; }
-            public int IdOfParcel;
-            public DroneToList(IDAL.DO.Drone drone)
-            {
-                Id = drone.Id;
-                Model = drone.Model;
-                MaxWeight = (WeightCategories)drone.MaxWeight;
-                Status = DroneStatuses.Available;
-                IdOfParcel = -1;
-            }
+            public int IdOfParcel { get; set; }
             public override string ToString()
             {
                 return base.ToString();

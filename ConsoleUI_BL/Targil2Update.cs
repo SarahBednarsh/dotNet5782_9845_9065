@@ -6,13 +6,13 @@ namespace ConsoleUI_BL
 {
     public partial class Targil2
     {
-        private static void UpdateDroneName(IBL.BO.IBL bl)
+        private static void UpdateDroneModel(IBL.BO.IBL bl)
         {
             Console.WriteLine("Enter drone ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
-            Console.WriteLine("Enter new name:");
-            string name = Console.ReadLine();
-            bl.UpdateDroneName(id, name);
+            Console.WriteLine("Enter new model:");
+            string model = Console.ReadLine();
+            bl.UpdateDroneModel(id, model);
         }
         private static void UpdateStation(IBL.BO.IBL bl)
         {

@@ -51,7 +51,7 @@ namespace ConsoleUI_BL
             {
                 //DroneName = 1, Station, Customer, SendToCharge, EndCharge, Attribute, Pickup, Deliver
                 case UpdateOption.DroneName:
-                    UpdateDroneName(bl);
+                    UpdateDroneModel(bl);
                     break;
                 case UpdateOption.Station:
                     UpdateStation(bl);

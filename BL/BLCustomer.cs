@@ -63,17 +63,17 @@ namespace IBL
                 }
                 return newCustomers;
             }
-            private ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
-            {
-                ParcelAtCustomer parcel = new ParcelAtCustomer();
-                parcel.Id = id;
-                parcel.Weight = weight;
-                parcel.Priority = priority;
-                parcel.State = state;
-                parcel.Customer = customer;
-                return parcel;
+            //private ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
+            //{
+            //    ParcelAtCustomer parcel = new ParcelAtCustomer();
+            //    parcel.Id = id;
+            //    parcel.Weight = weight;
+            //    parcel.Priority = priority;
+            //    parcel.State = state;
+            //    parcel.Customer = customer;
+            //    return parcel;
 
-            }
+            //}
             private Customer createCustomer(IDAL.DO.Customer old)
             {
                 
