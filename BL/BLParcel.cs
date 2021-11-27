@@ -40,8 +40,8 @@ namespace IBL
             {
                 Parcel parcel = new Parcel();
                 parcel.Id = old.Id;
-                parcel.Sender = new CustomerInParcel { Id = old.SenderId, CustomerName = SearchCustomer(old.SenderId).Name };
-                parcel.Target = new CustomerInParcel { Id = old.TargetId, CustomerName = SearchCustomer(old.TargetId).Name };
+                parcel.Sender = new CustomerInParcel { Id = old.SenderId, Name = SearchCustomer(old.SenderId).Name };
+                parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = SearchCustomer(old.TargetId).Name };
                 parcel.Weight = (WeightCategories)old.Weight;
                 parcel.Priority = (Priorities)old.Priority;
                 Drone drone = SearchDrone(old.DroneId);
@@ -75,7 +75,7 @@ namespace IBL
             {
                 return from parcel in YieldParcel()
                        where parcel.Attribution < DateTime.Now
-                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, Sender = parcel.Sender.CustomerName };
+                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, Sender = parcel.Sender.Name };
             }
         }
     }

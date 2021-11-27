@@ -17,7 +17,7 @@ namespace IBL
             public int OnTheirWay { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Name: {Name}, Phone number: {PhoneNum}, Number of parcels delivered: {Delivered}, Number of parcels sent: {Sent}, Number of parcels gotten: {Got}, Number of parcels on their way: {OnTheirWay}");
             }
         }
     }

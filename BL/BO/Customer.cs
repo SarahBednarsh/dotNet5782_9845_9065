@@ -17,7 +17,14 @@ namespace IBL
             public override string ToString()
             {
                 //return base.ToString();
-
+                string atCustomer = "";
+                foreach(ParcelAtCustomer parcel in AtCustomer)
+                    atCustomer += parcel.ToString();
+                string toCustomer = "";
+                foreach(ParcelAtCustomer parcel in ToCustomer)
+                    toCustomer += parcel.ToString();
+                
+                return string.Format("Id: {0}, Name: {1}, Phone number: {2}, Location: {3}, Parcels at customer: {4}, Parcels to customer: {5}", Id, Name, PhoneNum, atCustomer, toCustomer);
             }
         }
     }

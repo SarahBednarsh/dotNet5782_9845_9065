@@ -13,7 +13,7 @@ namespace IBL
             public int UsedChargeSlots { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Name: {Name}, Open charge slots: {OpenChargeSlots}, Used charge slots: {UsedChargeSlots}");
             }
         }
     }

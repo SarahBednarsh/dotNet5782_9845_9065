@@ -15,7 +15,7 @@ namespace IBL
             public CustomerInParcel Customer { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Weight: {Weight}, Priority: {Priority}, State: {State}, Customer: {Customer}");
             }
         }
     }

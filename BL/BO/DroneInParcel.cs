@@ -14,7 +14,7 @@ namespace IBL
             public Location Location { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Battery: {Battery}, Location: {Location}");
             }
         }
     }

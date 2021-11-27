@@ -20,7 +20,7 @@ namespace IBL
             public DateTime Delivery { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Sender: {Sender}, Target: {Target}, Weight: {Weight}, Priority: {Priority}, Drone: {Drone}, Creation time: {Creation}, Attribution time: {Attribution}, Pickup time: {PickUp}, Delivery time: {Delivery}");
             }
         }
     }

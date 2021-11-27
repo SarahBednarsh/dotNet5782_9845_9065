@@ -9,10 +9,11 @@ namespace IBL
         public class CustomerInParcel
         {
             public int Id { get; set; }
-            public string CustomerName { get; set; }
+            public string Name { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                //return base.ToString();
+                return string.Format($"Id: {Id}, Name: {Name}");
             }
         }
     }

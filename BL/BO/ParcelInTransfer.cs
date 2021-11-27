@@ -19,7 +19,7 @@ namespace IBL
             public double Distance { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return string.Format($"Id: {Id}, Already picked up: {PickedUpAlready}, Priority: {Priority}, Weight: {Weight}, Sender: {Sender}, Target: {Target}, Pick up location: {PickUpLocation}, Destination location: {Destination}, Distance from target: {Distance}");
             }
         }
     }
