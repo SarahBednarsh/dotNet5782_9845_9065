@@ -19,6 +19,12 @@ namespace DalObject
                // return new Station(Id = 0);
             return DataSource.Stations.Find(x => x.Id == stationId);
         }
+        public void DeleteStation(int id)
+        {
+            if (!DataSource.Stations.Exists(x => x.Id == id))
+                throw new CustomerException("Station to delete does not exist.");
+            DataSource.Stations.Remove(DataSource.Stations.Find(x => x.Id == id));
+        }
         public IEnumerable<Station> YieldStation()
         {
             return new List<Station>(DataSource.Stations);
@@ -33,13 +39,15 @@ namespace DalObject
             }
             return open;
         }
+
         public double CalcDisFromStation(int id, double longitude, double latitude)
         {
-            Station station = SearchStation(id);
-            //deal with if doesn't exist
-            double deltalLongitude = StaticSexagesimal.ParseDouble(station.Longitude) - longitude;
-            double deltalLatitude = StaticSexagesimal.ParseDouble(station.Latitude) - latitude;
-            return Math.Sqrt(Math.Pow(deltalLatitude, 2) + Math.Pow(deltalLongitude, 2));
+            if (!DataSource.Stations.Exists(x => x.Id == id))
+                throw new CustomerException("Station does not exist.");
+            Station station = this.SearchStation(id);
+            double clong = StaticSexagesimal.ParseDouble(station.Longitude);
+            double clat = StaticSexagesimal.ParseDouble(station.Latitude);
+            return StaticSexagesimal.CalcDis(clong, clat, longitude, latitude);
         }
 
     }
