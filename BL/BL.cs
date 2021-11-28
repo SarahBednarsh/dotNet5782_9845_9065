@@ -45,10 +45,10 @@ namespace IBL
                 foreach (DroneToList drone in dronesBL)
                 {
                     var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != DateTime.MinValue);
-                    if (droneParcels.Count() == 1)//not sure about == 1
+                    if (droneParcels.Count() > 0)//not sure about == 1
                     {
                         drone.Status = DroneStatuses.Delivering;
-                        IDAL.DO.Parcel parcel = droneParcels.GetEnumerator().Current;
+                        IDAL.DO.Parcel parcel = droneParcels.FirstOrDefault();
                         if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
                         {
                             IDAL.DO.Customer customer = dalAP.SearchCustomer(parcel.SenderId);
@@ -58,7 +58,7 @@ namespace IBL
                         }
                         else
                         {
-                            IDAL.DO.Customer customer = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).GetEnumerator().Current;
+                            IDAL.DO.Customer customer = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).FirstOrDefault();
                             drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
                         }
                         drone.Battery = r.Next(0, 20);
