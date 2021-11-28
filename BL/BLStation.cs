@@ -35,8 +35,7 @@ namespace IBL
                 station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
                 station.Name = old.Name;
                 station.OpenChargeSlots = old.ChargeSlots;
-                IEnumerable<Drone> drones = YieldDrone();
-                foreach(Drone drone in drones)
+                foreach(DroneToList drone in dronesBL)
                 {
                     if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
                         station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
@@ -56,13 +55,23 @@ namespace IBL
                     throw new KeyDoesNotExist("Station does not exists", exception);
                 }
             }
-            public IEnumerable<Station> YieldStation()//station to list- no its not
+            private IEnumerable<Station> YieldStation()
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                 List<Station> newStations = new List<Station>();
                 foreach (IDAL.DO.Station station in stations)
                 {
                     newStations.Add(CreateStation(station));
+                }
+                return newStations;
+            }
+            public IEnumerable<StationToList> ListStation()//station to list- no its not
+            {
+                IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
+                List<StationToList> newStations = new List<StationToList>();
+                foreach (IDAL.DO.Station station in stations)
+                {
+                    newStations.Add(new StationToList {  Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count()});
                 }
                 return newStations;
             }

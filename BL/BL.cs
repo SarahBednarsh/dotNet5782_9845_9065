@@ -18,7 +18,7 @@ namespace IBL
             internal static double light = 0;
             internal static double medium = 0;
             internal static double heavy = 0;
-            internal static double chargingPace = 0;
+            internal static double chargingPace = 0; //meters per second
             internal List<DroneToList> dronesBL;
             public BL()
             {

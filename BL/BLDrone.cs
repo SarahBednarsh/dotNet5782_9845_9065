@@ -73,13 +73,13 @@ namespace IBL
                 drone.Status = DroneStatuses.InMaintenance;
                 dalAP.DroneToCharge(drone.Id, stationToSendTo.Id);//in here it also updates the chargeslots in station             
             }
-            public void ReleaseCharging(int droneId, int timeCharging)
+            public void ReleaseCharging(int droneId, TimeSpan timeCharging)
             {
                 DroneToList drone = dronesBL.Find(X => X.Id == droneId);
                 //  int stationId = SearchDroneCharge(droneId).stationId;
                 if (drone.Status != DroneStatuses.InMaintenance)
                     throw Exception("cannot release drone that is not in maintenence");
-                drone.Battery = Math.Min(drone.Battery + timeCharging * chargingPace, 100);
+                drone.Battery = Math.Min(drone.Battery + timeCharging.TotalSeconds() * chargingPace, 100);
                 drone.Status = DroneStatuses.Available;
                 dronesBL.RemoveAll(X => X.Id == droneId);
                 dronesBL.Add(drone);
@@ -127,8 +127,7 @@ namespace IBL
                 dronesBL.RemoveAll(X => X.Id == droneId);
                 dronesBL.Add(newDrone);
                 dalAP.DeliverToCustomer(drone.Parcel.Id);
-\            }
-            public IEnumerable<Drone> YieldDrone() { }//we dont need
+            }
             private double GetUsage(WeightCategories weight)
             {
                 if (weight == WeightCategories.Light) return light;

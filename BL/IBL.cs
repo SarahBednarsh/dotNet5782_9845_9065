@@ -13,8 +13,8 @@ namespace IBL
             public void AddCustomer(int id, string name, string phone, double longitude, double latitude);
             public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority);
             public void UpdateDroneModel(int droneId, string newModel);
-            public void UpdateStationInfo(int stationId, int name, int chargingSlots);//not sure
-            public void UpdateCustomerInfo(int customerId, string name, string phone);//not sure
+            public void UpdateStationInfo(int stationId, int name, int chargingSlots);
+            public void UpdateCustomerInfo(int customerId, string name, string phone);
             public void DroneToCharge(int droneId);
             public void ReleaseCharging(int droneId, TimeSpan timeCharging);
             public void AttributeAParcel(int droneId);
@@ -26,12 +26,10 @@ namespace IBL
             public Customer SearchCustomer(int customerId);
             public Parcel SearchParcel(int parcelId);
             //with these we will among other things print a list
-            public IEnumerable<Station> YieldStation();
-            public IEnumerable<Station> YieldStationAvailable();
-            public IEnumerable<Drone> YieldDrone();
-            public IEnumerable<Customer> YieldCustomer();
-            public IEnumerable<Parcel> YieldParcel();
-            public IEnumerable<Parcel> YieldParcelNotAttributed();
+            public IEnumerable<StationToList> ListStation();
+            public IEnumerable<CustomerToList> ListCustomer();
+            public IEnumerable<ParcelToList> ListParcel();
+            public IEnumerable<ParcelToList> ListParcelNotAttributed();
             public IEnumerable<StationToList> ListStationAvailable();
 
         }

@@ -61,7 +61,7 @@ namespace IBL
                     Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
                 //PickedUpAlready- is that by calculating this distance?
             }
-            public IEnumerable<Parcel> YieldParcel()
+            private IEnumerable<Parcel> YieldParcel()
             {
                 IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
                 List<Parcel> newParcels = new List<Parcel>();
@@ -71,7 +71,7 @@ namespace IBL
                 }
                 return newParcels;
             }
-            public IEnumerable<ParcelToList> YieldParcelNotAttributed()
+            public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
                 return from parcel in YieldParcel()
                        where parcel.Attribution < DateTime.Now

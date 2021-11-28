@@ -45,7 +45,7 @@ namespace IBL
                 {
                     IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
                     //if equals default exception
-                    Customer BLcustomer = createCustomer(customer);
+                    Customer BLcustomer = CreateCustomer(customer);
                     return BLcustomer;
                 }
                 catch (CustomerException exception)
@@ -53,28 +53,18 @@ namespace IBL
                     throw new KeyDoesNotExist(string.Format("Customer with id {0} does not exists", customerId), exception);
                 }
             }
-            public IEnumerable<Customer> YieldCustomer()
+            private IEnumerable<Customer> YieldCustomer()
             {
                 IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
                 List<Customer> newCustomers = new List<Customer>();
                 foreach (IDAL.DO.Customer customer in customers)
                 {
-                    newCustomers.Add(createCustomer(customer));
+                    newCustomers.Add(CreateCustomer(customer));
                 }
                 return newCustomers;
             }
-            //private ParcelAtCustomer CreateParcelAtCustomer(int id, WeightCategories weight, Priorities priority, States state, CustomerInParcel customer)
-            //{
-            //    ParcelAtCustomer parcel = new ParcelAtCustomer();
-            //    parcel.Id = id;
-            //    parcel.Weight = weight;
-            //    parcel.Priority = priority;
-            //    parcel.State = state;
-            //    parcel.Customer = customer;
-            //    return parcel;
 
-            //}
-            private Customer createCustomer(IDAL.DO.Customer old)
+            private Customer CreateCustomer(IDAL.DO.Customer old)
             {
                 
                 Customer customer = new Customer();
@@ -114,8 +104,16 @@ namespace IBL
                 }
                 return customer;
             }
-            
-            
+            public IEnumerable<CustomerToList> ListCustomer()
+            {
+                List<CustomerToList> newCustomers = new List<CustomerToList>();
+                foreach (IDAL.DO.Customer customer in YieldCustomer())
+                {
+                    newCustomers.Add(CreateCustomer(customer));
+                }
+                return newCustomers;
+            }
+
         }
     }
 }
