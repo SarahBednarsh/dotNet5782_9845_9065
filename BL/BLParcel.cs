@@ -71,11 +71,17 @@ namespace IBL
                 }
                 return newParcels;
             }
+
+            public IEnumerable<ParcelToList> ListParcel()
+            {
+                foreach (Parcel parcel in YieldParcel())
+                    yield return new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
+            }
             public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
                 return from parcel in YieldParcel()
                        where parcel.Attribution < DateTime.Now
-                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, Sender = parcel.Sender.Name };
+                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName=parcel.Target.Name, Weight=parcel.Weight };
             }
         }
     }
