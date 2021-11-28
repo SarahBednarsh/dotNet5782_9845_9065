@@ -94,7 +94,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter drone ID:");
                                 int droneId;
                                 Int32.TryParse(Console.ReadLine(), out droneId);
-                                project.AddParcel(senderId, targetId, weight, priority, DateTime.Now, droneId);
+                                project.AddParcel(senderId, targetId, weight, priority, droneId);
                                 break;
                             default:
                                 Console.WriteLine("ERROR");

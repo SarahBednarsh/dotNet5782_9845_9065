@@ -12,17 +12,24 @@ namespace IBL
             public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
             {
                 dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
-                //not sure why it says in instructions about drone list, think we should ignore
             }
             public void UpdateStationInfo(int stationId, int name, int chargingSlots)
             {
-                Station station = SearchStation(stationId);
+                Station station;
+                try
+                {
+                    station = SearchStation(stationId);
+                }
+                catch (IDAL.DO.StationException exception)
+                {
+                    throw new KeyDoesNotExist("The station requested does not exist", exception);
+                }
                 if (name != -1)
                     station.Name = name;
                 if (chargingSlots != -1)
                 {
                     if (chargingSlots - station.Charging.Count < 0)
-                        throw;
+                        throw new NotEnoughChargingSlots("Not enough charging slots for drones already charging");
                     station.OpenChargeSlots = chargingSlots - station.Charging.Count;
                 }
                 dalAP.DeleteStation(stationId);
@@ -35,7 +42,7 @@ namespace IBL
                 station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
                 station.Name = old.Name;
                 station.OpenChargeSlots = old.ChargeSlots;
-                foreach(DroneToList drone in dronesBL)
+                foreach (DroneToList drone in dronesBL)
                 {
                     if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
                         station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
@@ -71,7 +78,7 @@ namespace IBL
                 List<StationToList> newStations = new List<StationToList>();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    newStations.Add(new StationToList {  Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count()});
+                    newStations.Add(new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count() });
                 }
                 return newStations;
             }

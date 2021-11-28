@@ -6,10 +6,9 @@ namespace DalObject
 {
     public partial class DalObject
     {
-        public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority,
-                DateTime requested, int droneId)
+        public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId)
         {
-            Parcel temp = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = senderId, TargetId = targetId, Weight = weight, Priority = priority, Requested = requested, DroneId = droneId };
+            Parcel temp = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = senderId, TargetId = targetId, Weight = weight, Priority = priority, Requested = DateTime.Now, DroneId = droneId, Scheduled = DateTime.MinValue, Delivered = DateTime.MinValue, PickedUp = DateTime.MinValue };
             DataSource.Parcels.Add(temp);
             return DataSource.Config.RunningParcelNumber;
         }

@@ -14,7 +14,7 @@ namespace IBL
             {
                 try
                 {
-                    dalAP.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority, DateTime.MinValue,???);
+                    dalAP.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority, -1);
                 }
                 catch (ParcelException exception)
                 {
@@ -44,22 +44,23 @@ namespace IBL
                 parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = SearchCustomer(old.TargetId).Name };
                 parcel.Weight = (WeightCategories)old.Weight;
                 parcel.Priority = (Priorities)old.Priority;
-                Drone drone = SearchDrone(old.DroneId);
+                Drone drone = null;
+                if(old.Id != -1)
+                    drone = SearchDrone(old.DroneId);
                 parcel.Drone = new DroneInParcel { Battery = drone.Battery, Id = drone.Id, Location = drone.Location };
-                parcel.Creation = DateTime.Now;
-                parcel.Attribution = DateTime.MinValue;
-                parcel.PickUp = DateTime.MinValue;
-                parcel.Delivery = DateTime.MinValue;
+                parcel.Creation = old.Requested;
+                parcel.Attribution = old.Scheduled;
+                parcel.PickUp = old.PickedUp;
+                parcel.Delivery = old.Delivered;
                 return parcel;
             }
             private ParcelInTransfer CreateParcelInTransfer(int parcelId)
             {
                 Parcel parcel = SearchParcel(parcelId);
-                return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready =??, Priority = parcel.Priority,
+                return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready = parcel.PickUp > DateTime.Now, Priority = parcel.Priority,
                     Weight = parcel.Weight, Sender = parcel.Sender, Target = parcel.Target, PickUpLocation = SearchCustomer(parcel.Sender.Id).Location,
                     Destination = SearchCustomer(parcel.Target.Id).Location,
                     Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
-                //PickedUpAlready- is that by calculating this distance?
             }
             private IEnumerable<Parcel> YieldParcel()
             {
@@ -80,7 +81,7 @@ namespace IBL
             public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
                 return from parcel in YieldParcel()
-                       where parcel.Attribution < DateTime.Now
+                       where parcel.Attribution == DateTime.MinValue
                        select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName=parcel.Target.Name, Weight=parcel.Weight };
             }
         }
