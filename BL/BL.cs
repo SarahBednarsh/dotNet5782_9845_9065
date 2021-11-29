@@ -10,7 +10,6 @@ namespace IBL
 {
     namespace BO
     {
-        //should this be in namespace BO?
         public partial class BL : IBL
         {
             internal IDal dalAP; // DAL access point
