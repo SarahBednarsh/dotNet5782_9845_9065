@@ -16,6 +16,7 @@ namespace IDAL
         public void DeleteParcel(int id);
         public void DeleteStation(int id);
         public void UpdateParcelsDrone(int parcelId, int droneId);
+        public void ScheduleParcel(int parcelId);
         public void PickUpParcel(int parcelId);
         public void DeliverToCustomer(int parcelId);
         public void DroneToCharge(int droneId, int stationId);

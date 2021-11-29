@@ -18,7 +18,18 @@ namespace DalObject
                 throw new ParcelException("Customer to delete does not exist.");
             DataSource.Parcels.Remove(DataSource.Parcels.Find(x => x.Id == id));
         }
-
+        /// <summary>
+        /// schedules a parcel- updates the parcel scheduling time
+        /// </summary>
+        public void ScheduleParcel(int parcelId)
+        {
+            int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+            if (indexParcel == -1)//if parcel doesn't exist
+                throw new ParcelException("Parcel to attribute does not exist.");
+            Parcel tempParcel = DataSource.Parcels[indexParcel];
+            tempParcel.Scheduled = DateTime.Now;
+            DataSource.Parcels[indexParcel] = tempParcel;
+        }
         /// <summary>
         /// picks up a parcel- first updates the parcel pickup time
         /// </summary>

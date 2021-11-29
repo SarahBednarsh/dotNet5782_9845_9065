@@ -29,7 +29,6 @@ namespace DalObject
         public void UpdateParcelsDrone(int parcelId, int droneId)
         {
             Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
-
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
                 throw new ParcelException("Parcel to update does not exist.");

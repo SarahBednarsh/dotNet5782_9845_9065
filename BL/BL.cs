@@ -36,7 +36,7 @@ namespace IBL
                 IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
                 IEnumerable<IDAL.DO.Drone> drones = dalAP.YieldDrone();
                 dronesBL = new List<DroneToList>();
-                foreach (IDAL.DO.Drone drone in drones)
+                foreach (IDAL.DO.Drone drone in drones) //initialize list of drones
                 {
                     //DroneToList tmp = new DroneToList() { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 };
                     dronesBL.Add(new DroneToList { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 });          
@@ -44,6 +44,7 @@ namespace IBL
                 Random r = new Random();
                 foreach (DroneToList drone in dronesBL)
                 {
+                    //get all the parcels that were not delivered yet but attributed to a drone
                     var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != DateTime.MinValue);
                     if (droneParcels.Count() > 0)//not sure about == 1
                     {

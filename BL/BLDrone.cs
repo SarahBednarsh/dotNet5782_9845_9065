@@ -121,9 +121,9 @@ namespace IBL
                             drone.Status = DroneStatuses.Delivering;
                             dalAP.DeleteDrone(drone.Id);
                             dalAP.AddDrone(drone.Id, drone.Model, (IDAL.DO.WeightCategories)drone.MaxWeight);
-                            dalAP.DeleteParcel(p.Id);
-                            dalAP.AddParcel(p.Sender.Id, p.Target.Id, (IDAL.DO.WeightCategories)p.Weight, (IDAL.DO.Priorities)p.Priority, drone.Id);
-                            dalAP.PickUpParcel(p.Id);
+                            dalAP.UpdateParcelsDrone(p.Id, drone.Id);
+                            dalAP.ScheduleParcel(p.Id);
+                            return;
                         }
                     }
                 }
