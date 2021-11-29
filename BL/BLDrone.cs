@@ -105,9 +105,13 @@ namespace IBL
             }
             public void AttributeAParcel(int droneId)
             {
-                Drone drone = SearchDrone(droneId);
+                Drone drone;
+                try
+                { drone = SearchDrone(droneId); }
+                catch(IDAL.DO.DroneException exception)
+                { throw new KeyDoesNotExist("No such drone", exception); }
                 if (drone.Status != DroneStatuses.Available)
-                    throw Exception;
+                    throw new CannotAttribute("Drone is not available");
 
             }
             public void PickUpAParcel(int droneId)
