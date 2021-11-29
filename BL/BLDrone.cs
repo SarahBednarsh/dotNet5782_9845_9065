@@ -26,11 +26,6 @@ namespace IBL
                     Parcel = CreateParcelInTransfer(drone.IdOfParcel)
                 };
             }
-            private Drone CreateDrone(IDAL.DO.Drone old)//dont think this is right
-            {
-                Drone drone = new Drone { Battery = new Random().Next(20, 40), Id = old.Id, Location =};//need to finish
-                return drone;
-            }
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging)
             {
                 try
@@ -108,11 +103,53 @@ namespace IBL
                 Drone drone;
                 try
                 { drone = SearchDrone(droneId); }
-                catch(IDAL.DO.DroneException exception)
+                catch (IDAL.DO.DroneException exception)
                 { throw new KeyDoesNotExist("No such drone", exception); }
                 if (drone.Status != DroneStatuses.Available)
                     throw new CannotAttribute("Drone is not available");
-
+                IEnumerable<Parcel> parcels = YieldParcel();
+                //Priorities highest = Priorities.Emergency;
+                for (Priorities highest = Priorities.Emergency; highest > 0; highest++)
+                {
+                    IEnumerable<Parcel> relevant = (from parcel in parcels
+                                                    where parcel.Priority == highest && parcel.Weight <= drone.MaxWeight
+                                                    select parcel).OrderBy<Parcel, double>(x => LocationStaticClass.CalcDis(GetSenderLocation(x), drone.Location));
+                    foreach (Parcel p in relevant)
+                    {
+                        if (CanDeliver(drone, p))
+                        {
+                            drone.Status = DroneStatuses.Delivering;
+                            dalAP.DeleteDrone(drone.Id);
+                            dalAP.AddDrone(drone.Id, drone.Model, (IDAL.DO.WeightCategories)drone.MaxWeight);
+                            dalAP.DeleteParcel(p.Id);
+                            dalAP.AddParcel(p.Sender.Id, p.Target.Id, (IDAL.DO.WeightCategories)p.Weight, (IDAL.DO.Priorities)p.Priority, drone.Id);
+                            dalAP.PickUpParcel(p.Id);
+                        }
+                    }
+                }
+            }
+            private bool CanDeliver(Drone d, Parcel p)
+            {
+                IEnumerator<double> info = dalAP.ReqPowerConsumption().GetEnumerator();
+                double available = info.Current;
+                info.MoveNext();
+                double light = info.Current;
+                info.MoveNext();
+                double medium = info.Current;
+                info.MoveNext();
+                double heavy = info.Current;
+                double batteryNeeded = available * LocationStaticClass.CalcDis(d.Location, GetSenderLocation(p));
+                double consumption;
+                if (p.Weight == WeightCategories.Light)
+                    consumption = light;
+                else if (p.Weight == WeightCategories.Medium)
+                    consumption = medium;
+                else
+                    consumption = heavy;
+                batteryNeeded += consumption * LocationStaticClass.CalcDis(GetTargetLocation(p), GetSenderLocation(p));
+                Station closest = CreateStation(GetClosestStation(GetTargetLocation(p)));
+                batteryNeeded += available * LocationStaticClass.CalcDis(GetTargetLocation(p), closest.Location);
+                return batteryNeeded <= d.Battery;
             }
             public void PickUpAParcel(int droneId)
             {

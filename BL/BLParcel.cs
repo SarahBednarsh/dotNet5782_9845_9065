@@ -54,6 +54,16 @@ namespace IBL
                 parcel.Delivery = old.Delivered;
                 return parcel;
             }
+            private Location GetSenderLocation(Parcel p)
+            {
+                Customer sender = SearchCustomer(p.Sender.Id);
+                return sender.Location;
+            }
+            private Location GetTargetLocation(Parcel p)
+            {
+                Customer target = SearchCustomer(p.Target.Id);
+                return target.Location;
+            }
             private ParcelInTransfer CreateParcelInTransfer(int parcelId)
             {
                 Parcel parcel = SearchParcel(parcelId);

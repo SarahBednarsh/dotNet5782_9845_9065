@@ -20,21 +20,16 @@ namespace DalObject
         }
 
         /// <summary>
-        /// picks up a parcel- first updates the parcel pickup town, then finds the drone attributed to the 
-        /// parcel and updates it
+        /// picks up a parcel- first updates the parcel pickup time
         /// </summary>
         public void PickUpParcel(int parcelId)
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)//if parcel doesn't exist
-                throw new ParcelException("Customer to pick up does not exist.");
+                throw new ParcelException("Parcel to pick up does not exist.");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.PickedUp = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
-
-            int indexDrone = DataSource.Drones.FindIndex(x => x.Id == tempParcel.DroneId);
-            Drone tempDrone = DataSource.Drones[indexDrone];
-            DataSource.Drones[indexDrone] = tempDrone;
         }
 
         /// <summary>
