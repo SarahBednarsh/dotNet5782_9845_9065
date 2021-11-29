@@ -10,7 +10,7 @@ namespace ConsoleUI_BL
         private enum UpdateOption { DroneName = 1, Station, Customer, SendToCharge, EndCharge, Attribute, Pickup, Deliver }
         public static void Main(string[] args)
         {
-            IBL.BO.IBL bl = new IBL.BO.BL();
+            IBL.BO.IBL bl = new IBL.BO.BL();           
             Actions option;
             do
             {
@@ -18,7 +18,7 @@ namespace ConsoleUI_BL
                     "Enter 2 for updating an entity\n" +
                     "Enter 3 for displaying an entity\n" +
                     "Enter 4 for displaying a list of entities\n" +
-                    "Enter 5 for calculating ditance from an entity\n" +
+                    "Enter 5 for calculating distance from an entity\n" +
                     "Enter 0 for Exit");
                 Int32.TryParse(Console.ReadLine(), out int input);
                 option = (Actions)input;

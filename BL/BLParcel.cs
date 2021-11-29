@@ -39,12 +39,12 @@ namespace IBL
             {
                 Parcel parcel = new Parcel();
                 parcel.Id = old.Id;
-                parcel.Sender = new CustomerInParcel { Id = old.SenderId, Name = SearchCustomer(old.SenderId).Name };
-                parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = SearchCustomer(old.TargetId).Name };
+                parcel.Sender = new CustomerInParcel { Id = old.SenderId, Name = dalAP.SearchCustomer(old.SenderId).Name };//sarah- never ending recursion correction
+                parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = dalAP.SearchCustomer(old.TargetId).Name };//''
                 parcel.Weight = (WeightCategories)old.Weight;
                 parcel.Priority = (Priorities)old.Priority;
                 Drone drone = null;
-                if(old.Id != -1) //is parcel was already attributed
+                if(old.Id != -1) //if parcel was already attributed
                     drone = SearchDrone(old.DroneId);
                 parcel.Drone = new DroneInParcel { Battery = drone.Battery, Id = drone.Id, Location = drone.Location };
                 parcel.Creation = old.Requested;
@@ -63,13 +63,47 @@ namespace IBL
                 Customer target = SearchCustomer(p.Target.Id);
                 return target.Location;
             }
+            /*private ParcelInTransfer CreateParcelInTransfer(int parcelId) //create parcel to be put in drone
+            {
+                Parcel parcel = CreateParcel(dalAP.SearchParcel(parcelId));
+                //return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready = parcel.PickUp > DateTime.Now, Priority = parcel.Priority,
+                    //Weight = parcel.Weight, Sender = parcel.Sender, Target = parcel.Target, PickUpLocation = SearchCustomer(parcel.Sender.Id).Location,
+                    //Destination = SearchCustomer(parcel.Target.Id).Location,
+                    //Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
+                //sarah-maybe fixing neverending recursion 2- not sure this is needed
+                return new ParcelInTransfer
+                {
+                    Id = parcel.Id,
+                    PickedUpAlready = parcel.PickUp > DateTime.Now,
+                    Priority = parcel.Priority,
+                    Weight = parcel.Weight,
+                    Sender = parcel.Sender,
+                    Target = parcel.Target,
+                    PickUpLocation = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.Sender.Id).Longitude, dalAP.SearchCustomer(parcel.Sender.Id).Latitude),
+                    Destination = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.Target.Id).Longitude, dalAP.SearchCustomer(parcel.Target.Id).Latitude),
+                    Distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.Sender.Id).Longitude, dalAP.SearchCustomer(parcel.Sender.Id).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.Target.Id).Longitude, dalAP.SearchCustomer(parcel.Target.Id).Latitude))
+                };
+            }*/
             private ParcelInTransfer CreateParcelInTransfer(int parcelId) //create parcel to be put in drone
             {
-                Parcel parcel = SearchParcel(parcelId);
-                return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready = parcel.PickUp > DateTime.Now, Priority = parcel.Priority,
+                IDAL.DO.Parcel parcel = dalAP.SearchParcel(parcelId);
+                /*return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready = parcel.PickUp > DateTime.Now, Priority = parcel.Priority,
                     Weight = parcel.Weight, Sender = parcel.Sender, Target = parcel.Target, PickUpLocation = SearchCustomer(parcel.Sender.Id).Location,
                     Destination = SearchCustomer(parcel.Target.Id).Location,
-                    Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
+                    Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };*/
+                //sarah-maybe fixing neverending recursion 2- not sure this is needed
+                return new ParcelInTransfer
+                {
+                    Id = parcel.Id,
+                    PickedUpAlready = parcel.PickedUp > DateTime.Now,
+                    Priority = (Priorities)parcel.Priority,
+                    Weight = (WeightCategories)parcel.Weight,
+                    Sender = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name },
+                    Target = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name },
+                    PickUpLocation = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude),
+                    Destination = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude),
+                    Distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude))
+                };
             }
             private IEnumerable<Parcel> YieldParcel() //create list of BL.Parcel
             {

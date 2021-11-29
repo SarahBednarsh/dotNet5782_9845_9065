@@ -29,7 +29,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
-            Console.WriteLine("Enter station name (if not interested - enter -1):");
+            Console.WriteLine("Enter customer name (if not interested - enter -1):");
             string name = Console.ReadLine();
             Int32.TryParse(name, out int intName);
             if (intName == -1)

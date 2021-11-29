@@ -63,6 +63,8 @@ namespace IBL
             {
 
                 Customer customer = new Customer();
+                customer.ToCustomer = new List<ParcelAtCustomer> { };//sarah- list not initialized- is this needed?? didn't work to add without it
+                customer.AtCustomer = new List<ParcelAtCustomer> { };//sarah- list not initialized- is this needed?? didn't work to add without it
                 customer.Id = old.Id;
                 customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
                 customer.Name = old.Name;
@@ -73,14 +75,15 @@ namespace IBL
                     if (customer.Id == parcel.SenderId)//from this customer
                     {
                         States state = States.Created;
-                        Parcel BLparcel = SearchParcel(parcel.Id);
+                        //Parcel BLparcel = SearchParcel(parcel.Id);//sarah-never ending recursion solution
+                        Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
                         if (BLparcel.Delivery != DateTime.MinValue)
                             state = States.Delivered;
                         else if (BLparcel.PickUp != DateTime.MinValue)
                             state = States.PickedUp;
                         else if (BLparcel.Attribution != DateTime.MinValue)
                             state = States.Attributed;
-                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = SearchCustomer(parcel.TargetId).Name };
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name };
                         customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
                     }
                     if (customer.Id == parcel.TargetId)//to this customer
@@ -93,7 +96,7 @@ namespace IBL
                             state = States.PickedUp;
                         else if (BLparcel.Attribution != DateTime.MinValue)
                             state = States.Attributed;
-                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, Name = SearchCustomer(parcel.SenderId).Name };
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name };
                         customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
                     }
                 }
