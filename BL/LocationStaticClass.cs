@@ -28,7 +28,7 @@ namespace IBL
             /// <returns></returns>
             public static Location InitializeLocation(Sexagesimal longitude, Sexagesimal latitude)
             {
-                return new Location { Longitude = StaticSexagesimal.InitializeSexagesimal(longitude), Latitude = StaticSexagesimal.InitializeSexagesimal(longitude) };
+                return new Location { Longitude = StaticSexagesimal.InitializeSexagesimal(longitude), Latitude = StaticSexagesimal.InitializeSexagesimal(latitude) };
             }
             /// <summary>
             /// creates Location from another Location object
