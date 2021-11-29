@@ -57,18 +57,20 @@ namespace IBL
                             Location closestStationLocation = LocationStaticClass.InitializeLocation(closestS.Longitude, closestS.Latitude);
                             drone.Location = closestStationLocation;
                         }
-                        else
+                        else //parcel was picked up
                         {
+                            //get the sender of the parcel
                             IDAL.DO.Customer customer = dalAP.YieldCustomer().Where(c => c.Id == parcel.SenderId).FirstOrDefault();
                             drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
                         }
                         IDAL.DO.Station closest = GetClosestStation(drone.Location);
                         Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
+                        //randomly chose battery between minimum for travel and full charge
                         int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location, 
                             SearchCustomer(SearchParcel(drone.IdOfParcel).Target.Id).Location) * available) + (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
                         drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                     }
-                    else
+                    else //drone is not delivering
                     {
                         if (r.Next(2) == 1)//makes it be in maintenence
                         {
@@ -76,6 +78,7 @@ namespace IBL
                             IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                             int index = r.Next(stations.Count());
                             int counter = 0;
+                            //set location of the drone to a random station
                             foreach (IDAL.DO.Station station in stations)
                             {
                                 if (counter == index)
@@ -95,6 +98,7 @@ namespace IBL
                             foreach (IDAL.DO.Customer customer in customers)
                                 if (HadAParcelDelivered(customer))
                                     numCustomerWithDeliveredParcel++;
+                            //set drone location at a random customer that has a parcel delivered
                             int index = r.Next(numCustomerWithDeliveredParcel);//customers that had parcels delivered to them
                             int counter = 0;
                             foreach (IDAL.DO.Customer customer in customers)
@@ -109,6 +113,7 @@ namespace IBL
                                     counter++;
                                 }
                             }
+                            //set battery
                             IDAL.DO.Station closest = GetClosestStation(drone.Location);
                             Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
                             int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
@@ -124,7 +129,7 @@ namespace IBL
                 Location location = LocationStaticClass.InitializeLocation(stations.GetEnumerator().Current.Longitude, stations.GetEnumerator().Current.Latitude);
                 double minDistance = LocationStaticClass.CalcDis(location, loc);//will fill in
                 IDAL.DO.Station closest = stations.FirstOrDefault();
-                foreach (IDAL.DO.Station station in stations)
+                foreach (IDAL.DO.Station station in stations) //find station with minimal distance
                 {
                     location = LocationStaticClass.InitializeLocation(station.Longitude, stations.GetEnumerator().Current.Latitude);
                     double dis = LocationStaticClass.CalcDis(location, loc);
@@ -138,12 +143,13 @@ namespace IBL
             }
             private bool HadAParcelDelivered(IDAL.DO.Customer customer)
             {
+                bool hadDelivered = false;
                 foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
                 {
-                    if ((parcel.Delivered != DateTime.MinValue) && (parcel.TargetId == customer.Id))
-                        return true;
+                    if ((parcel.Delivered != DateTime.MinValue) && (parcel.TargetId == customer.Id)) //had delivered
+                        hadDelivered = true;
                 }
-                return false;
+                return hadDelivered;
             }
 
         }

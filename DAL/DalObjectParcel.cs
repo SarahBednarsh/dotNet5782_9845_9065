@@ -44,7 +44,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// delivers a parcel to customer - updates the parcel delivery time and changes the drone to be availble
+        /// delivers a parcel to customer - updates the parcel delivery time
         /// </summary>
         /// <param name="parcelId"></param>
         public void DeliverToCustomer(int parcelId)
@@ -55,10 +55,6 @@ namespace DalObject
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.Delivered = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
-
-            int indexDrone = DataSource.Drones.FindIndex(x => x.Id == tempParcel.DroneId);
-            Drone tempDrone = DataSource.Drones[indexDrone];
-            DataSource.Drones[indexDrone] = tempDrone;
         }
         public Parcel SearchParcel(int parcelId)
         {

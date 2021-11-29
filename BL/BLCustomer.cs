@@ -25,7 +25,7 @@ namespace IBL
             {
                 try
                 {
-                    IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
+                    IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId); //find relevant customer
                     if (name != "")
                         customer.Name = name;
                     if (phone != "")
@@ -43,7 +43,7 @@ namespace IBL
                 try
                 {
                     IDAL.DO.Customer customer = dalAP.SearchCustomer(customerId);
-                    Customer BLcustomer = CreateCustomer(customer);
+                    Customer BLcustomer = CreateCustomer(customer); //convert IDAL.DO.Customer to BL.Customer
                     return BLcustomer;
                 }
                 catch (CustomerException exception)
@@ -51,18 +51,15 @@ namespace IBL
                     throw new KeyDoesNotExist(string.Format("Customer with id {0} does not exists", customerId), exception);
                 }
             }
-            private IEnumerable<Customer> YieldCustomer()
+            private IEnumerable<Customer> YieldCustomer() //return list of BL customers
             {
                 IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
-                List<Customer> newCustomers = new List<Customer>();
                 foreach (IDAL.DO.Customer customer in customers)
                 {
-                    newCustomers.Add(CreateCustomer(customer));
+                    yield return CreateCustomer(customer);
                 }
-                return newCustomers;
             }
-
-            private Customer CreateCustomer(IDAL.DO.Customer old)
+            private Customer CreateCustomer(IDAL.DO.Customer old) //convert IDAL.D.Customer to BL.Customer
             {
 
                 Customer customer = new Customer();
@@ -71,7 +68,7 @@ namespace IBL
                 customer.Name = old.Name;
                 customer.PhoneNum = old.Phone;
                 customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
-                foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
+                foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel()) //make list of sent and recieved parcels
                 {
                     if (customer.Id == parcel.SenderId)//from this customer
                     {
@@ -113,7 +110,6 @@ namespace IBL
                     yield return new CustomerToList { Id = customer.Id, Name = customer.Name, PhoneNum = customer.PhoneNum, Delivered = delivered, Got = got, OnTheirWay = onTheirWay, Sent = sent };
                 }
             }
-
         }
     }
 }

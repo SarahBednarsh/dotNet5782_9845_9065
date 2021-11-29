@@ -21,7 +21,6 @@ namespace IBL
                     throw new KeyAlreadyExists("Parcel alreday exists", exception);
                 }
             }
-            
             public Parcel SearchParcel(int parcelId)
             {
                 try
@@ -36,7 +35,7 @@ namespace IBL
                     throw new KeyDoesNotExist("Parcel does not exists", exception);
                 }
             }
-            private Parcel CreateParcel(IDAL.DO.Parcel old)
+            private Parcel CreateParcel(IDAL.DO.Parcel old) //convert IDAL.DO.Parcel to BL.Parcel
             {
                 Parcel parcel = new Parcel();
                 parcel.Id = old.Id;
@@ -45,7 +44,7 @@ namespace IBL
                 parcel.Weight = (WeightCategories)old.Weight;
                 parcel.Priority = (Priorities)old.Priority;
                 Drone drone = null;
-                if(old.Id != -1)
+                if(old.Id != -1) //is parcel was already attributed
                     drone = SearchDrone(old.DroneId);
                 parcel.Drone = new DroneInParcel { Battery = drone.Battery, Id = drone.Id, Location = drone.Location };
                 parcel.Creation = old.Requested;
@@ -64,7 +63,7 @@ namespace IBL
                 Customer target = SearchCustomer(p.Target.Id);
                 return target.Location;
             }
-            private ParcelInTransfer CreateParcelInTransfer(int parcelId)
+            private ParcelInTransfer CreateParcelInTransfer(int parcelId) //create parcel to be put in drone
             {
                 Parcel parcel = SearchParcel(parcelId);
                 return new ParcelInTransfer { Id = parcel.Id, PickedUpAlready = parcel.PickUp > DateTime.Now, Priority = parcel.Priority,
@@ -72,17 +71,14 @@ namespace IBL
                     Destination = SearchCustomer(parcel.Target.Id).Location,
                     Distance = LocationStaticClass.CalcDis(SearchCustomer(parcel.Sender.Id).Location, SearchCustomer(parcel.Target.Id).Location) };
             }
-            private IEnumerable<Parcel> YieldParcel()
+            private IEnumerable<Parcel> YieldParcel() //create list of BL.Parcel
             {
                 IEnumerable<IDAL.DO.Parcel> parcels = dalAP.YieldParcel();
-                List<Parcel> newParcels = new List<Parcel>();
                 foreach (IDAL.DO.Parcel parcel in parcels)
                 {
-                    newParcels.Add(CreateParcel(parcel));
+                    yield return CreateParcel(parcel);
                 }
-                return newParcels;
             }
-
             public IEnumerable<ParcelToList> ListParcel()
             {
                 foreach (Parcel parcel in YieldParcel())
@@ -91,7 +87,7 @@ namespace IBL
             public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
                 return from parcel in YieldParcel()
-                       where parcel.Attribution == DateTime.MinValue
+                       where parcel.Attribution == DateTime.MinValue //parcel was not attributed yet
                        select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName=parcel.Target.Name, Weight=parcel.Weight };
             }
         }

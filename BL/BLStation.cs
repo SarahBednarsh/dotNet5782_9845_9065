@@ -26,23 +26,24 @@ namespace IBL
                 }
                 if (name != -1)
                     station.Name = name;
-                if (chargingSlots != -1)
+                if (chargingSlots != -1) //new number of charging slots was requested
                 {
-                    if (chargingSlots - station.Charging.Count < 0)
+                    if (chargingSlots - station.Charging.Count < 0) //more charging drones than requested slots
                         throw new NotEnoughChargingSlots("Not enough charging slots for drones already charging");
                     station.OpenChargeSlots = chargingSlots - station.Charging.Count;
                 }
+                //update
                 dalAP.DeleteStation(stationId);
                 dalAP.AddStation(station.Id, station.Name, IDAL.DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), IDAL.DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), station.OpenChargeSlots + station.Charging.Count);
             }
-            private Station CreateStation(IDAL.DO.Station old)
+            private Station CreateStation(IDAL.DO.Station old) //convert IDAL.DO>Station to BL.Station
             {
                 Station station = new Station();
                 station.Id = old.Id;
                 station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
                 station.Name = old.Name;
                 station.OpenChargeSlots = old.ChargeSlots;
-                foreach (DroneToList drone in dronesBL)
+                foreach (DroneToList drone in dronesBL) //make list of charging drones
                 {
                     if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
                         station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
@@ -65,27 +66,23 @@ namespace IBL
             private IEnumerable<Station> YieldStation()
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                List<Station> newStations = new List<Station>();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    newStations.Add(CreateStation(station));
+                   yield return CreateStation(station);
                 }
-                return newStations;
             }
-            public IEnumerable<StationToList> ListStation()//station to list- no its not
+            public IEnumerable<StationToList> ListStation()
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                List<StationToList> newStations = new List<StationToList>();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    newStations.Add(new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count() });
+                    yield return new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count() };
                 }
-                return newStations;
             }
             public IEnumerable<StationToList> ListStationAvailable()
             {
                 return from station in YieldStation()
-                       where station.OpenChargeSlots > 0
+                       where station.OpenChargeSlots > 0 //station is available
                        select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
             }
         }
