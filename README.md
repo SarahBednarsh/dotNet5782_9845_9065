@@ -13,3 +13,7 @@ Stuff to do:
 - Liorah: Implement AttributeAParcel and implement CreateDrone if you need it ------------------------- done :)
 
 May the odds be ever in our favor :)
+
+
+1. minuses in sexagesimal
+2. add functions don't work

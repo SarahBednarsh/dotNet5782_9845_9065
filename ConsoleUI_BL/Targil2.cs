@@ -18,7 +18,6 @@ namespace ConsoleUI_BL
                     "Enter 2 for updating an entity\n" +
                     "Enter 3 for displaying an entity\n" +
                     "Enter 4 for displaying a list of entities\n" +
-                    "Enter 5 for calculating distance from an entity\n" +
                     "Enter 0 for Exit");
                 Int32.TryParse(Console.ReadLine(), out int input);
                 option = (Actions)input;

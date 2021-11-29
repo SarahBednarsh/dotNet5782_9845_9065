@@ -22,8 +22,9 @@ namespace IBL
             public BL()
             {
                 dalAP = new DalObject.DalObject();
-                Console.WriteLine("works till here");//sarah
+                //Console.WriteLine("works till here");//sarah
                 IEnumerator<double> info = dalAP.ReqPowerConsumption().GetEnumerator();
+                info.MoveNext();
                 available = info.Current;
                 info.MoveNext();
                 light = info.Current;
@@ -44,6 +45,7 @@ namespace IBL
                 Random r = new Random();
                 //try //sarah- took off to easily view he problems. need to add at end
                 {
+                    List<DroneToList> tmp = new List<DroneToList>();
                     foreach (DroneToList drone in dronesBL)
                     {
                         //get all the parcels that were not delivered yet but attributed to a drone
@@ -128,7 +130,9 @@ namespace IBL
                                 drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                             }
                         }
+                        tmp.Add(drone);
                     }
+                    dronesBL = tmp;
                 }
                 //catch (Exception exception)//sarah
                 //{

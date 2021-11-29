@@ -25,6 +25,7 @@ namespace IDAL
                     else
                         dir = Directions.N;
                 }
+                pos = Math.Abs(pos);
                 int degrees = (int)pos % 360;
                 int minutes = (int)(pos * 60) % 60;
                 double seconds = (pos * 60 * 60) % 60;
