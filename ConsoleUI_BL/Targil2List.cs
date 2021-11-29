@@ -15,8 +15,8 @@ namespace ConsoleUI_BL
         }
         private static void ListDrones(IBL.BO.IBL bl)
         {
-            IEnumerable<Drone> drones = bl.YieldDrone();
-            foreach (Drone drone in drones)
+            IEnumerable<DroneToList> drones = bl.ListDrone();
+            foreach (DroneToList drone in drones)
                 Console.WriteLine(string.Format("{0} \n", drone));
         }
         private static void ListCustomers(IBL.BO.IBL bl)
