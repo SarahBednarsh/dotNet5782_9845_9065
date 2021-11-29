@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO; //is this allowed?
+using IDAL.DO; 
 
 namespace IDAL
 {
