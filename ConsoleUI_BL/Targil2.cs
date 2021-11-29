@@ -22,26 +22,33 @@ namespace ConsoleUI_BL
                     "Enter 0 for Exit");
                 Int32.TryParse(Console.ReadLine(), out int input);
                 option = (Actions)input;
-                switch (option)
+                try
                 {
-                    case Actions.Exit:
-                        Console.WriteLine("Bye bye!");
-                        break;
-                    case Actions.Add:
-                        SwitchAdd(bl);
-                        break;
-                    case Actions.Update:
-                        SwitchUpdate(bl);
-                        break;
-                    case Actions.View:
-                        SwitchView(bl);
-                        break;
-                    case Actions.List:
-                        SwitchList(bl);
-                        break;
-                    default:
-                        Console.WriteLine("ERROR");
-                        break;
+                    switch (option)
+                    {
+                        case Actions.Exit:
+                            Console.WriteLine("Bye bye!");
+                            break;
+                        case Actions.Add:
+                            SwitchAdd(bl);
+                            break;
+                        case Actions.Update:
+                            SwitchUpdate(bl);
+                            break;
+                        case Actions.View:
+                            SwitchView(bl);
+                            break;
+                        case Actions.List:
+                            SwitchList(bl);
+                            break;
+                        default:
+                            Console.WriteLine("ERROR");
+                            break;
+                    }
+                }
+                catch(Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
                 }
 
             } while (option != 0);
