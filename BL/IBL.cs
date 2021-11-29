@@ -123,6 +123,11 @@ namespace IBL
             /// <returns></returns>
             public IEnumerable<CustomerToList> ListCustomer();
             /// <summary>
+            /// Returns all Drones
+            /// </summary>
+            /// <returns></returns>
+            public IEnumerable<DroneToList> ListDrone();
+            /// <summary>
             /// Returns all Parcels
             /// </summary>
             /// <returns></returns>

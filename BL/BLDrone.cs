@@ -199,6 +199,14 @@ namespace IBL
                 else if (weight == WeightCategories.Medium) return medium;
                 else return heavy;
             }
+            public IEnumerable<DroneToList> ListDrone()
+            {
+                foreach (DroneToList drone in dronesBL)
+                {
+                    yield return new DroneToList { Id = drone.Id, Model = drone.Model, Location = LocationStaticClass.InitializeLocation(drone.Location), 
+                        Battery = drone.Battery, IdOfParcel = drone.IdOfParcel, MaxWeight = drone.MaxWeight, Status = drone.Status };
+                }
+            }
         }
     }
 }
