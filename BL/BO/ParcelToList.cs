@@ -17,7 +17,7 @@ namespace IBL
             //public enum Priorities { Normal=1, Quick, Emergency }
             public override string ToString()
             {
-                return string.Format($"Id: {Id}, Sender: {Sender}, Target: {Target}, Weight: {Weight}, Priority: {Priority}");
+                return string.Format($"Id: {Id}, Sender: {SenderName}, Target: {TargetName}, Weight: {Weight}, Priority: {Priority}");
             }
         }
     }
