@@ -10,15 +10,15 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
-            Console.WriteLine("Enter name (number):");
-            Int32.TryParse(Console.ReadLine(), out int numName);//handle entering a string (I think tryparse should be used)
+            Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();//handle entering a string (I think tryparse should be used)
             Console.WriteLine("Enter longitude:");
             Double.TryParse(Console.ReadLine(), out double longitude);
             Console.WriteLine("Enter latitude:");
             Double.TryParse(Console.ReadLine(), out double latitude);
             Console.WriteLine("Enter amount of charge slots:");
             Int32.TryParse(Console.ReadLine(), out int chargeSlots);
-            bl.AddStation(id, numName, longitude, latitude, chargeSlots);
+            bl.AddStation(id, name, longitude, latitude, chargeSlots);
         }
         private static void AddDrone(IBL.BO.IBL bl)
         {

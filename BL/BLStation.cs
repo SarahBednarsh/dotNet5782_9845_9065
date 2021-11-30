@@ -9,11 +9,11 @@ namespace IBL
     {
         public partial class BL
         {
-            public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
+            public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots)
             {
                 dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
             }
-            public void UpdateStationInfo(int stationId, int name, int chargingSlots)
+            public void UpdateStationInfo(int stationId, string name, int chargingSlots)
             {
                 Station station;
                 try
@@ -24,7 +24,7 @@ namespace IBL
                 {
                     throw new KeyDoesNotExist("The station requested does not exist", exception);
                 }
-                if (name != -1)
+                if (name != "")
                     station.Name = name;
                 if (chargingSlots != -1) //new number of charging slots was requested
                 {

@@ -16,7 +16,7 @@ namespace IBL
             /// <param name="longitude"></param>
             /// <param name="latitude"></param>
             /// <param name="chargeSlots"></param>
-            public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots);
+            public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots);
             /// <summary>
             /// Adds a Drone to the DataBase
             /// </summary>
@@ -54,7 +54,7 @@ namespace IBL
             /// <param name="stationId"></param>
             /// <param name="name"></param>
             /// <param name="chargingSlots"></param>
-            public void UpdateStationInfo(int stationId, int name, int chargingSlots);
+            public void UpdateStationInfo(int stationId, string name, int chargingSlots);
             /// <summary>
             /// Updates relevant properties of a Customer
             /// </summary>

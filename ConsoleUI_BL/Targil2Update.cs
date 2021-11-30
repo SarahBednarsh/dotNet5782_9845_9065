@@ -21,9 +21,11 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter station name (if not interested - enter -1):");
             string name = Console.ReadLine();
             Int32.TryParse(name, out int intName);
+            if (intName == -1)
+                name = "";
             Console.WriteLine("Enter number of charging slots (if not interested - enter -1):");
             Int32.TryParse(Console.ReadLine(), out int slots);
-            bl.UpdateStationInfo(num, intName, slots);
+            bl.UpdateStationInfo(num, name, slots);
         }
         private static void UpdateCustomer(IBL.BO.IBL bl)
         {

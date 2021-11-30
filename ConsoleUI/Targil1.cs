@@ -41,8 +41,8 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter ID:");
                                 Int32.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine("Enter name (number):");
-                                int numName;
-                                Int32.TryParse(Console.ReadLine(), out numName);//handle entering a string (I think tryparse should be used)
+                                name = Console.ReadLine();
+                                //Int32.TryParse(Console.ReadLine(), out numName);//handle entering a string (I think tryparse should be used)
                                 Console.WriteLine("Enter longitude:");
                                 Double.TryParse(Console.ReadLine(), out longitude);
                                 Console.WriteLine("Enter latitude:");
@@ -50,7 +50,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter amount of charge slots:");
                                 int chargeSlots;
                                 Int32.TryParse(Console.ReadLine(), out chargeSlots);
-                                project.AddStation(id, numName, longitude, latitude, chargeSlots);
+                                project.AddStation(id, name, longitude, latitude, chargeSlots);
                                 break;
                             case Data.Drone:
                                 Console.WriteLine("Enter ID:");

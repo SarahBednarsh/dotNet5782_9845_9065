@@ -6,10 +6,10 @@ namespace DalObject
 {
     public partial class DalObject
     {
-        public void AddStation(int id, int name, double longitude, double latitude, int chargeSlots)
+        public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {
             if (DataSource.Stations.Exists(x => x.Id == id))
-                return;
+                throw new StationException("Station to add already exists");
             Station tempStation = new Station() { Id = id, Name = name, Longitude = StaticSexagesimal.InitializeSexagesimal(longitude, "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(latitude, "Latitude"), ChargeSlots = chargeSlots };
             DataSource.Stations.Add(tempStation);
         }

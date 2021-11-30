@@ -28,12 +28,13 @@ namespace DalObject
 
             Random r = new Random();
             int Id;
+            string[] stationNames = new string[2] { "station1", "station2" };
             for (int i = 0; i < 2; i++)
             {
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id == Id))
                     Id = r.Next(1000, 10000);
-                Station station = new Station() { Id = Id, Name = r.Next(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(9) + 1 };
+                Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(9) + 1 };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
