@@ -22,7 +22,6 @@ namespace IBL
             public BL()
             {
                 dalAP = new DalObject.DalObject();
-                //Console.WriteLine("works till here");//sarah
                 IEnumerator<double> info = dalAP.ReqPowerConsumption().GetEnumerator();
                 info.MoveNext();
                 available = info.Current;
@@ -43,7 +42,7 @@ namespace IBL
                     dronesBL.Add(new DroneToList { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 });
                 }
                 Random r = new Random();
-                //try //sarah- took off to easily view he problems. need to add at end
+                try
                 {
                     List<DroneToList> tmp = new List<DroneToList>();
                     foreach (DroneToList drone in dronesBL)
@@ -75,17 +74,13 @@ namespace IBL
                             int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location,
                                 LocationStaticClass.InitializeLocation((dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId)).Longitude, dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId).Latitude)) * available) + (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);//sarah-remove search customer
 
-                            //LocationStaticClass.InitializeLocation((dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId)).Longitude, dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId).Latitude);// sarah not neccessarry
-
                             drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
 
                         }
                         else //drone is not delivering
                         {
-                            //Console.WriteLine("doesn't have parcels");//liorah
                             if (r.Next(2) == 1)//makes it be in maintenence
                             {
-                                //Console.WriteLine("maitenwnwce");//liorah
                                 drone.Status = DroneStatuses.InMaintenance;
                                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                                 int index = r.Next(stations.Count() + 1);//sarah-makes it start from 1
@@ -96,9 +91,7 @@ namespace IBL
                                     counter++;
                                     if (counter == index)
                                     {
-                                        //Console.WriteLine("hello" + counter);//liorah
                                         drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
-                                        //Console.WriteLine(drone.Location);//liorah
                                         break;
                                     }
                                 }
@@ -106,7 +99,6 @@ namespace IBL
                             }
                             else//drone is available
                             {
-                                //Console.WriteLine("available");//liorah
                                 drone.Status = DroneStatuses.Available;
                                 IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
                                 int numCustomerWithDeliveredParcel = 0;
@@ -114,8 +106,7 @@ namespace IBL
                                     if (HadAParcelDelivered(customer))
                                         numCustomerWithDeliveredParcel++;
                                 //set drone location at a random customer that has a parcel delivered
-                                Console.WriteLine(numCustomerWithDeliveredParcel);//liorah
-                                int index = r.Next(numCustomerWithDeliveredParcel+1);//customers that had parcels delivered to them//sarah-start from 1
+                                int index = r.Next(numCustomerWithDeliveredParcel + 1);//customers that had parcels delivered to them
                                 int counter = 0;
                                 foreach (IDAL.DO.Customer customer in customers)
                                 {
@@ -130,36 +121,31 @@ namespace IBL
                                     }
                                 }
                                 //set battery
-                                //Console.WriteLine(drone.Location);//liorah
                                 IDAL.DO.Station closest = GetClosestStation(drone.Location);
                                 Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
                                 int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
                                 drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                             }
                         }
-                        //Console.WriteLine(drone);//liorah
                         tmp.Add(drone);
                     }
                     dronesBL = tmp;
                 }
-                //catch (Exception exception)//sarah
-                //{
-                //    Console.WriteLine("Problem with initializing the drones:");
-                //    Console.WriteLine(exception.Message);
-                //}
+                catch (Exception exception)//some kind of exception was thrown
+                {
+                    Console.WriteLine("Problem with initializing the drones:");
+                    Console.WriteLine(exception.Message);
+                }
             }
 
             private IDAL.DO.Station GetClosestStation(Location loc)
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                //Console.WriteLine("longitude is:");//sarah
-                //if (stations.FirstOrDefault().Longitude == null) Console.WriteLine("something is very wrong");//sarah
                 Location location = LocationStaticClass.InitializeLocation(stations.FirstOrDefault().Longitude, stations.FirstOrDefault().Latitude);
                 double minDistance = LocationStaticClass.CalcDis(location, loc);//will fill in
                 IDAL.DO.Station closest = stations.FirstOrDefault();
                 foreach (IDAL.DO.Station station in stations) //find station with minimal distance
                 {
-                    //location = LocationStaticClass.InitializeLocation(station.Longitude, stations.FirstOrDefault().Latitude);//sarah-wrong-changed
                     location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
                     double dis = LocationStaticClass.CalcDis(location, loc);
                     if (minDistance > dis)

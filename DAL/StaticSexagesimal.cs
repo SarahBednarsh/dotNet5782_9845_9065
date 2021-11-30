@@ -38,7 +38,7 @@ namespace IDAL
             public static Sexagesimal InitializeSexagesimal(Sexagesimal copy)
             {
                 if (copy == null)
-                    throw new ArgumentNullException();//sarah
+                    throw new ArgumentNullException();
                 return InitializeSexagesimal(copy.Degrees, copy.Minutes, copy.Seconds, copy.Direction);
             }
             public static double ParseDouble(Sexagesimal coordinate)//converts a sexagesimal coordinate to decimal

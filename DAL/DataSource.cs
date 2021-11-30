@@ -43,7 +43,6 @@ namespace DalObject
                     Id = r.Next(1000, 10000);
                 Drone drone = new Drone() { Id = Id, Model = "model" + i, MaxWeight = (WeightCategories)r.Next(1, 3) };
                 DataSource.Drones.Add(drone);
-                //Console.WriteLine(drone);//liorah
             }
             string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi", "Bilbo Baggins", "Paul", "Joseph", "Yoram", "Devorah", "Simcha" };
             for (int i = 0; i < 10; i++)
@@ -52,10 +51,10 @@ namespace DalObject
                 while (DataSource.Customers.Exists(x => x.Id == Id))
                     Id = r.Next(100000000, 1000000000);
                 Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
-                DataSource.Customers.Add(customer);//liorah
+                DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
-            for (int i = 0; i < 10; i++)//sarah update
+            for (int i = 0; i < 10; i++)
             {
                 DateTime start = new DateTime(2020, i + 1, 1);
                 int forScheduled = r.Next(1, 25);
@@ -79,7 +78,6 @@ namespace DalObject
                     Delivered = delivered
                 };
                 DataSource.Parcels.Add(parcel);
-                //Console.WriteLine(parcel);//liorah
             }
         }
     }

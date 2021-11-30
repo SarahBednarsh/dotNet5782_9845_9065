@@ -63,8 +63,8 @@ namespace IBL
             {
 
                 Customer customer = new Customer();
-                customer.ToCustomer = new List<ParcelAtCustomer> { };//sarah- list not initialized- is this needed?? didn't work to add without it
-                customer.AtCustomer = new List<ParcelAtCustomer> { };//sarah- list not initialized- is this needed?? didn't work to add without it
+                customer.ToCustomer = new List<ParcelAtCustomer> { };
+                customer.AtCustomer = new List<ParcelAtCustomer> { };
                 customer.Id = old.Id;
                 customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
                 customer.Name = old.Name;
@@ -75,8 +75,7 @@ namespace IBL
                     if (customer.Id == parcel.SenderId)//from this customer
                     {
                         States state = States.Created;
-                        //Parcel BLparcel = SearchParcel(parcel.Id);//sarah-never ending recursion solution
-                        Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
+                       Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
                         if (BLparcel.Delivery != DateTime.MinValue)
                             state = States.Delivered;
                         else if (BLparcel.PickUp != DateTime.MinValue)

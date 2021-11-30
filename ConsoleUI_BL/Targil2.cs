@@ -21,7 +21,7 @@ namespace ConsoleUI_BL
                     "Enter 0 for Exit");
                 Int32.TryParse(Console.ReadLine(), out int input);
                 option = (Actions)input;
-                //try
+                try
                 {
                     switch (option)
                     {
@@ -45,10 +45,10 @@ namespace ConsoleUI_BL
                             break;
                     }
                 }
-                //catch(Exception exception)
-                //{
-                //    Console.WriteLine(exception.Message);
-                //}
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
 
             } while (option != 0);
         }

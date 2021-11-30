@@ -90,7 +90,7 @@ namespace IBL
                     }
                 }
                 if (minDistance == -1) //no available station was found
-                    throw new CannotSendToCharge("All stations are full");//liorah what should i write?
+                    throw new CannotSendToCharge("All stations are full");
                 double usage = GetUsage(drone.MaxWeight);
                 if (drone.Battery < minDistance * usage)
                     throw new NotEnoughBattery("Not enough battery to get to station");
