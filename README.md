@@ -3,3 +3,5 @@ dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 
 
 Notes:
+- change to pradicates
+- change station name to string
