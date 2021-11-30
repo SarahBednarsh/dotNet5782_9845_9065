@@ -2,6 +2,5 @@
 dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 
 
-Notes:
+To do:
 - change to pradicates
-- change station name to string
