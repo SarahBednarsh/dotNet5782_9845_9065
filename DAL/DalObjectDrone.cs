@@ -10,7 +10,7 @@ namespace DalObject
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
             if (DataSource.Customers.Exists(x => x.Id == id))
-                throw new DroneException("Drone to add  exists.");
+                throw new DroneException("Drone to add exists.");
             Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
 

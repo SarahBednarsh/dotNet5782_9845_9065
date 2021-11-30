@@ -82,11 +82,13 @@ namespace IBL
                         }
                         else //drone is not delivering
                         {
+                            //Console.WriteLine("doesn't have parcels");//liorah
                             if (r.Next(2) == 1)//makes it be in maintenence
                             {
+                                //Console.WriteLine("maitenwnwce");//liorah
                                 drone.Status = DroneStatuses.InMaintenance;
                                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                                int index = r.Next(stations.Count()+1);//sarah-makes it start from 1
+                                int index = r.Next(stations.Count() + 1);//sarah-makes it start from 1
                                 int counter = 0;
                                 //set location of the drone to a random station
                                 foreach (IDAL.DO.Station station in stations)
@@ -94,7 +96,9 @@ namespace IBL
                                     counter++;
                                     if (counter == index)
                                     {
+                                        //Console.WriteLine("hello" + counter);//liorah
                                         drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
+                                        //Console.WriteLine(drone.Location);//liorah
                                         break;
                                     }
                                 }
@@ -102,6 +106,7 @@ namespace IBL
                             }
                             else//drone is available
                             {
+                                //Console.WriteLine("available");//liorah
                                 drone.Status = DroneStatuses.Available;
                                 IEnumerable<IDAL.DO.Customer> customers = dalAP.YieldCustomer();
                                 int numCustomerWithDeliveredParcel = 0;
@@ -109,13 +114,14 @@ namespace IBL
                                     if (HadAParcelDelivered(customer))
                                         numCustomerWithDeliveredParcel++;
                                 //set drone location at a random customer that has a parcel delivered
+                                Console.WriteLine(numCustomerWithDeliveredParcel);//liorah
                                 int index = r.Next(numCustomerWithDeliveredParcel+1);//customers that had parcels delivered to them//sarah-start from 1
                                 int counter = 0;
                                 foreach (IDAL.DO.Customer customer in customers)
                                 {
-                                    counter++;
                                     if (HadAParcelDelivered(customer))
                                     {
+                                        counter++;
                                         if (counter == index)
                                         {
                                             drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
@@ -124,12 +130,14 @@ namespace IBL
                                     }
                                 }
                                 //set battery
+                                //Console.WriteLine(drone.Location);//liorah
                                 IDAL.DO.Station closest = GetClosestStation(drone.Location);
                                 Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
                                 int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
                                 drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
                             }
                         }
+                        //Console.WriteLine(drone);//liorah
                         tmp.Add(drone);
                     }
                     dronesBL = tmp;
@@ -145,7 +153,7 @@ namespace IBL
             {
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                 //Console.WriteLine("longitude is:");//sarah
-                if (stations.FirstOrDefault().Longitude == null) Console.WriteLine("something is very wrong");//sarah
+                //if (stations.FirstOrDefault().Longitude == null) Console.WriteLine("something is very wrong");//sarah
                 Location location = LocationStaticClass.InitializeLocation(stations.FirstOrDefault().Longitude, stations.FirstOrDefault().Latitude);
                 double minDistance = LocationStaticClass.CalcDis(location, loc);//will fill in
                 IDAL.DO.Station closest = stations.FirstOrDefault();

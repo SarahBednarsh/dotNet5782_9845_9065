@@ -36,15 +36,17 @@ namespace IBL
                 dalAP.DeleteStation(stationId);
                 dalAP.AddStation(station.Id, station.Name, IDAL.DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), IDAL.DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), station.OpenChargeSlots + station.Charging.Count);
             }
-            private Station CreateStation(IDAL.DO.Station old) //convert IDAL.DO>Station to BL.Station
+            private Station CreateStation(IDAL.DO.Station old) //convert IDAL.DO.Station to BL.Station
             {
                 Station station = new Station();
                 station.Id = old.Id;
                 station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
                 station.Name = old.Name;
                 station.OpenChargeSlots = old.ChargeSlots;
+                station.Charging = new List<DroneInCharge>();
                 foreach (DroneToList drone in dronesBL) //make list of charging drones
                 {
+                    //if the drone is charging in the station
                     if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
                         station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
                 }
@@ -76,7 +78,8 @@ namespace IBL
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    yield return new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = CreateStation(station).Charging.Count() };
+                    yield return new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, 
+                                                     UsedChargeSlots = CreateStation(station).Charging.Count() };
                 }
             }
             public IEnumerable<StationToList> ListStationAvailable()

@@ -30,10 +30,19 @@ namespace IBL
                 };
             }
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging)
-            {
+            { 
                 try
                 {
-                    Drone drone = new Drone { Battery = new Random().Next(20, 40), Location = SearchStation(stationIdForCharging).Location, Id = id, MaxWeight = maxWeight, Model = model, Status = DroneStatuses.InMaintenance, Parcel = null };
+                    if (SearchStation(stationIdForCharging).OpenChargeSlots < 1) //station is not available
+                        throw new NotEnoughChargingSlots("not enough charging slots in the station requested");
+                    DroneToList drone = new DroneToList { Battery = new Random().Next(20, 40), Location = SearchStation(stationIdForCharging).Location, 
+                                               Id = id, MaxWeight = maxWeight, Model = model, Status = DroneStatuses.InMaintenance, IdOfParcel = -1};
+                    dronesBL.Add(drone);
+                    dalAP.AddDrone(id, model, (IDAL.DO.WeightCategories)maxWeight);
+                }
+                catch (IDAL.DO.DroneException exception)
+                {
+                    throw new KeyAlreadyExists("Drone requested already exists", exception);
                 }
                 catch (IDAL.DO.StationException exception)
                 {

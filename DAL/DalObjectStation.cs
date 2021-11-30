@@ -15,8 +15,8 @@ namespace DalObject
         }
         public Station SearchStation(int stationId)
         {
-            //if (!DataSource.Stations.Exists(x => x.Id == stationId))
-               // return new Station(Id = 0);
+            if (!DataSource.Stations.Exists(x => x.Id == stationId))
+                throw new StationException("Station does not exist");
             return DataSource.Stations.Find(x => x.Id == stationId);
         }
         public void DeleteStation(int id)

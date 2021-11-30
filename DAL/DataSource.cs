@@ -33,7 +33,7 @@ namespace DalObject
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id == Id))
                     Id = r.Next(1000, 10000);
-                Station station = new Station() { Id = Id, Name = r.Next(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(10) };
+                Station station = new Station() { Id = Id, Name = r.Next(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(9) + 1 };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
             }
             for (int i = 0; i < 5; i++)
@@ -43,6 +43,7 @@ namespace DalObject
                     Id = r.Next(1000, 10000);
                 Drone drone = new Drone() { Id = Id, Model = "model" + i, MaxWeight = (WeightCategories)r.Next(1, 3) };
                 DataSource.Drones.Add(drone);
+                //Console.WriteLine(drone);//liorah
             }
             string[] names = new string[10] { "Liorah", "Sarah", "Margalit", "Adi", "Bilbo Baggins", "Paul", "Joseph", "Yoram", "Devorah", "Simcha" };
             for (int i = 0; i < 10; i++)
@@ -51,7 +52,7 @@ namespace DalObject
                 while (DataSource.Customers.Exists(x => x.Id == Id))
                     Id = r.Next(100000000, 1000000000);
                 Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
-                DataSource.Customers.Add(customer);
+                DataSource.Customers.Add(customer);//liorah
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
             for (int i = 0; i < 10; i++)//sarah update
@@ -78,6 +79,7 @@ namespace DalObject
                     Delivered = delivered
                 };
                 DataSource.Parcels.Add(parcel);
+                //Console.WriteLine(parcel);//liorah
             }
         }
     }

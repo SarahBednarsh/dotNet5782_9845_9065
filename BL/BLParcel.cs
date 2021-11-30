@@ -44,9 +44,11 @@ namespace IBL
                 parcel.Weight = (WeightCategories)old.Weight;
                 parcel.Priority = (Priorities)old.Priority;
                 Drone drone = null;
-                if(old.Id != -1) //if parcel was already attributed
+                if (old.DroneId != -1) //if parcel was already attributed
+                {
                     drone = SearchDrone(old.DroneId);
-                parcel.Drone = new DroneInParcel { Battery = drone.Battery, Id = drone.Id, Location = drone.Location };
+                    parcel.Drone = new DroneInParcel { Battery = drone.Battery, Id = drone.Id, Location = drone.Location };
+                }
                 parcel.Creation = old.Requested;
                 parcel.Attribution = old.Scheduled;
                 parcel.PickUp = old.PickedUp;
@@ -122,7 +124,7 @@ namespace IBL
             {
                 return from parcel in YieldParcel()
                        where parcel.Attribution == DateTime.MinValue //parcel was not attributed yet
-                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName=parcel.Target.Name, Weight=parcel.Weight };
+                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
             }
         }
     }
