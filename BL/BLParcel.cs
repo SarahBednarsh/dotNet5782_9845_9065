@@ -78,7 +78,7 @@ namespace IBL
                 return new ParcelInTransfer
                 {
                     Id = parcel.Id,
-                    PickedUpAlready = parcel.PickedUp > DateTime.Now,
+                    PickedUpAlready = parcel.PickedUp != null,
                     Priority = (Priorities)parcel.Priority,
                     Weight = (WeightCategories)parcel.Weight,
                     Sender = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name },
@@ -104,7 +104,7 @@ namespace IBL
             public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
                 return from parcel in YieldParcel()
-                       where parcel.Attribution == DateTime.MinValue //parcel was not attributed yet
+                       where parcel.Attribution == null //parcel was not attributed yet
                        select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
             }
         }

@@ -48,14 +48,14 @@ namespace IBL
                     foreach (DroneToList drone in dronesBL)
                     {
                         //get all the parcels that were not delivered yet but attributed to a drone
-                        var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != DateTime.MinValue);
+                        var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != null);
                         if (droneParcels.Count() > 0)//not sure about == 1
                         {
                             drone.IdOfParcel = droneParcels.FirstOrDefault().Id;//sarah-write explanation- need to add the attribution somewhere
 
                             drone.Status = DroneStatuses.Delivering;
                             IDAL.DO.Parcel parcel = droneParcels.FirstOrDefault();
-                            if (parcel.PickedUp == DateTime.MinValue)//wasn't picked up
+                            if (parcel.PickedUp == null)//wasn't picked up
                             {
                                 IDAL.DO.Customer customer = dalAP.SearchCustomer(parcel.SenderId);
                                 IDAL.DO.Station closestS = GetClosestStation(LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude));
@@ -161,7 +161,7 @@ namespace IBL
                 bool hadDelivered = false;
                 foreach (IDAL.DO.Parcel parcel in dalAP.YieldParcel())
                 {
-                    if ((parcel.Delivered != DateTime.MinValue) && (parcel.TargetId == customer.Id)) //had delivered
+                    if ((parcel.Delivered != null) && (parcel.TargetId == customer.Id)) //had delivered
                         hadDelivered = true;
                 }
                 return hadDelivered;

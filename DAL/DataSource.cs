@@ -56,14 +56,14 @@ namespace DalObject
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
             for (int i = 0; i < 10; i++)
             {
-                DateTime start = new DateTime(2020, i + 1, 1);
+                DateTime? start = new DateTime(2020, i + 1, 1);
                 int forScheduled = r.Next(1, 25);
                 int forPickedUp = forScheduled + 1;
-                DateTime delivered;
+                DateTime? delivered;
                 if (i % 2 == 0)
-                    delivered = start.AddDays(forPickedUp + 1);
+                    delivered = ((DateTime)start).AddDays(forPickedUp + 1);
                 else
-                    delivered = DateTime.MinValue;
+                    delivered = null;
                 Parcel parcel = new Parcel()
                 {
                     Id = ++DataSource.Config.RunningParcelNumber,
@@ -73,8 +73,8 @@ namespace DalObject
                     Priority = (Priorities)r.Next(1, 3),
                     Requested = DateTime.Today,
                     DroneId = Drones[i % 5].Id,
-                    Scheduled = start.AddDays(forScheduled),
-                    PickedUp = start.AddDays(forPickedUp),
+                    Scheduled = ((DateTime)start).AddDays(forScheduled),
+                    PickedUp = ((DateTime)start).AddDays(forPickedUp),
                     Delivered = delivered
                 };
                 DataSource.Parcels.Add(parcel);

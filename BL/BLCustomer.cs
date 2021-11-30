@@ -76,11 +76,11 @@ namespace IBL
                     {
                         States state = States.Created;
                        Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
-                        if (BLparcel.Delivery != DateTime.MinValue)
+                        if (BLparcel.Delivery != null)
                             state = States.Delivered;
-                        else if (BLparcel.PickUp != DateTime.MinValue)
+                        else if (BLparcel.PickUp != null)
                             state = States.PickedUp;
-                        else if (BLparcel.Attribution != DateTime.MinValue)
+                        else if (BLparcel.Attribution != null)
                             state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name };
                         customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
@@ -89,11 +89,11 @@ namespace IBL
                     {
                         States state = States.Created;
                         Parcel BLparcel = SearchParcel(parcel.Id);
-                        if (BLparcel.Delivery != DateTime.MinValue)
+                        if (BLparcel.Delivery != null)
                             state = States.Delivered;
-                        else if (BLparcel.PickUp != DateTime.MinValue)
+                        else if (BLparcel.PickUp != null)
                             state = States.PickedUp;
-                        else if (BLparcel.Attribution != DateTime.MinValue)
+                        else if (BLparcel.Attribution != null)
                             state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name };
                         customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
