@@ -133,7 +133,9 @@ namespace IBL
                     {
                         if (CanDeliver(drone, p)) //if drone can deliver parcel
                         {
-                            drone.Status = DroneStatuses.Delivering; //update status
+                            DroneToList droneInBL = dronesBL.Find(x => x.Id == droneId);
+                            droneInBL.Status = DroneStatuses.Delivering; //update status
+                            droneInBL.IdOfParcel = p.Id; //update parcel id in BL
                             //update attribution of parcel in DAL
                             dalAP.UpdateParcelsDrone(p.Id, drone.Id);
                             dalAP.ScheduleParcel(p.Id); //set attribution time of parcel
