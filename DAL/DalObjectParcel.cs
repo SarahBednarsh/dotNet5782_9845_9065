@@ -81,5 +81,15 @@ namespace DalObject
             }
             return noDrone;
         }
+        public IEnumerable<Parcel> ListParcelConditional(Predicate<IDAL.DO.Parcel> predicate)
+        {
+            List<Parcel> noDrone = new List<Parcel>();
+            foreach (Parcel parcel in DataSource.Parcels)
+            {
+                if (predicate(parcel))
+                    noDrone.Add(parcel);
+            }
+            return noDrone;
+        }
     }
 }

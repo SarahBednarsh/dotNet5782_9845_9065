@@ -74,7 +74,7 @@ namespace IBL
             private ParcelInTransfer CreateParcelInTransfer(int parcelId) //create parcel to be put in drone
             {
                 IDAL.DO.Parcel parcel = dalAP.SearchParcel(parcelId);
-                
+
                 return new ParcelInTransfer
                 {
                     Id = parcel.Id,
@@ -105,6 +105,12 @@ namespace IBL
             {
                 return from parcel in YieldParcel()
                        where parcel.Attribution == null //parcel was not attributed yet
+                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
+            }
+            public IEnumerable<ParcelToList> ListParcelConditional(Predicate<Parcel> predicate)
+            {
+                return from parcel in YieldParcel()
+                       where predicate(parcel) //parcel was not attributed yet
                        select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
             }
         }
