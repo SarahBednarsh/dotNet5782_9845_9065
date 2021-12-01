@@ -35,9 +35,9 @@ namespace DalObject
                 while (DataSource.Stations.Exists(x => x.Id == Id))
                     Id = r.Next(1000, 10000);
                 Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude"), ChargeSlots = r.Next(9) + 1 };
-                DataSource.Stations.Add(station);//so it is a realistic number of chargeslos, and it might be full eventually
+                DataSource.Stations.Add(station);//so it is a realistic number of chargeslots, and it might be full eventually
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Id = r.Next(1000, 10000);
                 while (DataSource.Drones.Exists(x => x.Id == Id))
