@@ -29,6 +29,16 @@ namespace DalObject
         {
             return new List<Station>(DataSource.Stations);
         }
+        public IEnumerable<Station> ListStationConditional(Predicate<Station> predicate)
+        {
+            List<Station> open = new List<Station>();
+            foreach (Station station in DataSource.Stations)
+            {
+                if (predicate(station))
+                    open.Add(station);
+            }
+            return open;
+        }
         public IEnumerable<Station> OpenChargeSlots()
         {
             List<Station> open = new List<Station>();

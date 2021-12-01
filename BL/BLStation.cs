@@ -70,7 +70,7 @@ namespace IBL
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                   yield return CreateStation(station);
+                    yield return CreateStation(station);
                 }
             }
             public IEnumerable<StationToList> ListStation()
@@ -78,15 +78,25 @@ namespace IBL
                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
                 foreach (IDAL.DO.Station station in stations)
                 {
-                    yield return new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, 
-                                                     UsedChargeSlots = CreateStation(station).Charging.Count() };
+                    yield return new StationToList
+                    {
+                        Id = station.Id,
+                        Name = station.Name,
+                        OpenChargeSlots = station.ChargeSlots,
+                        UsedChargeSlots = CreateStation(station).Charging.Count()
+                    };
                 }
             }
+            //public IEnumerable<StationToList> ListStationAvailable()
+            //{
+            //    return from station in YieldStation()
+            //           where station.OpenChargeSlots > 0 //station is available
+            //           select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
+            //}
             public IEnumerable<StationToList> ListStationAvailable()
             {
-                return from station in YieldStation()
-                       where station.OpenChargeSlots > 0 //station is available
-                       select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
+                return from station in dalAP.ListStationConditional(x => x.ChargeSlots > 0)
+                       select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = SearchStation(station.Id).Charging.Count };
             }
         }
     }

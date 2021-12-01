@@ -101,17 +101,16 @@ namespace IBL
                 foreach (Parcel parcel in YieldParcel())
                     yield return new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
             }
+            //public IEnumerable<ParcelToList> ListParcelNotAttributed()
+            //{
+            //    return from parcel in YieldParcel()
+            //           where parcel.Attribution == null //parcel was not attributed yet
+            //           select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
+            //}
             public IEnumerable<ParcelToList> ListParcelNotAttributed()
             {
-                return from parcel in YieldParcel()
-                       where parcel.Attribution == null //parcel was not attributed yet
-                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
-            }
-            public IEnumerable<ParcelToList> ListParcelConditional(Predicate<Parcel> predicate)
-            {
-                return from parcel in YieldParcel()
-                       where predicate(parcel) //parcel was not attributed yet
-                       select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
+                return from parcel in dalAP.ListParcelConditional(x => x.Scheduled == null)
+                       select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
             }
         }
     }
