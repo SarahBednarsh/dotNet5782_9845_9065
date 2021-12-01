@@ -13,8 +13,8 @@ namespace IBL
             public Drone SearchDrone(int droneId)
             {
                 IEnumerable<DroneToList> drones = from currentDrone in dronesBL
-                                                   where currentDrone.Id == droneId //drone found
-                                                   select currentDrone;
+                                                  where currentDrone.Id == droneId //drone found
+                                                  select currentDrone;
                 if (drones.Count() < 1) //no drone with given id was found
                     throw new KeyDoesNotExist("No such drone");
                 DroneToList drone = drones.First();
@@ -30,13 +30,21 @@ namespace IBL
                 };
             }
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging)
-            { 
+            {
                 try
                 {
                     if (SearchStation(stationIdForCharging).OpenChargeSlots < 1) //station is not available
                         throw new NotEnoughChargingSlots("not enough charging slots in the station requested");
-                    DroneToList drone = new DroneToList { Battery = new Random().Next(20, 40), Location = SearchStation(stationIdForCharging).Location, 
-                                               Id = id, MaxWeight = maxWeight, Model = model, Status = DroneStatuses.InMaintenance, IdOfParcel = -1};
+                    DroneToList drone = new DroneToList
+                    {
+                        Battery = new Random().Next(20, 40),
+                        Location = SearchStation(stationIdForCharging).Location,
+                        Id = id,
+                        MaxWeight = maxWeight,
+                        Model = model,
+                        Status = DroneStatuses.InMaintenance,
+                        IdOfParcel = -1
+                    };
                     dronesBL.Add(drone);
                     dalAP.AddDrone(id, model, (IDAL.DO.WeightCategories)maxWeight);
                 }
@@ -128,7 +136,7 @@ namespace IBL
                     IEnumerable<Parcel> relevant = (from parcel in parcels
                                                     where parcel.Priority == highest && parcel.Weight <= drone.MaxWeight //drone can carry the current parcel
                                                     select parcel).OrderBy(x => LocationStaticClass.CalcDis(GetSenderLocation(x), drone.Location));
-                                                    //sort by increasing order of distance to the drone
+                    //sort by increasing order of distance to the drone
                     foreach (Parcel p in relevant)
                     {
                         if (CanDeliver(drone, p)) //if drone can deliver parcel
@@ -214,9 +222,23 @@ namespace IBL
             {
                 foreach (DroneToList drone in dronesBL)
                 {
-                    yield return new DroneToList { Id = drone.Id, Model = drone.Model, Location = LocationStaticClass.InitializeLocation(drone.Location), 
-                        Battery = drone.Battery, IdOfParcel = drone.IdOfParcel, MaxWeight = drone.MaxWeight, Status = drone.Status };
+                    yield return new DroneToList
+                    {
+                        Id = drone.Id,
+                        Model = drone.Model,
+                        Location = LocationStaticClass.InitializeLocation(drone.Location),
+                        Battery = drone.Battery,
+                        IdOfParcel = drone.IdOfParcel,
+                        MaxWeight = drone.MaxWeight,
+                        Status = drone.Status
+                    };
                 }
+            }
+            public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate)
+            {
+                return from drone in ListDrone()
+                       where predicate(drone)
+                       select drone;
             }
         }
     }

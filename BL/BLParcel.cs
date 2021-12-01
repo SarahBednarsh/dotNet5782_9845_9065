@@ -112,6 +112,12 @@ namespace IBL
                 return from parcel in dalAP.ListParcelConditional(x => x.Scheduled == null)
                        select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
             }
+            public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate)
+            {
+                return from parcel in ListParcel()
+                       where predicate(parcel)
+                       select parcel;
+            }
         }
     }
 }

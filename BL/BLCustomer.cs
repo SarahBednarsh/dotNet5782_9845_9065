@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using IDAL.DO;
 namespace IBL
 {
@@ -111,6 +112,12 @@ namespace IBL
                     int onTheirWay = customer.ToCustomer.FindAll(x => x.State != States.Delivered).Count;
                     yield return new CustomerToList { Id = customer.Id, Name = customer.Name, PhoneNum = customer.PhoneNum, Delivered = delivered, Got = got, OnTheirWay = onTheirWay, Sent = sent };
                 }
+            }
+            public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate)
+            {
+                return from customer in ListCustomer()
+                       where predicate(customer)
+                       select customer;
             }
         }
     }

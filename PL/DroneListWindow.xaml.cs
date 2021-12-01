@@ -31,7 +31,7 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.ListDrone();
+            DronesListView.ItemsSource = bl.ListDroneConditional(x=>x.Status==(DroneStatuses)StatusSelector.SelectedItem);
 
         }
     }
