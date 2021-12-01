@@ -21,11 +21,18 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private IBL.BO.IBL bl;
-        public DroneListWindow(IBL.BO.IBL _bl)
+        public DroneListWindow(IBL.BO.IBL bl)
         {
             InitializeComponent();
-            bl = _bl;
-            DronesListView.ItemsSource = bl.ListDrone(); 
+            this.bl = bl;
+            DronesListView.ItemsSource = bl.ListDrone();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.ListDrone();
+
         }
     }
 }
