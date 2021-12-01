@@ -11,17 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IBL.BO;
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for DroneList.xaml
     /// </summary>
-    public partial class DroneList : Window
+    public partial class DroneListWindow : Window
     {
-        public DroneList()
+        private IBL.BO.IBL bl;
+        public DroneListWindow(IBL.BO.IBL _bl)
         {
             InitializeComponent();
+            bl = _bl;
+            DronesListView.ItemsSource = bl.ListDrone(); 
         }
     }
 }

@@ -3,4 +3,4 @@ dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 
 
 To do:
-- change to predicates
+- targil 3
