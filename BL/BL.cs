@@ -83,17 +83,18 @@ namespace IBL
                             {
                                 drone.Status = DroneStatuses.InMaintenance;
                                 IEnumerable<IDAL.DO.Station> stations = dalAP.YieldStation();
-                                int index = r.Next(stations.Count() + 1);//sarah-makes it start from 1
+                                int index = r.Next(stations.Count());
                                 int counter = 0;
                                 //set location of the drone to a random station
                                 foreach (IDAL.DO.Station station in stations)
                                 {
-                                    counter++;
                                     if (counter == index)
                                     {
+                                        //sarah- must remove a charge slit from the list in dal
                                         drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
                                         break;
                                     }
+                                    counter++;
                                 }
                                 drone.Battery = r.NextDouble() * 20;
                             }
@@ -106,20 +107,22 @@ namespace IBL
                                     if (HadAParcelDelivered(customer))
                                         numCustomerWithDeliveredParcel++;
                                 //set drone location at a random customer that has a parcel delivered
-                                int index = r.Next(numCustomerWithDeliveredParcel + 1);//customers that had parcels delivered to them
+                                int index = r.Next(numCustomerWithDeliveredParcel);//customers that had parcels delivered to them
                                 int counter = 0;
                                 foreach (IDAL.DO.Customer customer in customers)
                                 {
                                     if (HadAParcelDelivered(customer))
                                     {
-                                        counter++;
                                         if (counter == index)
                                         {
                                             drone.Location = LocationStaticClass.InitializeLocation(customer.Longitude, customer.Latitude);
                                             break;
                                         }
+                                        counter++;
+
                                     }
                                 }
+                                Console.WriteLine("trying");
                                 //set battery
                                 IDAL.DO.Station closest = GetClosestStation(drone.Location);
                                 Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
