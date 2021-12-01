@@ -20,6 +20,8 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <ComboBox Name="StatusSelector" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
+            <ComboBox Name="WeightSelector" Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
+            <Button Name="AddDrone" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" Click="AddDrone_Click" />
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="81,134,0,0" VerticalAlignment="Top"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="DronesListView">

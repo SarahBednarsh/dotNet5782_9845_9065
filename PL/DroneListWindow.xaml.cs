@@ -27,12 +27,24 @@ namespace PL
             this.bl = bl;
             DronesListView.ItemsSource = bl.ListDrone();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.ListDroneConditional(x=>x.Status==(DroneStatuses)StatusSelector.SelectedItem);
+            DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem);
 
+        }
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+
+        }
+
+        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        {
+            new AddDroneWindow(bl).Show();
+            DronesListView.ItemsSource = bl.ListDrone();
         }
     }
 }

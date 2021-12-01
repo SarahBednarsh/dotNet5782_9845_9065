@@ -26,7 +26,7 @@ namespace ConsoleUI_BL
             Int32.TryParse(Console.ReadLine(), out int id);
             Console.WriteLine("Enter model:");
             string model = Console.ReadLine();
-            Console.WriteLine("Enter maximum weight- 1 for light, 2 for medium, 3 for heavy:");
+            Console.WriteLine("Enter maximum weight - 1 for light, 2 for medium, 3 for heavy:");
             Int32.TryParse(Console.ReadLine(), out int input);
             WeightCategories maxWeight = (WeightCategories)input;
             Console.WriteLine("Enter station for initial charging:");
