@@ -41,7 +41,7 @@ namespace ConsoleUI_BL
                               "Enter 2 to change station details, " +
                               "Enter 3 to change customer details, " +
                               "Enter 4 to send a drone to charge, " +
-                              "Enter 5 to send a drone charge, " +
+                              "Enter 5 to release a drone from charging, " +
                               "Enter 6 to attribute a parcel to drone, " +
                               "Enter 7 to pick up a parcel, " +
                               "Enter 8 to deliver a parcel:");

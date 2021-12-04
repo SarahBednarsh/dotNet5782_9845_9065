@@ -89,7 +89,7 @@ namespace IBL
                                 {
                                     if (counter == index)
                                     {
-                                        //sarah- must remove a charge slit from the list in dal
+                                        dalAP.DroneToCharge(drone.Id, station.Id);
                                         drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
                                         break;
                                     }
