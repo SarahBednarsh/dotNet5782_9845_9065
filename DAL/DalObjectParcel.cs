@@ -59,7 +59,7 @@ namespace DalObject
         public Parcel SearchParcel(int parcelId)
         {
             if (!DataSource.Parcels.Exists(x => x.Id == parcelId))
-                throw new ParcelException("Customer does not exist.");
+                throw new ParcelException("Parcel does not exist.");
             return DataSource.Parcels.Find(x => x.Id == parcelId);
         }
         public IEnumerable<Parcel> YieldParcel()

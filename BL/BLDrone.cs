@@ -18,6 +18,15 @@ namespace IBL
                 if (drones.Count() < 1) //no drone with given id was found
                     throw new KeyDoesNotExist("No such drone");
                 DroneToList drone = drones.First();
+                ParcelInTransfer parcel;
+                try
+                {
+                    parcel= CreateParcelInTransfer(drone.IdOfParcel);
+                }
+                catch(IDAL.DO.ParcelException e)
+                {
+                    parcel = null;
+                }
                 return new Drone
                 {
                     Id = drone.Id,
@@ -26,7 +35,7 @@ namespace IBL
                     MaxWeight = drone.MaxWeight,
                     Model = drone.Model,
                     Status = drone.Status,
-                    Parcel = CreateParcelInTransfer(drone.IdOfParcel)
+                    Parcel = parcel
                 };
             }
             public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging)
@@ -204,13 +213,19 @@ namespace IBL
                 if (drone.Battery < distance * usage) //not anough battery to pick up
                     throw new NotEnoughBattery("Not enough battery to get to destination");
                 DroneToList newDrone = dronesBL.Find(x => x.Id == droneId);
+                Console.WriteLine("sarah- battery before:" + newDrone.Battery);
+                Console.WriteLine("usage:"+usage);
+                Console.WriteLine("distance:" + distance);
                 newDrone.Battery = newDrone.Battery - distance * usage; //update battery
+                Console.WriteLine("sarah- battery after:" + newDrone.Battery);
                 newDrone.Location = drone.Parcel.Destination; //update location
+                newDrone.IdOfParcel = -1;
+                newDrone.Status = DroneStatuses.Available;
                 //update in BL
                 dronesBL.RemoveAll(x => x.Id == droneId);
+                dalAP.DeliverToCustomer(drone.Parcel.Id);
                 dronesBL.Add(newDrone);
                 //update parcel delivery time
-                dalAP.DeliverToCustomer(drone.Parcel.Id);
             }
             private double GetUsage(WeightCategories weight) //return battery consumption for requested weight
             {

@@ -48,11 +48,10 @@ namespace IBL
                     foreach (DroneToList drone in dronesBL)
                     {
                         //get all the parcels that were not delivered yet but attributed to a drone
-                        var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered != null);
-                        if (droneParcels.Count() > 0)//not sure about == 1
+                        var droneParcels = parcels.Where(p => p.DroneId == drone.Id && p.Delivered == null);
+                        if (droneParcels.Count() > 0)
                         {
-                            drone.IdOfParcel = droneParcels.FirstOrDefault().Id;//sarah-write explanation- need to add the attribution somewhere
-
+                            drone.IdOfParcel = droneParcels.FirstOrDefault().Id;//need to add the attribution somewhere
                             drone.Status = DroneStatuses.Delivering;
                             IDAL.DO.Parcel parcel = droneParcels.FirstOrDefault();
                             if (parcel.PickedUp == null)//wasn't picked up
@@ -122,7 +121,6 @@ namespace IBL
 
                                     }
                                 }
-                                Console.WriteLine("trying");
                                 //set battery
                                 IDAL.DO.Station closest = GetClosestStation(drone.Location);
                                 Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);

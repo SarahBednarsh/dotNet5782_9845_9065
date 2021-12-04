@@ -60,5 +60,6 @@ namespace DalObject
             return StaticSexagesimal.CalcDis(clong, clat, longitude, latitude);
         }
 
+        //public void RemoveChargingSlots(int stationId,int amount)
     }
 }

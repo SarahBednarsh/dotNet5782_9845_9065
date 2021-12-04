@@ -38,10 +38,10 @@ namespace ConsoleUI_BL
         {
             UpdateOption updateoption;
             Console.WriteLine("Enter 1 to change a drone's name, " +
-                              "Enter 2 change station details, " +
-                              "Enter 3 change customer details, " +
+                              "Enter 2 to change station details, " +
+                              "Enter 3 to change customer details, " +
                               "Enter 4 to send a drone to charge, " +
-                              "Enter 5 to end a drone charge, " +
+                              "Enter 5 to send a drone charge, " +
                               "Enter 6 to attribute a parcel to drone, " +
                               "Enter 7 to pick up a parcel, " +
                               "Enter 8 to deliver a parcel:");
