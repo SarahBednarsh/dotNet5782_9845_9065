@@ -43,7 +43,14 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl).Show();
+            new DroneWindow(bl).Show();
+            DronesListView.ItemsSource = bl.ListDrone();
+        }
+
+        private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((DroneToList)(sender as ListView).SelectedItem).Id;
+            new DroneWindow(bl, id).Show();
             DronesListView.ItemsSource = bl.ListDrone();
         }
     }
