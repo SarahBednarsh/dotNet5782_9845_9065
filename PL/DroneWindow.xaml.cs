@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 using IBL.BO;
 namespace PL
 {
@@ -29,12 +30,13 @@ namespace PL
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
         }
-        public DroneWindow(IBL.BO.IBL bl, int droneId)
+        public DroneWindow(IBL.BO.IBL bl, Drone drone)
         {
+            if (drone == null)
+                throw new ArgumentNullException("Drone is null");
             InitializeComponent();
             ActionsGrid.Visibility = Visibility.Visible;
             this.bl = bl;
-            Drone drone = bl.SearchDrone(droneId);
 
             IdBox.Text = drone.Id.ToString();
             ModelBox.Text = drone.Model;
@@ -45,7 +47,7 @@ namespace PL
             StatusSelector.SelectedItem = drone.Status;
             LongitudeBox.Text = drone.Location.Longitude.ToString();
             LatitudeBox.Text = drone.Location.Latitude.ToString();
-            IdOfParcelBox.Text = (drone.Parcel != null)?drone.Parcel.Id.ToString():"No parcel yet";
+            IdOfParcelBox.Text = (drone.Parcel != null) ? drone.Parcel.Id.ToString() : "No parcel yet";
 
             InitializeActionsButton(drone);
         }
@@ -66,7 +68,7 @@ namespace PL
                 Actions.Content = "Charge";
                 Actions.Click += ReleaseCharge_Click;
             }
-            else if(drone.Parcel.PickedUpAlready)
+            else if (drone.Parcel.PickedUpAlready)
             {
                 Actions.Content = "Deliver parcel";
                 Actions.Click += Deliver_Click;
@@ -88,6 +90,8 @@ namespace PL
         private bool ValidateId(string text)
         {
             if (!int.TryParse(text, out int id))
+                return false;
+            if (id < 0)
                 return false;
             try
             {
@@ -111,7 +115,7 @@ namespace PL
         }
         private void WeightSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
         private void StationIdSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -131,7 +135,7 @@ namespace PL
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateId(IdBoxNew.Text) && ValidateModel(ModelBoxNew.Text) && WeightSelectorNew.SelectedIndex != -1 && StationIdSelectorNew.SelectedIndex != -1) 
+            if (ValidateId(IdBoxNew.Text) && ValidateModel(ModelBoxNew.Text) && WeightSelectorNew.SelectedIndex != -1 && StationIdSelectorNew.SelectedIndex != -1)
             {
                 int.TryParse(IdBoxNew.Text, out int id);
                 try
@@ -149,32 +153,115 @@ namespace PL
         {
             ModelBoxNew_TextChanged(sender, e);
             string model = (sender as TextBox).Text;
-            //if (model == IdBox.Text) 
-            //    Update.IsEnabled = false;
-            //else
-            //    Update.IsEnabled = true;
+            if (Update == null)
+                return;
+            int.TryParse(IdBox.Text, out int id);
+            if (model == bl.SearchDrone(id).Model)
+                Update.IsEnabled = false;
+            else
+                Update.IsEnabled = true;
         }
         private void Pickup_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.PickUpAParcel(id);
+                MessageBox.Show("Picked up parcel successfully");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
         }
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.DeliverAParcel(id);
+                MessageBox.Show("Delivered parcel successfully");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
         }
         private void SendToDelivery_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.AttributeAParcel(id);
+                MessageBox.Show("Attributed parcel successfully");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
         }
         private void ReleaseCharge_Click(object sender, RoutedEventArgs e)
-        { }
+        {
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                int hours, minutes, seconds;
+                TimeSpanWindow timeSpanWindow = new TimeSpanWindow();
+                if (timeSpanWindow.ShowDialog() == true)
+                {
+                    int.TryParse(timeSpanWindow.Hours, out hours);
+                    int.TryParse(timeSpanWindow.Minutes, out minutes);
+                    int.TryParse(timeSpanWindow.Seconds, out seconds);
+                    TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
+                    bl.ReleaseCharging(id, timeCharging);
+                    MessageBox.Show("Drone sent to charge successfully");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
+        }
         private void Charge_Click(object sender, RoutedEventArgs e)
-        { } 
+        {
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.DroneToCharge(id);
+                MessageBox.Show("Sent drone to successfully");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
+        }
         private void Update_Click(object sender, RoutedEventArgs e)
-        { }
+        {
+            if (!ValidateModel(ModelBox.Text))
+            {
+                MessageBox.Show("Enter a valid model");
+                return;
+            }
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.UpdateDroneModel(id, ModelBox.Text);
+                MessageBox.Show("Updated model successfully");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            Close();
+        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
     }

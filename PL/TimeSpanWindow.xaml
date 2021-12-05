@@ -1,0 +1,33 @@
+﻿<Window x:Class="PL.TimeSpanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="TimeSpanWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="HoursLabel" Content="Enter hours:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" Width="108" FontSize="18"/>
+            <Label x:Name="MinutesLabel" Content="Enter minutes:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="44" Width="108" FontSize="18" Margin="0,29,0,0" Grid.Row="1"/>
+            <Label x:Name="SecondsLabel" Content="Enter seconds:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="44" Width="108" FontSize="18" Margin="0,30,0,0" Grid.Row="2"/>
+            <TextBox x:Name="HoursBox" TextChanged="Box_TextChanged" Grid.Column="1" HorizontalAlignment="Center" Height="44" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" FontSize="18"/>
+            <TextBox x:Name="MinutesBox" TextChanged="Box_TextChanged" Grid.Column="1" HorizontalAlignment="Center" Height="44" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="18" Margin="0,29,0,0" Grid.Row="1"/>
+            <TextBox x:Name="SecondsBox" TextChanged="Box_TextChanged" Grid.Column="1" HorizontalAlignment="Center" Height="44" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="18" Margin="0,30,0,0" Grid.Row="2"/>
+            <Button x:Name="OKButton" IsEnabled="False" Click="OKButton_Click" Content="Finish" Margin="110,32,110,32" Grid.Row="3" Grid.Column="1" FontSize="18"/>
+            <Button x:Name="CloseButton" Click="CloseButton_Click"  Content="Close" Margin="110,24,110,39" Grid.Row="3" FontSize="18"/>
+
+        </Grid>
+
+    </Grid>
+</Window>

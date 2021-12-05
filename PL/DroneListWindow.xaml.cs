@@ -29,16 +29,29 @@ namespace PL
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
-
+        //protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        //{
+        //    e.Cancel = true;
+        //    MessageBox.Show("Sorry, can't. Use the close button");
+        //}
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem);
+            if ((sender as ComboBox).SelectedIndex == -1)
+                return;
+            else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem);
+            else
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
 
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
-
+            if ((sender as ComboBox).SelectedIndex == -1)
+                return;
+            else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+            else
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
@@ -50,8 +63,37 @@ namespace PL
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int id = ((DroneToList)(sender as ListView).SelectedItem).Id;
-            new DroneWindow(bl, id).Show();
+            new DroneWindow(bl, bl.SearchDrone(id)).Show();
             DronesListView.ItemsSource = bl.ListDrone();
+        }
+
+        private void ClearStatus_Click(object sender, RoutedEventArgs e)
+        {
+            StatusSelector.SelectedItem = -1;
+            StatusSelector.Text = "";
+            if (WeightSelector == null || WeightSelector.SelectedIndex == -1) 
+            {
+                DronesListView.ItemsSource = bl.ListDrone();
+                return;
+            }
+            WeightSelector_SelectionChanged(WeightSelector, null);
+        }
+
+        private void ClearWeight_Click(object sender, RoutedEventArgs e)
+        {
+            WeightSelector.SelectedItem = -1;
+            WeightSelector.Text = "";
+            if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
+            {
+                DronesListView.ItemsSource = bl.ListDrone();
+                return;
+            }
+            StatusSelector_SelectionChanged(StatusSelector, null);
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

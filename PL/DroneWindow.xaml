@@ -29,7 +29,7 @@
             <Button x:Name="Add" Click="Add_Click" Content="Add" Grid.Column="3" HorizontalAlignment="Left" Margin="150,168,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5"/>
             <Button x:Name="CloseAdd" Click="Close_Click" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Height="39" Margin="10,168,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35"/>
         </Grid>
-        <Grid x:Name="ActionsGrid">
+        <Grid x:Name="ActionsGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>

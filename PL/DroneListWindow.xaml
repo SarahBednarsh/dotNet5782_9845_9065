@@ -19,13 +19,17 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="StatusSelector" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
-            <ComboBox Name="WeightSelector" Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
-            <Button Name="AddDrone" Content="Add drone" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,72,0,0" VerticalAlignment="Stretch" Width="120" Click="AddDrone_Click" />
+            <ComboBox Name="StatusSelector" Grid.Column="1" Margin="40,72,40,73" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
+            <ComboBox Name="WeightSelector" Grid.Column="2" Margin="40,72,40,73" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
+            <Button Name="AddDrone" Content="Add drone" Grid.Column="3" Margin="40,72,40,73" Width="120" Click="AddDrone_Click" />
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="81,134,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="Close" Content="Close" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="Close_Click"/>
+            <Button x:Name="ClearStatus" Click="ClearStatus_Click" Content="Clear selection" Grid.Column="1" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="ClearWeight" Click="ClearWeight_Click" Content="Clear selection" Grid.Column="2" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top"/>
+            
         </Grid>
-        <ListView Grid.Row="1" x:Name="DronesListView" MouseDoubleClick="DronesListView_MouseDoubleClick">
-            <ListView.View> 
+        <ListView Grid.Row="1" x:Name="DronesListView" ItemsSource="{Binding ListOfDrones}" SelectedItem="{Binding Path=SelectedDrone}" MouseDoubleClick="DronesListView_MouseDoubleClick">
+            <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
