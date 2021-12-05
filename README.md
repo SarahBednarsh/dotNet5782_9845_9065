@@ -3,4 +3,6 @@ dotNet project of Liorah Mandelbaum and Sarah Bednarsh
 
 
 To do:
-- targil 3
+- Design
+- Documentation
+- List conditional in DAL and not BL
