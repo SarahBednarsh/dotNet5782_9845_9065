@@ -25,6 +25,7 @@ namespace PL
         public TimeSpanWindow()
         {
             InitializeComponent();
+            OKButton.IsEnabled = false;
         }
 
         private void Box_TextChanged(object sender, TextChangedEventArgs e)
@@ -38,7 +39,7 @@ namespace PL
             }
             else
             {
-                if (OKButton != null)
+                if (Validate(Hours) && Validate(Minutes) && Validate(Seconds))
                     OKButton.IsEnabled = true;
                 MakeTextBoxWhite(box);
             }

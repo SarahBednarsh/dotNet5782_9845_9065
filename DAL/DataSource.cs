@@ -14,7 +14,7 @@ namespace DalObject
         internal class Config
         {
             internal static int RunningParcelNumber = 0;
-            internal static double available = 0;
+            internal static double available = 0.0003;
             internal static double light = 0.0005;
             internal static double medium = 0.0006;
             internal static double heavy = 0.0008;

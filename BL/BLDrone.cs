@@ -160,6 +160,7 @@ namespace IBL
                         }
                     }
                 }
+                throw new CannotAttribute("No parcel to attribute was found (drone might not have enough battery)");
             }
             private bool CanDeliver(Drone d, Parcel p) //checks if the drone has enough battery for delivering the parcel
             {
@@ -182,7 +183,7 @@ namespace IBL
                     throw new CannotPickUp("Drone is not in delivery state");
                 if (drone.Parcel.PickedUpAlready == true)//already picked up
                     throw new CannotPickUp("Drone has already picked up a parcel");
-                double usage = GetUsage(drone.MaxWeight);
+                double usage = GetUsage(drone.Parcel.Weight);
                 double distance = LocationStaticClass.CalcDis(drone.Location, drone.Parcel.PickUpLocation);
                 if (drone.Battery < distance * usage) //not enough battery
                     throw new NotEnoughBattery("not enough battery to get to sender");
@@ -208,7 +209,7 @@ namespace IBL
                     throw new CannotDeliver("Drone does not have a parcel attributed to deliver");
                 if (drone.Status != DroneStatuses.Delivering) //drone is not delivering
                     throw new CannotDeliver("Drone is not in delivery state");
-                double usage = GetUsage(drone.MaxWeight);
+                double usage = GetUsage(drone.Parcel.Weight);
                 double distance = LocationStaticClass.CalcDis(drone.Location, drone.Parcel.Destination);
                 if (drone.Battery < distance * usage) //not anough battery to pick up
                     throw new NotEnoughBattery("Not enough battery to get to destination");

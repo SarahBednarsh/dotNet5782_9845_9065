@@ -65,7 +65,7 @@ namespace PL
             }
             else if (drone.Status == DroneStatuses.InMaintenance)
             {
-                Actions.Content = "Charge";
+                Actions.Content = "Release charge";
                 Actions.Click += ReleaseCharge_Click;
             }
             else if (drone.Parcel.PickedUpAlready)
@@ -217,7 +217,8 @@ namespace PL
                     int.TryParse(timeSpanWindow.Seconds, out seconds);
                     TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
                     bl.ReleaseCharging(id, timeCharging);
-                    MessageBox.Show("Drone sent to charge successfully");
+                    MessageBox.Show(bl.SearchDrone(id).ToString());
+                    MessageBox.Show("Drone realeased from chraging successfully");
                 }
             }
             catch (Exception exception)
@@ -232,7 +233,7 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
-                MessageBox.Show("Sent drone to successfully");
+                MessageBox.Show("Drone sent to charge successfully");
             }
             catch (Exception exception)
             {

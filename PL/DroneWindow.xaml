@@ -60,7 +60,7 @@
             <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="3" Text="Parcel ID" TextWrapping="Wrap" Width="120" Margin="0,10,0,65"/>
             <Button IsEnabled="False" x:Name="Update" Click="Update_Click" Content="Update" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="62" Margin="128,59,0,0"/>
             <Button x:Name="Actions" Content="Actions" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="123,59,0,0" Grid.ColumnSpan="2"/>
-            <Button Visibility="Hidden" IsEnabled="False" x:Name="Actions2" Content="Actions2" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="62" Margin="143,59,0,0" Grid.ColumnSpan="2"/>
+            <Button Visibility="Hidden" x:Name="Actions2" Content="Actions2" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="0,59,0,0"/>
             <Button x:Name="CloseActions" Click="Close_Click" Content="Close" Grid.Column="3" HorizontalAlignment="Center" Height="39" Grid.Row="3" VerticalAlignment="Top" Width="36" Margin="0,59,0,0"/>
 
         </Grid>
