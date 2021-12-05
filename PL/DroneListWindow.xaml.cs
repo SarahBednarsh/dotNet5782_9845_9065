@@ -56,15 +56,19 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl).Show();
+            new DroneWindow(bl).ShowDialog();
             DronesListView.ItemsSource = bl.ListDrone();
+            WeightSelector_SelectionChanged(WeightSelector, null);
+            StatusSelector_SelectionChanged(StatusSelector, null);
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int id = ((DroneToList)(sender as ListView).SelectedItem).Id;
-            new DroneWindow(bl, bl.SearchDrone(id)).Show();
+            new DroneWindow(bl, bl.SearchDrone(id)).ShowDialog();
             DronesListView.ItemsSource = bl.ListDrone();
+            WeightSelector_SelectionChanged(WeightSelector, null);
+            StatusSelector_SelectionChanged(StatusSelector, null);
         }
 
         private void ClearStatus_Click(object sender, RoutedEventArgs e)

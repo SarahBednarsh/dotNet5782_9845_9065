@@ -22,7 +22,7 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox Name="StatusSelector" Grid.Column="1" Margin="40,72,40,73" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
             <ComboBox Name="WeightSelector" Grid.Column="2" Margin="40,72,40,73" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
             <Button Name="AddDrone" Content="Add drone" Grid.Column="3" Margin="40,72,40,73" Width="120" Click="AddDrone_Click" />
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="81,134,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="81,134,0,0" VerticalAlignment="Top"/>
             <Button x:Name="Close" Content="Close" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="Close_Click"/>
             <Button x:Name="ClearStatus" Click="ClearStatus_Click" Content="Clear selection" Grid.Column="1" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top"/>
             <Button x:Name="ClearWeight" Click="ClearWeight_Click" Content="Clear selection" Grid.Column="2" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top"/>

@@ -115,7 +115,7 @@ namespace PL
         }
         private void WeightSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
         private void StationIdSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -210,16 +210,14 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 int hours, minutes, seconds;
                 TimeSpanWindow timeSpanWindow = new TimeSpanWindow();
-                if (timeSpanWindow.ShowDialog() == true)
-                {
-                    int.TryParse(timeSpanWindow.Hours, out hours);
-                    int.TryParse(timeSpanWindow.Minutes, out minutes);
-                    int.TryParse(timeSpanWindow.Seconds, out seconds);
-                    TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
-                    bl.ReleaseCharging(id, timeCharging);
-                    MessageBox.Show(bl.SearchDrone(id).ToString());
-                    MessageBox.Show("Drone realeased from chraging successfully");
-                }
+                timeSpanWindow.ShowDialog();
+                int.TryParse(timeSpanWindow.Hours, out hours);
+                int.TryParse(timeSpanWindow.Minutes, out minutes);
+                int.TryParse(timeSpanWindow.Seconds, out seconds);
+                TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
+                bl.ReleaseCharging(id, timeCharging);
+                //MessageBox.Show(bl.SearchDrone(id).ToString());
+                MessageBox.Show("Drone realeased from chraging successfully");
             }
             catch (Exception exception)
             {

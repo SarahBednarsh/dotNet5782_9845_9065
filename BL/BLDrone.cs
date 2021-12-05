@@ -111,9 +111,10 @@ namespace IBL
                 double usage = GetUsage(drone.MaxWeight);
                 if (drone.Battery < minDistance * usage)
                     throw new NotEnoughBattery("Not enough battery to get to station");
-                drone.Battery = drone.Battery - minDistance * usage;
-                drone.Location = stationToSendTo.Location;
-                drone.Status = DroneStatuses.InMaintenance;
+                DroneToList droneInBL = dronesBL.Find(x => x.Id == droneId);
+                droneInBL.Battery = drone.Battery - minDistance * usage;
+                droneInBL.Location = stationToSendTo.Location;
+                droneInBL.Status = DroneStatuses.InMaintenance;
                 dalAP.DroneToCharge(drone.Id, stationToSendTo.Id);//in here it also updates the chargeslots in station             
             }
             public void ReleaseCharging(int droneId, TimeSpan timeCharging)
