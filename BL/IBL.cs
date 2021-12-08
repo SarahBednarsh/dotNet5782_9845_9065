@@ -72,7 +72,7 @@ namespace IBL
             /// </summary>
             /// <param name="droneId"></param>
             /// <param name="timeCharging"></param>
-            public void ReleaseCharging(int droneId, TimeSpan timeCharging);
+            public void ReleaseCharging(int droneId);
             /// <summary>
             /// Attributes a Parcel awaiting for attribution to the requested Drone
             /// </summary>
