@@ -10,6 +10,7 @@ namespace IDAL
         {
             public int DroneId { get; set; }
             public int StationId { get; set; }
+
             public DateTime? BeginTime;
             public override string ToString()
             {
