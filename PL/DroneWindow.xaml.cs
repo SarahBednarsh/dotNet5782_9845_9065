@@ -208,14 +208,7 @@ namespace PL
             try
             {
                 int.TryParse(IdBox.Text, out int id);
-                int hours, minutes, seconds;
-                TimeSpanWindow timeSpanWindow = new TimeSpanWindow();
-                timeSpanWindow.ShowDialog();
-                int.TryParse(timeSpanWindow.Hours, out hours);
-                int.TryParse(timeSpanWindow.Minutes, out minutes);
-                int.TryParse(timeSpanWindow.Seconds, out seconds);
-                TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
-                bl.ReleaseCharging(id, timeCharging);
+                bl.ReleaseCharging(id);
                 //MessageBox.Show(bl.SearchDrone(id).ToString());
                 MessageBox.Show("Drone realeased from chraging successfully");
             }
