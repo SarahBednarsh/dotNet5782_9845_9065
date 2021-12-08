@@ -36,5 +36,6 @@ namespace IDAL
         public double CalcDisFromStation(int id, double longitude, double latitude);
         public double CalcDisFromCustomer(int id, double longitude, double latitude);
         public IEnumerable<double> ReqPowerConsumption();
+        DateTime? GetBeginningChargeTime(int droneId);
     }
 }
