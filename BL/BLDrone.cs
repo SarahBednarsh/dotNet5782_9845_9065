@@ -117,19 +117,21 @@ namespace IBL
                 droneInBL.Status = DroneStatuses.InMaintenance;
                 dalAP.DroneToCharge(drone.Id, stationToSendTo.Id);//in here it also updates the chargeslots in station             
             }
-            public void ReleaseCharging(int droneId, TimeSpan timeCharging)
+            public void ReleaseCharging(int droneId)
             {
                 DroneToList drone = dronesBL.Find(x => x.Id == droneId);
                 if (drone == null)
                     throw new KeyDoesNotExist("No such drone");
                 if (drone.Status != DroneStatuses.InMaintenance) //if drone was not charging
                     throw new CannotReleaseDroneFromCharging("Cannot release drone that is not in maintenence");
-                drone.Battery = Math.Min(drone.Battery + timeCharging.TotalSeconds * chargingPace, 100);
+                TimeSpan? timeCharging = DateTime.Now - dalAP.GetBeginningChargeTime(droneId);
+                drone.Battery = Math.Min(drone.Battery + timeCharging.Value.TotalSeconds * chargingPace, 100);
                 drone.Status = DroneStatuses.Available;
                 //update drone in BL
-                dronesBL.RemoveAll(x => x.Id == droneId);
-                dronesBL.Add(drone);
+                //dronesBL.RemoveAll(x => x.Id == droneId);
+                //dronesBL.Add(drone);
                 dalAP.ReleaseCharging(droneId);//in here it also updates the chargeslots in station 
+
             }
             public void AttributeAParcel(int droneId)
             {

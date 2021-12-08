@@ -44,11 +44,10 @@ namespace DalObject
         /// <param name="stationId"></param>
         public void DroneToCharge(int droneId, int stationId)
         {
-            DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = stationId });
 
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
             if (indexDrone == -1)
-                throw new DroneException("Drone to chatge does not exist.");
+                throw new DroneException("Drone to charge does not exist.");
             Drone tempDrone = DataSource.Drones[indexDrone];
             DataSource.Drones[indexDrone] = tempDrone;
 
@@ -58,6 +57,8 @@ namespace DalObject
             Station tempStation = DataSource.Stations[indexStation];
             tempStation.ChargeSlots--;
             DataSource.Stations[indexStation] = tempStation;
+            DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = stationId, BeginTime = DateTime.Now });
+
         }
 
         /// <summary>
@@ -81,6 +82,13 @@ namespace DalObject
             tempStation.ChargeSlots++;
             DataSource.Stations[indexStation] = tempStation;
             DataSource.DroneCharges.RemoveAt(indexCharge);
+        }
+        public DateTime? GetBeginningChargeTime(int droneId)
+        {
+            int indexCharge = DataSource.DroneCharges.FindIndex(x => x.DroneId == droneId);
+            if (indexCharge == -1)
+                throw new DroneException("Drone was not in charging.");
+            return DataSource.DroneCharges[indexCharge].BeginTime;
         }
         public Drone SearchDrone(int droneId)
         {
