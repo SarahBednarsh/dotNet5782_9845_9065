@@ -6,3 +6,4 @@ To do:
 - Design
 - Documentation
 - List conditional in DAL and not BL
+- 
