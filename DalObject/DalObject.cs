@@ -5,17 +5,22 @@ using DO;
 using DalApi;
 namespace Dal
 {
-    internal partial class DalObject : IDal
+    sealed partial class DalObject : IDal
     {
-        public DalObject()
+        #region singleton
+        static readonly DalObject instance = new DalObject();
+        static DalObject()
         {
             DataSource.Initialize();
         }
+        DalObject() { }
+        public static DalObject Instance => instance;
+        #endregion 
+        //public DalObject()
+        //{
+        //    DataSource.Initialize();
+        //}
 
-        /// <summary>
-        /// creates and returns a list of open charge slots
-        /// </summary>
-        /// <returns></returns>
 
     }
 }

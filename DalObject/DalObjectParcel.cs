@@ -6,7 +6,7 @@ using DalApi;
 
 namespace Dal
 {
-    internal partial class DalObject
+    static partial class DalObject
     {
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId)
         {

@@ -6,7 +6,7 @@ using DalApi;
 
 namespace Dal
 {
-    internal partial class DalObject
+    static partial class DalObject
     {
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
