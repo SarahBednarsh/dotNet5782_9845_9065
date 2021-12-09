@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO;
-namespace DalObject
+using DO;
+using DalApi;
+
+namespace Dal
 {
-    public partial class DalObject
+    internal partial class DalObject
     {
         public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {

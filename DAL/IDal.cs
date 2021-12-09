@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO; 
+using DO;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {
@@ -31,7 +31,7 @@ namespace IDAL
         public IEnumerable<Parcel> YieldParcel();
         public IEnumerable<Station> OpenChargeSlots();
         public IEnumerable<Parcel> ParcelsWithNoDrone();
-        public IEnumerable<Parcel> ListParcelConditional(Predicate<IDAL.DO.Parcel> predicate);
+        public IEnumerable<Parcel> ListParcelConditional(Predicate<DO.Parcel> predicate);
         public IEnumerable<Station> ListStationConditional(Predicate<Station> predicate);
         public double CalcDisFromStation(int id, double longitude, double latitude);
         public double CalcDisFromCustomer(int id, double longitude, double latitude);

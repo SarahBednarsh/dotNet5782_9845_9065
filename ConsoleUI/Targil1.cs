@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DalObject;
-using IDAL.DO;
+using DalApi;
+using DO;
 namespace ConsoleUI
 {
     public enum Actions { Exit, Add, Update, View, List, Calc }
@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-            IDAL.IDal project = new DalObject.DalObject();
+            DalApi.IDal project = new DalObject.DalObject();
             Actions option;
             do
             {

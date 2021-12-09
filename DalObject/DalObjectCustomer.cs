@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO;
+using DO;
+using DalApi;
 
-
-namespace DalObject
+namespace Dal
 {
-    public partial class DalObject
+    internal partial class DalObject
     {
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {

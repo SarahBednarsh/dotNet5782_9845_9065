@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO;
-using IDAL;
-namespace DalObject
+using DO;
+using DalApi;
+namespace Dal
 {
-    public partial class DalObject : IDal
+    internal partial class DalObject : IDal
     {
         public DalObject()
         {
             DataSource.Initialize();
         }
-       
+
         /// <summary>
         /// creates and returns a list of open charge slots
         /// </summary>

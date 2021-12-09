@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDAL.DO;
+using DO;
+using DalApi;
 
-namespace DalObject
+namespace Dal
 {
-    public class DataSource
+    internal class DataSource
     {
         internal static List<Drone> Drones = new List<Drone>();
         internal static List<DroneCharge> DroneCharges = new List<DroneCharge>();

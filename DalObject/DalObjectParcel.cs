@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IDAL.DO;
-namespace DalObject
+using DO;
+using DalApi;
+
+namespace Dal
 {
-    public partial class DalObject
+    internal partial class DalObject
     {
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId)
         {
@@ -81,7 +83,7 @@ namespace DalObject
             }
             return noDrone;
         }
-        public IEnumerable<Parcel> ListParcelConditional(Predicate<IDAL.DO.Parcel> predicate)
+        public IEnumerable<Parcel> ListParcelConditional(Predicate<DO.Parcel> predicate)
         {
             List<Parcel> noDrone = new List<Parcel>();
             foreach (Parcel parcel in DataSource.Parcels)
