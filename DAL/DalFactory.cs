@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 namespace DalApi
 {
     public static class DalFactory
     {
-        public static IDal GetDal()
+        public static IDal GetDal(string dalType)
         {
-            string dalType = DalConfig.DalName;
             DalConfig.DalPackage dalPackage;
             try
             {
@@ -17,12 +17,37 @@ namespace DalApi
             }
             catch(KeyNotFoundException exception)
             {
-                throw new DalConfigExcpeption($"Wrong Dal type: {dalType}", exception);
+                throw new DalConfigException($"Wrong Dal type: {dalType}", exception);
             }
             string dalPackageName = dalPackage.PackageName;
             string dalNameSpace = dalPackage.NameSpace;
             string dalClassName = dalPackage.ClassName;
-            
+
+            try 
+            {
+                Assembly.Load(dalPackageName);
+            }
+            catch (Exception ex)
+            {
+                throw new DalConfigException($"Failed loading {dalPackage}.dll", ex);
+            }
+            Type type = Type.GetType($"DL.{dalPackage}, {dalPackage}");
+            // If the type is not found - the implementation is not correct - it looks like the class name is wrong...
+            if (type == null)
+                throw new DalConfigException($"Class name is not the same as Assembly Name: {dalPackage}");
+            try
+            {
+                IDal dal = type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null) as IDal;
+                // If the instance property is not initialized (i.e. it does not hold a real instance reference)...
+                if (dal == null)
+                    throw new DalConfigException($"Class {dalPackage} instance is not initialized");
+                // now it looks like we have appropriate dal implementation instance :-)
+                return dal;
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new DalConfigException($"Class {dalPackage} is not a singleton", ex);
+            }
         }
     }
 }

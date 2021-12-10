@@ -10,8 +10,29 @@ using WeightCategories = BO.WeightCategories;
 
 namespace BL
 {
-    internal partial class BL : IBL
+    sealed internal partial class BL : IBL
     {
+        #region singleton
+        private static IBL instance = null;
+        internal static IBL Instance
+        {
+            get
+            {
+                IBL localRef = instance;
+                if (localRef == null)
+                {
+                    object Lock = new object();
+                    lock (Lock)
+                    {
+                        if (instance == null)
+                            instance = new BL();
+                    }
+                }
+                return instance;
+            }
+        }
+        #endregion
+
         internal IDal dalAP; // DAL access point
         internal static double available = 0;
         internal static double light = 0;
@@ -21,7 +42,7 @@ namespace BL
         internal List<DroneToList> dronesBL;
         public BL()
         {
-            dalAP = new DalObject.DalObject();
+            dalAP = DalFactory.GetDal("DalObject");
             IEnumerator<double> info = dalAP.ReqPowerConsumption().GetEnumerator();
             info.MoveNext();
             available = info.Current;
@@ -138,7 +159,6 @@ namespace BL
                 Console.WriteLine(exception.Message);
             }
         }
-
         private DO.Station GetClosestStation(Location loc)
         {
             IEnumerable<DO.Station> stations = dalAP.YieldStation();

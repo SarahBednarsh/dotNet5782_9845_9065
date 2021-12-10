@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
-using IBL.BO;
+using BlApi;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -20,8 +21,8 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private IBL.BO.IBL bl;
-        public DroneWindow(IBL.BO.IBL bl)
+        private BlApi.IBL bl;
+        public DroneWindow(BlApi.IBL bl)
         {
             InitializeComponent();
             AddGrid.Visibility = Visibility.Visible;
@@ -30,7 +31,7 @@ namespace PL
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
         }
-        public DroneWindow(IBL.BO.IBL bl, Drone drone)
+        public DroneWindow(BlApi.IBL bl, Drone drone)
         {
             if (drone == null)
                 throw new ArgumentNullException("Drone is null");

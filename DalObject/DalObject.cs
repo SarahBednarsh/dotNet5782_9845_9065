@@ -5,21 +5,34 @@ using DO;
 using DalApi;
 namespace Dal
 {
-    sealed partial class DalObject : IDal
+    internal sealed partial class DalObject : IDal
     {
+
         #region singleton
-        static readonly DalObject instance = new DalObject();
-        static DalObject()
+        private static DalObject instance = null;
+        static DalObject() { }
+        internal static DalObject Instance
+        {
+            get
+            {
+                DalObject localRef = instance;
+                if (localRef == null)
+                {
+                    object Lock = new object();
+                    lock (Lock)
+                    {
+                        if (instance == null)
+                            instance = new DalObject();
+                    }
+                }
+                return instance;
+            }
+        }
+        #endregion
+        public DalObject()
         {
             DataSource.Initialize();
         }
-        DalObject() { }
-        public static DalObject Instance => instance;
-        #endregion 
-        //public DalObject()
-        //{
-        //    DataSource.Initialize();
-        //}
 
 
     }

@@ -6,7 +6,7 @@ using DalApi;
 
 namespace Dal
 {
-    static partial class DalObject
+    partial class DalObject
     {
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {

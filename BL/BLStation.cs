@@ -4,7 +4,12 @@ using System.Text;
 using System.Linq;
 using BO;
 using DO;
-
+using Parcel = BO.Parcel;
+using Priorities = BO.Priorities;
+using WeightCategories = BO.WeightCategories;
+using Drone = BO.Drone;
+using Station = BO.Station;
+using Customer = BO.Customer;
 namespace BL
 {
     internal partial class BL

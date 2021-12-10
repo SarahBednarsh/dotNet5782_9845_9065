@@ -7,6 +7,7 @@ using BO;
 using Customer = BO.Customer;
 using Parcel = BO.Parcel;
 using Priorities = BO.Priorities;
+using WeightCategories = BO.WeightCategories;
 
 namespace BL
 {

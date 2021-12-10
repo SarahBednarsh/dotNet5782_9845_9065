@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IBL.BO;
-
+using BO;
+using BlApi;
 namespace PL
 {
     /// <summary>
@@ -22,7 +22,7 @@ namespace PL
     
     public partial class MainWindow : Window
     {
-        private IBL.BO.IBL bl = new IBL.BO.BL();
+        private IBL bl = BlFactory.GetBL();
         public MainWindow()
         {
             InitializeComponent();
