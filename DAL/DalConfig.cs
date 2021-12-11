@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,11 @@ namespace DalApi
         internal static Dictionary<string, DalPackage> DalPackages;
         static DalConfig()
         {
-            XElement dalConfig = XElement.Load(@"DalConfig.xml");
-            DalName = dalConfig.Element("dl").Value;
+
+
+            string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "DalConfig.xml");
+            XElement dalConfig = XElement.Load(/*@"DalConfig.xml"*/startupPath);
+            DalName = dalConfig.Element("dal").Value;
             DalPackages = (from pkg in dalConfig.Element("dal-packages").Elements()
                            let tmp1 = pkg.Attribute("namespace")
                            let nameSpace = tmp1 == null ? "Dal" : tmp1.Value

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
+
 namespace DalApi
 {
     public static class DalFactory
@@ -23,15 +25,16 @@ namespace DalApi
             string dalNameSpace = dalPackage.NameSpace;
             string dalClassName = dalPackage.ClassName;
 
-            try 
+            string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, dalPackageName);
+            try
             {
-                Assembly.Load(dalPackageName);
+                Assembly.LoadFrom(startupPath);
             }
             catch (Exception ex)
             {
                 throw new DalConfigException($"Failed loading {dalPackage}.dll", ex);
             }
-            Type type = Type.GetType($"DL.{dalPackage}, {dalPackage}");
+            Type type = Type.GetType($"Dal.{dalPackage}, {dalPackage}");
             // If the type is not found - the implementation is not correct - it looks like the class name is wrong...
             if (type == null)
                 throw new DalConfigException($"Class name is not the same as Assembly Name: {dalPackage}");
