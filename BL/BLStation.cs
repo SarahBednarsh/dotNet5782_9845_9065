@@ -45,7 +45,7 @@ namespace BL
         {
             Station station = new Station();
             station.Id = old.Id;
-            station.Location = new Location { Latitude = old.Latitude, Longitude = old.Latitude };
+            station.Location = new Location { Latitude = old.Latitude, Longitude = old.Longitude };
             station.Name = old.Name;
             station.OpenChargeSlots = old.ChargeSlots;
             station.Charging = new List<DroneInCharge>();

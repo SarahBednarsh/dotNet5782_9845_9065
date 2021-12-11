@@ -49,7 +49,6 @@ namespace Dal
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
             if (indexDrone == -1)
                 throw new DroneException("Drone to charge does not exist.");
-
             int indexStation = DataSource.Stations.FindIndex(x => x.Id == stationId);
             if (indexStation == -1)
                 throw new StationException("Station for charging does not exist.");

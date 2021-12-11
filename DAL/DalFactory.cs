@@ -25,7 +25,6 @@ namespace DalApi
             string dalNameSpace = dalPackage.NameSpace;
             string dalClassName = dalPackage.ClassName;
 
-            //string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, dalPackageName);
             try
             {
                 Assembly.Load(dalPackageName);
