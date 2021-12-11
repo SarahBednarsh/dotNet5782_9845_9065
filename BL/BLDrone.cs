@@ -113,6 +113,8 @@ namespace BL
             }
             if (minDistance == -1) //no available station was found
                 throw new CannotSendToCharge("All stations are full");
+            if (stationToSendTo.OpenChargeSlots == 0)
+                throw new CannotSendToCharge("All charge slots are taken");
             double usage = GetUsage(drone.MaxWeight);
             if (drone.Battery < minDistance * usage)
                 throw new NotEnoughBattery("Not enough battery to get to station");
