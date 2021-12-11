@@ -34,13 +34,13 @@ namespace DalApi
             {
                 throw new DalConfigException($"Failed loading {dalPackage}.dll", ex);
             }
-            Type type = Type.GetType($"Dal.{dalPackage}, {dalPackage}");
+            Type type = Type.GetType($"Dal.{dalPackageName}, {dalPackageName}");
             // If the type is not found - the implementation is not correct - it looks like the class name is wrong...
             if (type == null)
                 throw new DalConfigException($"Class name is not the same as Assembly Name: {dalPackage}");
             try
             {
-                IDal dal = type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null) as IDal;
+                IDal dal = type.GetProperty("Instance", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null) as IDal;
                 // If the instance property is not initialized (i.e. it does not hold a real instance reference)...
                 if (dal == null)
                     throw new DalConfigException($"Class {dalPackage} instance is not initialized");
