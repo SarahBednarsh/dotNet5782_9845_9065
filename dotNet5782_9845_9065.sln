@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{C09E4B6B-B2FC-452C-90D8-27EF35849540}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalObject.csproj", "{B5906F09-1B2F-4047-9E2C-F52899116C78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DalObject\DalObject.csproj", "{B5906F09-1B2F-4047-9E2C-F52899116C78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{3081DD0E-3862-43B8-9060-81033C75E5DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{3081DD0E-3862-43B8-9060-81033C75E5DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
