@@ -11,4 +11,3 @@ To do:
 
 
 Bugs:
--doesn't limit how many drones are put to charge in a station- we can add more then the amount of charge slots it has
