@@ -32,6 +32,7 @@ namespace PL
             userNameHasBeenClicked = false;
             if (!isManager)
                 title.Text = "כניסת לקוח";
+            title.FontSize = 18;
             closeAllowed = false;
         }
 

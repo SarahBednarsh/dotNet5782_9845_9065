@@ -31,6 +31,7 @@ namespace PL
             userNameHasBeenClicked = false;
             if (!isManager)
                 title.Text = "הרשמת לקוח";
+            title.FontSize = 18;
         }
 
         private void userName_GotFocus(object sender, RoutedEventArgs e)
