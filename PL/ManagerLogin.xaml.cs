@@ -10,30 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BO;
-using BlApi;
+
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManagerLogin.xaml
     /// </summary>
-    
-    public partial class MainWindow : Window
+    public partial class ManagerLogin : Window
     {
-        private IBL bl = BlFactory.GetBL();
-        public MainWindow()
+        public ManagerLogin()
         {
-            (new ManagerLogin()).ShowDialog();
             InitializeComponent();
         }
-
-        private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Button button = sender as Button;
-           new DroneListWindow(bl).Show();
-        }
-
     }
 }
