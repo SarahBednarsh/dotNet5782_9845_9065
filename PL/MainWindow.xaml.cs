@@ -27,12 +27,7 @@ namespace PL
         {
             InitializeComponent();
         }
-
-        private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Button button = sender as Button;
-           new DroneListWindow(bl).Show();
-        }
+        
 
         private void managerLogin_Click(object sender, RoutedEventArgs e)
         {

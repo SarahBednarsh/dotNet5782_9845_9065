@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PL
         private bool isManager;
         private string xmlFile;
         private bool userNameHasBeenClicked;
+        private bool closeAllowed;
         public Login(string path, bool manager)
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace PL
             userNameHasBeenClicked = false;
             if (!isManager)
                 title.Text = "כניסת לקוח";
+            closeAllowed = false;
         }
 
         private void userName_GotFocus(object sender, RoutedEventArgs e)
@@ -51,5 +54,19 @@ namespace PL
             }
         }
 
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            closeAllowed = true;
+            Close();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!closeAllowed)
+            {
+                e.Cancel = true;
+                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול");
+            }
+        }
     }
 }
