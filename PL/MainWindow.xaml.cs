@@ -25,7 +25,6 @@ namespace PL
         private IBL bl = BlFactory.GetBL();
         public MainWindow()
         {
-            (new ManagerLogin()).ShowDialog();
             InitializeComponent();
         }
 
@@ -35,5 +34,9 @@ namespace PL
            new DroneListWindow(bl).Show();
         }
 
+        private void managerLogin_Click(object sender, RoutedEventArgs e)
+        {
+            new Login(null, true).ShowDialog();
+        }
     }
 }
