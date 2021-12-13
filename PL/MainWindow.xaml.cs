@@ -38,5 +38,15 @@ namespace PL
         {
             new Login(null, true).ShowDialog();
         }
+
+        private void managerSignup_Click(object sender, RoutedEventArgs e)
+        {
+            new Signup(null, true).ShowDialog();
+        }
+
+        private void customerSignup_Click(object sender, RoutedEventArgs e)
+        {
+            new Signup(null, false).ShowDialog();
+        }
     }
 }
