@@ -1,0 +1,17 @@
+﻿<Window x:Class="PL.Signup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Signup" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,128,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="userName_GotFocus" LostFocus="userName_LostFocus"/>
+        <TextBox x:Name="email" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,205,0,0" Text="כתובת מייל" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="email_GotFocus" LostFocus="email_LostFocus"/>
+        <PasswordBox x:Name="password" FlowDirection="LeftToRight"  VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Width="232" Height="50"/>
+        <TextBlock x:Name="passwordText" Visibility="{Binding ElementName=password, Path=IsFocused, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Left" Height="15" Margin="466,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>
+        <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" Margin="0,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"><Run FlowDirection="RightToLeft" Language="he-il" Text="הרשמת מנהל" FontSize="18"/></TextBlock>
+
+    </Grid>
+</Window>
