@@ -11,3 +11,7 @@ To do:
 
 
 Bugs:
+
+Things to figure out:
+- Handling Hebrew
+- Data binding

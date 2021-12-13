@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="ManagerLogin" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="userName" HorizontalAlignment="Center" Height="57" Margin="0,160,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
+        <TextBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,160,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
         <PasswordBox x:Name="password" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Width="232" Height="50"/>
+        <Button x:Name="passwordRecovery" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,357,0,0" VerticalAlignment="Top" Width="232">
+            <Run FlowDirection="RightToLeft" Language="he-il" Text="שכחת סיסמא?"/>
+        </Button>
+        <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" Margin="0,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"><Run FlowDirection="RightToLeft" Language="he-il" Text="כניסת מנהל" FontSize="18"/></TextBlock>
 
     </Grid>
 </Window>
