@@ -24,8 +24,8 @@ namespace DalApi
         {
 
 
-            //string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "DalConfig.xml");
-            XElement dalConfig = XElement.Load(@"DalConfig.xml"/*startupPath*/);
+            //string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "dal-config.xml");
+            XElement dalConfig = XElement.Load(@"dal-config.xml"/*startupPath*/);
             DalName = dalConfig.Element("dal").Value;
             DalPackages = (from pkg in dalConfig.Element("dal-packages").Elements()
                            let tmp1 = pkg.Attribute("namespace")
