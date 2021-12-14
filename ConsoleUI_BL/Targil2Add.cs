@@ -1,12 +1,12 @@
 ﻿using System;
-using IBL.BO;
-using IBL;
+using BO;
+using BlApi;
 
 namespace ConsoleUI_BL
 {
     public partial class Targil2
     {
-        private static void AddStation(IBL.BO.IBL bl)
+        private static void AddStation(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -20,7 +20,7 @@ namespace ConsoleUI_BL
             Int32.TryParse(Console.ReadLine(), out int chargeSlots);
             bl.AddStation(id, name, longitude, latitude, chargeSlots);
         }
-        private static void AddDrone(IBL.BO.IBL bl)
+        private static void AddDrone(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -33,7 +33,7 @@ namespace ConsoleUI_BL
             Int32.TryParse(Console.ReadLine(), out int stationID);
             bl.AddDrone(id, model, maxWeight, stationID);
         }
-        private static void AddCustomer(IBL.BO.IBL bl)
+        private static void AddCustomer(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -47,7 +47,7 @@ namespace ConsoleUI_BL
             Double.TryParse(Console.ReadLine(), out double latitude);
             bl.AddCustomer(id, name, phone, longitude, latitude);
         }
-        private static void AddParcel(IBL.BO.IBL bl)
+        private static void AddParcel(IBL bl)
         {
             Console.WriteLine("Enter sender ID:");
             Int32.TryParse(Console.ReadLine(), out int senderId);

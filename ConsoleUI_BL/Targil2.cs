@@ -1,6 +1,6 @@
 ﻿using System;
-using IBL.BO;
-using IBL;
+using BO;
+using BlApi;
 namespace ConsoleUI_BL
 {
     public partial class Targil2
@@ -10,7 +10,8 @@ namespace ConsoleUI_BL
         private enum UpdateOption { DroneName = 1, Station, Customer, SendToCharge, EndCharge, Attribute, Pickup, Deliver }
         public static void Main(string[] args)
         {
-            IBL.BO.IBL bl = new IBL.BO.BL();           
+            IBL bl = BlFactory.GetBL();
+
             Actions option;
             do
             {

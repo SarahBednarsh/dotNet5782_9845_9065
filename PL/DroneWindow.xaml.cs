@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 using BlApi;
 using BO;
+using Dronestatuses = BO.DroneToList;
 namespace PL
 {
     /// <summary>
@@ -56,7 +57,7 @@ namespace PL
         {
             if (drone == null)
                 throw new ArgumentNullException("No drone");
-            if (drone.Status == DroneStatuses.Available)
+            if (drone.Status == BO.DroneStatuses.Available)
             {
                 Actions.Content = "Charge";
                 Actions.Click += Charge_Click;
@@ -64,7 +65,7 @@ namespace PL
                 Actions2.Content = "Send to delivery";
                 Actions2.Click += SendToDelivery_Click;
             }
-            else if (drone.Status == DroneStatuses.InMaintenance)
+            else if (drone.Status == BO.DroneStatuses.InMaintenance)
             {
                 Actions.Content = "Release charge";
                 Actions.Click += ReleaseCharge_Click;
@@ -141,7 +142,7 @@ namespace PL
                 int.TryParse(IdBoxNew.Text, out int id);
                 try
                 {
-                    bl.AddDrone(id, ModelBoxNew.Text, (WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
+                    bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
                     MessageBox.Show("Success");
                     this.Close();
                     return;

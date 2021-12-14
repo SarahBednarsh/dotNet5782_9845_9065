@@ -1,12 +1,12 @@
 ﻿using System;
-using IBL.BO;
-using IBL;
+using BO;
+using BlApi;
 
 namespace ConsoleUI_BL
 {
     public partial class Targil2
     {
-        private static void UpdateDroneModel(IBL.BO.IBL bl)
+        private static void UpdateDroneModel(IBL bl)
         {
             Console.WriteLine("Enter drone ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -14,7 +14,7 @@ namespace ConsoleUI_BL
             string model = Console.ReadLine();
             bl.UpdateDroneModel(id, model);
         }
-        private static void UpdateStation(IBL.BO.IBL bl)
+        private static void UpdateStation(IBL bl)
         {
             Console.WriteLine("Enter station number:");
             Int32.TryParse(Console.ReadLine(), out int num);
@@ -27,7 +27,7 @@ namespace ConsoleUI_BL
             Int32.TryParse(Console.ReadLine(), out int slots);
             bl.UpdateStationInfo(num, name, slots);
         }
-        private static void UpdateCustomer(IBL.BO.IBL bl)
+        private static void UpdateCustomer(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -43,13 +43,13 @@ namespace ConsoleUI_BL
                 phone = "";
             bl.UpdateCustomerInfo(id, name, phone);
         }
-        private static void UpdateSendToCharge(IBL.BO.IBL bl)
+        private static void UpdateSendToCharge(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
             bl.DroneToCharge(id);
         }
-        private static void UpdateEndCharge(IBL.BO.IBL bl)
+        private static void UpdateEndCharge(IBL bl)
         {
             Console.WriteLine("Enter ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
@@ -60,21 +60,21 @@ namespace ConsoleUI_BL
             Int32.TryParse(Console.ReadLine(), out int minutes);
             Console.WriteLine("Enter seconds:");
             Int32.TryParse(Console.ReadLine(), out int seconds);
-            bl.ReleaseCharging(id, new TimeSpan(hours, minutes, seconds));
+            bl.ReleaseCharging(id /*,new TimeSpan(hours, minutes, seconds)*/);
         }
-        private static void UpdateAttribute(IBL.BO.IBL bl)
+        private static void UpdateAttribute(IBL bl)
         {
             Console.WriteLine("Enter drone ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
             bl.AttributeAParcel(id);
         }
-        private static void UpdatePickup(IBL.BO.IBL bl)
+        private static void UpdatePickup(IBL bl)
         {
             Console.WriteLine("Enter drone ID:");
             Int32.TryParse(Console.ReadLine(), out int id);
             bl.PickUpAParcel(id);
         }
-        private static void UpdateDeliver(IBL.BO.IBL bl)
+        private static void UpdateDeliver(IBL bl)
         {
             Console.WriteLine("Enter drone ID:");
             Int32.TryParse(Console.ReadLine(), out int id);

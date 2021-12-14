@@ -1,12 +1,11 @@
 ﻿using System;
-using IBL.BO;
-using IBL;
-
+using BO;
+using BlApi;
 namespace ConsoleUI_BL
 {
     public partial class Targil2
     {
-        private static void SwitchAdd(IBL.BO.IBL bl)
+        private static void SwitchAdd(IBL bl)
         {
             Data specific;
             Console.WriteLine("Enter 1 to add a station, " +
@@ -34,7 +33,7 @@ namespace ConsoleUI_BL
                     break;
             }
         }
-        private static void SwitchUpdate(IBL.BO.IBL bl)
+        private static void SwitchUpdate(IBL bl)
         {
             UpdateOption updateoption;
             Console.WriteLine("Enter 1 to change a drone's name, " +
@@ -79,7 +78,7 @@ namespace ConsoleUI_BL
                     break;
             }
         }
-        private static void SwitchView(IBL.BO.IBL bl)
+        private static void SwitchView(IBL bl)
         {
             Data specific;
             Console.WriteLine("Enter 1 to display a station, " +
@@ -107,7 +106,7 @@ namespace ConsoleUI_BL
                     break;
             }
         }
-        private static void SwitchList(IBL.BO.IBL bl)
+        private static void SwitchList(IBL bl)
         {
             Data specific;
             Console.WriteLine("Enter 1 to display list of stations, " +

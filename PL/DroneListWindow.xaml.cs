@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using DroneStatuses = BO.DroneStatuses;
+using WeightCategories = BO.WeightCategories;
 namespace PL
 {
     /// <summary>
@@ -39,9 +41,9 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem);
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
             else
-                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
 
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,9 +51,9 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
-                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
             else
-                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                DronesListView.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
