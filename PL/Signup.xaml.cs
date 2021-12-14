@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace PL
         private string xmlFile;
         private bool userNameHasBeenClicked;
         private bool passwordHasBeenClicked;
+        private bool closeAllowed;
+
         public Signup(string path, bool isManager)
         {
             InitializeComponent();
@@ -76,7 +79,20 @@ namespace PL
                 (sender as TextBox).Text = "כתובת מייל";
                 (sender as TextBox).Opacity = 0.5;
             }
+        }
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            closeAllowed = true;
+            Close();
+        }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!closeAllowed)
+            {
+                e.Cancel = true;
+                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול");
+            }
         }
     }
 }
