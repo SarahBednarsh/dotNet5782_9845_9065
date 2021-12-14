@@ -22,14 +22,12 @@ namespace PL
     {
         private bool isManager;
         private string xmlFile;
-        private bool userNameHasBeenClicked;
         private bool closeAllowed;
         public Login(string path, bool manager)
         {
             InitializeComponent();
             isManager = manager;
             xmlFile = path;
-            userNameHasBeenClicked = false;
             if (!isManager)
                 title.Text = "כניסת לקוח";
             title.FontSize = 18;
@@ -38,20 +36,26 @@ namespace PL
 
         private void userName_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (!userNameHasBeenClicked)
-            {
-                userNameHasBeenClicked = true;
-                (sender as TextBox).Text = "";
-                (sender as TextBox).Opacity = 1;
-            }
+            (sender as TextBox).Text = "";
+            (sender as TextBox).Opacity = 1;
         }
         private void userName_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (userNameHasBeenClicked && (sender as TextBox).Text == "")
+            if ((sender as TextBox).Text == "")
             {
-                userNameHasBeenClicked = false;
                 (sender as TextBox).Text = "שם משתמש";
                 (sender as TextBox).Opacity = 0.5;
+            }
+        }
+        private void password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            passwordText.Visibility = Visibility.Hidden;
+        }
+        private void password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as PasswordBox).Password == "")
+            {
+                passwordText.Visibility = Visibility.Visible;
             }
         }
 

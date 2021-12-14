@@ -9,8 +9,8 @@
         Title="Login" Height="480" Width="400">
     <Grid>
         <TextBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="userName_GotFocus" LostFocus="userName_LostFocus"/>
-        <PasswordBox x:Name="password" FlowDirection="LeftToRight"  VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
-        <TextBlock x:Name="passwordText" Visibility="{Binding ElementName=password, Path=IsFocused, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="267,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>
+        <PasswordBox x:Name="password" FlowDirection="LeftToRight" LostFocus="password_LostFocus" GotFocus="password_GotFocus" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
+        <TextBlock x:Name="passwordText" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="267,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>
         <Button x:Name="passwordRecovery" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,291,0,0" VerticalAlignment="Top" Width="232">
             <Run FlowDirection="RightToLeft" Language="he-il" Text="שכחת סיסמא?"/>
         </Button>

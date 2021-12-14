@@ -78,5 +78,16 @@ namespace PL
             }
 
         }
+        private void password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            passwordText.Visibility = Visibility.Hidden;
+        }
+        private void password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as PasswordBox).Password == "")
+            {
+                passwordText.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
