@@ -47,9 +47,9 @@ namespace PL
             BatteryBox.Text = drone.Battery.ToString();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             StatusSelector.SelectedItem = drone.Status;
-            LongitudeBox.Text = drone.Location.Longitude.ToString();
-            LatitudeBox.Text = drone.Location.Latitude.ToString();
-            IdOfParcelBox.Text = (drone.Parcel != null) ? drone.Parcel.Id.ToString() : "No parcel yet";
+            LongitudeBox.Text = drone.Longitude;
+            LatitudeBox.Text = drone.Latitude;
+            //IdOfParcelBox.Text = (bl.serdrone.Parcel != null) ? drone.Parcel.Id.ToString() : "No parcel yet";
 
             InitializeActionsButton(drone);
         }
@@ -57,7 +57,7 @@ namespace PL
         {
             if (drone == null)
                 throw new ArgumentNullException("No drone");
-            if (drone.Status == BO.DroneStatuses.Available)
+            if (drone.Status == (PL.DroneStatuses)BO.DroneStatuses.Available)
             {
                 Actions.Content = "Charge";
                 Actions.Click += Charge_Click;
@@ -65,7 +65,7 @@ namespace PL
                 Actions2.Content = "Send to delivery";
                 Actions2.Click += SendToDelivery_Click;
             }
-            else if (drone.Status == BO.DroneStatuses.InMaintenance)
+            else if (drone.Status == (PL.DroneStatuses)BO.DroneStatuses.InMaintenance)
             {
                 Actions.Content = "Release charge";
                 Actions.Click += ReleaseCharge_Click;
@@ -100,7 +100,7 @@ namespace PL
                 bl.SearchDrone(id);
                 return false;
             }
-            catch
+            catchS
             { return true; }
         }
         private void ModelBoxNew_TextChanged(object sender, TextChangedEventArgs e)

@@ -1,31 +1,35 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Windows;
-//namespace Model
-//{
-//    public class Parcel : DependencyObject
-//    {
-//        static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(Drone));
-//        static readonly DependencyProperty ModelProperty = DependencyProperty.Register("Model", typeof(string), typeof(Drone));
-//        static readonly DependencyProperty MaxWeightProperty = DependencyProperty.Register("MaxWeight", typeof(WeightCategories), typeof(Drone));
-//        static readonly DependencyProperty BatteryProperty = DependencyProperty.Register("Battry", typeof(double), typeof(Drone));
-//        static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(DroneStatuses), typeof(Drone));
-//        static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("Longitude", typeof(string), typeof(Drone));
-//        static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("Latitude", typeof(string), typeof(Drone));
-//        static readonly DependencyProperty ParcelIdPropery = DependencyProperty.Register("ParcelId", typeof(int), typeof(Drone));
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+namespace PL
+{
+    public class Parcel : DependencyObject
+    {
+        static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(Drone));
+        static readonly DependencyProperty SenderIdProperty = DependencyProperty.Register("SenderId", typeof(int), typeof(Drone));
+        static readonly DependencyProperty TargetIdProperty = DependencyProperty.Register("TargetId", typeof(int), typeof(Drone));
+        static readonly DependencyProperty WeightProperty = DependencyProperty.Register("Weight", typeof(WeightCategories), typeof(Drone));
+        static readonly DependencyProperty PriorityProperty = DependencyProperty.Register("Priority", typeof(Priorities), typeof(Drone));
+        static readonly DependencyProperty DroneIdProperty = DependencyProperty.Register("DroneId", typeof(int), typeof(Drone));
+        static readonly DependencyProperty CreationProperty = DependencyProperty.Register("Creation", typeof(DateTime?), typeof(Drone));
+        static readonly DependencyProperty AttributionProperty = DependencyProperty.Register("Attribution", typeof(DateTime?), typeof(Drone));
+        static readonly DependencyProperty PickUpProperty = DependencyProperty.Register("PickUp", typeof(DateTime?), typeof(Drone));
+        static readonly DependencyProperty DeliveryProperty = DependencyProperty.Register("Delivery", typeof(DroneStatuses), typeof(Drone));
 
-//        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
-//        public string Model { get => (string)GetValue(ModelProperty); set => SetValue(ModelProperty, value); }
-//        public WeightCategories MaxWeight { get => (WeightCategories)GetValue(MaxWeightProperty); set => SetValue(MaxWeightProperty, value); }
-//        public double Battery { get => (double)GetValue(BatteryProperty); set => SetValue(BatteryProperty, value); }
-//        public DroneStatuses Status { get => (DroneStatuses)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
-//        public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
-//        public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
-//        public string ParcelId { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
+        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
+        public int SenderId { get => (int)GetValue(SenderIdProperty); set => SetValue(SenderIdProperty, value); }
+        public int TargetId { get => (int)GetValue(TargetIdProperty); set => SetValue(TargetIdProperty, value); }
+        public WeightCategories Weight { get => (WeightCategories)GetValue(WeightProperty); set => SetValue(WeightProperty, value); }
+        public Priorities Priority { get => (Priorities)GetValue(PriorityProperty); set => SetValue(PriorityProperty, value); }
+        public int DroneId { get => (int)GetValue(DroneIdProperty); set => SetValue(DroneIdProperty, value); }
+        public DateTime? Creation { get => (DateTime?)GetValue(CreationProperty); set => SetValue(CreationProperty, value); }
+        public DateTime? Attribution { get => (DateTime?)GetValue(AttributionProperty); set => SetValue(AttributionProperty, value); }
+        public DateTime? PickUP { get => (DateTime?)GetValue(PickUpProperty); set => SetValue(PickUpProperty, value); }
+        public DateTime? Delivery { get => (DateTime?)GetValue(DeliveryProperty); set => SetValue(DeliveryProperty, value); }
 
 
-//    }
-//}
+    }
+}

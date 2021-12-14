@@ -74,7 +74,7 @@ namespace PL
         {
             StatusSelector.SelectedItem = -1;
             StatusSelector.Text = "";
-            if (WeightSelector == null || WeightSelector.SelectedIndex == -1) 
+            if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
             {
                 DronesListView.ItemsSource = bl.ListDrone();
                 return;

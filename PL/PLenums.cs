@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace PL
 {
     public enum DroneStatuses { Available = 1, InMaintenance, Delivering }
     public enum WeightCategories { Light = 1, Medium, Heavy }

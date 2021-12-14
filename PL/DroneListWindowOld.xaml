@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DroneListWindowOld" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
+       <Grid.RowDefinitions>
             <RowDefinition Height="233*"/>
             <RowDefinition Height="201*"/>
         </Grid.RowDefinitions>

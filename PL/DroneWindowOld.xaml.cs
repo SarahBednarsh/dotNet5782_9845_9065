@@ -47,8 +47,8 @@ namespace PL
             BatteryBox.Text = drone.Battery.ToString();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             StatusSelector.SelectedItem = drone.Status;
-            LongitudeBox.Text = drone.Location.Longitude.ToString();
-            LatitudeBox.Text = drone.Location.Latitude.ToString();
+            LongitudeBox.Text = drone.Longitude;
+            LatitudeBox.Text = drone.Latitude;
             IdOfParcelBox.Text = (drone.Parcel != null) ? drone.Parcel.Id.ToString() : "No parcel yet";
 
             InitializeActionsButton(drone);
