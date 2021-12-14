@@ -15,15 +15,15 @@ namespace System.Windows.Controls
         public double NoWaterMarkOpacity { get; set; }
         public string WaterMarkText { get; set; }
 
-        public WaterMarkBox() : base()
+
+        protected override void OnInitialized(EventArgs e)
         {
+            base.OnInitialized(e);
             Text = WaterMarkText;
-            MessageBox.Show(Opacity.ToString());
             Opacity = WaterMarkOpacity;
             isEmpty = true;
             GotFocus += GotFocusHandleWaterMark;
             LostFocus += LostFocusHandleWaterMark;
-            MessageBox.Show(Opacity.ToString());
         }
         private void GotFocusHandleWaterMark(object sender, RoutedEventArgs e)
         {
