@@ -66,8 +66,7 @@ namespace PL
             if (!closeAllowed)
             {
                 e.Cancel = true;
-                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK,
-                                 MessageBoxImage.Information);
+                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
