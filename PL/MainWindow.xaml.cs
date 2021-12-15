@@ -13,21 +13,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+using System.Linq;
 using BlApi;
+using System.Collections.ObjectModel;
+
 namespace PL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
     public partial class MainWindow : Window
     {
         private IBL bl = BlFactory.GetBL();
+
+        public static ObservableCollection<Drone> drones;
         public MainWindow()
         {
             InitializeComponent();
+            drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
+                                                      select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+
         }
-        
+
 
         private void managerLogin_Click(object sender, RoutedEventArgs e)
         {

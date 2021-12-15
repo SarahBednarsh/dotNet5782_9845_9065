@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.Windows;
  
 
-namespace Model
+namespace PL
 {
     public class Drone : DependencyObject
     {
         static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(Drone));
         static readonly DependencyProperty ModelProperty = DependencyProperty.Register("Model", typeof(string), typeof(Drone));
         static readonly DependencyProperty MaxWeightProperty = DependencyProperty.Register("MaxWeight", typeof(WeightCategories), typeof(Drone));
-        static readonly DependencyProperty BatteryProperty = DependencyProperty.Register("Battry", typeof(double), typeof(Drone));
+        static readonly DependencyProperty BatteryProperty = DependencyProperty.Register("Battery", typeof(double), typeof(Drone));
         static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(DroneStatuses), typeof(Drone));
         static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("Longitude", typeof(string), typeof(Drone));
         static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("Latitude", typeof(string), typeof(Drone));
@@ -26,7 +26,7 @@ namespace Model
         public DroneStatuses Status { get => (DroneStatuses)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
         public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
         public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
-        public string ParcelId { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
+        public int ParcelId { get => (int)GetValue(ParcelIdPropery); set => SetValue(ParcelIdPropery, value); }
 
 
     }

@@ -10,6 +10,7 @@ namespace BO
         public string Name { get; set; }
         public Location Location { get; set; }
         public int OpenChargeSlots { get; set; }
+
         public List<DroneInCharge> Charging;
         public override string ToString()
         {
