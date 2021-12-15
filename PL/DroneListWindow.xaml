@@ -7,9 +7,17 @@
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" Height="239" Margin="0,36,0,0" VerticalAlignment="Top" Width="712">
-            
-        </DataGrid>
-
-    </Grid>
+        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="196,64,196,156" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="latitudeColumn" Binding="{Binding Latitude}" Header="Latitude" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="longitudeColumn" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="maxWeightColumn" Binding="{Binding MaxWeight}" Header="Max Weight" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="modelColumn" Binding="{Binding Model}" Header="Model" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding ParcelId}" Header="Parcel Id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 </Window>

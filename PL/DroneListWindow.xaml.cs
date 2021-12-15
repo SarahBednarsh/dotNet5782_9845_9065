@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Globalization;
 using System.Collections.ObjectModel;
+using BlApi;
 
 namespace PL
 {
@@ -21,11 +22,14 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private ObservableCollection<Drone> drones = MainWindow.drones;
-        public DroneListWindow()
+        private IBL bl;
+        private ObservableCollection<Drone> drones;
+        public DroneListWindow(IBL bl, ObservableCollection<Drone> drones)
         {
             InitializeComponent();
-            DataContext = drones;
+            this.bl = bl;
+            this.drones = drones;
+            DataContext = MainWindow.drones;
         }
     }
 }

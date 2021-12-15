@@ -26,7 +26,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IBL bl = BlFactory.GetBL();
+        private readonly IBL bl = BlFactory.GetBL();
 
         public static ObservableCollection<Drone> drones;
         public MainWindow()
@@ -34,7 +34,7 @@ namespace PL
             InitializeComponent();
             drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-
+            new DroneListWindow(bl, drones).ShowDialog();
         }
 
 
