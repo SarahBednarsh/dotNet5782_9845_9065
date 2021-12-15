@@ -8,18 +8,17 @@
         Closing="Window_Closing"
         Title="Login" Height="480" Width="400">
     <Grid>
-        <controls:WaterMarkBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" NoWaterMarkOpacity="1" WaterMarkOpacity="0.5" WaterMarkText="שם משתמש" Visibility="Visible" />
-        <PasswordBox x:Name="password" FlowDirection="LeftToRight" LostFocus="password_LostFocus" GotFocus="password_GotFocus" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
-        <TextBlock x:Name="passwordText" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="267,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>
-        <Button x:Name="passwordRecovery" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,291,0,0" VerticalAlignment="Top" Width="232">
-            <Run FlowDirection="RightToLeft" Language="he-il" Text="שכחת סיסמא?"/>
+        <controls:WaterMarkBox x:Name="userName" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="username" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" NoWaterMarkOpacity="1" WaterMarkOpacity="0.5" WaterMarkText="username" Visibility="Visible" />
+        <TextBlock x:Name="passwordText" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="78,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69" Opacity="0.5" RenderTransformOrigin="-2.424,0.79"><Run Text="password"/></TextBlock>
+        <PasswordBox x:Name="password" Background="Transparent" LostFocus="password_LostFocus" GotFocus="password_GotFocus" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
+        <Button x:Name="passwordRecovery" Content="Forgot Password" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,291,0,0" VerticalAlignment="Top" Width="232">
         </Button>
         <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" Margin="0,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"><Run FlowDirection="RightToLeft" Language="he-il" Text="כניסת מנהל" FontSize="18"/></TextBlock>
         <Button x:Name="login" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,223,0,0" VerticalAlignment="Top" Width="232">
-            <Run FlowDirection="RightToLeft" Language="he-il" Text="כניסה"/>
+            <Run Text="Log in"/>
         </Button>
         <Button x:Name="close" Click="close_Click" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,357,0,0" VerticalAlignment="Top" Width="232">
-            <Run FlowDirection="RightToLeft" Language="he-il" Text="ביטול"/>
+            <Run Text="Cancel"/>
         </Button>
         <TextBox x:Name="incorrect" FlowDirection="RightToLeft" Foreground="Red" Visibility="Hidden" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" HorizontalAlignment="Center" Height="37" Margin="0,190,0,0" Text="שם משתמש או סיסמה אינם נכונים" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
 

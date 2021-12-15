@@ -43,7 +43,7 @@ namespace PL
         {
             if ((sender as TextBox).Text == "")
             {
-                (sender as TextBox).Text = "שם משתמש";
+                (sender as TextBox).Text = "username";
                 (sender as TextBox).Opacity = 0.5;
             }
         }
@@ -73,5 +73,6 @@ namespace PL
                 MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
     }
 }
