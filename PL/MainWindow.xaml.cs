@@ -34,7 +34,8 @@ namespace PL
             InitializeComponent();
             drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            new DroneListWindow(bl, drones).ShowDialog();
+            //new DroneListWindow(bl, drones).ShowDialog();
+            new DroneWindow(bl, drones, drones.FirstOrDefault().Id).ShowDialog();
         }
 
 
