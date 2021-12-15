@@ -18,7 +18,7 @@ namespace PL
                 Longitude = BoDrone.Location.Longitude.ToString(),
                 MaxWeight = (PL.WeightCategories)BoDrone.MaxWeight,
                 Model = BoDrone.Model,
-                ParcelId = BoDrone.Parcel.Id,
+                ParcelId = BoDrone.Parcel==null?-1:BoDrone.Parcel.Id,
                 Status = (PL.DroneStatuses)BoDrone.Status
             };
             return PoDrone;

@@ -20,20 +20,4 @@
     <Resource Include="logo.jpeg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="DroneWindowOld.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="DroneListWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="DroneWindowOld.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-
 </Project>
