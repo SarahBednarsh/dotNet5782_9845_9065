@@ -74,5 +74,9 @@ namespace PL
             }
         }
 
+        private void tempclick(object sender, RoutedEventArgs e)
+        {
+            new DroneListWindow(MainWindow.bl, MainWindow.drones).ShowDialog();
+        }
     }
 }

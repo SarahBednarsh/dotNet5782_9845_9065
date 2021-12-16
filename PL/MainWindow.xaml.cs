@@ -26,7 +26,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IBL bl = BlFactory.GetBL();
+        public static readonly IBL bl = BlFactory.GetBL();//changes to public and static cause i needed it in login- should we send a parameter in login so we can open dronelistwindow?
 
         public static ObservableCollection<Drone> drones;
         public MainWindow()
@@ -35,7 +35,7 @@ namespace PL
             drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             //new DroneListWindow(bl, drones).ShowDialog();
-            new DroneWindow(bl, drones, drones.FirstOrDefault().Id).ShowDialog();
+            //new DroneWindow(bl, drones, drones.FirstOrDefault().Id).ShowDialog();
         }
 
 

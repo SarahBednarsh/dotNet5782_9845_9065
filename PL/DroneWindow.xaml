@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="add">
+        <!--<Grid x:Name="add">
             <controls:WaterMarkBox x:Name="id" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" NoWaterMarkOpacity="1" WaterMarkOpacity="0.5" WaterMarkText="userName" Visibility="Visible"/>
             <controls:WaterMarkBox x:Name="model" HorizontalAlignment="Left" Margin="460,148,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="464,195,0,0" VerticalAlignment="Top" Width="120"/>
@@ -16,6 +16,63 @@
             <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="464,294,0,0" VerticalAlignment="Top" Height="52" Width="120"/>
         </Grid>
         <Grid Visibility="Hidden">
+
+        </Grid>-->
+        <Grid x:Name="AddGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="IdLabelNew" Content="Enter ID:" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="IdBoxNew" TextChanged="IdBoxNew_TextChanged" HorizontalAlignment="Left" Margin="73,10,0,158" Grid.Row="1" Text="Id" TextWrapping="Wrap" Width="120"/>
+            <Label x:Name="ModelLabelNew" Content="Enter model:" HorizontalAlignment="Center" Grid.Column="1" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="ModelBoxNew" TextChanged="ModelBoxNew_TextChanged" HorizontalAlignment="Center" Margin="73,10,0,158" Grid.Column="1" Grid.Row="1" Text="Model" TextWrapping="Wrap" Width="120"/>
+            <Label x:Name="WeightLabelNew" Content="Enter maximum weight:" HorizontalAlignment="Center" Grid.Column="2" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
+            <ComboBox Name="WeightSelectorNew" Grid.Column="2" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" SelectionChanged="WeightSelectorNew_SelectionChanged" Grid.Row="1"/>
+            <Label x:Name="StationIdLabelNew" Content="Enter station ID:" HorizontalAlignment="Center" Grid.Column="3" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
+            <ComboBox Name="StationIdSelectorNew" Grid.Column="3" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" SelectionChanged="StationIdSelectorNew_SelectionChanged" Grid.Row="1"/>
+            <Button x:Name="Add" Click="Add_Click" Content="Add" Grid.Column="3" HorizontalAlignment="Left" Margin="150,168,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5"/>
+            <Button x:Name="CloseAdd" Click="Close_Click" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Height="39" Margin="10,168,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35"/>
+        </Grid>
+        <Grid x:Name="ActionsGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" Width="54" Margin="0,73,0,0"/>
+            <TextBox IsEnabled="False" x:Name="IdBox" HorizontalAlignment="Center" Text="Id" TextWrapping="Wrap" Width="120" Grid.Row="1" Margin="0,10,0,72"/>
+            <Label x:Name="ModelLabel" Content="Model:" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="26" Width="76" Margin="0,73,0,0"/>
+            <TextBox x:Name="ModelBox" TextChanged="ModelBox_TextChanged" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="Model" TextWrapping="Wrap" Width="120" Margin="0,10,0,68"/>
+            <Label x:Name="WeightLabel" Content="Maximum weight:" HorizontalAlignment="Left" Grid.Column="2" VerticalAlignment="Top" Height="26" Width="134" Margin="40,73,0,0"/>
+            <ComboBox IsEnabled="False" Name="WeightSelector" HorizontalAlignment="Center" Width="120" Grid.Row="1" Grid.Column="2" Margin="0,10,0,48"/>
+            <Label x:Name="BatteryLabel" Content="Battery:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Top" Height="26" Width="76" Margin="0,73,0,0"/>
+            <TextBox IsEnabled="False" x:Name="BatteryBox" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Text="Battery" TextWrapping="Wrap" Width="120" Margin="0,10,0,62"/>
+            <Label x:Name="StatusLabel" Content="Status:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="94" Margin="0,73,0,0"/>
+            <ComboBox IsEnabled="False" Name="StatusSelector" HorizontalAlignment="Center" Width="120" Grid.Row="3" Margin="0,10,0,54"/>
+            <Label x:Name="LongitudeLabel" Content="Longitude:" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="76" Margin="0,73,0,0"/>
+            <TextBox IsEnabled="False" x:Name="LongitudeBox" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3" Text="Longitude" TextWrapping="Wrap" Width="120" Margin="0,10,0,54"/>
+            <Label x:Name="LatitudeLabel" Content="Latitude:" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="76" Margin="0,73,0,0"/>
+            <TextBox IsEnabled="False" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" Text="Latitude" TextWrapping="Wrap" Width="120" Margin="0,10,0,54"/>
+            <Label x:Name="IdOfParcelLabel" Content="Parcel ID:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="76" Margin="0,73,0,0"/>
+            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="3" Text="Parcel ID" TextWrapping="Wrap" Width="120" Margin="0,10,0,65"/>
+            <Button IsEnabled="False" x:Name="Update" Click="Update_Click" Content="Update" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="62" Margin="128,59,0,0"/>
+            <Button x:Name="Actions" Content="Actions" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="123,59,0,0" Grid.ColumnSpan="2"/>
+            <Button Visibility="Hidden" x:Name="Actions2" Content="Actions2" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="0,59,0,0"/>
+            <Button x:Name="CloseActions" Click="Close_Click" Content="Close" Grid.Column="3" HorizontalAlignment="Center" Height="39" Grid.Row="3" VerticalAlignment="Top" Width="36" Margin="0,59,0,0"/>
 
         </Grid>
     </Grid>
