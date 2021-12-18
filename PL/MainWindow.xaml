@@ -16,7 +16,7 @@
             <ColumnDefinition Width="133*"/>
             <ColumnDefinition Width="134*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="title" Content="will be title" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="362,63,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="75"/>
+        <Label x:Name="title" Content="will be title"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="319,60,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="32" Width="153"/>
         <Image x:Name="logo" HorizontalAlignment="Left" Height="100" Margin="350,117,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" Source="/logo.jpeg"/>
         <Separator x:Name="separator"  HorizontalAlignment="Left" Height="100" Margin="393,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="5" Background="#FF8BC836"/>
         <Label x:Name="customerTitle" Content="Customer" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>

@@ -38,6 +38,7 @@ namespace PL
             InitializeComponent();
             AddGrid.Visibility = Visibility.Visible;
             this.bl = bl;
+            this.drones = drones;
             WeightSelectorNew.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
@@ -154,7 +155,9 @@ namespace PL
                 int.TryParse(IdBoxNew.Text, out int id);
                 try
                 {
+
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
+                    drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok- need to find right way to deal with this
                     MessageBox.Show("Success");
                     this.Close();
                     return;
