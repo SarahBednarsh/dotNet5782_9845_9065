@@ -90,7 +90,7 @@ namespace Dal
         }
         public Drone SearchDrone(int droneId)
         {
-            if (!DataSource.Customers.Exists(x => x.Id == droneId))
+            if (!DataSource.Drones.Exists(x => x.Id == droneId))
                 throw new DroneException("Drone does not exist.");
             return DataSource.Drones.Find(x => x.Id == droneId);
         }

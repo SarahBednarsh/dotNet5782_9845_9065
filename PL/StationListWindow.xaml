@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="StationListWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="stationDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="52,58,342,163" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="stationDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="52,58,342,163" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding StationId}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="latitudeColumn" Binding="{Binding StationLatitude}" Header="Latitude" Width="SizeToHeader"/>

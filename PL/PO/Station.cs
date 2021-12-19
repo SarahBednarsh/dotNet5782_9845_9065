@@ -17,10 +17,10 @@ namespace PL
         static readonly DependencyProperty ChargingProperty = DependencyProperty.Register("Charging", typeof(List<int>), typeof(Drone));
 
 
-        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
-        public string Name { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
-        public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
-        public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
+        public int StationId { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
+        public string StationName { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
+        public string StationLongitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
+        public string StationLatitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
         public int OpenChargeSlots { get => (int)GetValue(OpenChargeSlotsProperty); set => SetValue(OpenChargeSlotsProperty, value); }
         public List<int> Charging { get => (List<int>)GetValue(ChargingProperty); set => SetValue(ChargingProperty, value); }
     }
