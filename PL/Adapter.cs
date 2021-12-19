@@ -66,10 +66,11 @@ namespace PL
         {
             PL.Station PoStation = new PL.Station()
             {
-                Id = BoStation.Id,
-                Name=BoStation.Name,
-                Latitude=BoStation.Location.Latitude.ToString(),
-                Longitude=BoStation.Location.Longitude.ToString(),
+                StationId = BoStation.Id,
+                StationName=BoStation.Name,
+                StationLatitude=BoStation.Location.Latitude.ToString(),
+                StationLongitude=BoStation.Location.Longitude.ToString(),
+                OpenChargeSlots=BoStation.OpenChargeSlots,
                 Charging=(from drone in BoStation.Charging
                           select drone.Id).ToList()
             };
