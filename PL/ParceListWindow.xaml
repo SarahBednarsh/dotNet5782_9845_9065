@@ -7,8 +7,21 @@
         mc:Ignorable="d"
         Title="ParceListWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="201,165,192.333,55.667" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,10,211" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="senderIdColumn" Binding="{Binding SenderId}" Header="Sender Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="targetIdColumn" Binding="{Binding TargetId}" Header="Target Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="weightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="droneIdColumn" Binding="{Binding DroneId}" Header="Drone Id" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="creationColumn" Header="Creation" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Creation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn x:Name="attributionColumn" Header="Attribution" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -16,10 +29,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="creationColumn" Header="Creation" Width="SizeToHeader">
+                <DataGridTemplateColumn x:Name="pickUPColumn" Header="Pick UP" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Creation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <DatePicker SelectedDate="{Binding PickUP, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -30,21 +43,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="droneIdColumn" Binding="{Binding DroneId}" Header="Drone Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="pickUPColumn" Header="Pick UP" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding PickUP, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="senderIdColumn" Binding="{Binding SenderId}" Header="Sender Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="targetIdColumn" Binding="{Binding TargetId}" Header="Target Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="weightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Height="30" Width="74"/>
+        <Button x:Name="addParcel" Content="Add parcel" Margin="531,365,149,37" Width="120"/>
+        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="weightSelector" HorizontalAlignment="Left" Margin="78,228,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="priotirySelector" HorizontalAlignment="Left" Margin="203,228,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
