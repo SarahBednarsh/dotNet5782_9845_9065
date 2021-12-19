@@ -29,11 +29,14 @@ namespace PL
         public static readonly IBL bl = BlFactory.GetBL();//changes to public and static cause i needed it in login- should we send a parameter in login so we can open dronelistwindow?
 
         public static ObservableCollection<Drone> drones;
+        public static ObservableCollection<Station> stations;
         public MainWindow()
         {
             InitializeComponent();
             drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+            stations = new ObservableCollection<Station>((from station in bl.ListStation()
+                                                          select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
             //new DroneListWindow(bl, drones).ShowDialog();
             //new DroneWindow(bl, drones, drones.FirstOrDefault().Id).ShowDialog();
         }
@@ -57,6 +60,11 @@ namespace PL
         private void customerLogin_Click(object sender, RoutedEventArgs e)
         {
             new Login(null, false).ShowDialog();
+        }
+
+        private void checkstation(object sender, RoutedEventArgs e)
+        {
+            new StationListWindow(bl, stations).ShowDialog();
         }
     }
 }

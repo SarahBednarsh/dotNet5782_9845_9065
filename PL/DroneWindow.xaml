@@ -8,16 +8,7 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid>
-        <!--<Grid x:Name="add">
-            <controls:WaterMarkBox x:Name="id" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" NoWaterMarkOpacity="1" WaterMarkOpacity="0.5" WaterMarkText="userName" Visibility="Visible"/>
-            <controls:WaterMarkBox x:Name="model" HorizontalAlignment="Left" Margin="460,148,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="464,195,0,0" VerticalAlignment="Top" Width="120"/>
-            <ComboBox x:Name="station" HorizontalAlignment="Left" Margin="464,238,0,0" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="464,294,0,0" VerticalAlignment="Top" Height="52" Width="120"/>
-        </Grid>
-        <Grid Visibility="Hidden">
-
-        </Grid>-->
+        
         <Grid x:Name="AddGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
