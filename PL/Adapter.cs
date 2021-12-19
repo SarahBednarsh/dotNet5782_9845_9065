@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BO;
 namespace PL
 {
-    class Adapter
+    internal class Adapter
     {
         static public PL.Drone DroneBotoPo(BO.Drone BoDrone)
         {

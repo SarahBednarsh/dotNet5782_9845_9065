@@ -10,7 +10,7 @@ namespace Dal
     {
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
-            if (DataSource.Customers.Exists(x => x.Id == id))
+            if (DataSource.Drones.Exists(x => x.Id == id))
                 throw new DroneException("Drone to add exists.");
             Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
@@ -18,7 +18,7 @@ namespace Dal
         }
         public void DeleteDrone(int id)
         {
-            if (!DataSource.Customers.Exists(x => x.Id == id))
+            if (!DataSource.Drones.Exists(x => x.Id == id))
                 throw new DroneException("Drone to delete does not exist.");
             DataSource.Drones.Remove(DataSource.Drones.Find(x => x.Id == id));
         }

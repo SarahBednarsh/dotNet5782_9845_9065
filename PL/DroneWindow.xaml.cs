@@ -42,6 +42,7 @@ namespace PL
             WeightSelectorNew.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
+
         }
         public DroneWindow(IBL bl, ObservableCollection<Drone> drones, int droneId)
         {
@@ -50,6 +51,7 @@ namespace PL
             boDrone = bl.SearchDrone(droneId);
             this.drones = drones;
             plDrone = drones.Where(d => d.Id == droneId).FirstOrDefault();
+            DataContext = plDrone;
             droneIndex = drones.IndexOf(plDrone);
             ActionsGrid.Visibility = Visibility.Visible;
 
@@ -212,6 +214,7 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
+
                 MessageBox.Show("Attributed parcel successfully");
             }
             catch (Exception exception)
@@ -225,15 +228,7 @@ namespace PL
             try
             {
                 int.TryParse(IdBox.Text, out int id);
-                int hours, minutes, seconds;
-                TimeSpanWindow timeSpanWindow = new TimeSpanWindow();
-                timeSpanWindow.ShowDialog();
-                int.TryParse(timeSpanWindow.Hours, out hours);
-                int.TryParse(timeSpanWindow.Minutes, out minutes);
-                int.TryParse(timeSpanWindow.Seconds, out seconds);
-                TimeSpan timeCharging = new TimeSpan(hours, minutes, seconds);
                 bl.ReleaseCharging(id);
-                //MessageBox.Show(bl.SearchDrone(id).ToString());
                 MessageBox.Show("Drone realeased from chraging successfully");
             }
             catch (Exception exception)
@@ -248,6 +243,8 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
+                plDrone.Status = DroneStatuses.InMaintenance;
+                plDrone.ParcelId = "No arcel yet";
                 MessageBox.Show("Drone sent to charge successfully");
             }
             catch (Exception exception)
@@ -271,6 +268,7 @@ namespace PL
             }
             catch (Exception exception)
             {
+                //MessageBox.Show(IdBox.Text);
                 MessageBox.Show(exception.Message);
             }
             Close();
