@@ -54,12 +54,12 @@ namespace PL
         }
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl,drones).ShowDialog();
-            drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()// this does not affect anything= it doesnt change MainWindow.drones!
-                 select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+            new DroneWindow(bl, drones).ShowDialog();
+            //drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()// this does not affect anything= it doesnt change MainWindow.drones!
+            //                                          select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             //MainWindow.drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
             //         select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            droneDataGrid.ItemsSource = drones;
+            //droneDataGrid.ItemsSource = drones;
             WeightSelector_SelectionChanged(WeightSelector, null);
             StatusSelector_SelectionChanged(StatusSelector, null);
         }
@@ -84,6 +84,14 @@ namespace PL
                 return;
             }
             StatusSelector_SelectionChanged(StatusSelector, null);
+        }
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            Drone d = cell.DataContext as Drone;
+            new DroneWindow(bl, drones, d.Id).ShowDialog();
+            int droneIndex = drones.IndexOf(d);
+            drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
