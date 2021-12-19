@@ -7,12 +7,12 @@ using System.Windows;
 
 namespace PL
 {
-    class Station : DependencyObject
+    public class Station : DependencyObject
     {
-        static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(Drone));
-        static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name", typeof(string), typeof(Drone));
-        static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("Longitude", typeof(string), typeof(Drone));
-        static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("Latitude", typeof(string), typeof(Drone));
+        static readonly DependencyProperty IdProperty = DependencyProperty.Register("StationId", typeof(int), typeof(Drone));
+        static readonly DependencyProperty NameProperty = DependencyProperty.Register("StationName", typeof(string), typeof(Drone));
+        static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("StationLongitude", typeof(string), typeof(Drone));
+        static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("StationLatitude", typeof(string), typeof(Drone));
         static readonly DependencyProperty OpenChargeSlotsProperty = DependencyProperty.Register("OpenChargeSlots", typeof(int), typeof(Drone));
         static readonly DependencyProperty ChargingProperty = DependencyProperty.Register("Charging", typeof(List<int>), typeof(Drone));
 
