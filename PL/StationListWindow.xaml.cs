@@ -41,5 +41,14 @@ namespace PL
         {
             Close();
         }
+
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            Station s = cell.DataContext as Station;
+            new StationWindow(bl, stations, s.StationId).ShowDialog();
+            int stationIndex = stations.IndexOf(s);
+            stations[stationIndex] = Adapter.StationBotoPo(bl.SearchStation(s.StationId));
+        }
     }
 }

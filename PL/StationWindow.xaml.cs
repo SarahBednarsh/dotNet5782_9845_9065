@@ -22,7 +22,12 @@ namespace PL
     /// </summary>
     public partial class StationWindow : Window
     {
+        private readonly IBL bl;
         public StationWindow(IBL bl, ObservableCollection<Station> stations)
+        {
+            InitializeComponent();
+        }
+        public StationWindow(IBL bl, ObservableCollection<Station> stations, int stationId)
         {
             InitializeComponent();
         }

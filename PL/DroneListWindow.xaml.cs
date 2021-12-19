@@ -89,9 +89,8 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             Drone d = cell.DataContext as Drone;
+            //int droneIndex = drones.IndexOf(d);
             new DroneWindow(bl, drones, d.Id).ShowDialog();
-            int droneIndex = drones.IndexOf(d);
-            drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

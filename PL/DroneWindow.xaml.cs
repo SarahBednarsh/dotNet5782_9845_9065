@@ -24,9 +24,8 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private readonly IBL bl;
-        private BO.Drone boDrone;
         private Drone plDrone;
-        private int droneIndex;
+        //private int droneIndex;
         ObservableCollection<Drone> drones;
         /// <summary>
         /// add ctor
@@ -48,11 +47,9 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
-            boDrone = bl.SearchDrone(droneId);
             this.drones = drones;
             plDrone = drones.Where(d => d.Id == droneId).FirstOrDefault();
             DataContext = plDrone;
-            droneIndex = drones.IndexOf(plDrone);
             ActionsGrid.Visibility = Visibility.Visible;
 
             IdBox.Text = plDrone.Id.ToString();
@@ -159,7 +156,7 @@ namespace PL
                 {
 
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
-                    drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok- need to find right way to deal with this
+                    drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok - need to find right way to deal with this
                     MessageBox.Show("Success");
                     this.Close();
                     return;
@@ -275,6 +272,11 @@ namespace PL
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            if (ActionsGrid.Visibility == Visibility.Visible)
+            {
+                int droneIndex = drones.IndexOf(plDrone);
+                drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(plDrone.Id));
+            }
             Close();
         }
     }
