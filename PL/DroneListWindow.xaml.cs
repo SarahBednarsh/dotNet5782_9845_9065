@@ -29,7 +29,7 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.drones = drones;
-            DataContext = MainWindow.drones;
+            DataContext = drones;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
