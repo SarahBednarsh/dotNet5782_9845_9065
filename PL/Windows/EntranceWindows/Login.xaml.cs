@@ -73,10 +73,9 @@ namespace PL
                 MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-        private void tempclick(object sender, RoutedEventArgs e)
+        private void login_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(MainWindow.bl, MainWindow.drones).ShowDialog();
+            new ManagerWindow().ShowDialog();
         }
     }
 }

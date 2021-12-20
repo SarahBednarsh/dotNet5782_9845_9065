@@ -23,5 +23,15 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void Drones_Click(object sender, RoutedEventArgs e)
+        {
+            new DroneListWindow(MainWindow.bl, MainWindow.drones).ShowDialog();
+        }
+
+        private void Stations_Click(object sender, RoutedEventArgs e)
+        {
+            new StationListWindow(MainWindow.bl, MainWindow.stations).ShowDialog();
+        }
     }
 }

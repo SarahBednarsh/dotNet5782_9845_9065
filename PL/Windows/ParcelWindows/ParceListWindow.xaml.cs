@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,15 @@ namespace PL
     /// </summary>
     public partial class ParceListWindow : Window
     {
-        public ParceListWindow()
+        private IBL bl;
+        private ObservableCollection<Parcel> parcels;
+        public ParceListWindow(IBL bl, ObservableCollection<Parcel> parcels)
         {
             InitializeComponent();
+            InitializeComponent();
+            this.bl = bl;
+            this.parcels = parcels;
+            DataContext = parcels;
         }
     }
 }

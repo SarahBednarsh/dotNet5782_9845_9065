@@ -26,6 +26,8 @@
         <Button x:Name="managerLogin" Content="Log in" HorizontalAlignment="Center" Height="34" Margin="0,38,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="170" Click="managerLogin_Click"/>
         <Button x:Name="managerSignup" Content="Sign up" HorizontalAlignment="Center" Height="34" Margin="0,88,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="170" Click="managerSignup_Click"/>
         <Button Content="Button" Margin="0,30,252,115" Click="checkstation"/>
+        <Button Content="Button" Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.911,0.233"/>
+
 
 
 

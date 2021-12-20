@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParceListWindow" Height="450" Width="800">
+        Title="ParceListWindow" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
     <Grid>
         <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,10,211" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
@@ -49,7 +50,7 @@
         <Button x:Name="addParcel" Content="Add parcel" Margin="531,365,149,37" Width="120"/>
         <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="weightSelector" HorizontalAlignment="Left" Margin="78,228,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="priotirySelector" HorizontalAlignment="Left" Margin="203,228,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="prioritySelector" HorizontalAlignment="Left" Margin="203,228,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

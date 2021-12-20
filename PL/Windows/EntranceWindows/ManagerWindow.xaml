@@ -1,0 +1,54 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="PL.ManagerWindow"
+        mc:Ignorable="d"
+        Title="ManagerWindow" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Welcome, -manager name-! Please select what entity you would like to manage" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" VerticalAlignment="Center" Height="434" HorizontalAlignment="Center" Width="800">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="#FF347D0D" Offset="0"/>
+                    <GradientStop Color="#FFEBF2E8" Offset="0.378"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <Button x:Name="Customers"
+            Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="100" Width="100"
+            ToolTip="MaterialDesignFloatingActionDarkButton"
+            Margin="538,195,162,139">
+            <Label Content="Customers" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
+        </Button>
+        <Button x:Name="Stations"
+            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+            Height="100" Width="100"
+            ToolTip="MaterialDesignFloatingActionDarkButton" Margin="420,267,280,67" Click="Stations_Click">
+            <Label Content="Stations" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
+        </Button>
+        <Button x:Name="Parcels"
+            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+            Height="100" Width="100"
+            ToolTip="MaterialDesignFloatingActionDarkButton" Margin="280,267,420,67">
+            <Label Content="Parcels" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
+        </Button>
+        <Button x:Name="Drones"
+            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+            Height="100" Width="100"
+            ToolTip="MaterialDesignFloatingActionDarkButton" Margin="162,195,538,139" Click="Drones_Click">
+            <Label Content="Drones" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
+        </Button>
+
+    </Grid>
+</Window>

@@ -10,10 +10,11 @@
 
   <ItemGroup>
     <None Remove="logo.jpeg" />
-    <None Remove="sadFaceIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.MaterialDesign" Version="4.11.0" />
+    <PackageReference Include="MaterialDesign.Icons" Version="1.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
   </ItemGroup>
 
@@ -23,7 +24,10 @@
 
   <ItemGroup>
     <Resource Include="logo.jpeg" />
-    <Resource Include="sadFaceIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Windows\CustomerWindows\" />
   </ItemGroup>
 
 </Project>

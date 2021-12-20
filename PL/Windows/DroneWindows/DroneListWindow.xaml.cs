@@ -38,28 +38,26 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
+                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem)
+                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             else
-                droneDataGrid.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
-
+                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
+                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = bl.ListDroneConditional(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
+                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
+                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             else
-                droneDataGrid.ItemsSource = bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
+                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
+                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
         }
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl, drones).ShowDialog();
-            //drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()// this does not affect anything= it doesnt change MainWindow.drones!
-            //                                          select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            //MainWindow.drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
-            //         select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            //droneDataGrid.ItemsSource = drones;
             WeightSelector_SelectionChanged(WeightSelector, null);
             StatusSelector_SelectionChanged(StatusSelector, null);
         }
@@ -69,7 +67,7 @@ namespace PL
             StatusSelector.Text = "";
             if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
             {
-                droneDataGrid.ItemsSource = bl.ListDrone();
+                droneDataGrid.ItemsSource = drones;
                 return;
             }
             WeightSelector_SelectionChanged(WeightSelector, null);
@@ -80,7 +78,7 @@ namespace PL
             WeightSelector.Text = "";
             if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
             {
-                droneDataGrid.ItemsSource = bl.ListDrone();
+                droneDataGrid.ItemsSource = drones;
                 return;
             }
             StatusSelector_SelectionChanged(StatusSelector, null);

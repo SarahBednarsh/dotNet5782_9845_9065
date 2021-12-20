@@ -65,6 +65,7 @@ namespace PL
         private void checkstation(object sender, RoutedEventArgs e)
         {
             new StationListWindow(bl, stations).ShowDialog();
+            new ManagerWindow().ShowDialog();
         }
     }
 }

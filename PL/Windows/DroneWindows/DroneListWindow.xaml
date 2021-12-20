@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneListWindow" Height="450" Width="800">
+        Title="DroneListWindow" Height="450" Width="880"
+        SizeToContent="WidthAndHeight">
     <Grid>
-        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="33,34,359,185" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}">
+        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,269,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
@@ -24,12 +25,27 @@
                 <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox Name="StatusSelector" Margin="557,43,123,351" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
-        <ComboBox Name="WeightSelector" Margin="557,100,123,292" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
-        <Button Name="AddDrone" Content="Add drone" Margin="557,163,123,217" Width="120" Click="AddDrone_Click" />
-        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="460,50,0,0" VerticalAlignment="Top"/>
+        <StackPanel Margin="682,59,-4,268">
+            <Grid>
+                <Label x:Name="StatusSelectorName" Content="Select Status" Foreground="#1f611f"  Margin="0,6,0,2"/>
+                <Button Content="ClearStatus" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearStatus_Click" />
+            </Grid>
+            <ComboBox
+    x:Name="StatusSelector" SelectionChanged="StatusSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+    IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="171" />
+        </StackPanel>
+        <StackPanel Margin="682,153,-4,174">
+            <Grid>
+                <Label x:Name="WeightSelectorName" Content="Select Weight" Foreground="#1f611f"  Margin="0,6,0,2"/>
+                <Button Content="ClearWeight" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearWeight_Click" />
+            </Grid>
+            <ComboBox
+                x:Name="WeightSelector" SelectionChanged="WeightSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="171" />
+        </StackPanel>
+        <Button Name="AddDrone" Content="Add drone" Margin="30,365,650,37" Width="120" Click="AddDrone_Click" />
+        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="736,26,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
-        <Button x:Name="ClearStatus" Click="ClearStatus_Click" Content="Clear selection" HorizontalAlignment="Left" Margin="682,56,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="ClearWeight" Click="ClearWeight_Click" Content="Clear selection" HorizontalAlignment="Left" Margin="682,111,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
