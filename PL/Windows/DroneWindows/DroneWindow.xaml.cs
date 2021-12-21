@@ -41,7 +41,6 @@ namespace PL
             WeightSelectorNew.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
-
         }
         public DroneWindow(IBL bl, ObservableCollection<Drone> drones, int droneId)
         {
@@ -56,12 +55,11 @@ namespace PL
             ModelBox.Text = plDrone.Model;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             WeightSelector.SelectedItem = plDrone.MaxWeight;
-            BatteryBox.Text = plDrone.Battery.ToString();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             StatusSelector.SelectedItem = plDrone.Status;
             LongitudeBox.Text = plDrone.Longitude.ToString();
             LatitudeBox.Text = plDrone.Latitude.ToString();
-            IdOfParcelBox.Text = (plDrone.ParcelId != null) ? plDrone.ParcelId.ToString() : "No parcel yet";
+            IdOfParcelBox.Text = (plDrone.DroneParcelId != null) ? plDrone.DroneParcelId.ToString() : "No parcel yet";
 
             InitializeActionsButton(plDrone);
         }
@@ -189,7 +187,7 @@ namespace PL
             {
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
         }
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
@@ -203,7 +201,7 @@ namespace PL
             {
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
         }
         private void SendToDelivery_Click(object sender, RoutedEventArgs e)
         {
@@ -218,7 +216,7 @@ namespace PL
             {
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
         }
         private void ReleaseCharge_Click(object sender, RoutedEventArgs e)
         {
@@ -232,7 +230,7 @@ namespace PL
             {
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
         }
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
@@ -241,14 +239,14 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.ParcelId = "No arcel yet";
+                plDrone.DroneParcelId = "No arcel yet";
                 MessageBox.Show("Drone sent to charge successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -265,18 +263,18 @@ namespace PL
             }
             catch (Exception exception)
             {
-                //MessageBox.Show(IdBox.Text);
                 MessageBox.Show(exception.Message);
             }
-            Close();
+            UpdateDrone();
+        }
+        private void UpdateDrone()
+        {
+            int droneIndex = drones.IndexOf(plDrone);
+            drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(plDrone.Id));
+            plDrone = drones[droneIndex];            
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            if (ActionsGrid.Visibility == Visibility.Visible)
-            {
-                int droneIndex = drones.IndexOf(plDrone);
-                drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(plDrone.Id));
-            }
             Close();
         }
     }

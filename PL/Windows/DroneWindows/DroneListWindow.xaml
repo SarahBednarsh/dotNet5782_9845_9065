@@ -21,14 +21,14 @@
                 <DataGridTextColumn x:Name="longitudeColumn" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="maxWeightColumn" Binding="{Binding MaxWeight}" Header="Max Weight" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="modelColumn" Binding="{Binding Model}" Header="Model" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding ParcelId}" Header="Parcel Id" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding DroneParcelId}" Header="Parcel Id" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="682,59,-4,268">
             <Grid>
                 <Label x:Name="StatusSelectorName" Content="Select Status" Foreground="#1f611f"  Margin="0,6,0,2"/>
-                <Button Content="ClearStatus" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearStatus_Click" />
+                <Button Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearStatus_Click" />
             </Grid>
             <ComboBox
     x:Name="StatusSelector" SelectionChanged="StatusSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -37,7 +37,7 @@
         <StackPanel Margin="682,153,-4,174">
             <Grid>
                 <Label x:Name="WeightSelectorName" Content="Select Weight" Foreground="#1f611f"  Margin="0,6,0,2"/>
-                <Button Content="ClearWeight" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearWeight_Click" />
+                <Button Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearWeight_Click" />
             </Grid>
             <ComboBox
                 x:Name="WeightSelector" SelectionChanged="WeightSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"

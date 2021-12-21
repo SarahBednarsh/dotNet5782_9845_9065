@@ -28,7 +28,7 @@
         <Button x:Name="Customers"
             Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="100" Width="100"
             ToolTip="MaterialDesignFloatingActionDarkButton"
-            Margin="538,195,162,139">
+            Margin="538,195,162,139" Click="Customers_Click">
             <Label Content="Customers" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
         </Button>
         <Button x:Name="Stations"
@@ -40,7 +40,7 @@
         <Button x:Name="Parcels"
             Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
             Height="100" Width="100"
-            ToolTip="MaterialDesignFloatingActionDarkButton" Margin="280,267,420,67">
+            ToolTip="MaterialDesignFloatingActionDarkButton" Margin="280,267,420,67" Click="Parcels_Click">
             <Label Content="Parcels" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
         </Button>
         <Button x:Name="Drones"

@@ -1,7 +1,5 @@
-﻿using BlApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,18 +15,14 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParceListWindow.xaml
+    /// Interaction logic for CustomerListWindow.xaml
     /// </summary>
-    public partial class ParceListWindow : Window
+    public partial class CustomerListWindow : Window
     {
-        private IBL bl;
-        private ObservableCollection<Parcel> parcels;
-        public ParceListWindow(IBL bl, ObservableCollection<Parcel> parcels)
+        public CustomerListWindow()
         {
             InitializeComponent();
-            this.bl = bl;
-            this.parcels = parcels;
-            DataContext = MainWindow.parcels;
+            DataContext = MainWindow.customers;
         }
     }
 }

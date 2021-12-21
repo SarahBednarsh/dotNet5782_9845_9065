@@ -13,12 +13,12 @@ namespace PL
             PL.Drone PoDrone = new PL.Drone()
             {
                 Id = BoDrone.Id,
-                Battery = BoDrone.Battery,
+                Battery = (int)BoDrone.Battery,
                 Latitude = BoDrone.Location.Latitude.ToString(),
                 Longitude = BoDrone.Location.Longitude.ToString(),
                 MaxWeight = (PL.WeightCategories)BoDrone.MaxWeight,
                 Model = BoDrone.Model,
-                ParcelId = BoDrone.Parcel == null ? "No parcel yet" : BoDrone.Parcel.Id.ToString(),
+                DroneParcelId = BoDrone.Parcel == null ? "No parcel yet" : BoDrone.Parcel.Id.ToString(),
                 Status = (PL.DroneStatuses)BoDrone.Status
             };
             return PoDrone;
@@ -29,16 +29,16 @@ namespace PL
         {
             PL.Parcel PoParcel = new PL.Parcel()
             {
-                Id = BoParcel.Id,
-                SenderId = BoParcel.Sender.Id,
-                TargetId = BoParcel.Target.Id,
-                Weight = (PL.WeightCategories)BoParcel.Weight,
-                Priority = (PL.Priorities)BoParcel.Priority,
-                DroneId = BoParcel.Drone.Id,
-                Creation = BoParcel.Creation,
-                Attribution = BoParcel.Attribution,
-                PickUP = BoParcel.PickUp,
-                Delivery = BoParcel.Delivery,
+                ParcelId = BoParcel.Id,
+                ParcelSenderId = BoParcel.Sender.Id,
+                ParcelTargetId = BoParcel.Target.Id,
+                ParcelWeight = (PL.WeightCategories)BoParcel.Weight,
+                ParcelPriority = (PL.Priorities)BoParcel.Priority,
+                ParcelDroneId = BoParcel.Drone==null? "No drone yet": BoParcel.Drone.Id.ToString(),
+                Creation = BoParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
+                Attribution = BoParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
+                PickUp = BoParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,
+                Delivery = BoParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
             };
             return PoParcel;
 
@@ -48,11 +48,11 @@ namespace PL
         {
             PL.Customer PoCustomer = new PL.Customer()
             {
-                Id = BoCustomer.Id,
-                Name = BoCustomer.Name,
-                PhoneNum = BoCustomer.PhoneNum,
-                Latitude = BoCustomer.Location.Latitude.ToString(),
-                Longitude = BoCustomer.Location.Longitude.ToString(),
+                CustomerId = BoCustomer.Id,
+                CustomerName = BoCustomer.Name,
+                CustomerPhoneNum = BoCustomer.PhoneNum,
+                CustomerLatitude = BoCustomer.Location.Latitude.ToString(),
+                CustomerLongitude = BoCustomer.Location.Longitude.ToString(),
                 AtCustomer = (from customer in BoCustomer.AtCustomer
                               select customer.Id).ToList(),
                 ToCustomer = (from customer in BoCustomer.ToCustomer

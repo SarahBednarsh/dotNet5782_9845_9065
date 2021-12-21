@@ -53,21 +53,21 @@
                 <ColumnDefinition Width="208*"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="54"/>
-            <TextBox IsEnabled="False" x:Name="IdBox" HorizontalAlignment="Center" Text="{Binding Id}"  TextWrapping="Wrap" Width="120" Margin="0,15,0,13" Grid.Column="1"/>
+            <TextBox IsEnabled="False" x:Name="IdBox" HorizontalAlignment="Center" Text="{Binding Id}" TextWrapping="Wrap" Width="120" Margin="0,15,0,13" Grid.Column="1"/>
             <Label x:Name="ModelLabel" Content="Model:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="76" Margin="73,0,0,0" Grid.Row="1"/>
             <TextBox x:Name="ModelBox" TextChanged="ModelBox_TextChanged" Text="{Binding Model}" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="120" Margin="0,17,0,17"/>
             <Label x:Name="WeightLabel" Content="Maximum weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="134" Margin="33,42,0,0" Grid.Row="3"/>
             <ComboBox IsEnabled="False" x:Name="WeightSelector" SelectedItem="{Binding MaxWeight}" HorizontalAlignment="Center" Width="120" Grid.Row="3" Grid.Column="1" Margin="0,29,0,25"/>
             <Label x:Name="BatteryLabel" Content="Battery:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Top" Height="26" Width="76" Margin="0,32,0,0" Grid.Row="2"/>
-            <TextBox IsEnabled="False" x:Name="BatteryBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="2" Text="Battery" TextWrapping="Wrap" Width="120" Margin="0,18,0,49"/>
+            <TextBox IsEnabled="False" x:Name="BatteryBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="2" Text="{Binding Battery}" TextWrapping="Wrap" Width="120" Margin="0,18,0,49"/>
             <Label x:Name="StatusLabel" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="94" Margin="55,32,0,0"/>
-            <ComboBox IsEnabled="False" x:Name="StatusSelector" HorizontalAlignment="Center" Width="120" Grid.Row="2" Margin="0,32,0,32" Grid.Column="1"/>
+            <ComboBox IsEnabled="False" x:Name="StatusSelector" SelectedItem="{Binding Status}" HorizontalAlignment="Center" Width="120" Grid.Row="2" Margin="0,32,0,32" Grid.Column="1"/>
             <Label x:Name="LongitudeLabel" Content="Longitude:" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Top" Height="26" Width="76" Margin="52,15,0,0"/>
-            <TextBox IsEnabled="False" x:Name="LongitudeBox" HorizontalAlignment="Center" Grid.Column="4" Text="Longitude" TextWrapping="Wrap" Width="120" Margin="0,10,0,28"/>
+            <TextBox IsEnabled="False" x:Name="LongitudeBox" HorizontalAlignment="Center" Grid.Column="4" Text="{Binding Longitude}" TextWrapping="Wrap" Width="120" Margin="0,10,0,28"/>
             <Label x:Name="LatitudeLabel" Content="Latitude:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Center" Height="26" Grid.Row="1" Width="76"/>
-            <TextBox IsEnabled="False" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="Latitude" TextWrapping="Wrap" Width="120" Margin="0,10,0,26"/>
+            <TextBox IsEnabled="False" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="{Binding Latitude}" TextWrapping="Wrap" Width="120" Margin="0,10,0,26"/>
             <Label x:Name="IdOfParcelLabel" Content="Parcel ID:" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Top" Height="26" Grid.Row="3" Width="76" Margin="90,10,0,0"/>
-            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="Parcel ID" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
+            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding ParcelId}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
             <Button IsEnabled="False" x:Name="Update" Click="Update_Click" Content="Update" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="160" Margin="43,0,0,0" Grid.ColumnSpan="2"/>
             <Button x:Name="Actions" Content="Actions" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="168,0,0,0" Grid.ColumnSpan="2"/>
             <Button Visibility="Visible" x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,0,0,0"/>

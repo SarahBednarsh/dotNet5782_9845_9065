@@ -30,6 +30,8 @@ namespace PL
 
         public static ObservableCollection<Drone> drones;
         public static ObservableCollection<Station> stations;
+        public static ObservableCollection<Parcel> parcels;
+        public static ObservableCollection<Customer> customers;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,8 +39,10 @@ namespace PL
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             stations = new ObservableCollection<Station>((from station in bl.ListStation()
                                                           select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
-            //new DroneListWindow(bl, drones).ShowDialog();
-            //new DroneWindow(bl, drones, drones.FirstOrDefault().Id).ShowDialog();
+            parcels = new ObservableCollection<Parcel>((from parcel in bl.ListParcel()
+                                                          select Adapter.ParcelBotoPo(bl.SearchParcel(parcel.Id))).ToList());
+            customers = new ObservableCollection<Customer>((from customer in bl.ListCustomer()
+                                                        select Adapter.CustomerBotoPo(bl.SearchCustomer(customer.Id))).ToList());
         }
 
 
@@ -64,8 +68,7 @@ namespace PL
 
         private void checkstation(object sender, RoutedEventArgs e)
         {
-            new StationListWindow(bl, stations).ShowDialog();
-            new ManagerWindow().ShowDialog();
+            new CustomerListWindow().ShowDialog();
         }
     }
 }

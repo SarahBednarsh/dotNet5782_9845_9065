@@ -33,5 +33,15 @@ namespace PL
         {
             new StationListWindow(MainWindow.bl, MainWindow.stations).ShowDialog();
         }
+
+        private void Parcels_Click(object sender, RoutedEventArgs e)
+        {
+            new ParceListWindow(MainWindow.bl, MainWindow.parcels).ShowDialog();
+        }
+
+        private void Customers_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerListWindow().ShowDialog();
+        }
     }
 }
