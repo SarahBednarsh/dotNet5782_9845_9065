@@ -23,12 +23,38 @@ namespace PL
     {
         private IBL bl;
         private ObservableCollection<Parcel> parcels;
+
         public ParceListWindow(IBL bl, ObservableCollection<Parcel> parcels)
         {
             InitializeComponent();
             this.bl = bl;
             this.parcels = parcels;
-            DataContext = MainWindow.parcels;
+            DataContext = parcels;
+            SenderSelector.ItemsSource = (from parcel in parcels
+                                          select parcel.ParcelSenderId).ToList();
+        }
+
+        private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex == -1)
+                return;
+            //else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
+            parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.ParcelSenderId).ToList().Find(x => x.Key == (int)(sender as ComboBox).SelectedItem);
+            //else
+            //  droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
+                                                                            // select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+        }
+
+        private void ClearSenderSelection_Click(object sender, RoutedEventArgs e)
+        {
+            SenderSelector.SelectedItem = -1;
+            SenderSelector.Text = "";
+            //if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
+            //{
+                parcelDataGrid.ItemsSource = parcels;
+                return;
+            }
+           // WeightSelector_SelectionChanged(WeightSelector, null);
         }
     }
-}
+
