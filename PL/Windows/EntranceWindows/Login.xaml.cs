@@ -75,7 +75,9 @@ namespace PL
         }
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            new ManagerWindow().ShowDialog();
+            new ManagerWindow().Show();
+            closeAllowed = true;
+            Close();
         }
     }
 }

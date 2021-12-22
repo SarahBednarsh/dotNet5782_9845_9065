@@ -51,20 +51,24 @@ namespace PL
             DataContext = plDrone;
             ActionsGrid.Visibility = Visibility.Visible;
 
-            IdBox.Text = plDrone.Id.ToString();
-            ModelBox.Text = plDrone.Model;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            WeightSelector.SelectedItem = plDrone.MaxWeight;
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            StatusSelector.SelectedItem = plDrone.Status;
-            LongitudeBox.Text = plDrone.Longitude.ToString();
-            LatitudeBox.Text = plDrone.Latitude.ToString();
-            IdOfParcelBox.Text = (plDrone.DroneParcelId != null) ? plDrone.DroneParcelId.ToString() : "No parcel yet";
+            //IdBox.Text = plDrone.Id.ToString();
+            //ModelBox.Text = plDrone.Model;
+            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            //WeightSelector.SelectedItem = plDrone.MaxWeight;
+            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            //StatusSelector.SelectedItem = plDrone.Status;
+            //LongitudeBox.Text = plDrone.Longitude.ToString();
+            //LatitudeBox.Text = plDrone.Latitude.ToString();
+            //IdOfParcelBox.Text = (plDrone.DroneParcelId != null) ? plDrone.DroneParcelId.ToString() : "No parcel yet";
 
             InitializeActionsButton(plDrone);
         }
         private void InitializeActionsButton(Drone drone)
         {
+            Actions.Click -= Charge_Click;
+            Actions.Click -= ReleaseCharge_Click;
+            Actions.Click -= Deliver_Click;
+            Actions.Click -= Pickup_Click;
             if (drone == null)
                 throw new ArgumentNullException("No drone");
             if (drone.Status == DroneStatuses.Available)
@@ -79,16 +83,19 @@ namespace PL
             {
                 Actions.Content = "Release charge";
                 Actions.Click += ReleaseCharge_Click;
+                Actions2.Visibility = Visibility.Hidden;
             }
             else if (bl.SearchDrone(drone.Id).Parcel.PickedUpAlready)
             {
                 Actions.Content = "Deliver parcel";
                 Actions.Click += Deliver_Click;
+                Actions2.Visibility = Visibility.Hidden;
             }
             else
             {
                 Actions.Content = "Pick up parcel";
                 Actions.Click += Pickup_Click;
+                Actions2.Visibility = Visibility.Hidden;
             }
         }
         private void IdBoxNew_TextChanged(object sender, TextChangedEventArgs e)
@@ -181,13 +188,13 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.PickUpAParcel(id);
+                UpdateDrone();
                 MessageBox.Show("Picked up parcel successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
@@ -195,13 +202,13 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.DeliverAParcel(id);
+                UpdateDrone();
                 MessageBox.Show("Delivered parcel successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void SendToDelivery_Click(object sender, RoutedEventArgs e)
         {
@@ -209,14 +216,13 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
-
+                UpdateDrone();
                 MessageBox.Show("Attributed parcel successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void ReleaseCharge_Click(object sender, RoutedEventArgs e)
         {
@@ -224,13 +230,13 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.ReleaseCharging(id);
+                UpdateDrone();
                 MessageBox.Show("Drone realeased from chraging successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
@@ -240,13 +246,13 @@ namespace PL
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
                 plDrone.DroneParcelId = "No arcel yet";
+                UpdateDrone();
                 MessageBox.Show("Drone sent to charge successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -259,23 +265,29 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.UpdateDroneModel(id, ModelBox.Text);
+                UpdateDrone();
                 MessageBox.Show("Updated model successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            UpdateDrone();
         }
         private void UpdateDrone()
         {
             int droneIndex = drones.IndexOf(plDrone);
             drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(plDrone.Id));
-            plDrone = drones[droneIndex];            
+            plDrone = drones[droneIndex];
+            InitializeActionsButton(plDrone);
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ActionsGrid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
