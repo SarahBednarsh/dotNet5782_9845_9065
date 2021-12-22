@@ -71,6 +71,21 @@ namespace BL
                 throw new KeyDoesNotExist("Station requested does not exist", exception);
             }
         }
+        public void DeleteDrone(int droneId)
+        {
+            Drone drone = SearchDrone(droneId);
+            if (drone.Status != DroneStatuses.Available)
+                throw new CannotDelete($"Drone is {drone.Status}, cannot delete");
+            try
+            {
+                dronesBL.RemoveAll(x => x.Id == drone.Id);
+                dalAP.DeleteDrone(droneId);
+            }
+            catch (DroneException exception)
+            {
+                throw new KeyDoesNotExist("No such drone", exception);
+            }
+        }
         public void UpdateDroneModel(int droneId, string newModel)
         {
             DO.Drone dalDrone;
@@ -140,6 +155,7 @@ namespace BL
             dalAP.ReleaseCharging(droneId);//in here it also updates the chargeslots in station 
 
         }
+
         public void AttributeAParcel(int droneId)
         {
             Drone drone;

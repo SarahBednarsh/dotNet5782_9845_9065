@@ -31,6 +31,21 @@ namespace BL
                 throw new KeyDoesNotExist("Sender or target don't exist", exception);
             }
         }
+        public void DeleteParcel(int parcelId)
+        {
+
+            IEnumerable<DroneToList> carryingParcel = ListDrone().Where(x => x.IdOfParcel == parcelId);
+            if (carryingParcel.Count() > 0)
+                throw new CannotDelete("Parcel is alreday on the way");
+            try
+            {
+                dalAP.DeleteParcel(parcelId);
+            }
+            catch (ParcelException exception)
+            {
+                throw new KeyDoesNotExist("No such parcel", exception);
+            }
+        }
         public Parcel SearchParcel(int parcelId)
         {
             try
