@@ -94,11 +94,8 @@ namespace BL
         }
         private IEnumerable<Parcel> YieldParcel() //create list of BL.Parcel
         {
-            IEnumerable<DO.Parcel> parcels = dalAP.YieldParcel();
-            foreach (DO.Parcel parcel in parcels)
-            {
-                yield return CreateParcel(parcel);
-            }
+            return from parcel in dalAP.YieldParcel()
+                   select CreateParcel(parcel);
         }
         public IEnumerable<ParcelToList> ListParcel()
         {
