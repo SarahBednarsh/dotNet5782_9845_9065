@@ -13,7 +13,6 @@ namespace BO
         public List<ParcelAtCustomer> ToCustomer;
         public override string ToString()
         {
-            //return base.ToString();
             string atCustomer = "";
             foreach (ParcelAtCustomer parcel in AtCustomer)
                 atCustomer += parcel.ToString();

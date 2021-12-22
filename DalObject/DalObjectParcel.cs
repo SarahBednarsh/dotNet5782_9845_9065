@@ -20,9 +20,7 @@ namespace Dal
                 throw new ParcelException("Customer to delete does not exist.");
             DataSource.Parcels.Remove(DataSource.Parcels.Find(x => x.Id == id));
         }
-        /// <summary>
-        /// schedules a parcel- updates the parcel scheduling time
-        /// </summary>
+        
         public void ScheduleParcel(int parcelId)
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
@@ -32,9 +30,7 @@ namespace Dal
             tempParcel.Scheduled = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
         }
-        /// <summary>
-        /// picks up a parcel- first updates the parcel pickup time
-        /// </summary>
+       
         public void PickUpParcel(int parcelId)
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
@@ -45,10 +41,6 @@ namespace Dal
             DataSource.Parcels[indexParcel] = tempParcel;
         }
 
-        /// <summary>
-        /// delivers a parcel to customer - updates the parcel delivery time
-        /// </summary>
-        /// <param name="parcelId"></param>
         public void DeliverToCustomer(int parcelId)
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
@@ -69,10 +61,7 @@ namespace Dal
             return new List<Parcel>(DataSource.Parcels);
         }
 
-        /// <summary>
-        /// creates and returns a list of parcels without an attributed drone
-        /// </summary>
-        /// <returns></returns>
+       
         public IEnumerable<Parcel> ParcelsWithNoDrone()
         {
             List<Parcel> noDrone = new List<Parcel>();
