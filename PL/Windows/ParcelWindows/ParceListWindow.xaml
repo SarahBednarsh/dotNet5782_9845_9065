@@ -9,41 +9,20 @@
         SizeToContent="WidthAndHeight">
     <Grid>
         <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="10,144,10,77" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding ParcelId}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="senderIdColumn" Binding="{Binding ParcelSenderId}" Header="Sender Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="targetIdColumn" Binding="{Binding ParcelTargetId}" Header="Target Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="weightColumn" Binding="{Binding ParcelWeight}" Header="Weight" Width="SizeToHeader" IsReadOnly="True"/>
-
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                            <Expander Header="Dates:" HorizontalAlignment="Stretch" Background="#FFE5E5E5" VerticalAlignment="Stretch">
-                                <Grid Background="#FFE5E5E5">
-                                    <StackPanel>
-                                        <TextBlock Text="Creation:"/>
-                                        <TextBlock Text="{Binding Creation}"/>
-                                        <TextBlock Text="Attribution:"/>
-                                        <TextBlock Text="{Binding Attribution}"/>
-                                        <TextBlock Text="PickUp:"/>
-                                        <TextBlock Text="{Binding PickUp}"/>
-                                        <TextBlock Text="Delivery:"/>
-                                        <TextBlock Text="{Binding Delivery}"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Expander>
-                    </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding ParcelPriority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="droneIdColumn" Binding="{Binding ParcelDroneId}" Header="Drone Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <!--`<DataGridTextColumn x:Name="creationColumn" Binding ="{Binding Creation}" Header="Creation time" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="attributionColumn" Binding ="{Binding Attribution}" Header="Attribution time" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="pickUpColumn" Binding ="{Binding PickUp}" Header="PickUp time" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="deliveryColumn" Binding ="{Binding Delivery}" Header="Delivery time" Width="SizeToHeader" IsReadOnly="True"/>-->
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,53,0,0" VerticalAlignment="Top" Height="30" Width="74"/>
+                        <DataGridTextColumn x:Name="pTLIdColumn" Binding="{Binding PTLId}" Header="Id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLPriorityColumn" Binding="{Binding PTLPriority}" Header="Priority" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLSenderNameColumn" Binding="{Binding PTLSenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLTargetNameColumn" Binding="{Binding PTLTargetName}" Header="Target Name" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLWeightColumn" Binding="{Binding PTLWeight}" Header="Weight" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,53,0,0" VerticalAlignment="Top" Height="30" Width="74"/>
         <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="531,53,149,349" Width="120"/>
         <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
         <StackPanel Margin="75,19,526,329">

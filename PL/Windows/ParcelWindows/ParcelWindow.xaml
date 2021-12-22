@@ -1,0 +1,17 @@
+﻿<Window x:Class="PL.ParcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelWindow" Height="450" Width="800">
+    <Grid>
+        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" DataContext="plParcel" BindingGroup="{Binding Source}">
+            <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="54"/>
+            <TextBox x:Name="IdBox" HorizontalAlignment="Center" Text="{Binding PTLId}" TextWrapping="Wrap" Width="120" Margin="0,15,0,13" Grid.Column="1"/>
+            <Label x:Name="SenderLabel" Content="Sender:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="76" Margin="73,0,0,0" Grid.Row="1"/>
+            <TextBox x:Name="ModelBox" Text="{Binding PTLSender}" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="120" Margin="0,17,0,17"/>
+        </Grid>
+    </Grid>
+</Window>
