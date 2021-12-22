@@ -26,6 +26,26 @@ namespace BL
             }
 
         }
+        public void DeleteCustomer(int customerId)
+        {
+            Customer customer = SearchCustomer(customerId);
+            IEnumerable<Parcel> onTheWayToCustomer = from drone in ListDrone()
+                                                     where drone.Status == DroneStatuses.Delivering
+                                                     let parcel = SearchParcel(drone.IdOfParcel)
+                                                     where parcel.Target.Id == customerId
+                                                     select parcel;
+            if (onTheWayToCustomer.Count() > 0)
+                throw new CannotDelete("There are parcels on their way to customer, cannot delete");
+            try
+            {
+
+                dalAP.DeleteCustomer(customerId);
+            }
+            catch (CustomerException exception)
+            {
+                throw new KeyDoesNotExist("No such customer", exception);
+            }
+        }
         public void UpdateCustomerInfo(int customerId, string name, string phone)
         {
             try

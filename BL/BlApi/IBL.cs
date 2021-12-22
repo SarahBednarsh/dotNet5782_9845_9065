@@ -126,6 +126,10 @@ namespace BlApi
         public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
         public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
         public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
+        void DeleteParcel(int parcelId);
+        void DeleteDrone(int droneId);
+        void DeleteCustomer(int customerId);
+        void DeleteStation(int stationId);
         #endregion
 
     }

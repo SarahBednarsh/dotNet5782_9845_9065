@@ -18,6 +18,20 @@ namespace BL
         {
             dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
         }
+        public void DeleteStation(int stationId)
+        {
+            Station station = SearchStation(stationId);
+            if (station.Charging.Count() > 0)
+                throw new CannotDelete("There are drones charging, cannot delete");
+            try
+            {
+                dalAP.DeleteCustomer(stationId);
+            }
+            catch (StationException exception)
+            {
+                throw new KeyDoesNotExist("No such station", exception);
+            }
+        }
         public void UpdateStationInfo(int stationId, string name, int chargingSlots)
         {
             Station station;
