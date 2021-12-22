@@ -23,10 +23,7 @@ namespace Dal
             DataSource.Drones.Remove(DataSource.Drones.Find(x => x.Id == id));
         }
 
-        /// <summary>
-        /// Attributes a drone to a parcel by finding the drone, making sure it is available,
-        /// finding the parcel and addig the drone ID to it
-        /// </summary>
+       
         public void UpdateParcelsDrone(int parcelId, int droneId)
         {
             Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
@@ -38,11 +35,6 @@ namespace Dal
             DataSource.Parcels[indexParcel] = tempParcel;
         }
 
-        /// <summary>
-        /// sends a drone to charge -adds a drone charge to the log, and updates the drone and station accordingly
-        /// </summary>
-        /// <param name="droneId"></param>
-        /// <param name="stationId"></param>
         public void DroneToCharge(int droneId, int stationId)
         {
 

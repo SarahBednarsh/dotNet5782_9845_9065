@@ -239,7 +239,7 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.DroneParcelId = "No arcel yet";
+                plDrone.DroneParcelId = "No parcel yet";
                 MessageBox.Show("Drone sent to charge successfully");
             }
             catch (Exception exception)
