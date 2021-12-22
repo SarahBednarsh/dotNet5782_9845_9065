@@ -8,7 +8,7 @@
         Title="ParceListWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
     <Grid>
-        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,144,10,77" RowDetailsVisibilityMode="VisibleWhenSelected" >
+        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="10,144,10,77" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding ParcelId}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="senderIdColumn" Binding="{Binding ParcelSenderId}" Header="Sender Id" Width="SizeToHeader" IsReadOnly="True"/>
@@ -46,14 +46,23 @@
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,53,0,0" VerticalAlignment="Top" Height="30" Width="74"/>
         <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="531,53,149,349" Width="120"/>
         <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
-        <StackPanel Margin="75,19,551,329">
+        <StackPanel Margin="75,19,526,329">
             <Grid>
-                <Label x:Name="SenderSelectorText" Content="Select Sender" Foreground="#1f611f"  Margin="0,6,0,2"/>
+                <Label x:Name="SenderSelectorText" Content="Select Sender" Foreground="#1f611f"  Margin="6,6,-6,2"/>
                 <Button x:Name="ClearSenderSelection" Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearSenderSelection_Click" />
             </Grid>
             <ComboBox
                 x:Name="SenderSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="171" SelectionChanged="SenderSelector_SelectionChanged" />
+                IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="183" SelectionChanged="SenderSelector_SelectionChanged" />
+        </StackPanel>
+        <StackPanel Margin="269,19,332,329">
+            <Grid>
+                <Label x:Name="TargetSelectorText" Content="Select Target" Foreground="#1f611f"  Margin="6,6,-6,2"/>
+                <Button x:Name="ClearTargetSelection" Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearTargetSelection_Click"/>
+            </Grid>
+            <ComboBox
+                x:Name="TargetSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="183" SelectionChanged="TargetSelector_SelectionChanged" />
         </StackPanel>
 
 

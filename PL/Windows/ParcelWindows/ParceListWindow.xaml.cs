@@ -32,29 +32,60 @@ namespace PL
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
                                           select parcel.ParcelSenderId).ToList();
+            TargetSelector.ItemsSource = (from parcel in parcels
+                                          select parcel.ParcelTargetId).ToList();
         }
 
         private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
-            //else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-            parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.ParcelSenderId).ToList().Find(x => x.Key == (int)(sender as ComboBox).SelectedItem);
-            //else
-            //  droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
-                                                                            // select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+            else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
+                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.ParcelSenderId).ToList()
+                                                .Find(x => x.Key == (int)(sender as ComboBox).SelectedItem);
+            else
+                parcelDataGrid.ItemsSource = (from parcel in parcels
+                                              where parcel.ParcelSenderId == (int)SenderSelector.SelectedItem && parcel.ParcelTargetId == (int)TargetSelector.SelectedItem
+                                              select parcel).ToList();
+        }
+
+
+
+        private void TargetSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex == -1)
+                return;
+            else if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
+                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.ParcelTargetId).ToList()
+                                                .Find(x => x.Key == (int)(sender as ComboBox).SelectedItem);
+            else
+                parcelDataGrid.ItemsSource = (from parcel in parcels
+                                              where parcel.ParcelTargetId == (int)TargetSelector.SelectedItem && parcel.ParcelSenderId == (int)SenderSelector.SelectedItem
+                                              select parcel).ToList();
         }
 
         private void ClearSenderSelection_Click(object sender, RoutedEventArgs e)
         {
             SenderSelector.SelectedItem = -1;
             SenderSelector.Text = "";
-            //if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-            //{
+            if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
+            {
                 parcelDataGrid.ItemsSource = parcels;
                 return;
             }
-           // WeightSelector_SelectionChanged(WeightSelector, null);
+            TargetSelector_SelectionChanged(TargetSelector, null);
+        }
+        private void ClearTargetSelection_Click(object sender, RoutedEventArgs e)
+        {
+            TargetSelector.SelectedItem = -1;
+            TargetSelector.Text = "";
+            if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
+            {
+                parcelDataGrid.ItemsSource = parcels;
+                return;
+            }
+            SenderSelector_SelectionChanged(SenderSelector, null);
         }
     }
+}
 

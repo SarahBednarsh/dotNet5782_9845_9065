@@ -38,22 +38,18 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem)
-                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            else
-                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
-                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+                droneDataGrid.ItemsSource = (from drone in drones where drone.Status == (DroneStatuses)StatusSelector.SelectedItem select drone).ToList();
+            else droneDataGrid.ItemsSource = (from drone in drones where drone.Status == (DroneStatuses)StatusSelector.SelectedItem && 
+                                              drone.MaxWeight==(WeightCategories)WeightSelector.SelectedItem select drone).ToList();
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
-                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            else
-                droneDataGrid.ItemsSource = new ObservableCollection<Drone>((from drone in bl.ListDroneConditional(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem && x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)
-                                                                             select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
+                droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem select drone).ToList();
+            else droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem && 
+                                              drone.Status == (DroneStatuses)StatusSelector.SelectedItem select drone).ToList();
         }
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
