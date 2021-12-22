@@ -246,19 +246,17 @@ namespace BL
         }
         public IEnumerable<DroneToList> ListDrone()
         {
-            foreach (DroneToList drone in dronesBL)
-            {
-                yield return new DroneToList
-                {
-                    Id = drone.Id,
-                    Model = drone.Model,
-                    Location = LocationStaticClass.InitializeLocation(drone.Location),
-                    Battery = drone.Battery,
-                    IdOfParcel = drone.IdOfParcel,
-                    MaxWeight = drone.MaxWeight,
-                    Status = drone.Status
-                };
-            }
+            return from DroneToList drone in dronesBL
+                   select new DroneToList
+                   {
+                       Id = drone.Id,
+                       Model = drone.Model,
+                       Location = LocationStaticClass.InitializeLocation(drone.Location),
+                       Battery = drone.Battery,
+                       IdOfParcel = drone.IdOfParcel,
+                       MaxWeight = drone.MaxWeight,
+                       Status = drone.Status
+                   };
         }
         public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate)
         {

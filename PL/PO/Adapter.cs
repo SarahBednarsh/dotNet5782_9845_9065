@@ -22,8 +22,6 @@ namespace PL
                 Status = (PL.DroneStatuses)BoDrone.Status
             };
             return PoDrone;
-
-
         }
         static public PL.Parcel ParcelBotoPo(BO.Parcel BoParcel)
         {

@@ -27,7 +27,7 @@ namespace DalApi
 
             try
             {
-                Assembly.Load(dalPackageName);
+                Assembly.Load (dalPackageName);
             }
             catch (Exception ex)
             {

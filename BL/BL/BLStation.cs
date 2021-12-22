@@ -72,25 +72,31 @@ namespace BL
         }
         private IEnumerable<Station> YieldStation()
         {
-            IEnumerable<DO.Station> stations = dalAP.YieldStation();
-            foreach (DO.Station station in stations)
-            {
-                yield return CreateStation(station);
-            }
+            return from station in dalAP.YieldStation()
+                   select CreateStation(station);
         }
         public IEnumerable<StationToList> ListStation()
         {
-            IEnumerable<DO.Station> stations = dalAP.YieldStation();
-            foreach (DO.Station station in stations)
-            {
-                yield return new StationToList
+            return from station in dalAP.YieldStation()
+                   select new StationToList
                 {
-                    Id = station.Id,
+                Id = station.Id,
                     Name = station.Name,
                     OpenChargeSlots = station.ChargeSlots,
                     UsedChargeSlots = CreateStation(station).Charging.Count()
                 };
-            }
+
+            //IEnumerable < DO.Station > stations = dalAP.YieldStation();
+            //foreach (DO.Station station in stations)
+            //{
+            //    yield return new StationToList
+            //    {
+            //        Id = station.Id,
+            //        Name = station.Name,
+            //        OpenChargeSlots = station.ChargeSlots,
+            //        UsedChargeSlots = CreateStation(station).Charging.Count()
+            //    };
+            //}
         }
         //public IEnumerable<StationToList> ListStationAvailable()
         //{

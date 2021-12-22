@@ -17,6 +17,7 @@ namespace PL
         static readonly DependencyProperty AtCustomerProperty = DependencyProperty.Register("AtCustomer", typeof(List<int>), typeof(Drone));
         static readonly DependencyProperty ToCustomerProperty = DependencyProperty.Register("ToCustomer", typeof(List<int>), typeof(Drone));
 
+
         public int CustomerId { get => (int)GetValue(CustomerIdProperty); set => SetValue(CustomerIdProperty, value); }
         public string CustomerName { get => (string)GetValue(CustomerNameProperty); set => SetValue(CustomerNameProperty, value); }
         public string CustomerPhoneNum { get => (string)GetValue(CustomerPhoneNumProperty); set => SetValue(CustomerPhoneNumProperty, value); }
@@ -24,6 +25,10 @@ namespace PL
         public string CustomerLatitude { get => (string)GetValue(CustomerLatitudeProperty); set => SetValue(CustomerLatitudeProperty, value); }
         public List<int> AtCustomer { get => (List<int>)GetValue(AtCustomerProperty); set => SetValue(AtCustomerProperty, value); }
         public List<int> ToCustomer { get => (List<int>)GetValue(ToCustomerProperty); set => SetValue(ToCustomerProperty, value); }
+        //public int Delivered { get; set; }
+        //public int Sent { get; set; }
+        //public int Got { get; set; }
+        //public int OnTheirWay { get; set; }
 
     }
 }

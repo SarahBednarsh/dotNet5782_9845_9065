@@ -58,11 +58,8 @@ namespace BL
         }
         private IEnumerable<Customer> YieldCustomer() //return list of BL customers
         {
-            IEnumerable<DO.Customer> customers = dalAP.YieldCustomer();
-            foreach (DO.Customer customer in customers)
-            {
-                yield return CreateCustomer(customer);
-            }
+            return from customer in dalAP.YieldCustomer()
+                   select CreateCustomer(customer);
         }
         private Customer CreateCustomer(DO.Customer old) //convert DO.Customer to BL.Customer
         {
@@ -108,14 +105,17 @@ namespace BL
         }
         public IEnumerable<CustomerToList> ListCustomer()
         {
-            foreach (Customer customer in YieldCustomer())
-            {
-                int delivered = customer.AtCustomer.FindAll(x => x.State == States.Delivered).Count;
-                int sent = customer.AtCustomer.FindAll(x => x.State != States.Delivered).Count;
-                int got = customer.ToCustomer.FindAll(x => x.State == States.Delivered).Count;
-                int onTheirWay = customer.ToCustomer.FindAll(x => x.State != States.Delivered).Count;
-                yield return new CustomerToList { Id = customer.Id, Name = customer.Name, PhoneNum = customer.PhoneNum, Delivered = delivered, Got = got, OnTheirWay = onTheirWay, Sent = sent };
-            }
+            return from Customer customer in YieldCustomer()
+                   select new CustomerToList
+                   {
+                       Id = customer.Id,
+                       Name = customer.Name,
+                       PhoneNum = customer.PhoneNum,
+                       Delivered = customer.AtCustomer.FindAll(x => x.State == States.Delivered).Count,
+                       Got = customer.AtCustomer.FindAll(x => x.State != States.Delivered).Count,
+                       OnTheirWay = customer.ToCustomer.FindAll(x => x.State != States.Delivered).Count,
+                       Sent = customer.AtCustomer.FindAll(x => x.State != States.Delivered).Count
+                   };
         }
         public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate)
         {
