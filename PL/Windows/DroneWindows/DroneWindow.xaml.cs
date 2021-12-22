@@ -25,6 +25,7 @@ namespace PL
     {
         private readonly IBL bl;
         private Drone plDrone;
+
         //private int droneIndex;
         ObservableCollection<Drone> drones;
         /// <summary>
@@ -285,9 +286,5 @@ namespace PL
             Close();
         }
 
-        private void ActionsGrid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
     }
 }
