@@ -28,8 +28,8 @@ namespace PL
             PL.Parcel PoParcel = new PL.Parcel()
             {
                 ParcelId = BoParcel.Id,
-                ParcelSenderId = BoParcel.Sender.Id,
-                ParcelTargetId = BoParcel.Target.Id,
+                ParcelSender = new CustomerInParcel { Id=BoParcel.Sender.Id, Name = BoParcel.Sender.Name },
+                ParcelTarget = new CustomerInParcel { Id = BoParcel.Target.Id, Name = BoParcel.Target.Name },
                 ParcelWeight = (PL.WeightCategories)BoParcel.Weight,
                 ParcelPriority = (PL.Priorities)BoParcel.Priority,
                 ParcelDroneId = BoParcel.Drone==null? "No drone yet": BoParcel.Drone.Id.ToString(),
@@ -39,8 +39,17 @@ namespace PL
                 Delivery = BoParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
             };
             return PoParcel;
-
-
+        }
+        static public PL.ParcelToList ParcelToListBotoPo(BO.ParcelToList BoParcel)
+        {
+            return new PL.ParcelToList()
+            {
+                PTLId = BoParcel.Id,
+                PTLSenderName = BoParcel.SenderName,
+                PTLTargetName = BoParcel.TargetName,
+                PTLWeight = (PL.WeightCategories)BoParcel.Weight,
+                PTLPriority = (PL.Priorities)BoParcel.Priority,
+            };
         }
         static public PL.Customer CustomerBotoPo(BO.Customer BoCustomer)
         {

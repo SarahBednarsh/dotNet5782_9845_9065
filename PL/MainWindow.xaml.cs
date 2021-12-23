@@ -30,7 +30,7 @@ namespace PL
 
         public static ObservableCollection<Drone> drones;
         public static ObservableCollection<Station> stations;
-        public static ObservableCollection<Parcel> parcels;
+        public static ObservableCollection<ParcelToList> parcels;
         public static ObservableCollection<Customer> customers;
         public MainWindow()
         {
@@ -39,8 +39,8 @@ namespace PL
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
             stations = new ObservableCollection<Station>((from station in bl.ListStation()
                                                           select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
-            parcels = new ObservableCollection<Parcel>((from parcel in bl.ListParcel()
-                                                          select Adapter.ParcelBotoPo(bl.SearchParcel(parcel.Id))).ToList());
+            parcels = new ObservableCollection<ParcelToList>((from parcel in bl.ListParcel()
+                                                          select Adapter.ParcelToListBotoPo(parcel)).ToList());
             customers = new ObservableCollection<Customer>((from customer in bl.ListCustomer()
                                                         select Adapter.CustomerBotoPo(bl.SearchCustomer(customer.Id))).ToList());
         }
