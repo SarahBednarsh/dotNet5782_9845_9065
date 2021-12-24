@@ -66,8 +66,21 @@ namespace PL
                               select customer.Id).ToList()
             };
             return PoCustomer;
+        }
 
-
+        static public PL.CustomerToList CustomerToListBotoPo(BO.CustomerToList BoCustomer)
+        {
+            PL.CustomerToList PoCustomerToList = new PL.CustomerToList()
+            {
+                CustomerToListId = BoCustomer.Id,
+                CustomerToListName = BoCustomer.Name,
+                CustomerToListPhoneNum = BoCustomer.PhoneNum,
+                Delivered = BoCustomer.Delivered,
+                Sent = BoCustomer.Sent,
+                Got = BoCustomer.Got,
+                OnTheirWay = BoCustomer.OnTheirWay
+            };
+            return PoCustomerToList;
         }
         static public PL.Station StationBotoPo(BO.Station BoStation)
         {

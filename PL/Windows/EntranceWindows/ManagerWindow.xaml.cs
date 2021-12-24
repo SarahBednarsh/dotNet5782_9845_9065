@@ -41,7 +41,7 @@ namespace PL
 
         private void Customers_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow().ShowDialog();
+            new CustomerListWindow(MainWindow.bl, MainWindow.customers).ShowDialog();
         }
     }
 }
