@@ -7,11 +7,63 @@
         mc:Ignorable="d"
         Title="ParcelWindow" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" DataContext="plParcel" BindingGroup="{Binding Source}">
-            <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="54"/>
-            <TextBox x:Name="IdBox" HorizontalAlignment="Center" Text="{Binding PTLId}" TextWrapping="Wrap" Width="120" Margin="0,15,0,13" Grid.Column="1"/>
-            <Label x:Name="SenderLabel" Content="Sender:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="76" Margin="73,0,0,0" Grid.Row="1"/>
-            <TextBox x:Name="ModelBox" Text="{Binding PTLSender}" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="120" Margin="0,17,0,17"/>
+        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" BindingGroup="{Binding Source}">
+            <Grid Margin="20,0,518,0">
+                <StackPanel>
+                    <Border BorderThickness="30"></Border>
+                    <DockPanel>
+                        <Label x:Name="IdLabel" Content="ID:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Id" Content="{Binding ParcelId}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="SenderLabel" Content="Sender:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Sender" Content="{Binding ParcelSender}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="TargetLabel" Content="Target:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Target" Content="{Binding ParcelTarget}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="WeightLabel" Content="Weight:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Weight" Content="{Binding ParcelWeight}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="PriorityLabel" Content="Priority:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Priority" Content="{Binding ParcelPriority}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="DroneLabel" Content="Drone:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Drone" Content="{Binding ParcelDrone}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="CreationLabel" Content="Creation time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Creation" Content="{Binding Creation}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="AttributionLabel" Content="Attribution time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Attribution" Content="{Binding Attribution}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="PickUpLabel" Content="PickUp time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="PickUp" Content="{Binding PickUp}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label x:Name="DeliveryLabel" Content="Delivery time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Delivery" Content="{Binding Delivery}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    </DockPanel>
+
+
+                </StackPanel>
+
+            </Grid>
+            <Grid x:Name="ButtonsForActions" Margin="319,93,236,0" >
+                <Button x:Name="Actions" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80"/>
+
+                <!--<Button Content="Pick up Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>
+                <Button Content="Deliver Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>
+                <Button Content="Delete Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>-->
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>
