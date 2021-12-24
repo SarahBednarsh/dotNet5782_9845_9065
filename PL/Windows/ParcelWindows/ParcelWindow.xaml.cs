@@ -12,7 +12,6 @@ using System.Collections.ObjectModel;
 using BlApi;
 using System.Linq;
 using System;
-
 namespace PL
 {
     /// <summary>
@@ -23,6 +22,7 @@ namespace PL
         private readonly IBL bl;
         ObservableCollection<ParcelToList> parcels;
         private Parcel plParcel;
+        int index;
 
         public ParcelWindow(IBL bl, ObservableCollection<ParcelToList> parcels, int parcelId)
         {
@@ -31,17 +31,10 @@ namespace PL
             this.parcels = parcels;
             plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelId));
             DataContext = plParcel;
-            //ActionsGrid.Visibility = Visibility.Visible;
+            index = parcels.IndexOf(parcels.Where(x => x.PTLId == plParcel.ParcelId).FirstOrDefault());
+                //ActionsGrid.Visibility = Visibility.Visible;
+            InitializeActionsButton(plParcel);
 
-            //IdBox.Text = plDrone.Id.ToString();
-            //ModelBox.Text = plDrone.Model;
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //WeightSelector.SelectedItem = plDrone.MaxWeight;
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            //StatusSelector.SelectedItem = plDrone.Status;
-            //LongitudeBox.Text = plDrone.Longitude.ToString();
-            //LatitudeBox.Text = plDrone.Latitude.ToString();
-            //IdOfParcelBox.Text = (plDrone.DroneParcelId != null) ? plDrone.DroneParcelId.ToString() : "No parcel yet";
 
             //InitializeActionsButton(plDrone);
         }
@@ -71,17 +64,48 @@ namespace PL
 
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
-            //bl.DeliverAParcel();
+            //do we need try and catch here? cause if it entered here there should always be a drone
+            //int droneId;
+            //try
+            //{
+            //    droneId = Int32.Parse(plParcel.ParcelDroneId);
+            //}
+            //catch 
+            bl.DeliverAParcel(Int32.Parse(plParcel.ParcelDroneId));
+            parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.ParcelId).FirstOrDefault());
         }
 
         private void PickUp_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //do we need try and catch here? cause if it entered here there should always be a drone
+                bl.PickUpAParcel(Int32.Parse(plParcel.ParcelDroneId));
+                parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.ParcelId).FirstOrDefault());
+            }
+            catch(BO.NotEnoughBattery ex)
+            {
+                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+            }
+            catch (BO.KeyDoesNotExist ex)
+            {
+                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+            }
+            catch (BO.CannotPickUp ex)
+            {
+                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBoxResult mbResult = MessageBox.Show($"Are you sure you want to delete this parcel?", "DELETE PARCEL", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (mbResult == MessageBoxResult.Yes)
+            {
+                parcels.Remove(parcels[index]);
+                bl.DeleteParcel(plParcel.ParcelId);
+                Close();
+            }
         }
 
         //private void InitializeActionsButton(Drone drone)
