@@ -13,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL
 {
     /// <summary>
@@ -39,6 +38,26 @@ namespace PL
                                           select parcel.PTLSenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.PTLTargetName).ToList();
+
+
+            //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
+
+            ////Implement grouping through LINQ queries
+            //var query = from item in parcels
+            //            group item by item.Range into g
+            //            select new { GroupName = g.Key, Items = g };
+
+            ////Populate Mountains grouped collection with results of the query
+            //foreach (var g in query)
+            //{
+            //    GroupInfoCollection<Mountain> info = new GroupInfoCollection<Mountain>();
+            //    info.Key = g.GroupName;
+            //    foreach (var item in g.Items)
+            //    {
+            //        info.Add(item);
+            //    }
+            //    mountains.Add(info);
+            //}
         }
 
         private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
