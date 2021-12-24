@@ -54,9 +54,9 @@ namespace PL
 
             //IdBox.Text = plDrone.Id.ToString();
             //ModelBox.Text = plDrone.Model;
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             //WeightSelector.SelectedItem = plDrone.MaxWeight;
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             //StatusSelector.SelectedItem = plDrone.Status;
             //LongitudeBox.Text = plDrone.Longitude.ToString();
             //LatitudeBox.Text = plDrone.Latitude.ToString();

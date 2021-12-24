@@ -25,15 +25,40 @@ namespace PL
     {
         private readonly IBL bl;
         private Customer plCustomer;
-        ObservableCollection<CustomerToList> customers;
-        public CustomerWindow(IBL bl, ObservableCollection<CustomerToList> customers, int customerId)
+        private int index;
+        public CustomerWindow(IBL bl, int customerId)
         {
             InitializeComponent();
             this.bl = bl;
-            this.customers = customers;
             plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(customerId));
+            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x=>x.CustomerToListId==customerId).FirstOrDefault());
             DataContext = plCustomer;
             actionsGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int.TryParse(idBox.Text, out int id);
+                bl.UpdateCustomerInfo(id, nameBox.Text, phoneBox.Text);
+                MainWindow.customers[index] = Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == plCustomer.CustomerId).FirstOrDefault());
+                plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(plCustomer.CustomerId));
+                MessageBox.Show("Updated successfully");
+            }
+            catch(Exception exception)
+            { MessageBox.Show(exception.Message); }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void parcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBox list = sender as ListBox;
+            new ParcelWindow(bl, MainWindow.parcels, (int)list.SelectedItem).Show();
         }
     }
 }
