@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
+using System.Collections.ObjectModel;
+using BlApi;
+
 
 namespace PL
 {
@@ -19,10 +23,21 @@ namespace PL
     /// </summary>
     public partial class CustomerListWindow : Window
     {
-        public CustomerListWindow()
+        private IBL bl;
+        private ObservableCollection<CustomerToList> customers;
+        public CustomerListWindow(IBL bl, ObservableCollection<CustomerToList> customers)
         {
             InitializeComponent();
-            DataContext = MainWindow.customers;
+            this.bl = bl;
+            this.customers = customers;
+            DataContext = this.customers;
+        }
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            CustomerToList c = cell.DataContext as CustomerToList;
+            //int droneIndex = drones.IndexOf(d);
+            new CustomerWindow(bl, customers, c.CustomerToListId).ShowDialog();
         }
     }
 }

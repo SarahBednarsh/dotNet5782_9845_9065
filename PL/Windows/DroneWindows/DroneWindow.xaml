@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.DroneWindow"
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800"
-    SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight">
     <Grid>
 
         <Grid x:Name="AddGrid" Visibility="Hidden">

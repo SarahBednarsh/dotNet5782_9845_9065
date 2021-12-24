@@ -8,12 +8,19 @@
         Title="CustomerListWindow" Height="450" Width="800">
     <Grid>
         <DataGrid x:Name="customerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="78,60,103.6,160" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerId}" Header="Customer Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerLatitudeColumn" Binding="{Binding CustomerLatitude}" Header="Customer Latitude" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerLongitudeColumn" Binding="{Binding CustomerLongitude}" Header="Customer Longitude" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerPhoneNumColumn" Binding="{Binding CustomerPhoneNum}" Header="Customer Phone Num" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerToListId}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerToListName}" Header="Name" Width="SizeToHeader"  IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerPhoneNumeColumn" Binding="{Binding CustomerToListPhoneNum}" Header="Phone No." Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerDelivered" Binding="{Binding Delivered}" Header="Delivered" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerSent" Binding="{Binding Sent}" Header="Customer Sent" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerGot" Binding="{Binding Got}" Header="Customer Got" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerOnTheirWay" Binding="{Binding OnTheirWay}" Header="OnTheirWay" Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
