@@ -13,8 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Globalization;
 namespace PL
 {
+    public class Parcels : ObservableCollection<ParcelToList>
+    {
+        
+        // Creating the Tasks collection in this way enables data binding from XAML.
+    }
     /// <summary>
     /// Interaction logic for ParceListWindow.xaml
     /// </summary>
@@ -31,14 +38,22 @@ namespace PL
         public ParceListWindow(IBL bl, ObservableCollection<ParcelToList> parcels)
         {
             InitializeComponent();
+            Parcels _parcels = (Parcels)this.Resources["parcels"];
             this.bl = bl;
             this.parcels = parcels;
+            _parcels = (Parcels)parcels;//might change the list and thats wrong
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
                                           select parcel.PTLSenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.PTLTargetName).ToList();
-
+            ICollectionView cvParcels = CollectionViewSource.GetDefaultView(dataGrid1.ItemsSource);
+            if (cvParcels.CanGroup == true)
+            {
+                cvParcels.GroupDescriptions.Clear();
+                cvParcels.GroupDescriptions.Add(new PropertyGroupDescription("SenderName"));
+                //cvTasks.GroupDescriptions.Add(new PropertyGroupDescription("Complete"));
+            }
 
             //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
 
@@ -66,21 +81,19 @@ namespace PL
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
             {
-                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLSenderName).ToList()
-                                                .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
-                //parcelDataGrid.ItemsSource = from item in parcels
-                //          group item by item.PTLSenderName
-                //         into g
-                //          orderby g.Key
-                //          select g;
-                //{
-                //    return from item in GetTestersList()
-                //           orderby item.LastName, item.FirstName
-                //           group item by item.Seniority
-                //                into g
-                //           orderby g.Key
-                //           select g;
-                //}
+                //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLSenderName).ToList()
+                                         //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+                var tmp = from item in parcels
+                                             group item by item.PTLSenderName
+                         into g
+                                             orderby g.Key
+                          select g;
+                foreach (var item in tmp)
+                    if (item.Key == (string)SenderSelector.SelectedItem)
+                    {
+                        parcelDataGrid.ItemsSource = item.ToList();
+                        break;
+                    }
             }
             else
                 parcelDataGrid.ItemsSource = (from parcel in parcels

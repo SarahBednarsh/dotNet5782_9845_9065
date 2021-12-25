@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace PL
 {
-    public class ParcelToList : DependencyObject
+    public class ParcelToList : DependencyObject, IEditableObject
     {
         static readonly DependencyProperty IdProperty = DependencyProperty.Register("PTLId", typeof(int), typeof(Drone));
         static readonly DependencyProperty SenderNameProperty = DependencyProperty.Register("PTLSenderName", typeof(string), typeof(Drone));

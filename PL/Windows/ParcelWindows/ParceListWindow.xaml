@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="ParceListWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <local:Parcels x:Key="parcels" />
+        <CollectionViewSource x:Key="cvsTasks" Source="{StaticResource parcelsTry}" Filter="CollectionViewSource_Filter">
+        </CollectionViewSource>
+    </Window.Resources>
     <Grid>
         <Grid.Resources>
             <!--<Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
@@ -21,8 +26,13 @@
                     </Setter.Value>
                 </Setter>
             </Style>-->
-            
+          
         </Grid.Resources>
+        <DataGrid x:Name="dataGrid1" 
+          ItemsSource="{Binding Source={StaticResource cvsParcels}}"
+          CanUserAddRows="False">
+        </DataGrid>
+        
         <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="10,144,10,77" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
             <!--<controls:DataGrid x:Name="dg" Height="600" Margin="12" AutoGenerateColumns="True"
                 LoadingRowGroup="dg_loadingRowGroup" RowGroupHeaderPropertyNameAlternative="Range">
