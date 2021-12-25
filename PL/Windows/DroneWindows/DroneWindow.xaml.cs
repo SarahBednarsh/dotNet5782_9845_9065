@@ -163,6 +163,8 @@ namespace PL
 
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
                     drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok - need to find right way to deal with this
+                    //drones = from drone in bl.ListDrone()
+                    //         select Adapter.DroneBotoPo(drone);
                     MessageBox.Show("Success");
                     this.Close();
                     return;

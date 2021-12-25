@@ -39,5 +39,15 @@ namespace PL
             //int droneIndex = drones.IndexOf(d);
             new CustomerWindow(bl, c.CustomerToListId).ShowDialog();
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerWindow(bl).ShowDialog();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

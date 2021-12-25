@@ -23,5 +23,8 @@
                 <DataGridTextColumn x:Name="customerOnTheirWay" Binding="{Binding OnTheirWay}" Header="OnTheirWay" Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="Add" Content="Add customer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="254" Margin="78,321,0,0" Click="Add_Click"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="254" Margin="442,321,0,0" Click="Close_Click"/>
+
     </Grid>
 </Window>
