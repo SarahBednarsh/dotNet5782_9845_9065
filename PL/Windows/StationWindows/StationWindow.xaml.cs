@@ -23,13 +23,26 @@ namespace PL
     public partial class StationWindow : Window
     {
         private readonly IBL bl;
-        public StationWindow(IBL bl, ObservableCollection<Station> stations)
+        private Customer plStation;
+        private int index;
+        public StationWindow(IBL bl)
+        {
+            InitializeComponent();
+
+        }
+        public StationWindow(IBL bl, int stationId)
         {
             InitializeComponent();
         }
-        public StationWindow(IBL bl, ObservableCollection<Station> stations, int stationId)
+
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

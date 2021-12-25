@@ -96,7 +96,16 @@ namespace PL
             };
             return PoStation;
 
-
+        }
+        static public PL.StationToList StationToListBotoPo(BO.StationToList BoStation)
+        {
+            return new PL.StationToList()
+            {
+                Id = BoStation.Id,
+                Name = BoStation.Name,
+                OpenChargeSlots = BoStation.OpenChargeSlots,
+                UsedChargeSlots = BoStation.UsedChargeSlots
+            };
         }
     }
 }
