@@ -65,8 +65,23 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
+            {
                 parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLSenderName).ToList()
                                                 .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+                //parcelDataGrid.ItemsSource = from item in parcels
+                //          group item by item.PTLSenderName
+                //         into g
+                //          orderby g.Key
+                //          select g;
+                //{
+                //    return from item in GetTestersList()
+                //           orderby item.LastName, item.FirstName
+                //           group item by item.Seniority
+                //                into g
+                //           orderby g.Key
+                //           select g;
+                //}
+            }
             else
                 parcelDataGrid.ItemsSource = (from parcel in parcels
                                               where parcel.PTLSenderName == (string)SenderSelector.SelectedItem && parcel.PTLTargetName == (string)TargetSelector.SelectedItem

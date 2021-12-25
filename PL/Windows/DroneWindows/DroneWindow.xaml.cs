@@ -45,7 +45,8 @@ namespace PL
         }
         public DroneWindow(IBL bl, ObservableCollection<Drone> drones, int droneId)
         {
-            InitializeComponent();
+                        InitializeComponent();
+
             this.bl = bl;
             this.drones = drones;
             plDrone = drones.Where(d => d.Id == droneId).FirstOrDefault();
