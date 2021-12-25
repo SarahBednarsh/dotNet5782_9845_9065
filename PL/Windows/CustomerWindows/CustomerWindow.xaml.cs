@@ -32,7 +32,7 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(customerId));
-            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x=>x.CustomerToListId==customerId).FirstOrDefault());
+            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x=>x.Id==customerId).FirstOrDefault());
             actionsTitle.Text = string.Format($"Customer {plCustomer.CustomerId}");
             DataContext = plCustomer;
             Width = 800;
@@ -80,6 +80,7 @@ namespace PL
                 double.TryParse(longitudeNewBox.Text, out double longitude);
                 double.TryParse(latitudeNewBox.Text, out double latitude);
                 bl.AddCustomer(id, nameNewBox.Text, phoneNewBox.Text, longitude, latitude);
+                MainWindow.customers.Add(Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == id).FirstOrDefault()));
                 MessageBox.Show("Added customer successfully");
             }
             catch(Exception exception)

@@ -14,9 +14,9 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerToListId}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerToListName}" Header="Name" Width="SizeToHeader"  IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="customerPhoneNumeColumn" Binding="{Binding CustomerToListPhoneNum}" Header="Phone No." Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"  IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerPhoneNumeColumn" Binding="{Binding PhoneNum}" Header="Phone No." Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="customerDelivered" Binding="{Binding Delivered}" Header="Delivered" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="customerSent" Binding="{Binding Sent}" Header="Customer Sent" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="customerGot" Binding="{Binding Got}" Header="Customer Got" Width="SizeToHeader" IsReadOnly="True"/>

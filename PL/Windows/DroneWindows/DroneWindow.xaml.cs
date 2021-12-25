@@ -248,7 +248,7 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.DroneParcelId = "No arcel yet";
+                plDrone.ParcelId = "No arcel yet";
                 UpdateDrone();
                 MessageBox.Show("Drone sent to charge successfully");
             }

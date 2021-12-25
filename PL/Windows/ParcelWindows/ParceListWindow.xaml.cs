@@ -26,7 +26,7 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             ParcelToList p = cell.DataContext as ParcelToList;
-            new ParcelWindow(bl, parcels, p.PTLId).ShowDialog();
+            new ParcelWindow(bl, parcels, p.Id).ShowDialog();
         }
         public ParceListWindow(IBL bl, ObservableCollection<ParcelToList> parcels)
         {
@@ -35,9 +35,9 @@ namespace PL
             this.parcels = parcels;
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
-                                          select parcel.PTLSenderName).ToList();
+                                          select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
-                                          select parcel.PTLTargetName).ToList();
+                                          select parcel.TargetName).ToList();
 
 
             //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
@@ -65,11 +65,11 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
-                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLSenderName).ToList()
+                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
                                                 .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
             else
                 parcelDataGrid.ItemsSource = (from parcel in parcels
-                                              where parcel.PTLSenderName == (string)SenderSelector.SelectedItem && parcel.PTLTargetName == (string)TargetSelector.SelectedItem
+                                              where parcel.SenderName == (string)SenderSelector.SelectedItem && parcel.TargetName == (string)TargetSelector.SelectedItem
                                               select parcel).ToList();
         }
 
@@ -78,11 +78,11 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
-                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLTargetName).ToList()
+                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.TargetName).ToList()
                                                 .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
             else
                 parcelDataGrid.ItemsSource = (from parcel in parcels
-                                              where parcel.PTLTargetName == (string)TargetSelector.SelectedItem && parcel.PTLSenderName == (string)SenderSelector.SelectedItem
+                                              where parcel.TargetName == (string)TargetSelector.SelectedItem && parcel.SenderName == (string)SenderSelector.SelectedItem
                                               select parcel).ToList();
         }
 

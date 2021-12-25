@@ -37,7 +37,7 @@ namespace PL
             DataGridCell cell = sender as DataGridCell;
             CustomerToList c = cell.DataContext as CustomerToList;
             //int droneIndex = drones.IndexOf(d);
-            new CustomerWindow(bl, c.CustomerToListId).ShowDialog();
+            new CustomerWindow(bl, c.Id).ShowDialog();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

@@ -38,11 +38,11 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="pTLIdColumn" Binding="{Binding PTLId}" Header="Id" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="pTLPriorityColumn" Binding="{Binding PTLPriority}" Header="Priority" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="pTLSenderNameColumn" Binding="{Binding PTLSenderName}" Header="Sender Name" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="pTLTargetNameColumn" Binding="{Binding PTLTargetName}" Header="Target Name" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="pTLWeightColumn" Binding="{Binding PTLWeight}" Header="Weight" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLSenderNameColumn" Binding="{Binding SenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLTargetNameColumn" Binding="{Binding TargetName}" Header="Target Name" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="pTLWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
                 <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,53,0,0" VerticalAlignment="Top" Height="30" Width="74"/>
