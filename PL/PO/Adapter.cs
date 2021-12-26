@@ -32,6 +32,14 @@ namespace PL
                 Latitude = boDroneInParcel.Location.Latitude.ToString()
             };
         }
+        static public PL.DroneInCharge DroneInChargeBotoPo(BO.DroneInCharge boDrone)
+        {
+            return new PL.DroneInCharge()
+            {
+                Id = boDrone.Id,
+                Battery = (int)boDrone.Battery
+            };
+        }
         static public PL.Parcel ParcelBotoPo(BO.Parcel boParcel)
         {
             return new PL.Parcel()
@@ -76,6 +84,17 @@ namespace PL
                 Distance = boParcel.Distance
             };
         }
+        static public PL.ParcelAtCustomer ParcelAtCustomerBotoPo(BO.ParcelAtCustomer boParcel)
+        {
+            return new PL.ParcelAtCustomer()
+            {
+                Id = boParcel.Id,
+                Weight = (WeightCategories)boParcel.Weight,
+                Priority = (Priorities)boParcel.Priority,
+                State = (States)boParcel.State,
+                Customer = Adapter.CustomerInParcelBotoPo(boParcel.Customer)
+            };
+        }
         static public PL.Customer CustomerBotoPo(BO.Customer boCustomer)
         {
             return new PL.Customer()
@@ -85,10 +104,10 @@ namespace PL
                 PhoneNum = boCustomer.PhoneNum,
                 Latitude = boCustomer.Location.Latitude.ToString(),
                 Longitude = boCustomer.Location.Longitude.ToString(),
-                AtCustomer = (from customer in boCustomer.AtCustomer
-                              select customer.Id).ToList(),
-                ToCustomer = (from customer in boCustomer.ToCustomer
-                              select customer.Id).ToList()
+                AtCustomer = (from parcel in boCustomer.AtCustomer
+                              select Adapter.ParcelAtCustomerBotoPo(parcel)).ToList(),
+                ToCustomer = (from parcel in boCustomer.ToCustomer
+                              select Adapter.ParcelAtCustomerBotoPo(parcel)).ToList()
             };
         }
 

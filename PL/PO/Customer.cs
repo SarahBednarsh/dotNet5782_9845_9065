@@ -14,8 +14,8 @@ namespace PL
         static readonly DependencyProperty PhoneNumProperty = DependencyProperty.Register("PhoneNum", typeof(string), typeof(Customer));
         static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("Longitude", typeof(string), typeof(Customer));
         static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("Latitude", typeof(string), typeof(Customer));
-        static readonly DependencyProperty AtCustomerProperty = DependencyProperty.Register("AtCustomer", typeof(List<int>), typeof(Customer));
-        static readonly DependencyProperty ToCustomerProperty = DependencyProperty.Register("ToCustomer", typeof(List<int>), typeof(Customer));
+        static readonly DependencyProperty AtCustomerProperty = DependencyProperty.Register("AtCustomer", typeof(List<ParcelAtCustomer>), typeof(Customer));
+        static readonly DependencyProperty ToCustomerProperty = DependencyProperty.Register("ToCustomer", typeof(List<ParcelAtCustomer>), typeof(Customer));
 
 
         public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
@@ -23,7 +23,7 @@ namespace PL
         public string PhoneNum { get => (string)GetValue(PhoneNumProperty); set => SetValue(PhoneNumProperty, value); }
         public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
         public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
-        public List<int> AtCustomer { get => (List<int>)GetValue(AtCustomerProperty); set => SetValue(AtCustomerProperty, value); }
-        public List<int> ToCustomer { get => (List<int>)GetValue(ToCustomerProperty); set => SetValue(ToCustomerProperty, value); }
+        public List<ParcelAtCustomer> AtCustomer { get => (List<ParcelAtCustomer>)GetValue(AtCustomerProperty); set => SetValue(AtCustomerProperty, value); }
+        public List<ParcelAtCustomer> ToCustomer { get => (List<ParcelAtCustomer>)GetValue(ToCustomerProperty); set => SetValue(ToCustomerProperty, value); }
     }
 }

@@ -17,7 +17,7 @@ namespace PL
         static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(DroneStatuses), typeof(Drone));
         static readonly DependencyProperty LongitudeProperty = DependencyProperty.Register("Longitude", typeof(string), typeof(Drone));
         static readonly DependencyProperty LatitudeProperty = DependencyProperty.Register("Latitude", typeof(string), typeof(Drone));
-        static readonly DependencyProperty ParcelPropery = DependencyProperty.Register("Parcel", typeof(ParcelInTransfer), typeof(Drone));
+        static readonly DependencyProperty ParcelProperty = DependencyProperty.Register("Parcel", typeof(ParcelInTransfer), typeof(Drone));
 
         public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
         public string Model { get => (string)GetValue(ModelProperty); set => SetValue(ModelProperty, value); }
@@ -26,7 +26,7 @@ namespace PL
         public DroneStatuses Status { get => (DroneStatuses)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
         public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
         public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
-        public string Parcel { get => (ParcelInTransfer)GetValue(ParcelPropery); set => SetValue(ParcelPropery, value); }
+        public ParcelInTransfer Parcel { get => (ParcelInTransfer)GetValue(ParcelProperty); set => SetValue(ParcelProperty, value); }
 
 
     }
