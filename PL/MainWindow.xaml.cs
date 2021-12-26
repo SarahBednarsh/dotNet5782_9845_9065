@@ -28,21 +28,21 @@ namespace PL
     {
         public static readonly IBL bl = BlFactory.GetBL();//changes to public and static cause i needed it in login- should we send a parameter in login so we can open dronelistwindow?
 
-        public static ObservableCollection<Drone> drones;
-        public static ObservableCollection<Station> stations;
+        public static ObservableCollection<DroneToList> drones;
+        public static ObservableCollection<StationToList> stations;
         public static ObservableCollection<ParcelToList> parcels;
         public static ObservableCollection<CustomerToList> customers;
         public MainWindow()
         {
             InitializeComponent();
-            drones = new ObservableCollection<Drone>((from drone in bl.ListDrone()
+            drones = new ObservableCollection<DroneToList>((from drone in bl.ListDrone()
                                                       select Adapter.DroneBotoPo(bl.SearchDrone(drone.Id))).ToList());
-            stations = new ObservableCollection<Station>((from station in bl.ListStation()
-                                                          select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
+            stations = new ObservableCollection<StationToList>((from station in bl.ListStation()
+                                                                select Adapter.StationToListBotoPo(station)).ToList());
             parcels = new ObservableCollection<ParcelToList>((from parcel in bl.ListParcel()
-                                                          select Adapter.ParcelToListBotoPo(parcel)).ToList());
+                                                              select Adapter.ParcelToListBotoPo(parcel)).ToList());
             customers = new ObservableCollection<CustomerToList>((from customer in bl.ListCustomer()
-                                                        select Adapter.CustomerToListBotoPo(customer)).ToList());
+                                                                  select Adapter.CustomerToListBotoPo(customer)).ToList());
         }
 
 

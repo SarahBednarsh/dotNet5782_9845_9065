@@ -24,16 +24,16 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private readonly IBL bl;
-        private Drone plDrone;
+        private DroneToList plDrone;
 
         //private int droneIndex;
-        ObservableCollection<Drone> drones;
+        ObservableCollection<DroneToList> drones;
         /// <summary>
         /// add ctor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneId"></param>
-        public DroneWindow(IBL bl, ObservableCollection<Drone> drones)
+        public DroneWindow(IBL bl, ObservableCollection<DroneToList> drones)
         {
             InitializeComponent();
             AddGrid.Visibility = Visibility.Visible;
@@ -43,7 +43,7 @@ namespace PL
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
         }
-        public DroneWindow(IBL bl, ObservableCollection<Drone> drones, int droneId)
+        public DroneWindow(IBL bl, ObservableCollection<DroneToList> drones, int droneId)
         {
             InitializeComponent();
             this.bl = bl;
@@ -64,7 +64,7 @@ namespace PL
 
             InitializeActionsButton(plDrone);
         }
-        private void InitializeActionsButton(Drone drone)
+        private void InitializeActionsButton(DroneToList drone)
         {
             Actions.Click -= Charge_Click;
             Actions.Click -= ReleaseCharge_Click;

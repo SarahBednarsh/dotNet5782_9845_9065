@@ -8,7 +8,7 @@
         Title="StationWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
     <Grid>
-        <Grid x:Name="addGrid" Visibility="Visible">
+        <Grid x:Name="addGrid" Visibility="Hidden">
             <TextBlock x:Name="addTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="59,28,0,0" Text="New Station" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
             <TextBlock x:Name="idNewBlock" HorizontalAlignment="Left" Margin="54,80,0,0" Text="Number:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="69"/>
             <TextBox x:Name="idNewBox" HorizontalAlignment="Left" Height="32" Margin="186,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
@@ -28,33 +28,30 @@
 
         </Grid>
 
-        <!--<Grid x:Name="actionsGrid" Visibility="Hidden">
+        <Grid x:Name="actionsGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="actionsTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="10,28,0,0" Text="Customer " TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+            <TextBlock x:Name="actionsTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="10,28,0,0" Text="Station " TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
             <TextBlock x:Name="idBlock" HorizontalAlignment="Left" Margin="54,80,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="17"/>
             <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="32" Margin="186,62,0,0" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
             <TextBlock x:Name="nameBlock" HorizontalAlignment="Left" Margin="54,121,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="32" Margin="186,105,0,0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
-            <TextBlock x:Name="phoneBlock" HorizontalAlignment="Left" Margin="54,166,0,0" Text="Phone number:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBox x:Name="phoneBox" HorizontalAlignment="Left" Height="32" Margin="186,147,0,0" Text="{Binding PhoneNum}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
             <TextBlock x:Name="longitudeBlock" HorizontalAlignment="Left" Margin="54,208,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
             <TextBox x:Name="longitudeBox" HorizontalAlignment="Left" Height="32" Margin="186,194,0,0" Text="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
             <TextBlock x:Name="latitudeBlock" HorizontalAlignment="Left" Margin="54,255,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
             <TextBox x:Name="latitudeBox" HorizontalAlignment="Left" Height="32" Margin="186,239,0,0" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+            <TextBlock x:Name="slotsBlock" HorizontalAlignment="Left" Margin="54,166,0,0" Text="Open charging slots:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox x:Name="slotsBox" HorizontalAlignment="Left" Height="32" Margin="186,147,0,0" Text="{Binding OpenChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
 
-            <Expander x:Name="atCustomerExpander" Header="Parcels sent from customer" Margin="420,42,104,128">
-                <ListBox x:Name="atCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding AtCustomer}"  Background="#FFB2EECA"/>
-            </Expander>
-            <Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55" Grid.RowSpan="2">
-                <ListBox x:Name="toCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding ToCustomer}"  Background="#FFB2EECA"/>
+            <Expander x:Name="chargingExpander" Header="Drones charging" Margin="420,42,104,56" Grid.RowSpan="2">
+                <ListBox x:Name="chargingList" MouseDoubleClick="chargingList_MouseDoubleClick" ItemsSource="{Binding Charging}"  Background="#FFB2EECA"/>
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>
 
-        </Grid>-->
+        </Grid>
     </Grid>
 
 </Window>

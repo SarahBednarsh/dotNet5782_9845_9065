@@ -32,8 +32,8 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(customerId));
-            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x=>x.Id==customerId).FirstOrDefault());
-            actionsTitle.Text = string.Format($"Customer {plCustomer.CustomerId}");
+            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x => x.Id == customerId).FirstOrDefault());
+            actionsTitle.Text = string.Format($"Customer {plCustomer.Id}");
             DataContext = plCustomer;
             Width = 800;
             actionsGrid.Visibility = Visibility.Visible;
@@ -53,10 +53,10 @@ namespace PL
             {
                 int.TryParse(idBox.Text, out int id);
                 bl.UpdateCustomerInfo(id, nameBox.Text, phoneBox.Text);
-                MainWindow.customers[index] = Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == plCustomer.CustomerId).FirstOrDefault());
+                MainWindow.customers[index] = Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == plCustomer.Id).FirstOrDefault());
                 //MainWindow.customers = new ObservableCollection<CustomerToList>((from customer in bl.ListCustomer()
                 //                                                                 select Adapter.CustomerToListBotoPo(customer)).ToList());
-                plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(plCustomer.CustomerId));
+                plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(plCustomer.Id));
                 MessageBox.Show("Updated successfully");
             }
             catch (Exception exception)

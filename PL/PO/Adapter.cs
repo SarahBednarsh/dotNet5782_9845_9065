@@ -8,83 +8,114 @@ namespace PL
 {
     internal class Adapter
     {
-        static public PL.Drone DroneBotoPo(BO.Drone BoDrone)
+        static public PL.DroneToList DroneBotoPo(BO.Drone boDrone)
         {
-            PL.Drone PoDrone = new PL.Drone()
+            return new PL.DroneToList()
             {
-                Id = BoDrone.Id,
-                Battery = (int)BoDrone.Battery,
-                Latitude = BoDrone.Location.Latitude.ToString(),
-                Longitude = BoDrone.Location.Longitude.ToString(),
-                MaxWeight = (PL.WeightCategories)BoDrone.MaxWeight,
-                Model = BoDrone.Model,
-                ParcelId = BoDrone.Parcel == null ? "No parcel yet" : BoDrone.Parcel.Id.ToString(),
-                Status = (PL.DroneStatuses)BoDrone.Status
+                Id = boDrone.Id,
+                Battery = (int)boDrone.Battery,
+                Latitude = boDrone.Location.Latitude.ToString(),
+                Longitude = boDrone.Location.Longitude.ToString(),
+                MaxWeight = (PL.WeightCategories)boDrone.MaxWeight,
+                Model = boDrone.Model,
+                ParcelId = boDrone.Parcel == null ? "No parcel yet" : boDrone.Parcel.Id.ToString(),
+                Status = (PL.DroneStatuses)boDrone.Status
             };
-            return PoDrone;
         }
-        static public PL.Parcel ParcelBotoPo(BO.Parcel BoParcel)
+        static public PL.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
         {
-            PL.Parcel PoParcel = new PL.Parcel()
+            return new PL.DroneInParcel()
             {
-                Id = BoParcel.Id,
-                Sender = new CustomerInParcel { Id = BoParcel.Sender.Id, Name = BoParcel.Sender.Name },
-                Target = new CustomerInParcel { Id = BoParcel.Target.Id, Name = BoParcel.Target.Name },
-                Weight = (PL.WeightCategories)BoParcel.Weight,
-                Priority = (PL.Priorities)BoParcel.Priority,
-                DroneId = BoParcel.Drone == null ? "No drone yet" : BoParcel.Drone.Id.ToString(),
-                Creation = BoParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
-                Attribution = BoParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
-                PickUp = BoParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,
-                Delivery = BoParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
+                Id = boDroneInParcel.Id,
+                Battery = (int)boDroneInParcel.Battery,
+                Longitude = boDroneInParcel.Location.Longitude.ToString(),
+                Latitude = boDroneInParcel.Location.Latitude.ToString()
             };
-            return PoParcel;
         }
-        static public PL.ParcelToList ParcelToListBotoPo(BO.ParcelToList BoParcel)
+        static public PL.Parcel ParcelBotoPo(BO.Parcel boParcel)
+        {
+            return new PL.Parcel()
+            {
+                Id = boParcel.Id,
+                Sender = new CustomerInParcel { Id = boParcel.Sender.Id, Name = boParcel.Sender.Name },
+                Target = new CustomerInParcel { Id = boParcel.Target.Id, Name = boParcel.Target.Name },
+                Weight = (PL.WeightCategories)boParcel.Weight,
+                Priority = (PL.Priorities)boParcel.Priority,
+                DroneId = boParcel.Drone == null ? "No drone yet" : boParcel.Drone.Id.ToString(),
+                Creation = boParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
+                Attribution = boParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
+                PickUp = boParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,
+                Delivery = boParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
+            };
+        }
+        static public PL.ParcelToList ParcelToListBotoPo(BO.ParcelToList boParcel)
         {
             return new PL.ParcelToList()
             {
-                Id = BoParcel.Id,
-                SenderName = BoParcel.SenderName,
-                TargetName = BoParcel.TargetName,
-                Weight = (PL.WeightCategories)BoParcel.Weight,
-                Priority = (PL.Priorities)BoParcel.Priority,
+                Id = boParcel.Id,
+                SenderName = boParcel.SenderName,
+                TargetName = boParcel.TargetName,
+                Weight = (PL.WeightCategories)boParcel.Weight,
+                Priority = (PL.Priorities)boParcel.Priority,
             };
         }
-        static public PL.Customer CustomerBotoPo(BO.Customer BoCustomer)
+        static public PL.ParcelInTransfer ParcelInTransferBotoPo(BO.ParcelInTransfer boParcel)
         {
-            PL.Customer PoCustomer = new PL.Customer()
+            return new PL.ParcelInTransfer()
             {
-                CustomerId = BoCustomer.Id,
-                CustomerName = BoCustomer.Name,
-                CustomerPhoneNum = BoCustomer.PhoneNum,
-                CustomerLatitude = BoCustomer.Location.Latitude.ToString(),
-                CustomerLongitude = BoCustomer.Location.Longitude.ToString(),
-                AtCustomer = (from customer in BoCustomer.AtCustomer
+                Id = boParcel.Id,
+                PickedUpAlready = boParcel.PickedUpAlready,
+                Weight = (WeightCategories)boParcel.Weight,
+                Priority = (Priorities)boParcel.Priority,
+                Sender = Adapter.CustomerInParcelBotoPo(boParcel.Sender),
+                Target = Adapter.CustomerInParcelBotoPo(boParcel.Target),
+                PickUpLongitude = boParcel.PickUpLocation.Longitude.ToString(),
+                PickUpLatitude = boParcel.PickUpLocation.Latitude.ToString(),
+                DestinationLongitude = boParcel.Destination.Longitude.ToString(),
+                DestinationLatitude = boParcel.Destination.Latitude.ToString(),
+                Distance = boParcel.Distance
+            };
+        }
+        static public PL.Customer CustomerBotoPo(BO.Customer boCustomer)
+        {
+            return new PL.Customer()
+            {
+                Id = boCustomer.Id,
+                Name = boCustomer.Name,
+                PhoneNum = boCustomer.PhoneNum,
+                Latitude = boCustomer.Location.Latitude.ToString(),
+                Longitude = boCustomer.Location.Longitude.ToString(),
+                AtCustomer = (from customer in boCustomer.AtCustomer
                               select customer.Id).ToList(),
-                ToCustomer = (from customer in BoCustomer.ToCustomer
+                ToCustomer = (from customer in boCustomer.ToCustomer
                               select customer.Id).ToList()
             };
-            return PoCustomer;
         }
 
-        static public PL.CustomerToList CustomerToListBotoPo(BO.CustomerToList BoCustomer)
+        static public PL.CustomerToList CustomerToListBotoPo(BO.CustomerToList boCustomer)
         {
-            PL.CustomerToList PoCustomerToList = new PL.CustomerToList()
+            return new PL.CustomerToList()
             {
-                Id = BoCustomer.Id,
-                Name = BoCustomer.Name,
-                PhoneNum = BoCustomer.PhoneNum,
-                Delivered = BoCustomer.Delivered,
-                Sent = BoCustomer.Sent,
-                Got = BoCustomer.Got,
-                OnTheirWay = BoCustomer.OnTheirWay
+                Id = boCustomer.Id,
+                Name = boCustomer.Name,
+                PhoneNum = boCustomer.PhoneNum,
+                Delivered = boCustomer.Delivered,
+                Sent = boCustomer.Sent,
+                Got = boCustomer.Got,
+                OnTheirWay = boCustomer.OnTheirWay
             };
-            return PoCustomerToList;
+        }
+        static public PL.CustomerInParcel CustomerInParcelBotoPo(BO.CustomerInParcel boCustomer)
+        {
+            return new PL.CustomerInParcel()
+            {
+                Id = boCustomer.Id,
+                Name = boCustomer.Name
+            };
         }
         static public PL.Station StationBotoPo(BO.Station BoStation)
         {
-            PL.Station PoStation = new PL.Station()
+            return new PL.Station()
             {
                 Id = BoStation.Id,
                 Name = BoStation.Name,
@@ -94,17 +125,16 @@ namespace PL
                 Charging = (from drone in BoStation.Charging
                             select drone.Id).ToList()
             };
-            return PoStation;
 
         }
-        static public PL.StationToList StationToListBotoPo(BO.StationToList BoStation)
+        static public PL.StationToList StationToListBotoPo(BO.StationToList boStation)
         {
             return new PL.StationToList()
             {
-                Id = BoStation.Id,
-                Name = BoStation.Name,
-                OpenChargeSlots = BoStation.OpenChargeSlots,
-                UsedChargeSlots = BoStation.UsedChargeSlots
+                Id = boStation.Id,
+                Name = boStation.Name,
+                OpenChargeSlots = boStation.OpenChargeSlots,
+                UsedChargeSlots = boStation.UsedChargeSlots
             };
         }
     }

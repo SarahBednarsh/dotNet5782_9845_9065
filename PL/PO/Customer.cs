@@ -18,11 +18,11 @@ namespace PL
         static readonly DependencyProperty ToCustomerProperty = DependencyProperty.Register("ToCustomer", typeof(List<int>), typeof(Customer));
 
 
-        public int CustomerId { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
-        public string CustomerName { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
-        public string CustomerPhoneNum { get => (string)GetValue(PhoneNumProperty); set => SetValue(PhoneNumProperty, value); }
-        public string CustomerLongitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
-        public string CustomerLatitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
+        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
+        public string Name { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
+        public string PhoneNum { get => (string)GetValue(PhoneNumProperty); set => SetValue(PhoneNumProperty, value); }
+        public string Longitude { get => (string)GetValue(LongitudeProperty); set => SetValue(LongitudeProperty, value); }
+        public string Latitude { get => (string)GetValue(LatitudeProperty); set => SetValue(LatitudeProperty, value); }
         public List<int> AtCustomer { get => (List<int>)GetValue(AtCustomerProperty); set => SetValue(AtCustomerProperty, value); }
         public List<int> ToCustomer { get => (List<int>)GetValue(ToCustomerProperty); set => SetValue(ToCustomerProperty, value); }
     }

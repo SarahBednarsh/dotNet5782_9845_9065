@@ -23,8 +23,8 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private IBL bl;
-        private ObservableCollection<Drone> drones;
-        public DroneListWindow(IBL bl, ObservableCollection<Drone> drones)
+        private ObservableCollection<DroneToList> drones;
+        public DroneListWindow(IBL bl, ObservableCollection<DroneToList> drones)
         {
             InitializeComponent();
             this.bl = bl;
@@ -82,7 +82,7 @@ namespace PL
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
-            Drone d = cell.DataContext as Drone;
+            DroneToList d = cell.DataContext as DroneToList;
             //int droneIndex = drones.IndexOf(d);
             new DroneWindow(bl, drones, d.Id).ShowDialog();
         }

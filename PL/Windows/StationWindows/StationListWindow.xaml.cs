@@ -22,8 +22,8 @@ namespace PL
     public partial class StationListWindow : Window
     {
         private IBL bl;
-        private ObservableCollection<Station> stations;
-        public StationListWindow(IBL bl, ObservableCollection<Station> stations)
+        private ObservableCollection<StationToList> stations;
+        public StationListWindow(IBL bl, ObservableCollection<StationToList> stations)
         {
             InitializeComponent();
             this.bl = bl;
@@ -45,7 +45,7 @@ namespace PL
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
-            Station s = cell.DataContext as Station;
+            StationToList s = cell.DataContext as StationToList;
             new StationWindow(bl, s.Id).ShowDialog();
             //int stationIndex = stations.IndexOf(s);
             //stations[stationIndex] = Adapter.StationBotoPo(bl.SearchStation(s.StationId));
