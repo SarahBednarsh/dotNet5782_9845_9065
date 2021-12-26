@@ -13,8 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Globalization;
 namespace PL
 {
+    public class Parcels : ObservableCollection<ParcelToList>
+    {
+        
+        // Creating the Tasks collection in this way enables data binding from XAML.
+    }
     /// <summary>
     /// Interaction logic for ParceListWindow.xaml
     /// </summary>
@@ -31,14 +38,22 @@ namespace PL
         public ParceListWindow(IBL bl, ObservableCollection<ParcelToList> parcels)
         {
             InitializeComponent();
+            Parcels _parcels = (Parcels)this.Resources["parcels"];
             this.bl = bl;
             this.parcels = parcels;
+            //_parcels = (Parcels)parcels;//might change the list and thats wrong
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.TargetName).ToList();
-
+            //ICollectionView cvParcels = CollectionViewSource.GetDefaultView(dataGrid1.ItemsSource);
+            //if (cvParcels.CanGroup == true)
+            //{
+            //    cvParcels.GroupDescriptions.Clear();
+            //    cvParcels.GroupDescriptions.Add(new PropertyGroupDescription("SenderName"));
+            //    //cvTasks.GroupDescriptions.Add(new PropertyGroupDescription("Complete"));
+            //}
 
             //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
 
@@ -65,8 +80,21 @@ namespace PL
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
-                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
-                                                .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+            {
+                //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
+                                         //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+                var tmp = from item in parcels
+                                             group item by item.SenderName
+                         into g
+                                             orderby g.Key
+                          select g;
+                foreach (var item in tmp)
+                    if (item.Key == (string)SenderSelector.SelectedItem)
+                    {
+                        parcelDataGrid.ItemsSource = item.ToList();
+                        break;
+                    }
+            }
             else
                 parcelDataGrid.ItemsSource = (from parcel in parcels
                                               where parcel.SenderName == (string)SenderSelector.SelectedItem && parcel.TargetName == (string)TargetSelector.SelectedItem
@@ -107,6 +135,11 @@ namespace PL
                 return;
             }
             SenderSelector_SelectionChanged(SenderSelector, null);
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -58,10 +58,10 @@ namespace Dal
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
             for (int i = 0; i < 12; i++)//adding parcels
             {
-                DateTime? start = new DateTime(2020, i + 1, 1);
+                DateTime? start = new DateTime(2020, i + 1, 1,r.Next(24),r.Next(60),r.Next(60));
                 int forScheduled = r.Next() % 8 != 0 ? r.Next(1, 25) : 0;//sarah bug-nvm
                 int forPickedUp = (r.Next() % 4 != 0 && forScheduled != 0) ? forScheduled + 1 : 0;
-                DateTime? delivered = r.Next() % 4 != 0 && forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp + 1) : null;
+                DateTime? delivered = r.Next() % 4 != 0 && forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp + 1) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null;
                 Parcel parcel = new Parcel()
                 {
                     Id = ++DataSource.Config.RunningParcelNumber,
@@ -71,8 +71,8 @@ namespace Dal
                     Priority = (Priorities)r.Next(1, 3),
                     Requested = start,
                     DroneId = forScheduled == 0 ? -1 : Drones[i % 5].Id,//like attribute
-                    Scheduled = forScheduled != 0 ? start + TimeSpan.FromDays(forScheduled) : null,//sarah- is it ok that they are not nullable? cause it wa oroblimatic when I did delivery
-                    PickedUp = forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp) : null,
+                    Scheduled = forScheduled != 0 ? start + TimeSpan.FromDays(forScheduled) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null,//sarah- is it ok that they are not nullable? cause it wa oroblimatic when I did delivery
+                    PickedUp = forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null,
                     Delivered = delivered
                 };
                 DataSource.Parcels.Add(parcel);
