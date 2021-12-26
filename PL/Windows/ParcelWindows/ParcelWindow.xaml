@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ParcelWindow" Height="450" Width="800">
+        Title="ParcelWindow" Height="450" Width="600">
     <Grid>
-        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" BindingGroup="{Binding Source}">
-            <Grid Margin="20,0,518,0">
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="450,53,0,55" VerticalAlignment="Bottom" Height="30" Width="74" Click="Close_Click"/>
+        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" BindingGroup="{Binding Source, Mode=TwoWay}">
+            <!--<Grid Margin="20,0,486,0">-->
                 <StackPanel>
                     <Border BorderThickness="30"></Border>
                     <DockPanel>
@@ -17,11 +18,18 @@
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="SenderLabel" Content="Sender:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="Sender" Content="{Binding Sender}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <!--`must also do id here b"h-->
+                        <Label Content="Name:"/>
+                        <Label x:Name="SenderName" Content="{Binding Sender.Name}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
+                        <Label Content=", ID:"/>
+                        <Label x:Name="SenderId" Content="{Binding Sender.Id}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="TargetLabel" Content="Target:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="Target" Content="{Binding Target}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label Content="Name:"/>
+                        <Label x:Name="TargetName" Content="{Binding Target.Name}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
+                        <Label Content=", ID:"/>
+                        <Label x:Name="TargetId" Content="{Binding Target.Id}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="WeightLabel" Content="Weight:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
@@ -37,33 +45,30 @@
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="CreationLabel" Content="Creation time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="Creation" Content="{Binding Creation}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Creation" Content="{Binding Creation}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="AttributionLabel" Content="Attribution time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="Attribution" Content="{Binding Attribution}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                        <Label x:Name="Attribution" Content="{Binding Attribution, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="PickUpLabel" Content="PickUp time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="PickUp" Content="{Binding PickUp}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    <Label x:Name="PickUp" Content="{Binding PickUp, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
                     <DockPanel>
                         <Label x:Name="DeliveryLabel" Content="Delivery time:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                        <Label x:Name="Delivery" Content="{Binding Delivery}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    <Label x:Name="Delivery" Content="{Binding Delivery, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     </DockPanel>
 
 
                 </StackPanel>
 
-            </Grid>
-            <Grid x:Name="ButtonsForActions" Margin="319,93,236,0" >
-                <Button x:Name="Actions" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80"/>
+            <!--</Grid>-->
+            <Button x:Name="Actions" HorizontalAlignment="Center"  Margin="180,53,0,55" VerticalAlignment="Bottom" Width="80"/>
 
-                <!--<Button Content="Pick up Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>
-                <Button Content="Deliver Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>
-                <Button Content="Delete Parcel" HorizontalAlignment="Center"  VerticalAlignment="Top"/>-->
-
-            </Grid>
+            <materialDesign:Snackbar x:Name="ConfirmAction" IsEnabled="False" Margin="0,337,0,0" VerticalAlignment="Top" Height="87">
+                <materialDesign:SnackbarMessage Name="message" Content="Parcel updated successfully" ActionContent="DISMISS" ActionClick="message_ActionClick" />
+            </materialDesign:Snackbar>
         </Grid>
     </Grid>
 </Window>

@@ -45,14 +45,14 @@ namespace PL
         }
         public DroneWindow(IBL bl, ObservableCollection<Drone> drones, int droneId)
         {
-                        InitializeComponent();
+            InitializeComponent();
 
             this.bl = bl;
             this.drones = drones;
             plDrone = drones.Where(d => d.Id == droneId).FirstOrDefault();
-            DataContext = plDrone;
+            //DataContext = plDrone;
             ActionsGrid.Visibility = Visibility.Visible;
-
+            ActionsGrid.DataContext = plDrone;
             //IdBox.Text = plDrone.Id.ToString();
             //ModelBox.Text = plDrone.Model;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -249,7 +249,7 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.ParcelId = "No arcel yet";
+                plDrone.ParcelId = "No parcel yet";
                 UpdateDrone();
                 MessageBox.Show("Drone sent to charge successfully");
             }
@@ -289,5 +289,9 @@ namespace PL
             Close();
         }
 
+        private void ActionsGrid_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

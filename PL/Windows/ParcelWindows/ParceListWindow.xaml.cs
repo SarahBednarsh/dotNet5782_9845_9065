@@ -41,19 +41,19 @@ namespace PL
             Parcels _parcels = (Parcels)this.Resources["parcels"];
             this.bl = bl;
             this.parcels = parcels;
-            _parcels = (Parcels)parcels;//might change the list and thats wrong
+            //_parcels = (Parcels)parcels;//might change the list and thats wrong
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
-                                          select parcel.PTLTargetName).ToList();
-            ICollectionView cvParcels = CollectionViewSource.GetDefaultView(dataGrid1.ItemsSource);
-            if (cvParcels.CanGroup == true)
-            {
-                cvParcels.GroupDescriptions.Clear();
-                cvParcels.GroupDescriptions.Add(new PropertyGroupDescription("SenderName"));
-                //cvTasks.GroupDescriptions.Add(new PropertyGroupDescription("Complete"));
-            }
+                                          select parcel.TargetName).ToList();
+            //ICollectionView cvParcels = CollectionViewSource.GetDefaultView(dataGrid1.ItemsSource);
+            //if (cvParcels.CanGroup == true)
+            //{
+            //    cvParcels.GroupDescriptions.Clear();
+            //    cvParcels.GroupDescriptions.Add(new PropertyGroupDescription("SenderName"));
+            //    //cvTasks.GroupDescriptions.Add(new PropertyGroupDescription("Complete"));
+            //}
 
             //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
 
@@ -81,10 +81,10 @@ namespace PL
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
             {
-                //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.PTLSenderName).ToList()
+                //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
                                          //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
                 var tmp = from item in parcels
-                                             group item by item.PTLSenderName
+                                             group item by item.SenderName
                          into g
                                              orderby g.Key
                           select g;
@@ -135,6 +135,11 @@ namespace PL
                 return;
             }
             SenderSelector_SelectionChanged(SenderSelector, null);
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

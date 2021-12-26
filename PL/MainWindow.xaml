@@ -16,6 +16,7 @@
             <ColumnDefinition Width="133*"/>
             <ColumnDefinition Width="134*"/>
         </Grid.ColumnDefinitions>
+
         <Label x:Name="title" Content="will be title"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="319,60,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="32" Width="153"/>
         <Image x:Name="logo" HorizontalAlignment="Left" Height="100" Margin="350,117,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" Source="/logo.jpeg"/>
         <Separator x:Name="separator"  HorizontalAlignment="Left" Height="100" Margin="393,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="5" Background="#FF8BC836"/>
@@ -25,9 +26,6 @@
         <Button x:Name="customerSignup" Content="Sign up" HorizontalAlignment="Center" Height="34" Margin="0,88,0,0" Grid.Row="1" VerticalAlignment="Top" Width="170" Click="customerSignup_Click"/>
         <Button x:Name="managerLogin" Content="Log in" HorizontalAlignment="Center" Height="34" Margin="0,38,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="170" Click="managerLogin_Click"/>
         <Button x:Name="managerSignup" Content="Sign up" HorizontalAlignment="Center" Height="34" Margin="0,88,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="170" Click="managerSignup_Click"/>
-        <Button Content="Button" Margin="0,30,252,115" Click="checkstation"/>
-        <Button Content="Button" Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.911,0.233"/>
-
 
 
 

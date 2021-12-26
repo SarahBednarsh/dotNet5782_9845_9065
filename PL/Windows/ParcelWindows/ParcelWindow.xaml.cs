@@ -34,9 +34,7 @@ namespace PL
             index = parcels.IndexOf(parcels.Where(x => x.Id == plParcel.Id).FirstOrDefault());
                 //ActionsGrid.Visibility = Visibility.Visible;
             InitializeActionsButton(plParcel);
-
-
-            //InitializeActionsButton(plDrone);
+            ConfirmAction.IsEnabled = IsEnabled;
         }
         private void InitializeActionsButton(Parcel parcel)
         {
@@ -60,8 +58,11 @@ namespace PL
                 Actions.Content = "Deliver parcel";
                 Actions.Click += Deliver_Click;
             }
+            else
+            {
+                Actions.Visibility = Visibility.Hidden;
+            }
         }
-
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
             //do we need try and catch here? cause if it entered here there should always be a drone
@@ -73,6 +74,10 @@ namespace PL
             //catch 
             bl.DeliverAParcel(Int32.Parse(plParcel.DroneId));
             parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
+            plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(plParcel.Id));
+            ConfirmAction.IsEnabled = true;
+            InitializeActionsButton(plParcel);
+
         }
 
         private void PickUp_Click(object sender, RoutedEventArgs e)
@@ -82,19 +87,26 @@ namespace PL
                 //do we need try and catch here? cause if it entered here there should always be a drone
                 bl.PickUpAParcel(Int32.Parse(plParcel.DroneId));
                 parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
+                plParcel.DroneId = "try this?";
+                //plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(plParcel.Id));
+                //DataContext = plParcel;
+
             }
-            catch(BO.NotEnoughBattery ex)
+            catch (BO.NotEnoughBattery ex)
             {
-                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+                MessageBox.Show($"PickUp did not work: " + ex.Message);
             }
             catch (BO.KeyDoesNotExist ex)
             {
-                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+                MessageBox.Show($"PickUp did not work: " + ex.Message);
             }
             catch (BO.CannotPickUp ex)
             {
-                MessageBox.Show($"PickUp did not work: " + ex.ToString());
+                MessageBox.Show($"PickUp did not work: " + ex.Message);
             }
+            ConfirmAction.IsEnabled = IsEnabled;
+            InitializeActionsButton(plParcel);
+
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -106,46 +118,22 @@ namespace PL
                 bl.DeleteParcel(plParcel.Id);
                 Close();
             }
+
         }
 
-        //private void InitializeActionsButton(Drone drone)
-        //{
-        //    Actions.Click -= Charge_Click;
-        //    Actions.Click -= ReleaseCharge_Click;
-        //    Actions.Click -= Deliver_Click;
-        //    Actions.Click -= Pickup_Click;
-        //    if (drone == null)
-        //        throw new ArgumentNullException("No drone");
-        //    if (drone.Status == DroneStatuses.Available)
-        //    {
-        //        Actions.Content = "Charge";
-        //        Actions.Click += Charge_Click;
-        //        Actions2.Visibility = Visibility.Visible;
-        //        Actions2.Content = "Send to delivery";
-        //        Actions2.Click += SendToDelivery_Click;
-        //    }
-        //    else if (drone.Status == DroneStatuses.InMaintenance)
-        //    {
-        //        Actions.Content = "Release charge";
-        //        Actions.Click += ReleaseCharge_Click;
-        //        Actions2.Visibility = Visibility.Hidden;
-        //    }
-        //    else if (bl.SearchDrone(drone.Id).Parcel.PickedUpAlready)
-        //    {
-        //        Actions.Content = "Deliver parcel";
-        //        Actions.Click += Deliver_Click;
-        //        Actions2.Visibility = Visibility.Hidden;
-        //    }
-        //    else
-        //    {
-        //        Actions.Content = "Pick up parcel";
-        //        Actions.Click += Pickup_Click;
-        //        Actions2.Visibility = Visibility.Hidden;
-        //    }
-        //}
+ 
         public ParcelWindow()
         {
             InitializeComponent();
+        }
+
+        private void message_ActionClick(object sender, RoutedEventArgs e)
+        {
+            ConfirmAction.IsEnabled = false;
+        }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PL
 {
-    public class ParcelToList : DependencyObject, IEditableObject
+    public class ParcelToList : DependencyObject
     {
         static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(ParcelToList));
         static readonly DependencyProperty SenderNameProperty = DependencyProperty.Register("SenderName", typeof(string), typeof(ParcelToList));
