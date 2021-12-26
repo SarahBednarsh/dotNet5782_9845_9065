@@ -67,7 +67,7 @@
             <Label x:Name="LatitudeLabel" Content="Latitude:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Center" Height="26" Grid.Row="1" Width="76"/>
             <TextBox IsEnabled="False" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="{Binding Latitude}" TextWrapping="Wrap" Width="120" Margin="0,10,0,26"/>
             <Label x:Name="IdOfParcelLabel" Content="Parcel ID:" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Top" Height="26" Grid.Row="3" Width="76" Margin="90,10,0,0"/>
-            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding DroneParcelId}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
+            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding ParcelId}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
             <Button IsEnabled="False" x:Name="Update" Click="Update_Click" Content="Update" Grid.Column="2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="160" Margin="43,0,0,0" Grid.ColumnSpan="2"/>
             <Button x:Name="Actions" Content="Actions" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="168,0,0,0" Grid.ColumnSpan="2"/>
             <Button Visibility="Visible" x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,0,0,0"/>

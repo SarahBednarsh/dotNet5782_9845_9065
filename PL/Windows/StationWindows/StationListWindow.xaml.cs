@@ -30,12 +30,13 @@ namespace PL
             this.stations = stations;
             DataContext = stations;
         }
-        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             new StationWindow(bl, stations).ShowDialog();
-            stations = new ObservableCollection<Station>((from station in bl.ListStation()// this does not affect anything= it doesnt change MainWindow.drones!
-                                                      select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
-            stationDataGrid.ItemsSource = stations;
+            //stations = new ObservableCollection<Station>((from station in bl.ListStation()// this does not affect anything= it doesnt change MainWindow.drones!
+            //                                          select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
+            //stations.Add(Adapter.S)
+            //stationDataGrid.ItemsSource = stations;
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -46,9 +47,9 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             Station s = cell.DataContext as Station;
-            new StationWindow(bl, stations, s.StationId).ShowDialog();
-            int stationIndex = stations.IndexOf(s);
-            stations[stationIndex] = Adapter.StationBotoPo(bl.SearchStation(s.StationId));
+            new StationWindow(bl, stations, s.Id).ShowDialog();
+            //int stationIndex = stations.IndexOf(s);
+            //stations[stationIndex] = Adapter.StationBotoPo(bl.SearchStation(s.StationId));
         }
     }
 }

@@ -10,17 +10,17 @@ namespace PL
 {
     public class CustomerToList : DependencyObject
     {
-        static readonly DependencyProperty CustomerToListIdProperty = DependencyProperty.Register("CustomerToListId", typeof(int), typeof(CustomerToList));
-        static readonly DependencyProperty CustomerToListNameProperty = DependencyProperty.Register("CustomerToListName", typeof(string), typeof(CustomerToList));
-        static readonly DependencyProperty CustomerToListPhoneNumProperty = DependencyProperty.Register("CustomerToListPhoneNum", typeof(string), typeof(CustomerToList));
+        static readonly DependencyProperty IdProperty = DependencyProperty.Register("CustomerToListId", typeof(int), typeof(CustomerToList));
+        static readonly DependencyProperty NameProperty = DependencyProperty.Register("CustomerToListName", typeof(string), typeof(CustomerToList));
+        static readonly DependencyProperty PhoneNumProperty = DependencyProperty.Register("CustomerToListPhoneNum", typeof(string), typeof(CustomerToList));
         static readonly DependencyProperty DeliveredProperty = DependencyProperty.Register("CustomerToListDelivered", typeof(int), typeof(CustomerToList));
         static readonly DependencyProperty SentProperty = DependencyProperty.Register("CustomerToListSent", typeof(int), typeof(CustomerToList));
         static readonly DependencyProperty GotProperty = DependencyProperty.Register("CustomerToListGot", typeof(int), typeof(CustomerToList));
         static readonly DependencyProperty OnTheirWayProperty = DependencyProperty.Register("CustomerToListOnTheirWay", typeof(int), typeof(CustomerToList));
 
-        public int CustomerToListId { get => (int)GetValue(CustomerToListIdProperty); set => SetValue(CustomerToListIdProperty, value); }
-        public string CustomerToListName { get => (string)GetValue(CustomerToListNameProperty); set => SetValue(CustomerToListNameProperty, value); }
-        public string CustomerToListPhoneNum { get => (string)GetValue(CustomerToListPhoneNumProperty); set => SetValue(CustomerToListPhoneNumProperty, value); }
+        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
+        public string Name { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
+        public string PhoneNum { get => (string)GetValue(PhoneNumProperty); set => SetValue(PhoneNumProperty, value); }
         public int Delivered { get => (int)GetValue(DeliveredProperty); set => SetValue(DeliveredProperty, value); }
         public int Sent { get => (int)GetValue(SentProperty); set => SetValue(SentProperty, value); }
         public int Got { get => (int)GetValue(GotProperty); set => SetValue(GotProperty, value); }

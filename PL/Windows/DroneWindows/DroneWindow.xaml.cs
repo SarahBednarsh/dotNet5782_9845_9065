@@ -164,6 +164,8 @@ namespace PL
 
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
                     drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok - need to find right way to deal with this
+                    //drones = from drone in bl.ListDrone()
+                    //         select Adapter.DroneBotoPo(drone);
                     MessageBox.Show("Success");
                     this.Close();
                     return;
@@ -247,7 +249,7 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.DroneToCharge(id);
                 plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.DroneParcelId = "No arcel yet";
+                plDrone.ParcelId = "No arcel yet";
                 UpdateDrone();
                 MessageBox.Show("Drone sent to charge successfully");
             }

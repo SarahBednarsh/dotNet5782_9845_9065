@@ -8,24 +8,24 @@ namespace PL
 {
     public class Parcel : DependencyObject
     {
-        static readonly DependencyProperty ParcelIdProperty = DependencyProperty.Register("ParcelId", typeof(int), typeof(Drone));
-        static readonly DependencyProperty ParcelSenderProperty = DependencyProperty.Register("ParcelSender", typeof(CustomerInParcel), typeof(Drone));
-        static readonly DependencyProperty ParcelTargetProperty = DependencyProperty.Register("ParcelTarget", typeof(CustomerInParcel), typeof(Drone));
-        static readonly DependencyProperty ParcelWeightProperty = DependencyProperty.Register("ParcelWeight", typeof(WeightCategories), typeof(Drone));
-        static readonly DependencyProperty ParcelPriorityProperty = DependencyProperty.Register("ParcelPriority", typeof(Priorities), typeof(Drone));
-        static readonly DependencyProperty ParcelDroneIdProperty = DependencyProperty.Register("ParcelDroneId", typeof(string), typeof(Drone));
-        static readonly DependencyProperty CreationProperty = DependencyProperty.Register("Creation", typeof(DateTime?), typeof(Drone));
-        static readonly DependencyProperty AttributionProperty = DependencyProperty.Register("Attribution", typeof(DateTime?), typeof(Drone));
-        static readonly DependencyProperty PickUpProperty = DependencyProperty.Register("PickUp", typeof(DateTime?), typeof(Drone));
-        static readonly DependencyProperty DeliveryProperty = DependencyProperty.Register("Delivery", typeof(DateTime?), typeof(Drone));
+        static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(Parcel));
+        static readonly DependencyProperty SenderProperty = DependencyProperty.Register("Sender", typeof(CustomerInParcel), typeof(Parcel));
+        static readonly DependencyProperty TargetProperty = DependencyProperty.Register("Target", typeof(CustomerInParcel), typeof(Parcel));
+        static readonly DependencyProperty WeightProperty = DependencyProperty.Register("Weight", typeof(WeightCategories), typeof(Parcel));
+        static readonly DependencyProperty PriorityProperty = DependencyProperty.Register("Priority", typeof(Priorities), typeof(Parcel));
+        static readonly DependencyProperty DroneIdProperty = DependencyProperty.Register("DroneId", typeof(string), typeof(Parcel));
+        static readonly DependencyProperty CreationProperty = DependencyProperty.Register("Creation", typeof(DateTime?), typeof(Parcel));
+        static readonly DependencyProperty AttributionProperty = DependencyProperty.Register("Attribution", typeof(DateTime?), typeof(Parcel));
+        static readonly DependencyProperty PickUpProperty = DependencyProperty.Register("PickUp", typeof(DateTime?), typeof(Parcel));
+        static readonly DependencyProperty DeliveryProperty = DependencyProperty.Register("Delivery", typeof(DateTime?), typeof(Parcel));
 
-        public int ParcelId { get => (int)GetValue(ParcelIdProperty); set => SetValue(ParcelIdProperty, value); }
-        public CustomerInParcel ParcelSender { get => (CustomerInParcel)GetValue(ParcelSenderProperty); set => SetValue(ParcelSenderProperty, value); }
-        public CustomerInParcel ParcelTarget { get => (CustomerInParcel)GetValue(ParcelTargetProperty); set => SetValue(ParcelTargetProperty, value); }
-        public WeightCategories ParcelWeight { get => (WeightCategories)GetValue(ParcelWeightProperty); set => SetValue(ParcelWeightProperty, value); }
-        public Priorities ParcelPriority { get => (Priorities)GetValue(ParcelPriorityProperty); set => SetValue(ParcelPriorityProperty, value); }
+        public int Id { get => (int)GetValue(IdProperty); set => SetValue(IdProperty, value); }
+        public CustomerInParcel Sender { get => (CustomerInParcel)GetValue(SenderProperty); set => SetValue(SenderProperty, value); }
+        public CustomerInParcel Target { get => (CustomerInParcel)GetValue(TargetProperty); set => SetValue(TargetProperty, value); }
+        public WeightCategories Weight { get => (WeightCategories)GetValue(WeightProperty); set => SetValue(WeightProperty, value); }
+        public Priorities Priority { get => (Priorities)GetValue(PriorityProperty); set => SetValue(PriorityProperty, value); }
         //needs to be drone in parcel
-        public string ParcelDroneId { get => (string)GetValue(ParcelDroneIdProperty); set => SetValue(ParcelDroneIdProperty, value); }
+        public string DroneId { get => (string)GetValue(DroneIdProperty); set => SetValue(DroneIdProperty, value); }
         public DateTime? Creation { get => (DateTime?)GetValue(CreationProperty); set => SetValue(CreationProperty, value); }
         public DateTime? Attribution { get => (DateTime?)GetValue(AttributionProperty); set => SetValue(AttributionProperty, value); }
         public DateTime? PickUp { get => (DateTime?)GetValue(PickUpProperty); set => SetValue(PickUpProperty, value); }

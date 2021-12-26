@@ -18,7 +18,7 @@ namespace PL
                 Longitude = BoDrone.Location.Longitude.ToString(),
                 MaxWeight = (PL.WeightCategories)BoDrone.MaxWeight,
                 Model = BoDrone.Model,
-                DroneParcelId = BoDrone.Parcel == null ? "No parcel yet" : BoDrone.Parcel.Id.ToString(),
+                ParcelId = BoDrone.Parcel == null ? "No parcel yet" : BoDrone.Parcel.Id.ToString(),
                 Status = (PL.DroneStatuses)BoDrone.Status
             };
             return PoDrone;
@@ -27,12 +27,12 @@ namespace PL
         {
             PL.Parcel PoParcel = new PL.Parcel()
             {
-                ParcelId = BoParcel.Id,
-                ParcelSender = new CustomerInParcel { Id=BoParcel.Sender.Id, Name = BoParcel.Sender.Name },
-                ParcelTarget = new CustomerInParcel { Id = BoParcel.Target.Id, Name = BoParcel.Target.Name },
-                ParcelWeight = (PL.WeightCategories)BoParcel.Weight,
-                ParcelPriority = (PL.Priorities)BoParcel.Priority,
-                ParcelDroneId = BoParcel.Drone==null? "No drone yet": BoParcel.Drone.Id.ToString(),
+                Id = BoParcel.Id,
+                Sender = new CustomerInParcel { Id = BoParcel.Sender.Id, Name = BoParcel.Sender.Name },
+                Target = new CustomerInParcel { Id = BoParcel.Target.Id, Name = BoParcel.Target.Name },
+                Weight = (PL.WeightCategories)BoParcel.Weight,
+                Priority = (PL.Priorities)BoParcel.Priority,
+                DroneId = BoParcel.Drone == null ? "No drone yet" : BoParcel.Drone.Id.ToString(),
                 Creation = BoParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
                 Attribution = BoParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
                 PickUp = BoParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,
@@ -44,11 +44,11 @@ namespace PL
         {
             return new PL.ParcelToList()
             {
-                PTLId = BoParcel.Id,
-                PTLSenderName = BoParcel.SenderName,
-                PTLTargetName = BoParcel.TargetName,
-                PTLWeight = (PL.WeightCategories)BoParcel.Weight,
-                PTLPriority = (PL.Priorities)BoParcel.Priority,
+                Id = BoParcel.Id,
+                SenderName = BoParcel.SenderName,
+                TargetName = BoParcel.TargetName,
+                Weight = (PL.WeightCategories)BoParcel.Weight,
+                Priority = (PL.Priorities)BoParcel.Priority,
             };
         }
         static public PL.Customer CustomerBotoPo(BO.Customer BoCustomer)
@@ -72,9 +72,9 @@ namespace PL
         {
             PL.CustomerToList PoCustomerToList = new PL.CustomerToList()
             {
-                CustomerToListId = BoCustomer.Id,
-                CustomerToListName = BoCustomer.Name,
-                CustomerToListPhoneNum = BoCustomer.PhoneNum,
+                Id = BoCustomer.Id,
+                Name = BoCustomer.Name,
+                PhoneNum = BoCustomer.PhoneNum,
                 Delivered = BoCustomer.Delivered,
                 Sent = BoCustomer.Sent,
                 Got = BoCustomer.Got,
@@ -86,13 +86,13 @@ namespace PL
         {
             PL.Station PoStation = new PL.Station()
             {
-                StationId = BoStation.Id,
-                StationName=BoStation.Name,
-                StationLatitude=BoStation.Location.Latitude.ToString(),
-                StationLongitude=BoStation.Location.Longitude.ToString(),
-                OpenChargeSlots=BoStation.OpenChargeSlots,
-                Charging=(from drone in BoStation.Charging
-                          select drone.Id).ToList()
+                Id = BoStation.Id,
+                Name = BoStation.Name,
+                Latitude = BoStation.Location.Latitude.ToString(),
+                Longitude = BoStation.Location.Longitude.ToString(),
+                OpenChargeSlots = BoStation.OpenChargeSlots,
+                Charging = (from drone in BoStation.Charging
+                            select drone.Id).ToList()
             };
             return PoStation;
 

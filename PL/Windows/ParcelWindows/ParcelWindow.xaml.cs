@@ -31,7 +31,7 @@ namespace PL
             this.parcels = parcels;
             plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelId));
             DataContext = plParcel;
-            index = parcels.IndexOf(parcels.Where(x => x.PTLId == plParcel.ParcelId).FirstOrDefault());
+            index = parcels.IndexOf(parcels.Where(x => x.Id == plParcel.Id).FirstOrDefault());
                 //ActionsGrid.Visibility = Visibility.Visible;
             InitializeActionsButton(plParcel);
 
@@ -71,8 +71,8 @@ namespace PL
             //    droneId = Int32.Parse(plParcel.ParcelDroneId);
             //}
             //catch 
-            bl.DeliverAParcel(Int32.Parse(plParcel.ParcelDroneId));
-            parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.ParcelId).FirstOrDefault());
+            bl.DeliverAParcel(Int32.Parse(plParcel.DroneId));
+            parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
         }
 
         private void PickUp_Click(object sender, RoutedEventArgs e)
@@ -80,8 +80,8 @@ namespace PL
             try
             {
                 //do we need try and catch here? cause if it entered here there should always be a drone
-                bl.PickUpAParcel(Int32.Parse(plParcel.ParcelDroneId));
-                parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.ParcelId).FirstOrDefault());
+                bl.PickUpAParcel(Int32.Parse(plParcel.DroneId));
+                parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
             }
             catch(BO.NotEnoughBattery ex)
             {
@@ -103,7 +103,7 @@ namespace PL
             if (mbResult == MessageBoxResult.Yes)
             {
                 parcels.Remove(parcels[index]);
-                bl.DeleteParcel(plParcel.ParcelId);
+                bl.DeleteParcel(plParcel.Id);
                 Close();
             }
         }
