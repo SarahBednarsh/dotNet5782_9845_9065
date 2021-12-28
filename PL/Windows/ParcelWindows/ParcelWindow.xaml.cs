@@ -67,7 +67,8 @@ namespace PL
             //    droneId = Int32.Parse(plParcel.ParcelDroneId);
             //}
             //catch 
-            bl.DeliverAParcel((DataContext as Parcel).Id);
+            Int32.TryParse((DataContext as Parcel).DroneId, out int id);
+            bl.DeliverAParcel(id);
             ConfirmAction.IsEnabled = true;
             //InitializeActionsButton(plParcel);
             Close();
@@ -78,11 +79,8 @@ namespace PL
         {
             try
             {
-                //do we need try and catch here? cause if it entered here there should always be a drone
-                bl.PickUpAParcel((DataContext as Parcel).Id);
-                //plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(plParcel.Id));
-                //DataContext = plParcel;
-
+                Int32.TryParse((DataContext as Parcel).DroneId, out int id);
+                bl.PickUpAParcel(id);
             }
             catch (BO.NotEnoughBattery ex)
             {
@@ -98,6 +96,7 @@ namespace PL
             }
             ConfirmAction.IsEnabled = IsEnabled;
             Close();
+            MessageBox.Show("Drone picked up succesfully", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
@@ -108,8 +107,9 @@ namespace PL
             {
                 bl.DeleteParcel((DataContext as Parcel).Id);
                 Close();
+                MessageBox.Show("Drone deleted succesfully", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
+            MessageBox.Show("Action was cancelleduccesfully", "CANCEL", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 

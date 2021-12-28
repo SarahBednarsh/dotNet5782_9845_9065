@@ -11,6 +11,9 @@
   <ItemGroup>
     <None Remove="DroneNature.png" />
     <None Remove="logo.jpeg" />
+    <None Remove="logo.png" />
+    <None Remove="whitelogo-removebg-preview %283%29.png" />
+    <None Remove="whitelogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +29,9 @@
   <ItemGroup>
     <Resource Include="DroneNature.png" />
     <Resource Include="logo.jpeg" />
+    <Resource Include="logo.png" />
+    <Resource Include="whitelogo-removebg-preview (3).png" />
+    <Resource Include="whitelogo.png" />
   </ItemGroup>
 
 </Project>

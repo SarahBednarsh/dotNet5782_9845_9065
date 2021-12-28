@@ -38,39 +38,14 @@ namespace PL
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.TargetName).ToList();
-            //ICollectionView cvParcels = CollectionViewSource.GetDefaultView(dataGrid1.ItemsSource);
-            //if (cvParcels.CanGroup == true)
-            //{
-            //    cvParcels.GroupDescriptions.Clear();
-            //    cvParcels.GroupDescriptions.Add(new PropertyGroupDescription("SenderName"));
-            //    //cvTasks.GroupDescriptions.Add(new PropertyGroupDescription("Complete"));
-            //}
-
-            //ObservableCollection<GroupInfoCollection<ParcelToList>> groupInfoCollections = new ObservableCollection<GroupInfoCollection<ParcelToList>>();
-
-            ////Implement grouping through LINQ queries
-            //var query = from item in parcels
-            //            group item by item.Range into g
-            //            select new { GroupName = g.Key, Items = g };
-
-            ////Populate Mountains grouped collection with results of the query
-            //foreach (var g in query)
-            //{
-            //    GroupInfoCollection<Mountain> info = new GroupInfoCollection<Mountain>();
-            //    info.Key = g.GroupName;
-            //    foreach (var item in g.Items)
-            //    {
-            //        info.Add(item);
-            //    }
-            //    mountains.Add(info);
-            //}
+            
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
             ParcelToList p = cell.DataContext as ParcelToList;
-            Parcel parcelToOpem = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
-            new ParcelWindow().ShowDialog();
+            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
+            new ParcelWindow(parcelToOpen).ShowDialog();
             DataContext = (from parcel in bl.ListParcel()
                            select Adapter.ParcelToListBotoPo(parcel)).ToList();
         }
