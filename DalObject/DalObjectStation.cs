@@ -62,6 +62,11 @@ namespace Dal
             return StaticSexagesimal.CalcDis(clong, clat, longitude, latitude);
         }
 
-        //public void RemoveChargingSlots(int stationId,int amount)
+        public IEnumerable<DroneCharge> YieldDroneCharges()
+        {
+            foreach (DroneCharge droneCharge in DataSource.DroneCharges)
+                yield return droneCharge;
+        }
+
     }
 }

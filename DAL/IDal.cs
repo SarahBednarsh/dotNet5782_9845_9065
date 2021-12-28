@@ -150,5 +150,7 @@ namespace DalApi
         /// <param name="droneId"></param>
         /// <returns></returns>
         DateTime? GetBeginningChargeTime(int droneId);
+        public IEnumerable<DroneCharge> YieldDroneCharges();
+
     }
 }
