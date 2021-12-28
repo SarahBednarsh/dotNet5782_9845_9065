@@ -8,7 +8,7 @@
         Title="ParcelWindow" Height="450" Width="600">
     <Grid>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="450,53,0,55" VerticalAlignment="Bottom" Height="30" Width="74" Click="Close_Click"/>
-        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible" BindingGroup="{Binding Source, Mode=TwoWay}">
+        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible">
             <!--<Grid Margin="20,0,486,0">-->
                 <StackPanel>
                     <Border BorderThickness="30"></Border>

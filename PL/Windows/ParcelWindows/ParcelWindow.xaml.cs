@@ -22,7 +22,8 @@ namespace PL
         private readonly IBL bl = BlFactory.GetBL();
         public ParcelWindow(Parcel parcel)
         {
-            InitializeComponent(); DataContext = parcel;
+            InitializeComponent(); 
+            DataContext = parcel;
             InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
         }
