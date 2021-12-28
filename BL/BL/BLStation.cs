@@ -63,12 +63,13 @@ namespace BL
             station.Name = old.Name;
             station.OpenChargeSlots = old.ChargeSlots;
             station.Charging = new List<DroneInCharge>();
-            foreach (DroneToList drone in dronesBL) //make list of charging drones
-            {
-                //if the drone is charging in the station
-                if (drone.Status == DroneStatuses.InMaintenance && drone.Location == station.Location)
+            foreach (DroneCharge droneCharge in dalAP.YieldDroneCharges())
+                if (droneCharge.StationId == station.Id)
+                {
+                    DroneToList drone = dronesBL.Find(x => x.Id == droneCharge.DroneId);
                     station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
-            }
+                }
+
             return station;
         }
         public Station SearchStation(int stationId)
