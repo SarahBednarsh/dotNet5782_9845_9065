@@ -20,9 +20,14 @@ namespace PL
     public partial class ParcelWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        public ParcelWindow()
+        {
+            InitializeComponent();
+        }
         public ParcelWindow(Parcel parcel)
         {
-            InitializeComponent(); DataContext = parcel;
+            InitializeComponent();
+            DataContext = parcel;
             InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
         }
@@ -108,10 +113,6 @@ namespace PL
         }
 
 
-        public ParcelWindow()
-        {
-            InitializeComponent();
-        }
 
         private void message_ActionClick(object sender, RoutedEventArgs e)
         {

@@ -31,6 +31,7 @@ namespace PL
         public StationWindow(Station station)
         {
             InitializeComponent();
+            actionsTitle.Text = string.Format($"Station {station.Id}");
             DataContext = station;
         }
 

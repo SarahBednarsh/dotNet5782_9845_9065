@@ -9,7 +9,7 @@ namespace DO
     {
         public int Degrees { get; set; }
         public int Minutes { get; set; }
-        public double Seconds { get; set; }
+        public int Seconds { get; set; }
         public Directions Direction { get; set; }
         public override string ToString()
         {

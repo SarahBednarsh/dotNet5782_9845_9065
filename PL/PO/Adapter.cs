@@ -8,8 +8,10 @@ namespace PL
 {
     internal class Adapter
     {
-        static public PL.Drone DroneBotoPo(BO.Drone boDrone)
+        public static PL.Drone DroneBotoPo(BO.Drone boDrone)
         {
+            if (boDrone == null)
+                return null;
             return new PL.Drone()
             {
                 Id = boDrone.Id,
@@ -22,8 +24,10 @@ namespace PL
                 Status = (PL.DroneStatuses)boDrone.Status
             };
         }
-        static public PL.DroneToList DroneToListBotoPo(BO.DroneToList boDrone)
+        public static PL.DroneToList DroneToListBotoPo(BO.DroneToList boDrone)
         {
+            if (boDrone == null)
+                return null;
             return new PL.DroneToList()
             {
                 Id = boDrone.Id,
@@ -36,8 +40,10 @@ namespace PL
                 Status = (PL.DroneStatuses)boDrone.Status
             };
         }
-        static public PL.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
+        public static PL.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
         {
+            if (boDroneInParcel == null)
+                return null;
             return new PL.DroneInParcel()
             {
                 Id = boDroneInParcel.Id,
@@ -46,16 +52,20 @@ namespace PL
                 Latitude = boDroneInParcel.Location.Latitude.ToString()
             };
         }
-        static public PL.DroneInCharge DroneInChargeBotoPo(BO.DroneInCharge boDrone)
+        public static PL.DroneInCharge DroneInChargeBotoPo(BO.DroneInCharge boDrone)
         {
+            if (boDrone == null)
+                return null;
             return new PL.DroneInCharge()
             {
                 Id = boDrone.Id,
                 Battery = (int)boDrone.Battery
             };
         }
-        static public PL.Parcel ParcelBotoPo(BO.Parcel boParcel)
+        public static PL.Parcel ParcelBotoPo(BO.Parcel boParcel)
         {
+            if (boParcel == null)
+                return null;
             return new PL.Parcel()
             {
                 Id = boParcel.Id,
@@ -72,6 +82,8 @@ namespace PL
         }
         static public PL.ParcelToList ParcelToListBotoPo(BO.ParcelToList boParcel)
         {
+            if (boParcel == null)
+                return null;
             return new PL.ParcelToList()
             {
                 Id = boParcel.Id,
@@ -83,6 +95,8 @@ namespace PL
         }
         static public PL.ParcelInTransfer ParcelInTransferBotoPo(BO.ParcelInTransfer boParcel)
         {
+            if (boParcel == null)
+                return null;
             return new PL.ParcelInTransfer()
             {
                 Id = boParcel.Id,
@@ -100,6 +114,8 @@ namespace PL
         }
         static public PL.ParcelAtCustomer ParcelAtCustomerBotoPo(BO.ParcelAtCustomer boParcel)
         {
+            if (boParcel == null)
+                return null;
             return new PL.ParcelAtCustomer()
             {
                 Id = boParcel.Id,
@@ -111,6 +127,8 @@ namespace PL
         }
         static public PL.Customer CustomerBotoPo(BO.Customer boCustomer)
         {
+            if (boCustomer == null)
+                return null;
             return new PL.Customer()
             {
                 Id = boCustomer.Id,
@@ -127,6 +145,8 @@ namespace PL
 
         static public PL.CustomerToList CustomerToListBotoPo(BO.CustomerToList boCustomer)
         {
+            if (boCustomer == null)
+                return null;
             return new PL.CustomerToList()
             {
                 Id = boCustomer.Id,
@@ -140,28 +160,34 @@ namespace PL
         }
         static public PL.CustomerInParcel CustomerInParcelBotoPo(BO.CustomerInParcel boCustomer)
         {
+            if (boCustomer == null)
+                return null;
             return new PL.CustomerInParcel()
             {
                 Id = boCustomer.Id,
                 Name = boCustomer.Name
             };
         }
-        static public PL.Station StationBotoPo(BO.Station BoStation)
+        public static PL.Station StationBotoPo(BO.Station boStation)
         {
+            if (boStation == null)
+                return null;
             return new PL.Station()
             {
-                Id = BoStation.Id,
-                Name = BoStation.Name,
-                Latitude = BoStation.Location.Latitude.ToString(),
-                Longitude = BoStation.Location.Longitude.ToString(),
-                OpenChargeSlots = BoStation.OpenChargeSlots,
-                Charging = (from drone in BoStation.Charging
+                Id = boStation.Id,
+                Name = boStation.Name,
+                Latitude = boStation.Location.Latitude.ToString(),
+                Longitude = boStation.Location.Longitude.ToString(),
+                OpenChargeSlots = boStation.OpenChargeSlots,
+                Charging = (from drone in boStation.Charging
                             select drone.Id).ToList()
             };
 
         }
-        static public PL.StationToList StationToListBotoPo(BO.StationToList boStation)
+        public static PL.StationToList StationToListBotoPo(BO.StationToList boStation)
         {
+            if (boStation == null)
+                return null;
             return new PL.StationToList()
             {
                 Id = boStation.Id,

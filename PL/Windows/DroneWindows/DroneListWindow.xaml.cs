@@ -66,7 +66,7 @@ namespace PL
             StatusSelector.Text = "";
             if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
             {
-                droneDataGrid.ItemsSource = DataContext as List<Drone>;
+                droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
                 return;
             }
             WeightSelector_SelectionChanged(WeightSelector, null);

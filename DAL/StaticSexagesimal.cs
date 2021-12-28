@@ -26,12 +26,12 @@ namespace DO
             pos = Math.Abs(pos);
             int degrees = (int)pos % 360;
             int minutes = (int)(pos * 60) % 60;
-            double seconds = (pos * 60 * 60) % 60;
+            int seconds = (int)(pos * 60 * 60) % 60;
             return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = seconds, Direction = dir };
         }
         public static Sexagesimal InitializeSexagesimal(int degrees, int minutes, double seconds, Directions direction)
         {
-            return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = seconds, Direction = direction };
+            return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = (int)seconds, Direction = direction };
         }
         public static Sexagesimal InitializeSexagesimal(Sexagesimal copy)
         {

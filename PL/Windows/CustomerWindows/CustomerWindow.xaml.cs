@@ -31,6 +31,7 @@ namespace PL
             DataContext = customer;
             Width = 800;
             actionsGrid.Visibility = Visibility.Visible;
+            actionsTitle.Text = string.Format($"Customer {customer.Id}");
         }
         public CustomerWindow()
         {
@@ -78,5 +79,15 @@ namespace PL
                 MessageBox.Show(exception.Message);
             }
         }
+        //private void AtCustomer_Format(object sender, ListControlConvertEventArgs e)
+        //{
+        //    // Assuming your class called Scores
+        //    string team1 = ((Scores)e.ListItem).team1.ToString();
+        //    string team2 = ((Scores)e.ListItem).team2.ToString();
+        //    string battingteam = ((Scores)e.ListItem).battingteam.ToString();
+        //    string score = ((Scores)e.ListItem).score.ToString();
+
+        //    e.Value = team1 + " vs " + team2 + ": " + battingteam + " Score: " + score;
+        //}
     }
 }

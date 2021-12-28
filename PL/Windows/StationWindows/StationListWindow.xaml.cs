@@ -44,7 +44,7 @@ namespace PL
             DataGridCell cell = sender as DataGridCell;
             StationToList s = cell.DataContext as StationToList;
             Station sta = Adapter.StationBotoPo(bl.SearchStation(s.Id));
-            new StationWindow().ShowDialog();
+            new StationWindow(sta).ShowDialog();
             DataContext = (from station in bl.ListStation()
                            select Adapter.StationToListBotoPo(station)).ToList();
         }

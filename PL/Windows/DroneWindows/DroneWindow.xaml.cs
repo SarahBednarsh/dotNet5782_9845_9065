@@ -42,7 +42,7 @@ namespace PL
             InitializeComponent();
 
             ActionsGrid.Visibility = Visibility.Visible;
-            ActionsGrid.DataContext = drone;
+            DataContext = drone;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             InitializeActionsButton(drone);
@@ -81,6 +81,10 @@ namespace PL
                 Actions.Click += Pickup_Click;
                 Actions2.Visibility = Visibility.Hidden;
             }
+        }
+        private void White_GotFocus(object sender, RoutedEventArgs e)
+        {
+            MakeTextBoxWhite(sender as TextBox);
         }
         private void IdBoxNew_LostFocus(object sender, RoutedEventArgs e)
         {
