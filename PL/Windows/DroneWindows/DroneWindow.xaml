@@ -23,9 +23,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="IdLabelNew" Content="Enter ID:" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
-            <TextBox x:Name="IdBoxNew" TextChanged="IdBoxNew_TextChanged" HorizontalAlignment="Left" Margin="73,10,0,158" Grid.Row="1" Text="Id" TextWrapping="Wrap" Width="120"/>
+            <TextBox x:Name="IdBoxNew" LostFocus="IdBoxNew_LostFocus" HorizontalAlignment="Left" Margin="73,10,0,158" Grid.Row="1" Text="Id" TextWrapping="Wrap" Width="120"/>
             <Label x:Name="ModelLabelNew" Content="Enter model:" HorizontalAlignment="Center" Grid.Column="1" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
-            <TextBox x:Name="ModelBoxNew" TextChanged="ModelBoxNew_TextChanged" HorizontalAlignment="Center" Margin="73,10,0,158" Grid.Column="1" Grid.Row="1" Text="Model" TextWrapping="Wrap" Width="120"/>
+            <TextBox x:Name="ModelBoxNew" LostFocus="ModelBoxNew_LostFocus" HorizontalAlignment="Center" Margin="73,10,0,158" Grid.Column="1" Grid.Row="1" Text="Model" TextWrapping="Wrap" Width="120"/>
             <Label x:Name="WeightLabelNew" Content="Enter maximum weight:" HorizontalAlignment="Center" Grid.Column="2" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
             <ComboBox x:Name="WeightSelectorNew" Grid.Column="2" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" SelectionChanged="WeightSelectorNew_SelectionChanged" Grid.Row="1"/>
             <Label x:Name="StationIdLabelNew" Content="Enter station ID:" HorizontalAlignment="Center" Grid.Column="3" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
@@ -55,7 +55,7 @@
             <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="54"/>
             <TextBox IsEnabled="False" x:Name="IdBox" HorizontalAlignment="Center" Text="{Binding Id, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,15,0,13" Grid.Column="1"/>
             <Label x:Name="ModelLabel" Content="Model:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="76" Margin="73,0,0,0" Grid.Row="1"/>
-            <TextBox x:Name="ModelBox" TextChanged="ModelBox_TextChanged" Text="{Binding Model, Mode=TwoWay}" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="120" Margin="0,17,0,17"/>
+            <TextBox x:Name="ModelBox" LostFocus="ModelBox_LostFocus" Text="{Binding Model, Mode=TwoWay}" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="120" Margin="0,17,0,17"/>
             <Label x:Name="WeightLabel" Content="Maximum weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="134" Margin="33,42,0,0" Grid.Row="3"/>
             <ComboBox IsEnabled="False" x:Name="WeightSelector" SelectedItem="{Binding MaxWeight, Mode=TwoWay}" HorizontalAlignment="Center" Width="120" Grid.Row="3" Grid.Column="1" Margin="0,29,0,25"/>
             <Label x:Name="BatteryLabel" Content="Battery:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Top" Height="26" Width="76" Margin="0,32,0,0" Grid.Row="2"/>

@@ -26,22 +26,22 @@ namespace PL
 
         private void Drones_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(MainWindow.bl, MainWindow.drones).ShowDialog();
+            new DroneListWindow().ShowDialog();
         }
 
         private void Stations_Click(object sender, RoutedEventArgs e)
         {
-            new StationListWindow(MainWindow.bl, MainWindow.stations).ShowDialog();
+            new StationListWindow().ShowDialog();
         }
 
         private void Parcels_Click(object sender, RoutedEventArgs e)
         {
-            new ParceListWindow(MainWindow.bl, MainWindow.parcels).ShowDialog();
+            new ParceListWindow().ShowDialog();
         }
 
         private void Customers_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow(MainWindow.bl, MainWindow.customers).ShowDialog();
+            new CustomerListWindow().ShowDialog();
         }
     }
 }

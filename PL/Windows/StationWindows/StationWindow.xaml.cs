@@ -22,24 +22,16 @@ namespace PL
     /// </summary>
     public partial class StationWindow : Window
     {
-        private readonly IBL bl;
-        private Station plStation;
-        private int index;
-        public StationWindow(IBL bl)
+        private readonly IBL bl = BlFactory.GetBL();
+        public StationWindow()
         {
             InitializeComponent();
-            this.bl = bl;
             Width = 350;
-            DataContext = plStation;
         }
-        public StationWindow(IBL bl, int stationId)
+        public StationWindow(Station station)
         {
             InitializeComponent();
-            this.bl = bl;
-            plStation = Adapter.StationBotoPo(bl.SearchStation(stationId));
-            index = MainWindow.stations.IndexOf(Adapter.StationToListBotoPo(bl.ListStation().Where(x => x.Id == stationId).FirstOrDefault()));
-            actionsTitle.Text = string.Format($"Customer {plStation.Id}");
-            DataContext = plStation;
+            DataContext = station;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -56,7 +48,6 @@ namespace PL
                 double.TryParse(latitudeNewBox.Text, out double latitude);
                 int.TryParse(slotsNewBox.Text, out int chargeSlots);
                 bl.AddStation(id, nameNewBox.Text, longitude, latitude, chargeSlots);
-                MainWindow.stations.Add(Adapter.StationToListBotoPo(bl.ListStation().Where(x => x.Id == id).FirstOrDefault()));
                 MessageBox.Show("Added station successfully");
             }
             catch (Exception exception)
@@ -68,13 +59,15 @@ namespace PL
         private void chargingList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
-            new DroneWindow(bl, MainWindow.drones, (int)list.SelectedItem).Show();
+            Drone drone = Adapter.DroneBotoPo(bl.SearchDrone((int)list.SelectedItem));
+            new DroneWindow(drone).Show();
+            Close();
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(slotsBox.Text, out int chargeSlots);
-            bl.UpdateStationInfo(plStation.Id, nameBox.Text, chargeSlots);
+            bl.UpdateStationInfo((DataContext as Station).Id, nameBox.Text, chargeSlots);
         }
     }
 }
