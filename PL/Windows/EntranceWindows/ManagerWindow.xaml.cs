@@ -22,6 +22,14 @@ namespace PL
         public ManagerWindow()
         {
             InitializeComponent();
+            SnackbarWelcome.MessageQueue?.Enqueue(
+                "Welcome, name here! Glad to have you in our program!",
+                null,
+                null,
+                null,
+                false,
+                true,
+                TimeSpan.FromSeconds(3));
         }
 
         private void Drones_Click(object sender, RoutedEventArgs e)

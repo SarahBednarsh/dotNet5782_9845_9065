@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DroneNature.png" />
     <None Remove="logo.jpeg" />
   </ItemGroup>
 
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="DroneNature.png" />
     <Resource Include="logo.jpeg" />
   </ItemGroup>
 

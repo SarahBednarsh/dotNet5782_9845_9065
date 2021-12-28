@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="StationWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
@@ -50,7 +50,7 @@
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>
-
+           
         </Grid>
     </Grid>
 

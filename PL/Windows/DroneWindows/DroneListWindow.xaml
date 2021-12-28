@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="880"
         SizeToContent="WidthAndHeight">
@@ -46,6 +46,6 @@
         <Button Name="AddDrone" Content="Add drone" Margin="30,365,650,37" Width="120" Click="AddDrone_Click" />
         <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="736,26,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
-
+        
     </Grid>
 </Window>

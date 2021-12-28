@@ -59,6 +59,7 @@ namespace PL
         }
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
+
             StatusSelector.SelectedItem = -1;
             StatusSelector.Text = "";
             if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
@@ -68,6 +69,7 @@ namespace PL
             }
             WeightSelector_SelectionChanged(WeightSelector, null);
         }
+  
         private void ClearWeight_Click(object sender, RoutedEventArgs e)
         {
             WeightSelector.SelectedItem = -1;

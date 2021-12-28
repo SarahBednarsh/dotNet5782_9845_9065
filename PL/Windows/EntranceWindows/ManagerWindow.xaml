@@ -49,6 +49,6 @@
             ToolTip="MaterialDesignFloatingActionDarkButton" Margin="162,195,538,139" Click="Drones_Click">
             <Label Content="Drones" FontStyle="Italic" FontWeight="SemiBold"  FontSize="19" />
         </Button>
-
+        <materialDesign:Snackbar x:Name="SnackbarWelcome" MessageQueue="{materialDesign:MessageQueue}"/>
     </Grid>
 </Window>
