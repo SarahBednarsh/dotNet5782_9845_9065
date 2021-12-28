@@ -24,25 +24,17 @@ namespace PL
     /// </summary>
     public partial class CustomerWindow : Window
     {
-        private readonly IBL bl;
-        private Customer plCustomer;
-        private int index;
-        public CustomerWindow(IBL bl, int customerId)
+        private readonly IBL bl = BlFactory.GetBL();
+        public CustomerWindow(Customer customer)
         {
             InitializeComponent();
-            this.bl = bl;
-            plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(customerId));
-            index = MainWindow.customers.IndexOf(MainWindow.customers.Where(x => x.Id == customerId).FirstOrDefault());
-            actionsTitle.Text = string.Format($"Customer {plCustomer.Id}");
-            DataContext = plCustomer;
+            DataContext = customer;
             Width = 800;
             actionsGrid.Visibility = Visibility.Visible;
         }
-        public CustomerWindow(IBL bl)
+        public CustomerWindow()
         {
             InitializeComponent();
-            this.bl = bl;
-            DataContext = plCustomer;
             Width = 350;
             addGrid.Visibility = Visibility.Visible;
         }
@@ -53,11 +45,8 @@ namespace PL
             {
                 int.TryParse(idBox.Text, out int id);
                 bl.UpdateCustomerInfo(id, nameBox.Text, phoneBox.Text);
-                MainWindow.customers[index] = Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == plCustomer.Id).FirstOrDefault());
-                //MainWindow.customers = new ObservableCollection<CustomerToList>((from customer in bl.ListCustomer()
-                //                                                                 select Adapter.CustomerToListBotoPo(customer)).ToList());
-                plCustomer = Adapter.CustomerBotoPo(bl.SearchCustomer(plCustomer.Id));
                 MessageBox.Show("Updated successfully");
+                Close();
             }
             catch (Exception exception)
             { MessageBox.Show(exception.Message); }
@@ -65,7 +54,9 @@ namespace PL
         private void parcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
-            new ParcelWindow(bl, MainWindow.parcels, (int)list.SelectedItem).Show();
+            Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel((int)list.SelectedItem));
+            new ParcelWindow(parcel).Show();
+            Close();
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +71,6 @@ namespace PL
                 double.TryParse(longitudeNewBox.Text, out double longitude);
                 double.TryParse(latitudeNewBox.Text, out double latitude);
                 bl.AddCustomer(id, nameNewBox.Text, phoneNewBox.Text, longitude, latitude);
-                MainWindow.customers.Add(Adapter.CustomerToListBotoPo(bl.ListCustomer().Where(x => x.Id == id).FirstOrDefault()));
                 MessageBox.Show("Added customer successfully");
             }
             catch(Exception exception)

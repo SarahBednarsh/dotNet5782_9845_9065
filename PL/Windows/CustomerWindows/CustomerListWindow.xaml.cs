@@ -23,26 +23,29 @@ namespace PL
     /// </summary>
     public partial class CustomerListWindow : Window
     {
-        private IBL bl;
-        private ObservableCollection<CustomerToList> customers;
-        public CustomerListWindow(IBL bl, ObservableCollection<CustomerToList> customers)
+        private readonly IBL bl = BlFactory.GetBL();
+        public CustomerListWindow()
         {
             InitializeComponent();
-            this.bl = bl;
-            this.customers = customers;
-            DataContext = this.customers;
+            DataContext = (from customer in bl.ListCustomer()
+                           select Adapter.CustomerToListBotoPo(customer)).ToList();
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
             CustomerToList c = cell.DataContext as CustomerToList;
-            //int droneIndex = drones.IndexOf(d);
-            new CustomerWindow(bl, c.Id).ShowDialog();
+            Customer cus = Adapter.CustomerBotoPo(bl.SearchCustomer(c.Id));
+            new CustomerWindow(cus).ShowDialog();
+            DataContext = (from customer in bl.ListCustomer()
+                           select Adapter.CustomerToListBotoPo(customer)).ToList();
+
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl).ShowDialog();
+            new CustomerWindow().ShowDialog();
+            DataContext = (from customer in bl.ListCustomer()
+                           select Adapter.CustomerToListBotoPo(customer)).ToList();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

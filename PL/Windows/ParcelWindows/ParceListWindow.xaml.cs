@@ -17,31 +17,22 @@ using System.ComponentModel;
 using System.Globalization;
 namespace PL
 {
-    public class Parcels : ObservableCollection<ParcelToList>
-    {
-        
-        // Creating the Tasks collection in this way enables data binding from XAML.
-    }
+    //public class Parcels : ObservableCollection<ParcelToList>
+    //{
+
+    //    // Creating the Tasks collection in this way enables data binding from XAML.
+    //}
     /// <summary>
     /// Interaction logic for ParceListWindow.xaml
     /// </summary>
     public partial class ParceListWindow : Window
     {
-        private IBL bl;
-        private ObservableCollection<ParcelToList> parcels;
-        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DataGridCell cell = sender as DataGridCell;
-            ParcelToList p = cell.DataContext as ParcelToList;
-            new ParcelWindow(bl, parcels, p.Id).ShowDialog();
-        }
-        public ParceListWindow(IBL bl, ObservableCollection<ParcelToList> parcels)
+        private readonly IBL bl = BlFactory.GetBL();
+        public ParceListWindow()
         {
             InitializeComponent();
-            Parcels _parcels = (Parcels)this.Resources["parcels"];
-            this.bl = bl;
-            this.parcels = parcels;
-            //_parcels = (Parcels)parcels;//might change the list and thats wrong
+            List<ParcelToList> parcels = (from parcel in bl.ListParcel()
+                                          select Adapter.ParcelToListBotoPo(parcel)).ToList();
             DataContext = parcels;
             SenderSelector.ItemsSource = (from parcel in parcels
                                           select parcel.SenderName).ToList();
@@ -74,19 +65,30 @@ namespace PL
             //    mountains.Add(info);
             //}
         }
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            ParcelToList p = cell.DataContext as ParcelToList;
+            Parcel parcelToOpem = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
+            new ParcelWindow().ShowDialog();
+            DataContext = (from parcel in bl.ListParcel()
+                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+        }
+
 
         private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            List<ParcelToList> parcels = DataContext as List<ParcelToList>;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
             {
                 //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
-                                         //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+                //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
                 var tmp = from item in parcels
-                                             group item by item.SenderName
+                          group item by item.SenderName
                          into g
-                                             orderby g.Key
+                          orderby g.Key
                           select g;
                 foreach (var item in tmp)
                     if (item.Key == (string)SenderSelector.SelectedItem)
@@ -103,6 +105,8 @@ namespace PL
 
         private void TargetSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            List<ParcelToList> parcels = DataContext as List<ParcelToList>;
+            DataContext = parcels;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
@@ -120,7 +124,7 @@ namespace PL
             SenderSelector.Text = "";
             if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
             {
-                parcelDataGrid.ItemsSource = parcels;
+                parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
                 return;
             }
             TargetSelector_SelectionChanged(TargetSelector, null);
@@ -131,7 +135,7 @@ namespace PL
             TargetSelector.Text = "";
             if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
             {
-                parcelDataGrid.ItemsSource = parcels;
+                parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
                 return;
             }
             SenderSelector_SelectionChanged(SenderSelector, null);

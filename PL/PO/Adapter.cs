@@ -8,7 +8,21 @@ namespace PL
 {
     internal class Adapter
     {
-        static public PL.DroneToList DroneBotoPo(BO.Drone boDrone)
+        static public PL.Drone DroneBotoPo(BO.Drone boDrone)
+        {
+            return new PL.Drone()
+            {
+                Id = boDrone.Id,
+                Battery = (int)boDrone.Battery,
+                Latitude = boDrone.Location.Latitude.ToString(),
+                Longitude = boDrone.Location.Longitude.ToString(),
+                MaxWeight = (PL.WeightCategories)boDrone.MaxWeight,
+                Model = boDrone.Model,
+                Parcel = Adapter.ParcelInTransferBotoPo(boDrone.Parcel),
+                Status = (PL.DroneStatuses)boDrone.Status
+            };
+        }
+        static public PL.DroneToList DroneToListBotoPo(BO.DroneToList boDrone)
         {
             return new PL.DroneToList()
             {
@@ -18,7 +32,7 @@ namespace PL
                 Longitude = boDrone.Location.Longitude.ToString(),
                 MaxWeight = (PL.WeightCategories)boDrone.MaxWeight,
                 Model = boDrone.Model,
-                ParcelId = boDrone.Parcel == null ? "No parcel yet" : boDrone.Parcel.Id.ToString(),
+                ParcelId = boDrone.IdOfParcel == -1 ? "No parcel yet" : boDrone.IdOfParcel.ToString(),
                 Status = (PL.DroneStatuses)boDrone.Status
             };
         }

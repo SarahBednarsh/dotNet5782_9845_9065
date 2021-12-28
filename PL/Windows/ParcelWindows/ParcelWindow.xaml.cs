@@ -19,21 +19,11 @@ namespace PL
     /// </summary>
     public partial class ParcelWindow : Window
     {
-        private readonly IBL bl;
-        ObservableCollection<ParcelToList> parcels;
-        private Parcel plParcel;
-        int index;
-
-        public ParcelWindow(IBL bl, ObservableCollection<ParcelToList> parcels, int parcelId)
+        private readonly IBL bl = BlFactory.GetBL();
+        public ParcelWindow(Parcel parcel)
         {
-            InitializeComponent();
-            this.bl = bl;
-            this.parcels = parcels;
-            plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelId));
-            DataContext = plParcel;
-            index = parcels.IndexOf(parcels.Where(x => x.Id == plParcel.Id).FirstOrDefault());
-                //ActionsGrid.Visibility = Visibility.Visible;
-            InitializeActionsButton(plParcel);
+            InitializeComponent(); DataContext = parcel;
+            InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
         }
         private void InitializeActionsButton(Parcel parcel)
@@ -41,19 +31,19 @@ namespace PL
             Actions.Click -= Delete_Click;
             Actions.Click -= PickUp_Click;
             Actions.Click -= Deliver_Click;
-            if (parcel==null)
+            if (parcel == null)
                 throw new ArgumentNullException("No parcel");
-            if(parcel.Attribution==null)
+            if (parcel.Attribution == null)
             {
                 Actions.Content = "Delete parcel";
                 Actions.Click += Delete_Click;
-            }            
-            else if(parcel.PickUp==null)
+            }
+            else if (parcel.PickUp == null)
             {
                 Actions.Content = "Pick up parcel";
                 Actions.Click += PickUp_Click;
-            }            
-            else if(parcel.Delivery==null)
+            }
+            else if (parcel.Delivery == null)
             {
                 Actions.Content = "Deliver parcel";
                 Actions.Click += Deliver_Click;
@@ -72,11 +62,10 @@ namespace PL
             //    droneId = Int32.Parse(plParcel.ParcelDroneId);
             //}
             //catch 
-            bl.DeliverAParcel(Int32.Parse(plParcel.DroneId));
-            parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
-            plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(plParcel.Id));
+            bl.DeliverAParcel((DataContext as Parcel).Id);
             ConfirmAction.IsEnabled = true;
-            InitializeActionsButton(plParcel);
+            //InitializeActionsButton(plParcel);
+            Close();
 
         }
 
@@ -85,9 +74,7 @@ namespace PL
             try
             {
                 //do we need try and catch here? cause if it entered here there should always be a drone
-                bl.PickUpAParcel(Int32.Parse(plParcel.DroneId));
-                parcels[index] = Adapter.ParcelToListBotoPo(bl.ListParcel().Where(x => x.Id == plParcel.Id).FirstOrDefault());
-                plParcel.DroneId = "try this?";
+                bl.PickUpAParcel((DataContext as Parcel).Id);
                 //plParcel = Adapter.ParcelBotoPo(bl.SearchParcel(plParcel.Id));
                 //DataContext = plParcel;
 
@@ -105,7 +92,7 @@ namespace PL
                 MessageBox.Show($"PickUp did not work: " + ex.Message);
             }
             ConfirmAction.IsEnabled = IsEnabled;
-            InitializeActionsButton(plParcel);
+            Close();
 
         }
 
@@ -114,14 +101,13 @@ namespace PL
             MessageBoxResult mbResult = MessageBox.Show($"Are you sure you want to delete this parcel?", "DELETE PARCEL", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
             if (mbResult == MessageBoxResult.Yes)
             {
-                parcels.Remove(parcels[index]);
-                bl.DeleteParcel(plParcel.Id);
+                bl.DeleteParcel((DataContext as Parcel).Id);
                 Close();
             }
 
         }
 
- 
+
         public ParcelWindow()
         {
             InitializeComponent();

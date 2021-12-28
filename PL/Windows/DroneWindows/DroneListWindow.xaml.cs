@@ -22,19 +22,18 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private IBL bl;
-        private ObservableCollection<DroneToList> drones;
-        public DroneListWindow(IBL bl, ObservableCollection<DroneToList> drones)
+        private readonly IBL bl = BlFactory.GetBL();
+        public DroneListWindow()
         {
             InitializeComponent();
-            this.bl = bl;
-            this.drones = drones;
-            DataContext = this.drones;
+            DataContext = (from drone in bl.ListDrone()
+                          select Adapter.DroneToListBotoPo(drone)).ToList();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            List<DroneToList> drones = DataContext as List<DroneToList>;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
@@ -44,6 +43,7 @@ namespace PL
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            List<DroneToList> drones = DataContext as List<DroneToList>;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
             else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
@@ -53,7 +53,9 @@ namespace PL
         }
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl, drones).ShowDialog();
+            new DroneWindow().ShowDialog();
+            DataContext = (from drone in bl.ListDrone()
+                           select Adapter.DroneToListBotoPo(drone)).ToList();
             WeightSelector_SelectionChanged(WeightSelector, null);
             StatusSelector_SelectionChanged(StatusSelector, null);
         }
@@ -64,7 +66,7 @@ namespace PL
             StatusSelector.Text = "";
             if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
             {
-                droneDataGrid.ItemsSource = drones;
+                droneDataGrid.ItemsSource = DataContext as List<Drone>;
                 return;
             }
             WeightSelector_SelectionChanged(WeightSelector, null);
@@ -76,7 +78,7 @@ namespace PL
             WeightSelector.Text = "";
             if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
             {
-                droneDataGrid.ItemsSource = drones;
+                droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
                 return;
             }
             StatusSelector_SelectionChanged(StatusSelector, null);
@@ -85,8 +87,10 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             DroneToList d = cell.DataContext as DroneToList;
-            //int droneIndex = drones.IndexOf(d);
-            new DroneWindow(bl, drones, d.Id).ShowDialog();
+            Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
+            new DroneWindow(dro).ShowDialog();
+            DataContext = (from drone in bl.ListDrone()
+                           select Adapter.DroneToListBotoPo(drone)).ToList();
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

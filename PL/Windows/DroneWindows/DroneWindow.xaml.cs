@@ -23,49 +23,31 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private readonly IBL bl;
-        private DroneToList plDrone;
-
-        //private int droneIndex;
-        ObservableCollection<DroneToList> drones;
+        private readonly IBL bl = BlFactory.GetBL();
         /// <summary>
         /// add ctor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneId"></param>
-        public DroneWindow(IBL bl, ObservableCollection<DroneToList> drones)
+        public DroneWindow()
         {
             InitializeComponent();
             AddGrid.Visibility = Visibility.Visible;
-            this.bl = bl;
-            this.drones = drones;
             WeightSelectorNew.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
         }
-        public DroneWindow(IBL bl, ObservableCollection<DroneToList> drones, int droneId)
+        public DroneWindow(Drone drone)
         {
             InitializeComponent();
 
-            this.bl = bl;
-            this.drones = drones;
-            plDrone = drones.Where(d => d.Id == droneId).FirstOrDefault();
-            //DataContext = plDrone;
             ActionsGrid.Visibility = Visibility.Visible;
-            ActionsGrid.DataContext = plDrone;
-            //IdBox.Text = plDrone.Id.ToString();
-            //ModelBox.Text = plDrone.Model;
+            ActionsGrid.DataContext = drone;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //WeightSelector.SelectedItem = plDrone.MaxWeight;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            //StatusSelector.SelectedItem = plDrone.Status;
-            //LongitudeBox.Text = plDrone.Longitude.ToString();
-            //LatitudeBox.Text = plDrone.Latitude.ToString();
-            //IdOfParcelBox.Text = (plDrone.DroneParcelId != null) ? plDrone.DroneParcelId.ToString() : "No parcel yet";
-
-            InitializeActionsButton(plDrone);
+            InitializeActionsButton(drone);
         }
-        private void InitializeActionsButton(DroneToList drone)
+        private void InitializeActionsButton(Drone drone)
         {
             Actions.Click -= Charge_Click;
             Actions.Click -= ReleaseCharge_Click;
@@ -100,7 +82,7 @@ namespace PL
                 Actions2.Visibility = Visibility.Hidden;
             }
         }
-        private void IdBoxNew_TextChanged(object sender, TextChangedEventArgs e)
+        private void IdBoxNew_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox id = sender as TextBox;
             if (!ValidateId(id.Text))
@@ -122,7 +104,7 @@ namespace PL
             catch
             { return true; }
         }
-        private void ModelBoxNew_TextChanged(object sender, TextChangedEventArgs e)
+        private void ModelBoxNew_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox model = sender as TextBox;
             if (!ValidateModel(model.Text))
@@ -145,7 +127,7 @@ namespace PL
 
         private void MakeTextBoxRed(TextBox textBox)
         {
-            textBox.Background = Brushes.Red;
+            textBox.Background = Brushes.PaleVioletRed;
             textBox.BorderBrush = Brushes.Red;
         }
         private void MakeTextBoxWhite(TextBox textBox)
@@ -163,20 +145,17 @@ namespace PL
                 {
 
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
-                    drones.Add(Adapter.DroneBotoPo(bl.SearchDrone(id)));//not ok - need to find right way to deal with this
-                    //drones = from drone in bl.ListDrone()
-                    //         select Adapter.DroneBotoPo(drone);
-                    MessageBox.Show("Success");
+                    MessageBox.Show("Added drone successfully");
                     this.Close();
                     return;
                 }
                 catch { }
             }
-            MessageBox.Show("Failure");
+            MessageBox.Show("Couldn't add drone");
         }
-        private void ModelBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void ModelBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            ModelBoxNew_TextChanged(sender, e);
+            ModelBoxNew_LostFocus(sender, e);
             string model = (sender as TextBox).Text;
             if (Update == null)
                 return;
@@ -190,10 +169,9 @@ namespace PL
         {
             try
             {
-                int.TryParse(IdBox.Text, out int id);
-                bl.PickUpAParcel(id);
-                UpdateDrone();
+                bl.PickUpAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Picked up parcel successfully");
+                Close();
             }
             catch (Exception exception)
             {
@@ -204,10 +182,9 @@ namespace PL
         {
             try
             {
-                int.TryParse(IdBox.Text, out int id);
-                bl.DeliverAParcel(id);
-                UpdateDrone();
+                bl.DeliverAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Delivered parcel successfully");
+                Close();
             }
             catch (Exception exception)
             {
@@ -220,7 +197,6 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
-                UpdateDrone();
                 MessageBox.Show("Attributed parcel successfully");
             }
             catch (Exception exception)
@@ -232,10 +208,9 @@ namespace PL
         {
             try
             {
-                int.TryParse(IdBox.Text, out int id);
-                bl.ReleaseCharging(id);
-                UpdateDrone();
+                bl.ReleaseCharging((DataContext as Drone).Id);
                 MessageBox.Show("Drone realeased from chraging successfully");
+                Close();
             }
             catch (Exception exception)
             {
@@ -246,12 +221,9 @@ namespace PL
         {
             try
             {
-                int.TryParse(IdBox.Text, out int id);
-                bl.DroneToCharge(id);
-                plDrone.Status = DroneStatuses.InMaintenance;
-                plDrone.ParcelId = "No parcel yet";
-                UpdateDrone();
+                bl.DroneToCharge((DataContext as Drone).Id);
                 MessageBox.Show("Drone sent to charge successfully");
+                Close();
             }
             catch (Exception exception)
             {
@@ -269,20 +241,13 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.UpdateDroneModel(id, ModelBox.Text);
-                UpdateDrone();
                 MessageBox.Show("Updated model successfully");
+                Close();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-        }
-        private void UpdateDrone()
-        {
-            int droneIndex = drones.IndexOf(plDrone);
-            drones[droneIndex] = Adapter.DroneBotoPo(bl.SearchDrone(plDrone.Id));
-            plDrone = drones[droneIndex];
-            InitializeActionsButton(plDrone);
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -293,5 +258,6 @@ namespace PL
         {
 
         }
+
     }
 }

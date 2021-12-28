@@ -21,21 +21,18 @@ namespace PL
     /// </summary>
     public partial class StationListWindow : Window
     {
-        private IBL bl;
-        private ObservableCollection<StationToList> stations;
-        public StationListWindow(IBL bl, ObservableCollection<StationToList> stations)
+        private readonly IBL bl = BlFactory.GetBL();
+        public StationListWindow()
         {
             InitializeComponent();
-            this.bl = bl;
-            this.stations = stations;
-            DataContext = stations;
+            DataContext = (from station in bl.ListStation()
+                           select Adapter.StationToListBotoPo(station)).ToList();
         }
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            new StationWindow(bl).ShowDialog();
-            //stations = new ObservableCollection<Station>((from station in bl.ListStation()// this does not affect anything= it doesnt change MainWindow.drones!
-            //                                          select Adapter.StationBotoPo(bl.SearchStation(station.Id))).ToList());
-            //stationDataGrid.ItemsSource = stations;
+            new StationWindow().ShowDialog();
+            DataContext = (from station in bl.ListStation()
+                           select Adapter.StationToListBotoPo(station)).ToList();
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -46,9 +43,10 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             StationToList s = cell.DataContext as StationToList;
-            new StationWindow(bl, s.Id).ShowDialog();
-            //int stationIndex = stations.IndexOf(s);
-            //stations[stationIndex] = Adapter.StationBotoPo(bl.SearchStation(s.StationId));
+            Station sta = Adapter.StationBotoPo(bl.SearchStation(s.Id));
+            new StationWindow().ShowDialog();
+            DataContext = (from station in bl.ListStation()
+                           select Adapter.StationToListBotoPo(station)).ToList();
         }
     }
 }
