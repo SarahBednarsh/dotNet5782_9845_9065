@@ -69,8 +69,8 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             ParcelToList p = cell.DataContext as ParcelToList;
-            Parcel parcelToOpem = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
-            new ParcelWindow().ShowDialog();
+            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
+            new ParcelWindow(parcelToOpen).ShowDialog();
             DataContext = (from parcel in bl.ListParcel()
                            select Adapter.ParcelToListBotoPo(parcel)).ToList();
         }
