@@ -26,12 +26,14 @@ namespace PL
         public StationWindow()
         {
             InitializeComponent();
+            addGrid.Visibility = Visibility.Visible;
             Width = 350;
         }
         public StationWindow(Station station)
         {
             InitializeComponent();
             actionsTitle.Text = string.Format($"Station {station.Id}");
+            actionsGrid.Visibility = Visibility.Visible;
             DataContext = station;
         }
 
