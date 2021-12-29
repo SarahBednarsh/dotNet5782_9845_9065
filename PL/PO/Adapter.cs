@@ -43,10 +43,10 @@ namespace PL
         public static PL.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
         {
             if (boDroneInParcel == null)
-                return null;
+                return new PL.DroneInParcel() { Id = "No drone yet" };
             return new PL.DroneInParcel()
             {
-                Id = boDroneInParcel.Id,
+                Id =/* boDroneInParcel == null ? "No drone yet" : */boDroneInParcel.Id.ToString(),
                 Battery = (int)boDroneInParcel.Battery,
                 Longitude = boDroneInParcel.Location.Longitude.ToString(),
                 Latitude = boDroneInParcel.Location.Latitude.ToString()
@@ -73,7 +73,7 @@ namespace PL
                 Target = new CustomerInParcel { Id = boParcel.Target.Id, Name = boParcel.Target.Name },
                 Weight = (PL.WeightCategories)boParcel.Weight,
                 Priority = (PL.Priorities)boParcel.Priority,
-                DroneId = boParcel.Drone == null ? "No drone yet" : boParcel.Drone.Id.ToString(),
+                Drone = Adapter.DroneInParcelBotoPo(boParcel.Drone),
                 Creation = boParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
                 Attribution = boParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
                 PickUp = boParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,

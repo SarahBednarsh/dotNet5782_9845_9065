@@ -61,6 +61,7 @@ namespace BL
                 };
                 dronesBL.Add(drone);
                 dalAP.AddDrone(id, model, (DO.WeightCategories)maxWeight);
+                dalAP.DroneToCharge(id, stationIdForCharging);
             }
             catch (DO.DroneException exception)
             {

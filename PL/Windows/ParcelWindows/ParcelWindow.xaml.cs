@@ -67,7 +67,7 @@ namespace PL
             //    droneId = Int32.Parse(plParcel.ParcelDroneId);
             //}
             //catch 
-            Int32.TryParse((DataContext as Parcel).DroneId, out int id);
+            Int32.TryParse((DataContext as Parcel).Drone.Id, out int id);
             bl.DeliverAParcel(id);
             ConfirmAction.IsEnabled = true;
             //InitializeActionsButton(plParcel);
@@ -79,7 +79,7 @@ namespace PL
         {
             try
             {
-                Int32.TryParse((DataContext as Parcel).DroneId, out int id);
+                Int32.TryParse((DataContext as Parcel).Drone.Id, out int id);
                 bl.PickUpAParcel(id);
             }
             catch (BO.NotEnoughBattery ex)

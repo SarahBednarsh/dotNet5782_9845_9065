@@ -14,7 +14,6 @@ namespace Dal
                 throw new DroneException("Drone to add exists.");
             Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
-
         }
         public void DeleteDrone(int id)
         {
