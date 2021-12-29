@@ -2,6 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,10 @@ namespace Dal
         private readonly string customersPath = @"CustomersXml.xml"; //XMLSerializer
         private readonly string parcelsPath = @"ParcelsXml.xml"; //XMLSerializer
         private readonly string droneChargesPath = @"DroneChargesXml.xml"; //XMLSerializer
-        private readonly string batteryCunsumptionPath = @"BatteryCunsumtionXml.xml"; //XElement
+        private readonly string usersPath = @"UsersXml.xml"; //XMLSerializer
+        private readonly string batteryCunsumptionPath = @"BatteryCunsumptionXml.xml"; //XElement
         private readonly string runningNumbersPath = @"RunningNumbersXml.xml"; //XMLSerializer
+        private readonly string defaultsPath = @"DefaultsXml.xml"; //XMLElement
         #endregion
         #region Drones XElement
         public void AddDrone(int id, string model, WeightCategories maxWeight)
@@ -97,7 +100,7 @@ namespace Dal
             XElement droneChargesRootElem = XmlTools.LoadListFromXMLElement(droneChargesPath);
             XElement droneCharge = new XElement("DroneCharge", new XElement("DroneId", droneId.ToString()),
                                                                 new XElement("StationId", stationId.ToString()),
-                                                                new XElement("BeginTime", DateTime.Now.ToString()));
+                                                                new XElement("BeginTime", DateTime.Now.ToString("O")));
             droneChargesRootElem.Add(droneCharge);
             XmlTools.SaveListToXMLElement(droneChargesRootElem, droneChargesPath);
         }
@@ -223,7 +226,7 @@ namespace Dal
             return XmlTools.LoadListFromXMLSerializer<DroneCharge>(droneChargesPath);
         }
         #endregion
-        
+
         #region Customers XMLSerializer
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
@@ -358,12 +361,60 @@ namespace Dal
         }
         #endregion
 
+        #region Users XMLSerializer
+        public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
+        {
+            List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
+            if (users.Exists(x => x.Id == id || x.UserName == userName && x.IsManager == isManager))
+                throw new UserException("User with the same id or username already exists");
+            if (!File.Exists(photo))
+                photo = GetDefaultPhoto();
+            int salt = PasswordHandler.GenerateSalt();
+            User tempUser = new User()
+            {
+                Id = id,
+                UserName = userName,
+                Photo = photo,
+                Email = email,
+                Salt = salt,
+                HashedPassword = PasswordHandler.GenerateNewPassword(password, salt),
+                IsManager = isManager
+            };
+            users.Add(tempUser);
+            XmlTools.SaveListToXMLSerializer(users, usersPath);
+        }
+        public void DeleteUser(int id)
+        {
+            List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
+            if (!users.Exists(x => x.Id == id))
+                throw new UserException("no such user");
+            users.RemoveAll(x => x.Id == id);
+            XmlTools.SaveListToXMLSerializer(users, usersPath);
+        }
+        public User SearchUser(string userName, string password, bool isManager)
+        {
+            List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
+            if (!users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt)))
+                throw new UserException("Cannot find user");
+            return users.Find(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
+        }
+        #endregion
+
         #region Battery Consumption Data XElement
         public IEnumerable<double> ReqPowerConsumption()
         {
             XElement batteryConsumption = XmlTools.LoadListFromXMLElement(batteryCunsumptionPath);
             return from consumption in batteryConsumption.Elements()
                    select double.Parse(consumption.Value);
+        }
+        #endregion
+        
+        #region Defaults XElement
+        public string GetDefaultPhoto()
+        {
+            XElement defaultsRoot = XmlTools.LoadListFromXMLElement(defaultsPath);
+            return (from def in defaultsRoot.Elements()
+                    select def.Value).FirstOrDefault();
         }
         #endregion
     }
