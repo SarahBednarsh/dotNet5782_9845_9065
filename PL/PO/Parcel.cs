@@ -13,7 +13,7 @@ namespace PL
         static readonly DependencyProperty TargetProperty = DependencyProperty.Register("Target", typeof(CustomerInParcel), typeof(Parcel));
         static readonly DependencyProperty WeightProperty = DependencyProperty.Register("Weight", typeof(WeightCategories), typeof(Parcel));
         static readonly DependencyProperty PriorityProperty = DependencyProperty.Register("Priority", typeof(Priorities), typeof(Parcel));
-        static readonly DependencyProperty DroneIdProperty = DependencyProperty.Register("DroneId", typeof(string), typeof(Parcel));
+        static readonly DependencyProperty DroneProperty = DependencyProperty.Register("Drone", typeof(DroneInParcel), typeof(DroneInParcel));
         static readonly DependencyProperty CreationProperty = DependencyProperty.Register("Creation", typeof(DateTime?), typeof(Parcel));
         static readonly DependencyProperty AttributionProperty = DependencyProperty.Register("Attribution", typeof(DateTime?), typeof(Parcel));
         static readonly DependencyProperty PickUpProperty = DependencyProperty.Register("PickUp", typeof(DateTime?), typeof(Parcel));
@@ -24,8 +24,7 @@ namespace PL
         public CustomerInParcel Target { get => (CustomerInParcel)GetValue(TargetProperty); set => SetValue(TargetProperty, value); }
         public WeightCategories Weight { get => (WeightCategories)GetValue(WeightProperty); set => SetValue(WeightProperty, value); }
         public Priorities Priority { get => (Priorities)GetValue(PriorityProperty); set => SetValue(PriorityProperty, value); }
-        //needs to be drone in parcel
-        public string DroneId { get => (string)GetValue(DroneIdProperty); set => SetValue(DroneIdProperty, value); }
+        public DroneInParcel Drone { get => (DroneInParcel)GetValue(DroneProperty); set => SetValue(DroneProperty, value); }
         public DateTime? Creation { get => (DateTime?)GetValue(CreationProperty); set => SetValue(CreationProperty, value); }
         public DateTime? Attribution { get => (DateTime?)GetValue(AttributionProperty); set => SetValue(AttributionProperty, value); }
         public DateTime? PickUp { get => (DateTime?)GetValue(PickUpProperty); set => SetValue(PickUpProperty, value); }
