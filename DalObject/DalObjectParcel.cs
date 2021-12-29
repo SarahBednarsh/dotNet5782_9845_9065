@@ -10,9 +10,9 @@ namespace Dal
     {
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId)
         {
-            Parcel temp = new Parcel() { Id = ++DataSource.Config.RunningParcelNumber, SenderId = senderId, TargetId = targetId, Weight = weight, Priority = priority, Requested = DateTime.Now, DroneId = droneId, Scheduled = null, Delivered = null, PickedUp = null };
+            Parcel temp = new Parcel() { Id = DataSource.Config.RunningParcelNumber++, SenderId = senderId, TargetId = targetId, Weight = weight, Priority = priority, Requested = DateTime.Now, DroneId = droneId, Scheduled = null, Delivered = null, PickedUp = null };
             DataSource.Parcels.Add(temp);
-            return DataSource.Config.RunningParcelNumber;
+            return DataSource.Config.RunningParcelNumber - 1;
         }
         public void DeleteParcel(int id)
         {
@@ -25,7 +25,7 @@ namespace Dal
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)//if parcel doesn't exist
-                throw new ParcelException("Parcel to attribute does not exist.");
+                throw new ParcelException("Parcel to schedule does not exist");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.Scheduled = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;
@@ -45,7 +45,7 @@ namespace Dal
         {
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
-                throw new ParcelException("Customer to deliver does not exist.");
+                throw new ParcelException("Parcel to deliver does not exist.");
             Parcel tempParcel = DataSource.Parcels[indexParcel];
             tempParcel.Delivered = DateTime.Now;
             DataSource.Parcels[indexParcel] = tempParcel;

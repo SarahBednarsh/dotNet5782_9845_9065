@@ -23,10 +23,11 @@ namespace Dal
             DataSource.Drones.Remove(DataSource.Drones.Find(x => x.Id == id));
         }
 
-       
         public void UpdateParcelsDrone(int parcelId, int droneId)
         {
-            Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
+            //Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
+            if (!DataSource.Drones.Exists(x => x.Id == droneId))
+                throw new DroneException("Requested drone was not found");
             int indexParcel = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
             if (indexParcel == -1)
                 throw new ParcelException("Parcel to update does not exist.");
