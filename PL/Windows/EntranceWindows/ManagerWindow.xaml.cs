@@ -19,11 +19,13 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
-        public ManagerWindow()
+        User manager;
+        public ManagerWindow(User _manager)
         {
             InitializeComponent();
+            manager = _manager;
             SnackbarWelcome.MessageQueue?.Enqueue(
-                "Welcome, name here! Glad to have you in our program!",
+                $"Welcome, {manager.UserName}! Glad to have you in our program!",
                 null,
                 null,
                 null,

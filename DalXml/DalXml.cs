@@ -33,6 +33,7 @@ namespace Dal
             }
         }
         #endregion
+
         #region xml file paths
         private readonly string dronesPath = @"DronesXml.xml"; //XElement
         private readonly string stationsPath = @"StationsXml.xml"; //XMLSerializer
@@ -44,6 +45,7 @@ namespace Dal
         private readonly string runningNumbersPath = @"RunningNumbersXml.xml"; //XMLSerializer
         private readonly string defaultsPath = @"DefaultsXml.xml"; //XMLElement
         #endregion
+
         #region Drones XElement
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
@@ -391,12 +393,18 @@ namespace Dal
             users.RemoveAll(x => x.Id == id);
             XmlTools.SaveListToXMLSerializer(users, usersPath);
         }
-        public User SearchUser(string userName, string password, bool isManager)
+        public User SearchUser(string userName)
         {
             List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
-            if (!users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt)))
+            if (!users.Exists(x => x.UserName == userName))
                 throw new UserException("Cannot find user");
-            return users.Find(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
+            return users.Find(x => x.UserName == userName);
+        }
+        public bool UserInfoCorrect(string userName, string password, bool isManager)
+        {
+            List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
+            return users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
+
         }
         #endregion
 

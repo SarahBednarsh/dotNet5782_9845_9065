@@ -96,7 +96,7 @@ namespace BlApi
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User SearchUser(string userName, string password, bool isManager);
+        public User SearchUser(string userName);
         
         /// <summary>
         /// Returns all Stations
@@ -135,12 +135,17 @@ namespace BlApi
         //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
         //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
         //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
+        #endregion
+
+        #region deleting
         void DeleteParcel(int parcelId);
         void DeleteDrone(int droneId);
         void DeleteCustomer(int customerId);
         void DeleteStation(int stationId);
         void DeleteUser(int id);
         #endregion
+        bool UserInfoCorrect(string userName, string password, bool isManager);
+
 
     }
 }

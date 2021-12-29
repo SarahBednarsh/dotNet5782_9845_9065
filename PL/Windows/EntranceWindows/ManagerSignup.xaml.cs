@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+using Microsoft.Win32;
 
 namespace PL
 {
@@ -20,11 +22,15 @@ namespace PL
     /// </summary>
     public partial class Signup : Window
     {
+        private IBL bl = BlFactory.GetBL();
+        private User user;
         private bool isManager;
         private string xmlFile;
         private bool userNameHasBeenClicked;
         private bool passwordHasBeenClicked;
         private bool closeAllowed;
+        private bool ImageChanged = false;
+        OpenFileDialog op;
 
         public Signup(string path, bool isManager)
         {
@@ -32,9 +38,8 @@ namespace PL
             this.isManager = isManager;
             xmlFile = path;
             userNameHasBeenClicked = false;
-            if (!isManager)
-                title.Text = "הרשמת לקוח";
-            title.FontSize = 18;
+            user = new User();
+            DataContext = user;
         }
 
         private void userName_GotFocus(object sender, RoutedEventArgs e)
@@ -95,15 +100,48 @@ namespace PL
                                   MessageBoxImage.Information);
             }
         }
-        private void password_GotFocus(object sender, RoutedEventArgs e)
+        //private void password_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    passwordText.Visibility = Visibility.Hidden;
+        //}
+        //private void password_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if ((sender as PasswordBox).Password == "")
+        //    {
+        //        passwordText.Visibility = Visibility.Visible;
+        //    }
+        //}
+
+        private void signup_Click(object sender, RoutedEventArgs e)
         {
-            passwordText.Visibility = Visibility.Hidden;
-        }
-        private void password_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if ((sender as PasswordBox).Password == "")
+
+           try
             {
-                passwordText.Visibility = Visibility.Visible;
+                MessageBox.Show($"id= {user.Id}, name ={user.UserName}, source= {ManagerImage.Source.ToString()}, email={user.Email}, password= {PasswordBox.Password}");
+                bl.AddUser(user.Id, user.UserName,
+                    ImageChanged ? ManagerImage.Source.ToString() : null,
+                    user.Email,
+                    PasswordBox.Password,
+                    true) ;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Close();
+        }
+
+        private void Button_Click_UploadImage(object sender, RoutedEventArgs e)
+        {
+            op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                ImageChanged = true;
+                ManagerImage.Source = new BitmapImage(new Uri(op.FileName));
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class Login : Window
     {
+        private IBL bl = BlFactory.GetBL();
         private bool isManager;
         private string xmlFile;
         private bool closeAllowed;
@@ -47,17 +49,17 @@ namespace PL
                 (sender as TextBox).Opacity = 0.5;
             }
         }
-        private void password_GotFocus(object sender, RoutedEventArgs e)
-        {
-            passwordText.Visibility = Visibility.Hidden;
-        }
-        private void password_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if ((sender as PasswordBox).Password == "")
-            {
-                passwordText.Visibility = Visibility.Visible;
-            }
-        }
+        //private void password_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    passwordText.Visibility = Visibility.Hidden;
+        //}
+        //private void password_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if ((sender as PasswordBox).Password == "")
+        //    {
+        //        passwordText.Visibility = Visibility.Visible;
+        //    }
+        //}
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
@@ -75,9 +77,14 @@ namespace PL
         }
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            new ManagerWindow().Show();
-            closeAllowed = true;
-            Close();
+            if (!bl.UserInfoCorrect(NameTextBox.Text, PasswordBox.Password, true))
+                MessageBox.Show("Wrong information. Please try again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                new ManagerWindow(Adapter.UserBotoPo(bl.SearchUser(NameTextBox.Text))).Show();
+                closeAllowed = true;
+                Close();
+            }
         }
     }
 }

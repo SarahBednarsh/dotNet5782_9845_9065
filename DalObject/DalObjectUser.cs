@@ -36,11 +36,16 @@ namespace Dal
             DataSource.Users.RemoveAll(x => x.Id == id);
 
         }
-        public User SearchUser(string userName, string password, bool isManager)
+        public User SearchUser(string userName)
         {
-            if (!DataSource.Users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt)))
+            if (!DataSource.Users.Exists(x => x.UserName == userName))
                 throw new UserException("Cannot find user");
-            return DataSource.Users.Find(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
+            return DataSource.Users.Find(x => x.UserName == userName);
+        }
+        public bool UserInfoCorrect(string userName, string password, bool isManager)
+        {
+            return DataSource.Users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
+
         }
         public string GetDefaultPhoto()
         {
