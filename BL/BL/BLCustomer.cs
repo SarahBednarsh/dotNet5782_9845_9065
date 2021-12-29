@@ -137,11 +137,11 @@ namespace BL
                        Sent = customer.AtCustomer.FindAll(x => x.State != States.Delivered).Count
                    };
         }
-        public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate)
-        {
-            return from customer in ListCustomer()
-                   where predicate(customer)
-                   select customer;
-        }
+        //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate)
+        //{
+        //    return from customer in ListCustomer()
+        //           where predicate(customer)
+        //           select customer;
+        //}
     }
 }

@@ -12,6 +12,7 @@ namespace Dal
         internal static List<Station> Stations = new List<Station>();
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
+        internal static List<User> Users = new List<User>();
         internal class Config
         {
             internal static int RunningParcelNumber = 0;
@@ -20,6 +21,7 @@ namespace Dal
             internal static double medium = 0.0006;
             internal static double heavy = 0.0008;
             internal static double chargingPace = 3;
+            internal static string defaultPhoto = "";
         }
         /// <summary>
         /// initializes the datasource with random data

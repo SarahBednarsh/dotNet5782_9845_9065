@@ -29,7 +29,7 @@ namespace PL
             isManager = manager;
             xmlFile = path;
             if (!isManager)
-                title.Text = "כניסת לקוח";
+                title.Text = "User Login";
             title.FontSize = 18;
             closeAllowed = false;
         }

@@ -24,6 +24,7 @@ namespace BlApi
         /// Adds a Parcel to the DataBase
         /// </summary>
         public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority);
+        public void AddUser(int id, string userName, string photo, string email, string password, bool isManager);
         #endregion
 
         #region updating
@@ -90,6 +91,14 @@ namespace BlApi
         /// <returns></returns>
         public Parcel SearchParcel(int parcelId);
         /// <summary>
+        /// Returns a requested user from the database
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public User SearchUser(string userName, string password, bool isManager);
+        
+        /// <summary>
         /// Returns all Stations
         /// </summary>
         /// <returns></returns>
@@ -122,14 +131,15 @@ namespace BlApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<StationToList> ListStationAvailable();
-        public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
-        public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
-        public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
-        public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
+        //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
+        //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
+        //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
+        //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
         void DeleteParcel(int parcelId);
         void DeleteDrone(int droneId);
         void DeleteCustomer(int customerId);
         void DeleteStation(int stationId);
+        void DeleteUser(int id);
         #endregion
 
     }

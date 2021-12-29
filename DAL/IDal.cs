@@ -24,6 +24,13 @@ namespace DalApi
         /// Adds a parcel to the DAL database
         /// </summary>
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId);
+        /// <summary>
+        /// Adds a user to the DAL dadtabase
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userName"></param>
+        /// <param name="photo">photo path</param>
+        public void AddUser(int id, string userName, string photo, string email, string password, bool isManager);
         #endregion
 
         #region deleting
@@ -43,6 +50,11 @@ namespace DalApi
         /// Deletes a station from the DAL database
         /// </summary>
         public void DeleteStation(int id);
+        /// <summary>
+        /// Deletes a user from the DAL database
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteUser(int id);
         #endregion
 
         #region updating
@@ -144,6 +156,11 @@ namespace DalApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<double> ReqPowerConsumption();
+       /// <summary>
+       /// Returns the path for default photo
+       /// </summary>
+       /// <returns></returns>
+        public string GetDefaultPhoto();
         /// <summary>
         /// Returns the beginning time of a droneCharge
         /// </summary>
@@ -151,6 +168,15 @@ namespace DalApi
         /// <returns></returns>
         DateTime? GetBeginningChargeTime(int droneId);
         public IEnumerable<DroneCharge> YieldDroneCharges();
+        /// <summary>
+        /// Checks if the user exists
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="isManager"></param>
+        /// <returns></returns>
+        public User SearchUser(string userName, string password, bool isManager);
+
 
     }
 }

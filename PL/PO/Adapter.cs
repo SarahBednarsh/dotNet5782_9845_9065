@@ -196,5 +196,20 @@ namespace PL
                 UsedChargeSlots = boStation.UsedChargeSlots
             };
         }
+        public static PL.User UserBotoPo(BO.User boUser)
+        {
+            if (boUser == null)
+                return null;
+            return new User()
+            {
+                Id = boUser.Id,
+                UserName = boUser.UserName,
+                Email = boUser.Email,
+                Photo = boUser.Photo,
+                Salt = boUser.Salt,
+                HashedPassword = boUser.HashedPassword,
+                IsManager = boUser.IsManager
+            };
+        }
     }
 }
