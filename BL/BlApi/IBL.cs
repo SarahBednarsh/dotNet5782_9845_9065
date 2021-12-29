@@ -122,10 +122,10 @@ namespace BlApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<StationToList> ListStationAvailable();
-        public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
-        public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
-        public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
-        public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
+        //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
+        //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
+        //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
+        //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
         void DeleteParcel(int parcelId);
         void DeleteDrone(int droneId);
         void DeleteCustomer(int customerId);

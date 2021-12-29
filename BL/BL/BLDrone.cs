@@ -274,11 +274,11 @@ namespace BL
                        Status = drone.Status
                    };
         }
-        public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate)
-        {
-            return from drone in ListDrone()
-                   where predicate(drone)
-                   select drone;
-        }
+        //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate)
+        //{
+        //    return from drone in ListDrone()
+        //           where predicate(drone)
+        //           select drone;
+        //}
     }
 }

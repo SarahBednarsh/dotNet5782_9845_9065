@@ -124,12 +124,12 @@ namespace BL
             return from station in dalAP.ListStationConditional(x => x.ChargeSlots > 0)
                    select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = SearchStation(station.Id).Charging.Count };
         }
-        public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate)
-        {
-            return from station in ListStation()
-                   where predicate(station)
-                   select station;
-        }
+        //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate)
+        //{
+        //    return from station in ListStation()
+        //           where predicate(station)
+        //           select station;
+        //}
     }
 }
 
