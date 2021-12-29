@@ -15,7 +15,7 @@ namespace Dal
     /// </summary>
     public class XmlTools
     {
-        static string dir = @"xml\";
+        static string dir = @"Data\";
         static XmlTools()
         {
             if (!Directory.Exists(dir))
