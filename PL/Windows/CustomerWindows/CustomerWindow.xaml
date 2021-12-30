@@ -42,28 +42,48 @@
             <TextBlock x:Name="latitudeBlock" HorizontalAlignment="Left" Margin="54,255,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
             <TextBox x:Name="latitudeBox" HorizontalAlignment="Left" Height="32" Margin="186,239,0,0" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
 
-            <Expander x:Name="atCustomerExpander" Header="Parcels sent from customer" Margin="420,42,104,128">
-                <!--<ListView x:Name="atCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding AtCustomer}"  Background="#FFB2EECA">
-                
-                </ListView>-->
-                <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding AtCustomer}" Margin="78,60,103.6,160" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Expander>
-            <Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55" Grid.RowSpan="2">
+            <StackPanel>
+                <Expander x:Name="atCustomerExpander" Header="Parcels sent from customer" Margin="420,42,104,128">
+                    <Expander.Content>
+                        <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding AtCustomer}" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA" Height="120" Width="256">
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="parcelAtIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelAtWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelAtPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelAtStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander.Content>
+                </Expander>
+            </StackPanel>
+            <StackPanel>
+                <Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55">
+                    <Expander.Content>
+                        <DataGrid x:Name="toCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ToCustomer}" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA" Height="120" Width="256">
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="parcelToIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelToWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelToPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelToStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander.Content>
+                </Expander>
+            </StackPanel>
+            <!--<Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55" Grid.RowSpan="2">
                 <ListView x:Name="toCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding ToCustomer}"  Background="#FFB2EECA"/>
 
-            </Expander>
+            </Expander>-->
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>
 
