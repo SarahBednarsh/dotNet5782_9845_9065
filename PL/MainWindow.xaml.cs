@@ -46,7 +46,7 @@ namespace PL
 
         private void customerSignup_Click(object sender, RoutedEventArgs e)
         {
-            new Signup(null, false).ShowDialog();
+            //new Signup(null, false).ShowDialog();
         }
 
         private void customerLogin_Click(object sender, RoutedEventArgs e)

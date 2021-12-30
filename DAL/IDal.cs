@@ -175,8 +175,7 @@ namespace DalApi
         /// <param name="password"></param>
         /// <param name="isManager"></param>
         /// <returns></returns>
-        public User SearchUser(string userName, string password, bool isManager);
-
-
+        public User SearchUser(string userName);
+        bool UserInfoCorrect(string userName, string password, bool isManager);
     }
 }

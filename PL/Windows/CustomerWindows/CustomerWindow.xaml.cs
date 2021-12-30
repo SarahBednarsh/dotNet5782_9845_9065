@@ -55,9 +55,12 @@ namespace PL
         private void parcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
-            Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel((int)list.SelectedItem));
+            ParcelAtCustomer parcelAtCustomer = list.DataContext as ParcelAtCustomer;
+            Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelAtCustomer.Id));
             new ParcelWindow(parcel).Show();
             Close();
+
+
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

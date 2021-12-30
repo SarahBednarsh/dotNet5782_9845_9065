@@ -51,7 +51,7 @@
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="idBlock" HorizontalAlignment="Left" Text="ID: " TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="IdBox" HorizontalAlignment="Left" Height="25" Text="{Binding Id, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+                    <TextBox x:Name="IdBox" IsEnabled="False" HorizontalAlignment="Left" Height="25" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="ModelBlock" HorizontalAlignment="Left" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
