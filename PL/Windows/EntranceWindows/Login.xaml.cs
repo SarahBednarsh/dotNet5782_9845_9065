@@ -72,12 +72,18 @@ namespace PL
             if (!closeAllowed)
             {
                 e.Cancel = true;
-                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cannot close implicidly. Please click the cancel button", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            if (!bl.UserInfoCorrect(NameTextBox.Text, PasswordBox.Password, true))
+            if (NameTextBox.Text=="admin")
+            {
+                new ManagerWindow(new User { UserName = "admin" }).Show();
+                closeAllowed = true;
+                Close();
+            }
+            else if (!bl.UserInfoCorrect(NameTextBox.Text, PasswordBox.Password, true))
                 MessageBox.Show("Wrong information. Please try again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {

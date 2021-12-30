@@ -42,49 +42,49 @@ namespace PL
             DataContext = user;
         }
 
-        private void userName_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (!userNameHasBeenClicked)
-            {
-                userNameHasBeenClicked = true;
-                (sender as TextBox).Text = "";
-                (sender as TextBox).Opacity = 1;
-            }
-        }
-        private void userName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (userNameHasBeenClicked && (sender as TextBox).Text == "")
-            {
-                userNameHasBeenClicked = false;
-                (sender as TextBox).Text = "שם משתמש";
-                (sender as TextBox).Opacity = 0.5;
-            }
-        }
+        //private void userName_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (!userNameHasBeenClicked)
+        //    {
+        //        userNameHasBeenClicked = true;
+        //        (sender as TextBox).Text = "";
+        //        (sender as TextBox).Opacity = 1;
+        //    }
+        //}
+        //private void userName_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (userNameHasBeenClicked && (sender as TextBox).Text == "")
+        //    {
+        //        userNameHasBeenClicked = false;
+        //        (sender as TextBox).Text = "שם משתמש";
+        //        (sender as TextBox).Opacity = 0.5;
+        //    }
+        //}
 
-        private void email_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (!passwordHasBeenClicked)
-            {
-                passwordHasBeenClicked = true;
-                (sender as TextBox).Text = "";
-                (sender as TextBox).FlowDirection = FlowDirection.LeftToRight;
-                (sender as TextBox).Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-us");
-                (sender as TextBox).Opacity = 1;
-            }
+        //private void email_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (!passwordHasBeenClicked)
+        //    {
+        //        passwordHasBeenClicked = true;
+        //        (sender as TextBox).Text = "";
+        //        (sender as TextBox).FlowDirection = FlowDirection.LeftToRight;
+        //        (sender as TextBox).Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-us");
+        //        (sender as TextBox).Opacity = 1;
+        //    }
 
-        }
+        //}
 
-        private void email_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (passwordHasBeenClicked && (sender as TextBox).Text == "")
-            {
-                passwordHasBeenClicked = false;
-                (sender as TextBox).FlowDirection = FlowDirection.RightToLeft;
-                (sender as TextBox).Language = System.Windows.Markup.XmlLanguage.GetLanguage("he-il");
-                (sender as TextBox).Text = "כתובת מייל";
-                (sender as TextBox).Opacity = 0.5;
-            }
-        }
+        //private void email_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (passwordHasBeenClicked && (sender as TextBox).Text == "")
+        //    {
+        //        passwordHasBeenClicked = false;
+        //        (sender as TextBox).FlowDirection = FlowDirection.RightToLeft;
+        //        (sender as TextBox).Language = System.Windows.Markup.XmlLanguage.GetLanguage("he-il");
+        //        (sender as TextBox).Text = "כתובת מייל";
+        //        (sender as TextBox).Opacity = 0.5;
+        //    }
+        //}
         private void close_Click(object sender, RoutedEventArgs e)
         {
             closeAllowed = true;
@@ -96,7 +96,7 @@ namespace PL
             if (!closeAllowed)
             {
                 e.Cancel = true;
-                MessageBox.Show("לא ניתן לסגור חלון באמצעות כפתור זה. אנא השתמש בכפתור ביטול", "ERROR", MessageBoxButton.OK,
+                MessageBox.Show("Cannot close implicidly. Please click the cancel button", "ERROR", MessageBoxButton.OK,
                                   MessageBoxImage.Information);
             }
         }
@@ -117,7 +117,6 @@ namespace PL
 
            try
             {
-                MessageBox.Show($"id= {user.Id}, name ={user.UserName}, source= {ManagerImage.Source.ToString()}, email={user.Email}, password= {PasswordBox.Password}");
                 bl.AddUser(user.Id, user.UserName,
                     ImageChanged ? ManagerImage.Source.ToString() : null,
                     user.Email,
@@ -128,6 +127,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            closeAllowed = true;
             Close();
         }
 

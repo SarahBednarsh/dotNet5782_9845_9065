@@ -46,23 +46,34 @@
                 <!--<ListView x:Name="atCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding AtCustomer}"  Background="#FFB2EECA">
                 
                 </ListView>-->
-                <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding AtCustomer}" Margin="78,60,103.6,160" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding AtCustomer}"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
             </Expander>
             <Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55" Grid.RowSpan="2">
-                <ListView x:Name="toCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding ToCustomer}"  Background="#FFB2EECA"/>
-
+                <DataGrid x:Name="toCustomerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding ToCustomer}"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
+                    <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="toparcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="toparcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="toparcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="toparcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                </DataGrid.Columns>
+                </DataGrid>
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>

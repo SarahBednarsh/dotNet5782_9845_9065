@@ -38,8 +38,8 @@ namespace BL
             string to = email;
             string from = "dotnetliorahandsarah@gmail.com";
             string pass = "dotnet5782";
-            string subject = "Hey Liorah! this is sarah, right it is cool?";
-            string body = @"OH MY GOD I just send a mail from xaml";
+            string subject = $"Hey {userName}! Thank you for signing up to our project! Hope you enjoy.";
+            string body = @"Signup for .DRONE company";
 
             message.To.Add(to);
             //message.To.Add("sarahbednarsh@gmail.com");
