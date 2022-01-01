@@ -4,47 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
+using PO;
+using CustomerInParcel = PO.CustomerInParcel;
+using Priorities = PO.Priorities;
+using States = PO.States;
+using User = PO.User;
+using WeightCategories = PO.WeightCategories;
+
 namespace PL
 {
     internal class Adapter
     {
-        public static PL.Drone DroneBotoPo(BO.Drone boDrone)
+        public static PO.Drone DroneBotoPo(BO.Drone boDrone)
         {
             if (boDrone == null)
                 return null;
-            return new PL.Drone()
+            return new PO.Drone()
             {
                 Id = boDrone.Id,
                 Battery = (int)boDrone.Battery,
                 Latitude = boDrone.Location.Latitude.ToString(),
                 Longitude = boDrone.Location.Longitude.ToString(),
-                MaxWeight = (PL.WeightCategories)boDrone.MaxWeight,
+                MaxWeight = (PO.WeightCategories)boDrone.MaxWeight,
                 Model = boDrone.Model,
                 Parcel = Adapter.ParcelInTransferBotoPo(boDrone.Parcel),
-                Status = (PL.DroneStatuses)boDrone.Status
+                Status = (PO.DroneStatuses)boDrone.Status
             };
         }
-        public static PL.DroneToList DroneToListBotoPo(BO.DroneToList boDrone)
+        public static PO.DroneToList DroneToListBotoPo(BO.DroneToList boDrone)
         {
             if (boDrone == null)
                 return null;
-            return new PL.DroneToList()
+            return new PO.DroneToList()
             {
                 Id = boDrone.Id,
                 Battery = (int)boDrone.Battery,
                 Latitude = boDrone.Location.Latitude.ToString(),
                 Longitude = boDrone.Location.Longitude.ToString(),
-                MaxWeight = (PL.WeightCategories)boDrone.MaxWeight,
+                MaxWeight = (PO.WeightCategories)boDrone.MaxWeight,
                 Model = boDrone.Model,
                 ParcelId = boDrone.IdOfParcel == -1 ? "No parcel yet" : boDrone.IdOfParcel.ToString(),
-                Status = (PL.DroneStatuses)boDrone.Status
+                Status = (PO.DroneStatuses)boDrone.Status
             };
         }
-        public static PL.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
+        public static PO.DroneInParcel DroneInParcelBotoPo(BO.DroneInParcel boDroneInParcel)
         {
             if (boDroneInParcel == null)
-                return new PL.DroneInParcel() { Id = "No drone yet" };
-            return new PL.DroneInParcel()
+                return new PO.DroneInParcel() { Id = "No drone yet" };
+            return new PO.DroneInParcel()
             {
                 Id =/* boDroneInParcel == null ? "No drone yet" : */boDroneInParcel.Id.ToString(),
                 Battery = (int)boDroneInParcel.Battery,
@@ -52,27 +59,27 @@ namespace PL
                 Latitude = boDroneInParcel.Location.Latitude.ToString()
             };
         }
-        public static PL.DroneInCharge DroneInChargeBotoPo(BO.DroneInCharge boDrone)
+        public static PO.DroneInCharge DroneInChargeBotoPo(BO.DroneInCharge boDrone)
         {
             if (boDrone == null)
                 return null;
-            return new PL.DroneInCharge()
+            return new PO.DroneInCharge()
             {
                 Id = boDrone.Id,
                 Battery = (int)boDrone.Battery
             };
         }
-        public static PL.Parcel ParcelBotoPo(BO.Parcel boParcel)
+        public static PO.Parcel ParcelBotoPo(BO.Parcel boParcel)
         {
             if (boParcel == null)
                 return null;
-            return new PL.Parcel()
+            return new PO.Parcel()
             {
                 Id = boParcel.Id,
                 Sender = new CustomerInParcel { Id = boParcel.Sender.Id, Name = boParcel.Sender.Name },
                 Target = new CustomerInParcel { Id = boParcel.Target.Id, Name = boParcel.Target.Name },
-                Weight = (PL.WeightCategories)boParcel.Weight,
-                Priority = (PL.Priorities)boParcel.Priority,
+                Weight = (PO.WeightCategories)boParcel.Weight,
+                Priority = (PO.Priorities)boParcel.Priority,
                 Drone = Adapter.DroneInParcelBotoPo(boParcel.Drone),
                 Creation = boParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
                 Attribution = boParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
@@ -80,24 +87,24 @@ namespace PL
                 Delivery = boParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
             };
         }
-        static public PL.ParcelToList ParcelToListBotoPo(BO.ParcelToList boParcel)
+        static public PO.ParcelToList ParcelToListBotoPo(BO.ParcelToList boParcel)
         {
             if (boParcel == null)
                 return null;
-            return new PL.ParcelToList()
+            return new PO.ParcelToList()
             {
                 Id = boParcel.Id,
                 SenderName = boParcel.SenderName,
                 TargetName = boParcel.TargetName,
-                Weight = (PL.WeightCategories)boParcel.Weight,
-                Priority = (PL.Priorities)boParcel.Priority,
+                Weight = (PO.WeightCategories)boParcel.Weight,
+                Priority = (PO.Priorities)boParcel.Priority,
             };
         }
-        static public PL.ParcelInTransfer ParcelInTransferBotoPo(BO.ParcelInTransfer boParcel)
+        static public PO.ParcelInTransfer ParcelInTransferBotoPo(BO.ParcelInTransfer boParcel)
         {
             if (boParcel == null)
                 return null;
-            return new PL.ParcelInTransfer()
+            return new PO.ParcelInTransfer()
             {
                 Id = boParcel.Id,
                 PickedUpAlready = boParcel.PickedUpAlready,
@@ -112,11 +119,11 @@ namespace PL
                 Distance = boParcel.Distance
             };
         }
-        static public PL.ParcelAtCustomer ParcelAtCustomerBotoPo(BO.ParcelAtCustomer boParcel)
+        static public PO.ParcelAtCustomer ParcelAtCustomerBotoPo(BO.ParcelAtCustomer boParcel)
         {
             if (boParcel == null)
                 return null;
-            return new PL.ParcelAtCustomer()
+            return new PO.ParcelAtCustomer()
             {
                 Id = boParcel.Id,
                 Weight = (WeightCategories)boParcel.Weight,
@@ -125,11 +132,11 @@ namespace PL
                 Customer = Adapter.CustomerInParcelBotoPo(boParcel.Customer)
             };
         }
-        static public PL.Customer CustomerBotoPo(BO.Customer boCustomer)
+        static public PO.Customer CustomerBotoPo(BO.Customer boCustomer)
         {
             if (boCustomer == null)
                 return null;
-            return new PL.Customer()
+            return new PO.Customer()
             {
                 Id = boCustomer.Id,
                 Name = boCustomer.Name,
@@ -143,11 +150,11 @@ namespace PL
             };
         }
 
-        static public PL.CustomerToList CustomerToListBotoPo(BO.CustomerToList boCustomer)
+        static public PO.CustomerToList CustomerToListBotoPo(BO.CustomerToList boCustomer)
         {
             if (boCustomer == null)
                 return null;
-            return new PL.CustomerToList()
+            return new PO.CustomerToList()
             {
                 Id = boCustomer.Id,
                 Name = boCustomer.Name,
@@ -158,21 +165,21 @@ namespace PL
                 OnTheirWay = boCustomer.OnTheirWay
             };
         }
-        static public PL.CustomerInParcel CustomerInParcelBotoPo(BO.CustomerInParcel boCustomer)
+        static public PO.CustomerInParcel CustomerInParcelBotoPo(BO.CustomerInParcel boCustomer)
         {
             if (boCustomer == null)
                 return null;
-            return new PL.CustomerInParcel()
+            return new PO.CustomerInParcel()
             {
                 Id = boCustomer.Id,
                 Name = boCustomer.Name
             };
         }
-        public static PL.Station StationBotoPo(BO.Station boStation)
+        public static PO.Station StationBotoPo(BO.Station boStation)
         {
             if (boStation == null)
                 return null;
-            return new PL.Station()
+            return new PO.Station()
             {
                 Id = boStation.Id,
                 Name = boStation.Name,
@@ -184,11 +191,11 @@ namespace PL
             };
 
         }
-        public static PL.StationToList StationToListBotoPo(BO.StationToList boStation)
+        public static PO.StationToList StationToListBotoPo(BO.StationToList boStation)
         {
             if (boStation == null)
                 return null;
-            return new PL.StationToList()
+            return new PO.StationToList()
             {
                 Id = boStation.Id,
                 Name = boStation.Name,
@@ -196,7 +203,7 @@ namespace PL
                 UsedChargeSlots = boStation.UsedChargeSlots
             };
         }
-        public static PL.User UserBotoPo(BO.User boUser)
+        public static PO.User UserBotoPo(BO.User boUser)
         {
             if (boUser == null)
                 return null;

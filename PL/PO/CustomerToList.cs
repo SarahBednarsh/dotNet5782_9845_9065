@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows;
 
-namespace PL
+
+namespace PO
 {
     public class CustomerToList : DependencyObject
     {
