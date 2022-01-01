@@ -53,7 +53,7 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
