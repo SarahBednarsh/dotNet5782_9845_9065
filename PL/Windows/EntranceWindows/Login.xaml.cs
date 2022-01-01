@@ -77,7 +77,7 @@ namespace PL
         }
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            if (NameTextBox.Text=="admin")
+            if (NameTextBox.Text == "admin")
             {
                 new ManagerWindow(new User { UserName = "admin" }).Show();
                 closeAllowed = true;

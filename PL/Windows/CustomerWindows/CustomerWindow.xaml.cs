@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Globalization;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-
+using PO;
 
 namespace PL
 {
@@ -54,8 +54,8 @@ namespace PL
         }
         private void parcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListBox list = sender as ListBox;
-            ParcelAtCustomer parcelAtCustomer = list.DataContext as ParcelAtCustomer;
+            DataGridCell cell = sender as DataGridCell;
+            ParcelAtCustomer parcelAtCustomer = cell.DataContext as ParcelAtCustomer;
             Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelAtCustomer.Id));
             new ParcelWindow(parcel).Show();
             Close();
