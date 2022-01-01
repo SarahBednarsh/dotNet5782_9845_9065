@@ -46,7 +46,20 @@
             <TextBox x:Name="slotsBox" HorizontalAlignment="Left" Height="32" Margin="186,147,0,0" Text="{Binding OpenChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
 
             <Expander x:Name="chargingExpander" Header="Drones charging" Margin="420,42,104,56" Grid.RowSpan="2">
-                <ListBox x:Name="chargingList" MouseDoubleClick="chargingList_MouseDoubleClick" ItemsSource="{Binding Charging}"  Background="#FFB2EECA"/>
+                <DataGrid x:Name="chargingDronesDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Charging}" ItemBindingGroup="{Binding Source}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="MouseDoubleClick" Handler="chargingList_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="droneIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="droneBatteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader"  IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <!--<ListBox x:Name="chargingList" MouseDoubleClick="chargingList_MouseDoubleClick" ItemsSource="{Binding Charging}"  Background="#FFB2EECA"/>-->
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>

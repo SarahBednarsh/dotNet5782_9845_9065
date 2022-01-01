@@ -180,7 +180,7 @@ namespace PL
                 Longitude = boStation.Location.Longitude.ToString(),
                 OpenChargeSlots = boStation.OpenChargeSlots,
                 Charging = (from drone in boStation.Charging
-                            select drone.Id).ToList()
+                            select DroneInChargeBotoPo(drone)).ToList()
             };
 
         }

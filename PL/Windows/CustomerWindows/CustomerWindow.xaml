@@ -43,9 +43,6 @@
             <TextBox x:Name="latitudeBox" HorizontalAlignment="Left" Height="32" Margin="186,239,0,0" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
 
             <Expander x:Name="atCustomerExpander" Header="Parcels sent from customer" Margin="420,42,104,128">
-                <!--<ListView x:Name="atCustomerList" MouseDoubleClick="parcelsList_MouseDoubleClick" ItemsSource="{Binding AtCustomer}"  Background="#FFB2EECA">
-                
-                </ListView>-->
                     <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding AtCustomer}"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridCell}">
@@ -53,7 +50,7 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding AtCustomer.Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
                             <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
@@ -68,7 +65,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="toparcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="toparcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
                     <DataGridTextColumn x:Name="toparcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
                     <DataGridTextColumn x:Name="toparcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
                     <DataGridTextColumn x:Name="toparcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
