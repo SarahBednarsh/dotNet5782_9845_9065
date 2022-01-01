@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:converters="clr-namespace:PL"
         xmlns:controls="clr-namespace:System.Windows.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.DroneWindow"
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <converters:BackgroundToBoolConverter x:Key="BackgroundToBoolConverter" />
+    </Window.Resources>
     <Grid>
 
         <Grid x:Name="AddGrid" Visibility="Hidden">
@@ -74,7 +78,7 @@
                     <TextBox x:Name="longitudeBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock x:Name="LatitudeBlock" HorizontalAlignment="Left" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
+                    <TextBlock x:Name="latitudeBlock" HorizontalAlignment="Left" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
                     <TextBox x:Name="latitudeBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
                 </DockPanel>
             </StackPanel>
@@ -127,7 +131,8 @@
                 </Expander>
             </StackPanel>
 
-            <Button IsEnabled="False" x:Name="Update" Click="Update_Click" Content="Update" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="133" Margin="451,0,0,0"/>
+            <Button IsEnabled="{Binding ElementName=ModelLabel, Path=Background, Converter={StaticResource BackgroundToBoolConverter}}" x:Name="Update" Click="Update_Click" Content="Update" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="133" Margin="451,0,0,0"/>
+
             <Button x:Name="Actions" Content="Actions" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="168,0,0,0" Grid.ColumnSpan="2"/>
             <Button Visibility="Visible" x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,0,0,0"/>
             <Button x:Name="CloseActions" Click="Close_Click" Content="Close" Height="39" Grid.Row="1" VerticalAlignment="Center" Margin="619,0,49,0"/>
