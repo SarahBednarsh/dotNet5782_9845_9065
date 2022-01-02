@@ -61,9 +61,18 @@ namespace PL
 
         private void chargingList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListBox list = sender as ListBox;
-            Drone drone = Adapter.DroneBotoPo(bl.SearchDrone((int)list.SelectedItem));
-            new DroneWindow(drone).Show();
+            try
+            {
+                ListBox list = sender as ListBox;
+                DroneInCharge droneInCharge = list.DataContext as DroneInCharge;
+                Drone drone = Adapter.DroneBotoPo(bl.SearchDrone(droneInCharge.Id));
+                new DroneWindow(drone).Show();
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
             Close();
         }
 

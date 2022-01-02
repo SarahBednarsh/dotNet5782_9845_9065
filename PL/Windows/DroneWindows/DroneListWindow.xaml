@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="880"
         SizeToContent="WidthAndHeight">
+    
     <Grid>
         <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,269,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Resources>
@@ -24,6 +25,15 @@
                 <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding ParcelId}" Header="Parcel Id" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" Text="{Binding }" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
         </DataGrid>
         <StackPanel Margin="682,59,-4,268">
             <Grid>

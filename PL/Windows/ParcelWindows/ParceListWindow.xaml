@@ -7,41 +7,34 @@
         mc:Ignorable="d"
         Title="ParceListWindow" Height="450" Width="800"
         SizeToContent="WidthAndHeight">
-    <!--<Window.Resources>
-        <local:Parcels x:Key="parcels" />
-        <CollectionViewSource x:Key="cvsParcels" Source="{StaticResource parcelsTry}" Filter="CollectionViewSource_Filter">
-        </CollectionViewSource>
-    </Window.Resources>-->
+    <Window.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding SenderName}"/>
+                            <ItemsPresenter/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
     <Grid>
-        <Grid.Resources>
-            <!--<Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type GroupItem}">
-                            <StackPanel>
-                                <TextBlock Text="{Binding SenderName}"/>
-                                <ItemsPresenter/>
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
-          
-        </Grid.Resources>
-        <!--<DataGrid x:Name="dataGrid1" 
-          ItemsSource="{Binding Source={StaticResource cvsParcels}}"
-          CanUserAddRows="False">
-        </DataGrid>-->
+     
         
         <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="10,144,10,77" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
-            <!--<controls:DataGrid x:Name="dg" Height="600" Margin="12" AutoGenerateColumns="True"
-                LoadingRowGroup="dg_loadingRowGroup" RowGroupHeaderPropertyNameAlternative="Range">
-                <controls:DataGrid.RowGroupHeaderStyles>
-                    <Style TargetType="controls:DataGridRowGroupHeader">
-                        <Setter Property="Background" Value="LightGray" />
-                    </Style>
-                </controls:DataGrid.RowGroupHeaderStyles>
-            </controls:DataGrid>-->
+            <!--<d:DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <d:DataGridRowsPresentor/>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </d:DataGrid.GroupStyle>-->
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
