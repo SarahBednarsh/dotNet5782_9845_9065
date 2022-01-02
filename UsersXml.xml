@@ -9,4 +9,13 @@
     <Salt>1261821828</Salt>
     <HashedPassword>mkLQk1Hyuql4OKaisjNxNsqUoJ4WHndgAb0HC+Q0J8iQe5C1FY3re2VHY28LuxHB30pO0egBgnzFpUdm4/cHIw==</HashedPassword>
   </User>
+  <User>
+    <Id>123</Id>
+    <UserName>sarah</UserName>
+    <Photo />
+    <Email>sarahbednarsh@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>1144821904</Salt>
+    <HashedPassword>mkfBVKlYhl4dcv0Yhkdw+z+SrA71UmFcYBspQkNaItjDNH1ypjDQh1yswOefzDEmWY3hlVgv3dfqysGcjKmVQQ==</HashedPassword>
+  </User>
 </ArrayOfUser>
