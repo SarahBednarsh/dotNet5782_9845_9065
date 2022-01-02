@@ -63,7 +63,14 @@ namespace BlApi
         /// Delivers a parcel the was picked up by the requested Drone
         /// </summary>
         public void DeliverAParcel(int droneId);
-        
+        /// <summary>
+        /// Recovers password for user
+        /// Generates a new password and sends email
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="lengthForNewPassword"></param>
+        void RecoverPassword(string userName, int lengthForNewPassword);
+
         #endregion
 
         #region display specific object
@@ -151,7 +158,6 @@ namespace BlApi
         void DeleteUser(int id);
         #endregion
         bool UserInfoCorrect(string userName, string password, bool isManager);
-
-
+        
     }
 }

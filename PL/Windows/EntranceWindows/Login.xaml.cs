@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PO;
+using BO;
+using User = PO.User;
+
 namespace PL
 {
     /// <summary>
@@ -80,6 +83,22 @@ namespace PL
                 closeAllowed = true;
                 Close();
             }
+        }
+
+        private void passwordRecovery_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string email = bl.SearchUser(NameTextBox.Text).Email;
+                bl.RecoverPassword(NameTextBox.Text, 4);
+                MessageBox.Show("Password recovered. Check your inbox to view new password");
+            }
+            catch(KeyDoesNotExist exception)
+            {
+                MessageBox.Show(exception + ", please enter a valid username");
+            }
+            catch(Exception exception)
+            { MessageBox.Show(exception.Message); }
         }
     }
 }
