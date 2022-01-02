@@ -15,10 +15,10 @@ namespace Dal
     /// </summary>
     public class XmlTools
     {
-        static string dir = @"Data\";
+        static string dir = @"";
         static XmlTools()
         {
-            if (!Directory.Exists(dir))
+            if (dir != "" && !Directory.Exists(dir)) 
                 Directory.CreateDirectory(dir);
         }
         #region SaveLoadWithXElement

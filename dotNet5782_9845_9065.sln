@@ -26,7 +26,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{03ED6FE9-C221-4613-BB00-D9E90FBB4DCA}"
 	ProjectSection(SolutionItems) = preProject
+		BatteryConsumptionXml.xml = BatteryConsumptionXml.xml
+		CustomersXml.xml = CustomersXml.xml
 		dal-config.xml = dal-config.xml
+		DefaultsXml.xml = DefaultsXml.xml
+		DroneChargesXml.xml = DroneChargesXml.xml
+		DronesXml.xml = DronesXml.xml
+		ParcelsXml.xml = ParcelsXml.xml
+		RunningNumbersXml.xml = RunningNumbersXml.xml
+		StationsXml.xml = StationsXml.xml
+		UsersXml.xml = UsersXml.xml
 	EndProjectSection
 EndProject
 Global

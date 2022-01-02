@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Id>12345</Id>
+    <UserName>liorah</UserName>
+    <Photo />
+    <Email>liorahmm@gmail.com</Email>
+    <IsManager>true</IsManager>
+    <Salt>1261821828</Salt>
+    <HashedPassword>mkLQk1Hyuql4OKaisjNxNsqUoJ4WHndgAb0HC+Q0J8iQe5C1FY3re2VHY28LuxHB30pO0egBgnzFpUdm4/cHIw==</HashedPassword>
+  </User>
+</ArrayOfUser>
