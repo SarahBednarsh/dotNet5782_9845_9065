@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using PL.Windows;
 using PO;
 namespace PL
 {
@@ -29,6 +30,8 @@ namespace PL
             this.user = user;
             DataContext = (from parcel in bl.ListParcelFromCustomer(user.Id)
                            select Adapter.ParcelToListBotoPo(parcel)).ToList();
+            viewProfilePhoto.Source = new BitmapImage(new Uri(user.Photo));
+
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -51,6 +54,10 @@ namespace PL
         {
             if (MessageBoxResult.Yes == MessageBox.Show("Thank you for using .DRONE!\n Are you sure you want to leave?", "Bye", MessageBoxButton.YesNo))
                 Close();
+        }
+        private void viewProfile_Click(object sender, RoutedEventArgs e)
+        {
+            new ViewProfile(user).Show();
         }
     }
 }

@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
+        <Button x:Name="viewProfile" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Margin="620,10,10,330" Height="100" Click="viewProfile_Click" >
+            <Image x:Name="viewProfilePhoto" Source="{Binding}"/>
+        </Button>
         <Label x:Name="title" Content="Welcome, {0}!" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" VerticalAlignment="Top" Width="390" FontSize="24" FontWeight="Bold"/>
         <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="150,92,150,132" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
             <DataGrid.Resources>

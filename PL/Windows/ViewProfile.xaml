@@ -28,6 +28,6 @@
             </DockPanel>
         </StackPanel>
         <Image x:Name="profilePhoto" Source="/whitelogo-removebg-preview (3).png" HorizontalAlignment="Center" Width="140" Height="127" VerticalAlignment="Top" Margin="0,273,0,0"/>
-        <Button x:Name="close" Content="Close" Margin="244,394,40,40" Click="close_Click"/>
+        <Button x:Name="close" Content="Close" Margin="244,398,40,0" Click="close_Click" Height="32" VerticalAlignment="Top"/>
     </Grid>
 </Window>

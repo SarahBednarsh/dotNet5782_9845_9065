@@ -153,4 +153,13 @@
     <Salt>11448281</Salt>
     <HashedPassword>HnzVp7V7u/eF3UldsfZLxZmRdy59wNnnoP+Ftwsup1a2PgqI3rToAGg78OBEq2fZBB0g2df2LXXVr6g+ZC7iTA==</HashedPassword>
   </User>
+  <User>
+    <Id>325019818</Id>
+    <UserName>Noga</UserName>
+    <Photo>file:///C:/Users/sarah/OneDrive/Pictures/Saved Pictures/IMG_3368.JPG</Photo>
+    <Email>nogaelman27778@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>1162796012</Salt>
+    <HashedPassword>z+kBdybGRmP+XrZf6AW9ERoG8VdWH1Q7OdlsiZUpjXrUP5nO/mWUdR1hOMKR4VkughdGZUxQUy3nTLYFFgcCvQ==</HashedPassword>
+  </User>
 </ArrayOfUser>
