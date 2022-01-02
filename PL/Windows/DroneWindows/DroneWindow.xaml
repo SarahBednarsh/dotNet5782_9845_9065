@@ -84,12 +84,12 @@
             </StackPanel>
 
 
-            <DockPanel x:Name="parcelInTransfer" Margin="405,10,115,0" Height="308" VerticalAlignment="Top" Visibility="Visible">
-                <Expander Background="#B7D2B6" >
+            <DockPanel x:Name="parcelInTransfer" Margin="363,14,49,0" Height="308" VerticalAlignment="Top" Visibility="Visible" Grid.RowSpan="2">
+                <Expander Background="#B7D2B6" Width="312" Height="308" >
                     <Expander.Header>
                         <TextBlock Text="Parcel transfered by drone:" FontStyle="Oblique" FontSize="16" TextWrapping="Wrap" Margin="-19,0,0,0" />
                     </Expander.Header>
-                    <StackPanel x:Name="ParcelInTransfer" >
+                    <StackPanel x:Name="ParcelInTransfer" Width="312" Height="400" >
                         <DockPanel>
                             <TextBlock x:Name="parcelIdBlock" Text="ID: " Height="29" TextWrapping="Wrap" Width="120"/>
                             <TextBox x:Name="parcelIdBox" HorizontalAlignment="Left" Height="25" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
@@ -130,7 +130,7 @@
                     </StackPanel>
 
                 </Expander>
-                <Button x:Name="viewParcel" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="Open Parcel window" Click="viewParcel_Click"  />
+                <Button x:Name="viewParcel" FontSize="10" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="Open Parcel window" Click="viewParcel_Click"  />
 
             </DockPanel>
 
