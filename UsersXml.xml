@@ -144,4 +144,13 @@
     <Salt>796803185</Salt>
     <HashedPassword>gfPh/xRb7Up2Y8QeyXP8tBtU1BS8C67uf/ZTdSOTFGmjk3fdnx3ghsVGFcOMUJs+Z8Ii+cEggTQuBAHAoQXF4g==</HashedPassword>
   </User>
+  <User>
+    <Id>326080421</Id>
+    <UserName>chemda</UserName>
+    <Photo />
+    <Email>chemdush@gmail.com</Email>
+    <IsManager>true</IsManager>
+    <Salt>11448281</Salt>
+    <HashedPassword>HnzVp7V7u/eF3UldsfZLxZmRdy59wNnnoP+Ftwsup1a2PgqI3rToAGg78OBEq2fZBB0g2df2LXXVr6g+ZC7iTA==</HashedPassword>
+  </User>
 </ArrayOfUser>
