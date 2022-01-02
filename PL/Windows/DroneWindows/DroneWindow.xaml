@@ -42,7 +42,7 @@
             <materialDesign:PackIcon Name="stationIdIcon" Kind="Number8BoxMultipleOutline" Grid.Column="3" Margin="16,189,0,0" Height="29" Width="30" Grid.RowSpan="2"/>
         </Grid>
 
-        <Grid x:Name="ActionsGrid" Visibility="Hidden">
+        <Grid x:Name="ActionsGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
@@ -55,7 +55,7 @@
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="idBlock" HorizontalAlignment="Left" Text="ID: " TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="IdBox" IsEnabled="False" HorizontalAlignment="Left" Height="25" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+                    <TextBox x:Name="IdBox" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="ModelBlock" HorizontalAlignment="Left" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
@@ -63,28 +63,28 @@
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="MaxWeightBlock" HorizontalAlignment="Left" Text="MaxWeight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="MaxWeightBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+                    <TextBox x:Name="MaxWeightBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="BatteryBlock" HorizontalAlignment="Left" Text="Battery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="BatteryBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+                    <TextBox x:Name="BatteryBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="StatusBlock" HorizontalAlignment="Left" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="StatusBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Status}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+                    <TextBox x:Name="StatusBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Status}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="longitudeBlock" HorizontalAlignment="Left" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="longitudeBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+                    <TextBox x:Name="longitudeBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="latitudeBlock" HorizontalAlignment="Left" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="latitudeBox" IsEnabled="False" HorizontalAlignment="Left" Height="32" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+                    <TextBox x:Name="latitudeBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
             </StackPanel>
 
 
-            <StackPanel x:Name="parcelInTransfer" Margin="405,10,115,0" Height="308" VerticalAlignment="Top" Visibility="Hidden">
+            <DockPanel x:Name="parcelInTransfer" Margin="405,10,115,0" Height="308" VerticalAlignment="Top" Visibility="Visible">
                 <Expander Background="#B7D2B6" >
                     <Expander.Header>
                         <TextBlock Text="Parcel transfered by drone:" FontStyle="Oblique" FontSize="16" TextWrapping="Wrap" Margin="-19,0,0,0" />
@@ -128,8 +128,11 @@
                         </DockPanel>
 
                     </StackPanel>
+
                 </Expander>
-            </StackPanel>
+                <Button x:Name="viewParcel" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="Open Parcel window" Click="viewParcel_Click"  />
+
+            </DockPanel>
 
             <Button IsEnabled="{Binding ElementName=ModelLabel, Path=Background, Converter={StaticResource BackgroundToBoolConverter}}" x:Name="Update" Click="Update_Click" Content="Update" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="133" Margin="451,0,0,0"/>
 
@@ -162,12 +165,13 @@
             <TextBox IsEnabled="False" x:Name="batteryBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="2" Text="{Binding Battery, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,18,0,49"/>
             <Label x:Name="StatusLabel" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Grid.Row="2" Width="94" Margin="55,32,0,0"/>
             <ComboBox IsEnabled="False" x:Name="StatusSelector" SelectedItem="{Binding Status, Mode=TwoWay}" HorizontalAlignment="Center" Width="120" Grid.Row="2" Margin="0,32,0,32" Grid.Column="1"/>
+
             <Label x:Name="LongitudeLabel" Content="Longitude:" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Top" Height="26" Width="76" Margin="52,15,0,0"/>
-            <TextBox IsEnabled="False" x:Name="LongitudeBox" HorizontalAlignment="Center" Grid.Column="4" Text="{Binding Longitude, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,10,0,28"/>
+            <TextBox IsReadOnly="True" x:Name="LongitudeBox" HorizontalAlignment="Center" Grid.Column="4" Text="{Binding Longitude, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,10,0,28"/>
             <Label x:Name="LatitudeLabel" Content="Latitude:" HorizontalAlignment="Center" Grid.Column="3" VerticalAlignment="Center" Height="26" Grid.Row="1" Width="76"/>
-            <TextBox IsEnabled="False" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="{Binding Latitude, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,10,0,26"/>
+            <TextBox IsReadOnly="True" x:Name="LatitudeBox" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="{Binding Latitude, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="0,10,0,26"/>
             <Label x:Name="IdOfParcelLabel" Content="Parcel ID:" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Top" Height="26" Grid.Row="3" Width="76" Margin="90,10,0,0"/>
-            <TextBox IsEnabled="False" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding ParcelId, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
+            <TextBox IsReadOnly="True" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding ParcelId, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
 
 
 
