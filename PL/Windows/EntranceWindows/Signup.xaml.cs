@@ -39,6 +39,7 @@ namespace PL
             if (!isManager)
                 title.Text = "Customer Signup";
             user = new User();
+            user.IsManager = isManager;
             DataContext = user;
         }
 
@@ -70,7 +71,7 @@ namespace PL
                     PasswordBox.Password,
                     isManager) ;
                 if (!isManager)
-                    bl.AddCustomer(user.Id, user.UserName, phoneBox.ToString(), double.Parse(longitudeBox.ToString()), double.Parse(latitudeBox.ToString()));
+                    bl.AddCustomer(user.Id, user.UserName, phoneBox.Text, double.Parse(longitudeBox.Text), double.Parse(latitudeBox.Text));
             }
             catch(Exception ex)
             {
