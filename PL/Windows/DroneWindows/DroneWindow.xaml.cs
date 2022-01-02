@@ -267,10 +267,15 @@ namespace PL
         {
 
         }
-        
 
+
+        private void viewParcel_Click(object sender, RoutedEventArgs e)
+        {
+            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Drone).Parcel.Id));
+            new ParcelWindow(parcelToOpen).ShowDialog();
+        }
     }
-    
+
 }
 
 
