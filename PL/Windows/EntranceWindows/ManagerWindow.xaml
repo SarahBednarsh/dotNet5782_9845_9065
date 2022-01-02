@@ -12,6 +12,9 @@
 
         <Image Opacity="0.35" Height="563" Width="918" Source="/DroneNature.png" Margin="-57,-96,-61,-33"/>
 
+        <Button x:Name="viewProfile" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Margin="590,10,10,324" Height="100" Click="viewProfile_Click" >
+            <Image x:Name="viewProfilePhoto" Source="{Binding}"/>
+        </Button>
 
         <Button x:Name="Customers"
             Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="100" Width="100"

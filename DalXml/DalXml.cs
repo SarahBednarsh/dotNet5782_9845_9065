@@ -369,8 +369,8 @@ namespace Dal
             List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
             if (users.Exists(x => x.Id == id || x.UserName == userName))
                 throw new UserException("User with the same id or username already exists");
-            if (!File.Exists(photo))
-                photo = GetDefaultPhoto();
+            //if (!File.Exists(photo))
+            //    photo = GetDefaultPhoto();
             int salt = PasswordHandler.GenerateSalt();
             User tempUser = new User()
             {

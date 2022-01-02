@@ -63,20 +63,23 @@ namespace PL
         private void signup_Click(object sender, RoutedEventArgs e)
         {
 
-           try
+            try
             {
                 bl.AddUser(user.Id, user.UserName,
-                    ImageChanged ? ManagerImage.Source.ToString() : null,
+                    ImageChanged ? ManagerImage.Source.ToString() : "/whitelogo-removebg-preview (3).png",
                     user.Email,
                     PasswordBox.Password,
-                    isManager) ;
+                    isManager);
                 if (!isManager)
                     bl.AddCustomer(user.Id, user.UserName, phoneBox.Text, double.Parse(longitudeBox.Text), double.Parse(latitudeBox.Text));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            string image = bl.SearchUser(user.UserName).Photo;
+            MessageBox.Show($"Image: {ManagerImage.Source.ToString()}");
+            MessageBox.Show($"Image: {image}");
             closeAllowed = true;
             Close();
         }

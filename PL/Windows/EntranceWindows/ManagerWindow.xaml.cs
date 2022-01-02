@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PL.Windows;
 using PO;
 namespace PL
 {
@@ -32,6 +33,7 @@ namespace PL
                 false,
                 true,
                 TimeSpan.FromSeconds(3));
+            viewProfilePhoto.Source = new BitmapImage(new Uri(manager.Photo));
         }
 
         private void Drones_Click(object sender, RoutedEventArgs e)
@@ -52,6 +54,11 @@ namespace PL
         private void Customers_Click(object sender, RoutedEventArgs e)
         {
             new CustomerListWindow().ShowDialog();
+        }
+
+        private void viewProfile_Click(object sender, RoutedEventArgs e)
+        {
+            new ViewProfile(manager).Show();
         }
     }
 }

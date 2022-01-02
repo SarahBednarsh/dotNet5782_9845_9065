@@ -21,7 +21,7 @@ namespace Dal
             internal static double medium = 0.0006;
             internal static double heavy = 0.0008;
             internal static double chargingPace = 3;
-            internal static string defaultPhoto = "";
+            internal static string defaultPhoto = "/whitelogo-removebg-preview (3).png";
         }
         /// <summary>
         /// initializes the datasource with random data
