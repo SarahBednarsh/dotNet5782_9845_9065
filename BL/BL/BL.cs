@@ -42,7 +42,7 @@ namespace BL
         internal List<DroneToList> dronesBL;
         public BL()
         {
-            dalAP = DalFactory.GetDal("list");
+            dalAP = DalFactory.GetDal("xml");
             IEnumerator<double> info = dalAP.ReqPowerConsumption().GetEnumerator();
             info.MoveNext();
             available = info.Current;

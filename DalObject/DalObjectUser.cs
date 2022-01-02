@@ -12,7 +12,7 @@ namespace Dal
     {
         public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
         {
-            if (DataSource.Users.Exists(x => x.Id == id || x.UserName == userName && x.IsManager == isManager))
+            if (DataSource.Users.Exists(x => x.Id == id || x.UserName == userName))
                 throw new UserException("User with the same id or username already exists");
             if (!File.Exists(photo))
                 photo = GetDefaultPhoto();
