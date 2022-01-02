@@ -56,7 +56,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,53,0,0" VerticalAlignment="Top" Height="30" Width="74" Click="Close_Click"/>
-        <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="531,53,149,349" Width="120"/>
+        <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="531,53,149,349" Width="120" Click="addParcel_Click"/>
         <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
         <StackPanel Margin="75,19,526,329">
             <Grid>

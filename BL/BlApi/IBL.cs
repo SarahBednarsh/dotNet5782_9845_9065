@@ -131,6 +131,12 @@ namespace BlApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<StationToList> ListStationAvailable();
+        /// <summary>
+        /// List parcels sent from a specific customer
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        public IEnumerable<ParcelToList> ListParcelFromCustomer(int customerId);
         //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
         //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
         //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);

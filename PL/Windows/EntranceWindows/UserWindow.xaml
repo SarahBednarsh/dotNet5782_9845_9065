@@ -3,11 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Windows.EntranceWindows"
+        xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name="title" Content="Welcome, {0}!" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" VerticalAlignment="Top" Width="390" FontSize="24" FontWeight="Bold"/>
-
+        <Label x:Name="title" Content="Welcome, {0}!" HorizontalAlignment="Left" Height="62" Margin="25,24,0,0" VerticalAlignment="Top" Width="390" FontSize="24" FontWeight="Bold"/>
+        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Height="210" Width="500" Margin="150,112,150,112" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="pTLIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pTLPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pTLSenderNameColumn" Binding="{Binding SenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pTLTargetNameColumn" Binding="{Binding TargetName}" Header="Target Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pTLWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="addButton" Content="Send a new parcel" HorizontalAlignment="Left" Height="33" Margin="150,352,0,0" VerticalAlignment="Top" Width="177" Click="add_Click"/>
+        <Button x:Name="closeButton" Content="Close" HorizontalAlignment="Left" Height="33" Margin="474,352,0,0" VerticalAlignment="Top" Width="176" Click="close_Click"/>
     </Grid>
 </Window>

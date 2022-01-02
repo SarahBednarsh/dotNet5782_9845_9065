@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Globalization;
+using PO;
 namespace PL
 {
     //public class Parcels : ObservableCollection<ParcelToList>
@@ -38,7 +39,7 @@ namespace PL
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.TargetName).ToList();
-            
+
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -119,6 +120,18 @@ namespace PL
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void addParcel_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow().ShowDialog();
+            DataContext = (from parcel in bl.ListParcel()
+                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+            SenderSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
+                                          select parcel.SenderName).ToList();
+            TargetSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
+                                          select parcel.TargetName).ToList();
+
         }
     }
 }

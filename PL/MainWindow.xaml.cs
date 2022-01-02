@@ -36,22 +36,22 @@ namespace PL
 
         private void managerLogin_Click(object sender, RoutedEventArgs e)
         {
-            new Login(null, true).ShowDialog();
+            new Login(true).ShowDialog();
         }
 
         private void managerSignup_Click(object sender, RoutedEventArgs e)
         {
-            new Signup(null, true).ShowDialog();
+            new Signup(true).ShowDialog();
         }
 
         private void customerSignup_Click(object sender, RoutedEventArgs e)
         {
-            //new Signup(null, false).ShowDialog();
+            new Signup(false).ShowDialog();
         }
 
         private void customerLogin_Click(object sender, RoutedEventArgs e)
         {
-            new Login(null, false).ShowDialog();
+            new Login(false).ShowDialog();
         }
 
         private void checkstation(object sender, RoutedEventArgs e)

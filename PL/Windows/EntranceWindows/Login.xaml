@@ -18,13 +18,11 @@
                   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="232" Height="40"  Margin="84,144,84,0"  />
         <Button x:Name="passwordRecovery" Content="Forgot Password" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,291,0,0" VerticalAlignment="Top" Width="232">
         </Button>
-        <TextBlock x:Name="title" Text="Manager Login" TextAlignment="Center" HorizontalAlignment="Center" Height="34" Margin="0,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
-        <Button x:Name="login" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,223,0,0" VerticalAlignment="Top" Width="232" Click="login_Click">
-            <Run Text="Log in"/>
-        </Button>
-        <Button x:Name="close" Click="close_Click" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,357,0,0" VerticalAlignment="Top" Width="232">
-            <Run Text="Cancel"/>
-        </Button>
+        <TextBlock x:Name="title" Text="Manager Login" TextAlignment="Center" HorizontalAlignment="Center" Height="34" Margin="0,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" FontSize="24" FontWeight="Bold"/>
+        <Button x:Name="login" Content="Log in" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,223,0,0" VerticalAlignment="Top" Width="232" Click="login_Click"/>
+
+        <Button x:Name="close" Content="Cancel" Click="close_Click" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,357,0,0" VerticalAlignment="Top" Width="232"/>
+
         <TextBox x:Name="incorrect" FlowDirection="RightToLeft" Foreground="Red" Visibility="Hidden" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" HorizontalAlignment="Center" Height="37" Margin="0,190,0,0" Text="שם משתמש או סיסמה אינם נכונים" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
 
     </Grid>

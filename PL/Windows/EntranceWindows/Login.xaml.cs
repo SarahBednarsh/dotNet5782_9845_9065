@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using PO;
 namespace PL
 {
     /// <summary>
@@ -23,16 +23,13 @@ namespace PL
     {
         private IBL bl = BlFactory.GetBL();
         private bool isManager;
-        private string xmlFile;
         private bool closeAllowed;
-        public Login(string path, bool manager)
+        public Login(bool manager)
         {
             InitializeComponent();
             isManager = manager;
-            xmlFile = path;
             if (!isManager)
                 title.Text = "User Login";
-            title.FontSize = 18;
             closeAllowed = false;
         }
 
@@ -49,17 +46,6 @@ namespace PL
                 (sender as TextBox).Opacity = 0.5;
             }
         }
-        //private void password_GotFocus(object sender, RoutedEventArgs e)
-        //{
-        //    passwordText.Visibility = Visibility.Hidden;
-        //}
-        //private void password_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    if ((sender as PasswordBox).Password == "")
-        //    {
-        //        passwordText.Visibility = Visibility.Visible;
-        //    }
-        //}
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +58,7 @@ namespace PL
             if (!closeAllowed)
             {
                 e.Cancel = true;
-                MessageBox.Show("Cannot close implicidly. Please click the cancel button", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cannot close implicitly. Please click the cancel button", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void login_Click(object sender, RoutedEventArgs e)
@@ -83,11 +69,14 @@ namespace PL
                 closeAllowed = true;
                 Close();
             }
-            else if (!bl.UserInfoCorrect(NameTextBox.Text, PasswordBox.Password, true))
+            else if (!bl.UserInfoCorrect(NameTextBox.Text, PasswordBox.Password, isManager))
                 MessageBox.Show("Wrong information. Please try again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                new ManagerWindow(Adapter.UserBotoPo(bl.SearchUser(NameTextBox.Text))).Show();
+                if (isManager)
+                    new ManagerWindow(Adapter.UserBotoPo(bl.SearchUser(NameTextBox.Text))).Show();
+                else
+                    new UserWindow(Adapter.UserBotoPo(bl.SearchUser(NameTextBox.Text))).Show();
                 closeAllowed = true;
                 Close();
             }

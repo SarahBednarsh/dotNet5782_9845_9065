@@ -4,53 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:PL"
         xmlns:local="clr-namespace:PL"
         xmlns:Controls="clr-namespace:System.Windows.Controls" x:Class="PL.Signup"
         mc:Ignorable="d"
         Closing="Window_Closing"
         Title="Signup" Height="480" Width="700" >
+    <Window.Resources>
+        <converters:BoolToVisibilityIsManagerConverter x:Key="BoolToVisibilityIsManagerConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="407*"/>
             <ColumnDefinition Width="293*"/>
         </Grid.ColumnDefinitions>
         <Grid Margin="0,0,57,0" >
-            <TextBox  x:Name="NameTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Name" Margin="59,91,59,0" VerticalAlignment="Top">
+            <TextBox  x:Name="NameTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Name" Margin="59,65,59,0" VerticalAlignment="Top">
                 <TextBox.Text>
                     <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
                 </TextBox.Text>
             </TextBox>
-            <TextBox  x:Name="IdTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Id" Margin="59,133,59,0" VerticalAlignment="Top">
+            <TextBox  x:Name="IdTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Id" Margin="59,107,59,0" VerticalAlignment="Top">
                 <TextBox.Text>
                     <Binding Path="Id" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
                 </TextBox.Text>
             </TextBox>
-            <TextBox  x:Name="EmailTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Email" Margin="59,175,59,0" VerticalAlignment="Top">
+            <TextBox  x:Name="EmailTextBox" Width="232" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Email" Margin="59,149,59,0" VerticalAlignment="Top">
                 <TextBox.Text>
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" />
                 </TextBox.Text>
             </TextBox>
+           
             <PasswordBox x:Name="PasswordBox"
                     materialDesign:HintAssist.Hint="Password" VerticalAlignment="Top"
-                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="232" Height="40"  Margin="59,220,59,0"  />
-            
-            
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="232" Height="40"  Margin="59,194,59,0"  />
+
+
             <!--<TextBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="userName_GotFocus" LostFocus="userName_LostFocus"/>
             <Controls:WaterMarkBox x:Name="email" HorizontalAlignment="Center" Height="57" Text="Emali address" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="email_GotFocus" LostFocus="email_LostFocus" Margin="0,196,0,0"/>
             <PasswordBox x:Name="password" FlowDirection="LeftToRight" LostFocus="password_LostFocus" GotFocus="password_GotFocus" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
             <TextBlock x:Name="passwordText" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="267,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>-->
-            <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" FontSize="20" FontWeight="Bold" Text="Manager Signup" Margin="0,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
+            <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" FontSize="20" FontWeight="Bold" Text="Manager Signup" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
             <Button x:Name="signup" IsEnabled="{Binding IsChecked, ElementName=terms}" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,325,0,0" VerticalAlignment="Top" Width="232" Click="signup_Click">
-                <Run FlowDirection="RightToLeft" Language="he-il" Text="הרשמה"/>
+                <Run Text="Signup"/>
             </Button>
             <Button x:Name="close" Click="close_Click" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,389,0,0" VerticalAlignment="Top" Width="232">
-                <Run FlowDirection="RightToLeft" Language="he-il" Text="ביטול"/>
+                <Run Text="Close"/>
             </Button>
             <TextBox x:Name="incorrect" FlowDirection="RightToLeft" Foreground="Red" Visibility="Hidden" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" HorizontalAlignment="Center" Height="37" Margin="0,190,0,0" Text="שם משתמש או סיסמה אינם נכונים" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
             <CheckBox x:Name="terms" Content="I agree to the company's terms and conditions" HorizontalAlignment="Center" Height="20" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
-
+            <TextBox  x:Name="longitudeBox" Width="232" Visibility="{Binding ElementName=this, Path=isManager, Converter={StaticResource BoolToVisibilityIsManagerConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Longitude" Margin="390,75,-272,0" VerticalAlignment="Top"/>
+            <TextBox  x:Name="latitudeBox" Width="232" Visibility="{Binding ElementName=this, Path=isManager, Converter={StaticResource BoolToVisibilityIsManagerConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Latitude" Margin="390,121,-272,0" VerticalAlignment="Top"/>
+            <TextBox  x:Name="phoneBox" Width="232" Visibility="{Binding ElementName=this, Path=isManager, Converter={StaticResource BoolToVisibilityIsManagerConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Phone" Margin="59,238,59,0" VerticalAlignment="Top"/>
+            
         </Grid>
-        <Grid Margin="350,147,0,0" Height="281" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Grid Margin="350,161,0,0" Height="281" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="128*"/>
                 <RowDefinition Height="153*"/>
@@ -58,8 +66,10 @@
             <Border x:Name="ImageBorder" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" Margin="40,10,40,40">
                 <Image x:Name="ManagerImage" Source="/whitelogo-removebg-preview (3).png"/>
             </Border>
-            <Button x:Name="Button_UploadImage" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Upload profile picture" Grid.Row="1" Click="Button_Click_UploadImage" Margin="0,120,0,0"/>
+            <Button x:Name="Button_UploadImage" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Upload profile picture" Grid.Row="1" Click="Button_Click_UploadImage" Margin="0,118,0,0"/>
         </Grid>
+        <TextBlock x:Name="locationBlock" Visibility="{Binding ElementName=this, Path=isManager, Converter={StaticResource BoolToVisibilityIsManagerConverter}}" HorizontalAlignment="Left" Height="20" Margin="390,53,0,0" Text="Location information:" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
     </Grid>
 
 

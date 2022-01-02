@@ -123,6 +123,11 @@ namespace BL
         //           where parcel.Attribution == null //parcel was not attributed yet
         //           select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
         //}
+        public IEnumerable<ParcelToList> ListParcelFromCustomer(int customerId)
+        {
+            return from parcel in dalAP.ListParcelConditional(x => x.SenderId == customerId)
+                   select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+        }
         public IEnumerable<ParcelToList> ListParcelNotAttributed()
         {
             return from parcel in dalAP.ListParcelConditional(x => x.Scheduled == null)

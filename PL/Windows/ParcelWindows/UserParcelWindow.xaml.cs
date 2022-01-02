@@ -19,37 +19,19 @@ namespace PL
     /// <summary>
     /// Interaction logic for ParcelWindow.xaml
     /// </summary>
-    public partial class ParcelWindow : Window
+    public partial class UserParcelWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
-        public ParcelWindow(int senderId = -1)
+        public UserParcelWindow()
         {
             InitializeComponent();
-            Width = 350;
-            AddGrid.Visibility = Visibility.Visible;
-            senderBox.ItemsSource = from customer in bl.ListCustomer()
-                                    select customer.Id;
-            if (senderId != -1)
-            {
-                senderBox.SelectedItem = senderId;
-                senderBox.IsReadOnly = true;
-            }
-            targetBox.ItemsSource = from customer in bl.ListCustomer()
-                                    select customer.Id;
-            weightBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            priorityBox.ItemsSource = Enum.GetValues(typeof(Priorities));
-
-
         }
-        public ParcelWindow(Parcel parcel)
+        public UserParcelWindow(Parcel parcel)
         {
             InitializeComponent();
-            Width = 600;
-            ActionsAndDiplayGrid.Visibility = Visibility.Visible;
             DataContext = parcel;
             InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
-
         }
         private void InitializeActionsButton(Parcel parcel)
         {
@@ -140,20 +122,6 @@ namespace PL
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-        }
-
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bl.AddParcel((int)senderBox.SelectedItem, (int)targetBox.SelectedItem, (BO.WeightCategories)weightBox.SelectedItem, (BO.Priorities)priorityBox.SelectedItem);
-                MessageBox.Show("Parcel added successfully");
-            }
-            catch(Exception excpetion)
-            {
-                MessageBox.Show(excpetion.Message);
-            }
             Close();
         }
     }

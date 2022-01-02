@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 using PO;
 namespace PL
 {
@@ -19,16 +20,37 @@ namespace PL
     /// </summary>
     public partial class UserWindow : Window
     {
-        public UserWindow()
-        {
-            InitializeComponent();
-            
-        }
+        private readonly IBL bl = BlFactory.GetBL();
+        private User user;
         public UserWindow(User user)
         {
             InitializeComponent();
             title.Content = string.Format(title.Content.ToString(), user.UserName);
+            this.user = user;
+            DataContext = (from parcel in bl.ListParcelFromCustomer(user.Id)
+                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+        }
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            ParcelToList p = cell.DataContext as ParcelToList;
+            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
+            new ParcelWindow(parcelToOpen).ShowDialog();
+            DataContext = (from parcel in bl.ListParcelFromCustomer(p.Id)
+                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
         }
 
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(user.Id).ShowDialog();
+            DataContext = (from parcel in bl.ListParcelFromCustomer(user.Id)
+                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBoxResult.Yes == MessageBox.Show("Thank you for using .DRONE!\n Are you sure you want to leave?", "Bye", MessageBoxButton.YesNo))
+                Close();
+        }
     }
 }
