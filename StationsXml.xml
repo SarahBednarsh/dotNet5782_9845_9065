@@ -1,4 +1,20 @@
 <?xml version="1.0"?>
-<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  
-</ArrayOfStation>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <Id>123</Id>
+    <Name>sarah</Name>
+    <Phone>12345</Phone>
+    <Longitude>
+      <Degrees>123</Degrees>
+      <Minutes>0</Minutes>
+      <Seconds>0</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>123</Degrees>
+      <Minutes>0</Minutes>
+      <Seconds>0</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+</ArrayOfCustomer>
