@@ -9,4 +9,31 @@
     <Salt>1261821828</Salt>
     <HashedPassword>mkLQk1Hyuql4OKaisjNxNsqUoJ4WHndgAb0HC+Q0J8iQe5C1FY3re2VHY28LuxHB30pO0egBgnzFpUdm4/cHIw==</HashedPassword>
   </User>
+  <User>
+    <Id>0</Id>
+    <UserName>li</UserName>
+    <Photo />
+    <Email>liorahmm@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>84681547</Salt>
+    <HashedPassword>psSzLNkh3Jg1MYDAWqrWwzKf7gnEreE42H/Kr5OAYtNgHlykLyErmPQosqCrbEeOaTt1Ec3fZl86qu4vr8PDDQ==</HashedPassword>
+  </User>
+  <User>
+    <Id>11111</Id>
+    <UserName>a</UserName>
+    <Photo />
+    <Email>aaa@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>1828510746</Salt>
+    <HashedPassword>YWzX4cmUYKoCIDIvA8def4kN8Iiw4JhPP9TeeIgO31MiXEt1hV6p/gKcw1OtMunsQ4aEWUalzPlA6mYK4K5Mzw==</HashedPassword>
+  </User>
+  <User>
+    <Id>98765</Id>
+    <UserName>gitit</UserName>
+    <Photo />
+    <Email>gitit@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>1547842706</Salt>
+    <HashedPassword>eLOCOMg171JgEZ9kBuHqby8fH1pcOVVh9UrOI5RgwkHwYvPCu/rQo8ELbAwrdQzGrQPz7WNmsyBz1BIibmiaCw==</HashedPassword>
+  </User>
 </ArrayOfUser>

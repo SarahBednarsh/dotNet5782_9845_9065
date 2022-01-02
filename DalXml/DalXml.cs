@@ -237,7 +237,7 @@ namespace Dal
                 throw new CustomerException("Customer to add already exists");
             Customer tempCustomer = new Customer() { Id = id, Name = name, Phone = phone, Longitude = StaticSexagesimal.InitializeSexagesimal(longitude, "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(latitude, "Latitude") };
             customers.Add(tempCustomer);
-            XmlTools.SaveListToXMLSerializer(customers, stationsPath);
+            XmlTools.SaveListToXMLSerializer(customers, customersPath);
         }
         public void DeleteCustomer(int id)
         {
