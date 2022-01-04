@@ -18,7 +18,7 @@ namespace Dal
         static string dir = @"";
         static XmlTools()
         {
-            if (dir != "" && !Directory.Exists(dir)) 
+            if (dir != "" && !Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
         #region SaveLoadWithXElement
