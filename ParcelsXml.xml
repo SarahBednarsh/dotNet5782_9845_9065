@@ -1,4 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  
+  <Parcel>
+    <Id>40944</Id>
+    <SenderId>123</SenderId>
+    <TargetId>325019818</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Quick</Priority>
+    <Requested>2022-01-03T10:40:29.9897942+02:00</Requested>
+    <DroneId>-1</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <Id>40945</Id>
+    <SenderId>325019818</SenderId>
+    <TargetId>123</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Normal</Priority>
+    <Requested>2022-01-03T10:40:52.9527043+02:00</Requested>
+    <DroneId>-1</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+  </Parcel>
 </ArrayOfParcel>

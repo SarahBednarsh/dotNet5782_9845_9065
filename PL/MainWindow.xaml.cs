@@ -54,9 +54,10 @@ namespace PL
             new Login(false).ShowDialog();
         }
 
-        private void checkstation(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow().ShowDialog();
+            new DroneListWindow().ShowDialog();
         }
     }
 }

@@ -24,33 +24,26 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        public List<IGrouping<DroneStatuses, DroneToList>> GroupingData;
         public DroneListWindow()
         {
             InitializeComponent();
             DataContext = (from drone in bl.ListDrone()
                           select Adapter.DroneToListBotoPo(drone)).ToList();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-        }
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<DroneToList> drones = DataContext as List<DroneToList>;
-            if ((sender as ComboBox).SelectedIndex == -1)
-                return;
-            else if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = (from drone in drones where drone.Status == (DroneStatuses)StatusSelector.SelectedItem select drone).ToList();
-            else droneDataGrid.ItemsSource = (from drone in drones where drone.Status == (DroneStatuses)StatusSelector.SelectedItem && 
-                                              drone.MaxWeight==(WeightCategories)WeightSelector.SelectedItem select drone).ToList();
+           
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<DroneToList> drones = DataContext as List<DroneToList>;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
-            else if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
-                droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem select drone).ToList();
-            else droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem && 
-                                              drone.Status == (DroneStatuses)StatusSelector.SelectedItem select drone).ToList();
+            droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem select drone).ToList();
+            if(groupingDataGrid.Visibility==Visibility.Visible)//updates the datagrid with updated list
+            {
+                GroupingData = (droneDataGrid.ItemsSource as List<DroneToList>).GroupBy(x => x.Status).ToList();
+                groupingDataGrid.DataContext = GroupingData;
+            }
         }
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
@@ -58,31 +51,17 @@ namespace PL
             DataContext = (from drone in bl.ListDrone()
                            select Adapter.DroneToListBotoPo(drone)).ToList();
             WeightSelector_SelectionChanged(WeightSelector, null);
-            StatusSelector_SelectionChanged(StatusSelector, null);
         }
-        private void ClearStatus_Click(object sender, RoutedEventArgs e)
-        {
-
-            StatusSelector.SelectedItem = -1;
-            StatusSelector.Text = "";
-            if (WeightSelector == null || WeightSelector.SelectedIndex == -1)
-            {
-                droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
-                return;
-            }
-            WeightSelector_SelectionChanged(WeightSelector, null);
-        }
-  
         private void ClearWeight_Click(object sender, RoutedEventArgs e)
         {
             WeightSelector.SelectedItem = -1;
             WeightSelector.Text = "";
-            if (StatusSelector == null || StatusSelector.SelectedIndex == -1)
+            droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
+            if (groupingDataGrid.Visibility == Visibility.Visible)
             {
-                droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
-                return;
+                GroupingData = (DataContext as List<DroneToList>).GroupBy(x => x.Status).ToList();
+                groupingDataGrid.DataContext = GroupingData;
             }
-            StatusSelector_SelectionChanged(StatusSelector, null);
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -96,6 +75,34 @@ namespace PL
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void DataGridCell_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            if (!((sender as DataGridCell).DataContext is DroneToList))
+                return;
+            DataGridCell cell = sender as DataGridCell;            
+            DroneToList tmp = cell.DataContext as DroneToList;
+            Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(tmp.Id));
+            new DroneWindow(dro).ShowDialog();
+            DataContext = (from drone in bl.ListDrone()
+                           select Adapter.DroneToListBotoPo(drone)).ToList();
+            GroupingData = (DataContext as List<DroneToList>).GroupBy(x => x.Status).ToList();
+        }
+
+        private void groupStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+            GroupingData = (droneDataGrid.ItemsSource as List<DroneToList>).GroupBy(x => x.Status).ToList();
+            groupingDataGrid.DataContext = GroupingData;
+            droneDataGrid.Visibility = Visibility.Hidden;
+            groupingDataGrid.Visibility = Visibility.Visible;
+        }
+
+        private void unGroupStatus_Click(object sender, RoutedEventArgs e)
+        {
+            groupingDataGrid.Visibility = Visibility.Hidden;
+            droneDataGrid.Visibility = Visibility.Visible;
         }
     }
 }

@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="880"
         SizeToContent="WidthAndHeight">
-    
+
     <Grid>
+
         <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,269,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
@@ -35,16 +36,36 @@
                 </GroupStyle>
             </DataGrid.GroupStyle>
         </DataGrid>
-        <StackPanel Margin="682,59,-4,268">
-            <Grid>
-                <Label x:Name="StatusSelectorName" Content="Select Status" Foreground="#1f611f"  Margin="0,6,0,2"/>
-                <Button Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearStatus_Click" />
-            </Grid>
-            <ComboBox
-    x:Name="StatusSelector" SelectionChanged="StatusSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-    IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="171" />
-        </StackPanel>
-        <StackPanel Margin="682,153,-4,174">
+        <DataGrid x:Name="groupingDataGrid" AutoGenerateColumns="False" Visibility="Hidden" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,239,89" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick_1"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Status , Mode=OneWay}"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="latitudeColumn" Binding="{Binding Latitude}" Header="Latitude" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="longitudeColumn" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="maxWeightColumn" Binding="{Binding MaxWeight}" Header="Max Weight" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="modelColumn" Binding="{Binding Model}" Header="Model" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding ParcelId}" Header="Parcel Id" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+        <StackPanel Margin="664,81,14,246">
             <Grid>
                 <Label x:Name="WeightSelectorName" Content="Select Weight" Foreground="#1f611f"  Margin="0,6,0,2"/>
                 <Button Content="Clear selection" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearWeight_Click" />
@@ -56,6 +77,8 @@
         <Button Name="AddDrone" Content="Add drone" Margin="30,365,650,37" Width="120" Click="AddDrone_Click" />
         <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="736,26,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
-        
+        <Button x:Name="groupStatus" Content="Group by status" Margin="688,193,48,209" Visibility="{Binding ElementName=droneDataGrid, Path=Visibility}" Click="groupStatus_Click" />
+        <Button x:Name="unGroupStatus" Content="Ungroup" Margin="706,265,30,137" Visibility="{Binding ElementName=groupingDataGrid, Path=Visibility}" Click="unGroupStatus_Click" />
+
     </Grid>
 </Window>

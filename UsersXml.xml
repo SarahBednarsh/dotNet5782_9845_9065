@@ -162,4 +162,13 @@
     <Salt>1162796012</Salt>
     <HashedPassword>z+kBdybGRmP+XrZf6AW9ERoG8VdWH1Q7OdlsiZUpjXrUP5nO/mWUdR1hOMKR4VkughdGZUxQUy3nTLYFFgcCvQ==</HashedPassword>
   </User>
+  <User>
+    <Id>567</Id>
+    <UserName>Zaidy</UserName>
+    <Photo>file:///C:/Users/sarah/OneDrive/Pictures/Saved Pictures/gallery_04+קבלת+פנים+וצילומי+משפחת+החתן_Riki&amp;Tani-471.jpg</Photo>
+    <Email>feigenblum@aol.com</Email>
+    <IsManager>true</IsManager>
+    <Salt>915804646</Salt>
+    <HashedPassword>53iMw7qT7giD4+32gHLJWpmPGI/fgZq6yA/ld+5a66cwp8eV0irtY6WYPke1XaN6EjXfgJW+gBeMii0yCtfhXA==</HashedPassword>
+  </User>
 </ArrayOfUser>
