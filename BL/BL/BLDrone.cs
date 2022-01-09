@@ -15,6 +15,7 @@ namespace BL
 {
     internal partial class BL
     {
+        internal DroneToList GetReferenceDroneToList(int droneId) => dronesBL.Find(x => x.Id == droneId);
         public Drone SearchDrone(int droneId)
         {
             IEnumerable<DroneToList> drones = from currentDrone in dronesBL
@@ -28,7 +29,7 @@ namespace BL
             {
                 parcel = CreateParcelInTransfer(drone.IdOfParcel);
             }
-            catch (DO.ParcelException e)
+            catch (DO.ParcelException)
             {
                 parcel = null;
             }
@@ -241,11 +242,7 @@ namespace BL
             if (drone.Battery < distance * usage) //not anough battery to pick up
                 throw new NotEnoughBattery("Not enough battery to get to destination");
             DroneToList newDrone = dronesBL.Find(x => x.Id == droneId);
-            Console.WriteLine("sarah- battery before:" + newDrone.Battery);
-            Console.WriteLine("usage:" + usage);
-            Console.WriteLine("distance:" + distance);
             newDrone.Battery = newDrone.Battery - distance * usage; //update battery
-            Console.WriteLine("sarah- battery after:" + newDrone.Battery);
             newDrone.Location = drone.Parcel.Destination; //update location
             newDrone.IdOfParcel = -1;
             newDrone.Status = DroneStatuses.Available;
@@ -255,7 +252,7 @@ namespace BL
             dronesBL.Add(newDrone);
             //update parcel delivery time
         }
-        private double GetUsage(WeightCategories weight) //return battery consumption for requested weight
+        internal double GetUsage(WeightCategories weight) //return battery consumption for requested weight
         {
             if (weight == WeightCategories.Light) return light;
             else if (weight == WeightCategories.Medium) return medium;
@@ -281,5 +278,6 @@ namespace BL
         //           where predicate(drone)
         //           select drone;
         //}
+        void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
     }
 }
