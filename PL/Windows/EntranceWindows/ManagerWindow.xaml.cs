@@ -33,7 +33,8 @@ namespace PL
                 false,
                 true,
                 TimeSpan.FromSeconds(3));
-            viewProfilePhoto.Source = new BitmapImage(new Uri(manager.Photo));
+            if (!(manager.UserName=="admin"))
+                viewProfilePhoto.Source =  new BitmapImage(new Uri(manager.Photo));
         }
 
         private void Drones_Click(object sender, RoutedEventArgs e)
