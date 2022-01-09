@@ -289,6 +289,11 @@ namespace BL
             else return heavy;
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
+        public void ReleaseAllCharging()
+        {
+            dronesBL.Where(drone => drone.Status == DroneStatuses.InMaintenance).ToList().ForEach(drone => ReleaseCharging(drone.Id));
+        }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> ListDrone()
         {
             return from DroneToList drone in dronesBL

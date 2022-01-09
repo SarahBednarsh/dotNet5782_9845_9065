@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BlApi;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -26,13 +27,17 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public static readonly IBL bl = BlFactory.GetBL();//changes to public and static cause i needed it in login- should we send a parameter in login so we can open dronelistwindow?
+        public static readonly IBL bl = BlFactory.GetBL();//changes to public and static cause i needed it in login- should we send a parameter in login so we can open dronelistwindow?
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            bl.ReleaseAllCharging(); // status is random, so it can't start with being in maintenance for next time
+        }
 
         private void managerLogin_Click(object sender, RoutedEventArgs e)
         {

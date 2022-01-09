@@ -64,6 +64,10 @@ namespace BlApi
         /// </summary>
         public void DeliverAParcel(int droneId);
         /// <summary>
+        /// Releases from charging all the drones that are in maintenance
+        /// </summary>
+        public void ReleaseAllCharging();
+        /// <summary>
         /// Recovers password for user
         /// Generates a new password and sends email
         /// </summary>
