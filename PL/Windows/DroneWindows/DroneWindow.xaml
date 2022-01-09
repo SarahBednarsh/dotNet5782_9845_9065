@@ -9,9 +9,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.DroneWindow"
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <Window.Resources>
         <converters:BackgroundToBoolConverter x:Key="BackgroundToBoolConverter" />
+        <converters:ColorPercentageConverter x:Key="ColorPercentageConverter" />
     </Window.Resources>
     <Grid>
 
@@ -68,7 +70,10 @@
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="BatteryBlock" HorizontalAlignment="Left" Text="Battery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
-                    <TextBox x:Name="BatteryBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Path = Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+                    <Grid Margin="0, 0, 128, 0" Height="20" Width="112">
+                        <ProgressBar x:Name="BatteryStatus" Value="{Binding Battery}" Orientation="Horizontal" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  SnapsToDevicePixels="True" Background="Transparent"  Foreground="{Binding Battery, Converter={StaticResource ColorPercentageConverter}}" Width="112" Height="20"/>
+                        <TextBlock Text="{Binding Battery, StringFormat=\{0:0\}%}" FontWeight="Bold" TextAlignment="Center" Width="112" Height="20"/>
+                    </Grid>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock x:Name="StatusBlock" HorizontalAlignment="Left" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
@@ -79,7 +84,7 @@
                     <TextBox x:Name="longitudeBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock x:Name="latitudeBlock" HorizontalAlignment="Left" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="100"/>
+                    <TextBlock x:Name="latitudeBlock" Text="Latitude:" TextWrapping="Wrap" Width="100"/>
                     <TextBox x:Name="latitudeBox" IsReadOnly="True" HorizontalAlignment="Left" Height="32" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
                 </DockPanel>
             </StackPanel>
@@ -175,7 +180,7 @@
             <TextBox IsReadOnly="True" x:Name="IdOfParcelBox" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="3" Text="{Binding ParcelId, Mode=TwoWay}" TextWrapping="Wrap" Width="120" Margin="39,14,0,23"/>
 
 
-
         </Grid>
+        
     </Grid>
 </Window>

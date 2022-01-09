@@ -9,7 +9,8 @@
         xmlns:Controls="clr-namespace:System.Windows.Controls" x:Class="PL.Signup"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Title="Signup" Height="480" Width="700" >
+        Title="Signup" Height="480" Width="700"
+        ResizeMode="NoResize">
     <Window.Resources>
         <converters:BoolToVisibilityIsManagerConverter x:Key="BoolToVisibilityIsManagerConverter" />
     </Window.Resources>

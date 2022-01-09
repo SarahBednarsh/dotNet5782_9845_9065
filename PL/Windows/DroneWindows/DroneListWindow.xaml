@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="880"
-        SizeToContent="WidthAndHeight">
-
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <converters:ColorPercentageConverter x:Key="ColorPercentageConverter" />
+    </Window.Resources>
     <Grid>
 
-        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,269,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,239,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
@@ -18,7 +22,18 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader" IsReadOnly="True"/>
+                <!--<DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader" IsReadOnly="True"/>-->
+                <DataGridTemplateColumn x:Name="batteryColumn" Header="Battery" Width="SizeToHeader" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <ProgressBar x:Name="BatteryStatus" Value="{Binding Battery}" Orientation="Horizontal" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top"  SnapsToDevicePixels="True" Background="Transparent"  Foreground="{Binding Battery, Converter={StaticResource ColorPercentageConverter}}" Margin="0" Height="20" Width="80"/>
+                                <TextBlock Text="{Binding Battery, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn x:Name="latitudeColumn" Binding="{Binding Latitude}" Header="Latitude" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="longitudeColumn" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="maxWeightColumn" Binding="{Binding MaxWeight}" Header="Max Weight" Width="SizeToHeader" IsReadOnly="True"/>
@@ -74,9 +89,9 @@
                 x:Name="WeightSelector" SelectionChanged="WeightSelector_SelectionChanged" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                 IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" Width="171" />
         </StackPanel>
-        <Button Name="AddDrone" Content="Add drone" Margin="30,365,650,37" Width="120" Click="AddDrone_Click" />
-        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="736,26,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
+        <Button Name="AddDrone" Content="Add drone" Margin="69,372,691,30" Width="120" Click="AddDrone_Click" />
+        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="725,52,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="725,374,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
         <Button x:Name="groupStatus" Content="Group by status" Margin="688,193,48,209" Visibility="{Binding ElementName=droneDataGrid, Path=Visibility}" Click="groupStatus_Click" />
         <Button x:Name="unGroupStatus" Content="Ungroup" Margin="688,193,48,209" Visibility="{Binding ElementName=groupingDataGrid, Path=Visibility}" Click="unGroupStatus_Click" />
 
