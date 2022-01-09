@@ -158,6 +158,7 @@ namespace BlApi
         void DeleteUser(int id);
         #endregion
         bool UserInfoCorrect(string userName, string password, bool isManager);
-        
+        void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop);
+
     }
 }
