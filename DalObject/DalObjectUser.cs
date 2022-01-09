@@ -17,6 +17,10 @@ namespace Dal
             //if (!File.Exists(photo))
                // photo = GetDefaultPhoto();
             int salt = PasswordHandler.GenerateSalt();
+            //string man = isManager ? "Manager" : "Customer";
+            //string photoPath = @"..\..\..\ManagerPhotos\" + id + @".jpg";
+            //(File.Create(photoPath)).Close();
+            //System.IO.File.Copy(photo, photoPath, true);
             User tempUser = new User()
             {
                 Id = id,
