@@ -33,15 +33,16 @@
                     <Label x:Name="Id" Content="{Binding Id}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
                 </DockPanel>
                 <DockPanel>
-                    <Label x:Name="SenderLabel" Content="Sender:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
-                    <!--`must also do id here b"h-->
+                    <Label x:Name="SenderLabel" Content="Sender:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="57"/>
+                    <Button x:Name="openSender" Content="open" Padding="0" FontSize="11" Click="openSender_Click" Width="34"/>
                     <Label Content="Name:"/>
                     <Label x:Name="SenderName" Content="{Binding Sender.Name}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     <Label Content=", ID:"/>
                     <Label x:Name="SenderId" Content="{Binding Sender.Id}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                 </DockPanel>
                 <DockPanel>
-                    <Label x:Name="TargetLabel" Content="Target:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    <Label x:Name="TargetLabel" Content="Target:" Foreground="ForestGreen" Height="26" Width="57"/>
+                    <Button x:Name="openTarget" Content="open" Padding="0" FontSize="11" Click="openTarget_Click" Width="34"/>
                     <Label Content="Name:"/>
                     <Label x:Name="TargetName" Content="{Binding Target.Name}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     <Label Content=", ID:"/>
@@ -56,7 +57,8 @@
                     <Label x:Name="Priority" Content="{Binding Priority}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
                 </DockPanel>
                 <DockPanel>
-                    <Label x:Name="DroneLabel" Content="Drone:" Foreground="ForestGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="100"/>
+                    <Label x:Name="DroneLabel" Content="Drone:" Foreground="ForestGreen" Height="26" Width="57"/>
+                    <Button x:Name="openDrone" Content="open" Padding="0" FontSize="11" Click="openDrone_Click" Width="34"/>
                     <Label Content="ID:"/>
                     <Label x:Name="DroneId" Content="{Binding Drone.Id}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" />
                     <Label Content=", Battery:"/>

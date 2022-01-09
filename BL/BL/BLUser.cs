@@ -34,6 +34,8 @@ namespace BL
             //Console.WriteLine($"success maybe! path is: {photoPath}");
             try
             {
+                MailMessage message = new MailMessage();
+                message.To.Add(email);
                 lock (dalAP)
                 {
                     dalAP.AddUser(id, userName, photo, email, password, isManager);
@@ -42,6 +44,10 @@ namespace BL
             catch (UserException exception)
             {
                 throw new KeyAlreadyExists("There is already a user with the same ID or username", exception);
+            }
+            catch (Exception ex)
+            {
+                throw new SendMailException($"email didn't work: {ex.Message}");
             }
             try
             {
@@ -76,8 +82,14 @@ namespace BL
             string to = email;
             string from = "dotnetliorahandsarah@gmail.com";
             string pass = "dotnet5782";
-
-            message.To.Add(to);
+            try
+            {
+                message.To.Add(to);
+            }
+            catch (Exception ex)
+            {
+                throw new SendMailException($"email didn't work: {ex.Message}");
+            }
             message.To.Add("sarahbednarsh@gmail.com");
             message.From = new MailAddress(from);
             message.Body = body;
@@ -93,9 +105,13 @@ namespace BL
             {
                 smtp.Send(message);
             }
+            catch (SmtpException ex)
+            {
+                throw new Exception($"email didn't work-smtp: {ex.Message}");
+            }
             catch (Exception ex)
             {
-                throw new Exception($"email ddn't work: {ex.Message}");
+                throw new Exception($"email didn't work: {ex.Message}");
             }
         }
         private string CreatePassword(int length)
@@ -109,37 +125,7 @@ namespace BL
             }
             return res.ToString();
         }
-        //private void SendMailForSignup(string userName, string email)
-        //{
-        //    MailMessage message = new MailMessage();
-
-        //    string to = email;
-        //    string from = "dotnetliorahandsarah@gmail.com";
-        //    string pass = "dotnet5782";
-        //    string subject = $"Hey {userName}! Thank you for signing up to our project! Hope you enjoy.";
-        //    string body = @"Signup for .DRONE company";
-
-        //    message.To.Add(to);
-        //    //message.To.Add("sarahbednarsh@gmail.com");
-        //    message.From = new MailAddress(from);
-        //    message.Body = body;
-        //    message.Subject = subject;
-        //    message.IsBodyHtml = true;
-
-        //    SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-        //    smtp.EnableSsl = true;
-        //    smtp.Port = 587;
-        //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //    smtp.Credentials = new NetworkCredential(from, pass);
-        //    try
-        //    {
-        //        smtp.Send(message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception($"email ddn't work: {ex.Message}");
-        //    }
-        //}
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteUser(int id)
         {
