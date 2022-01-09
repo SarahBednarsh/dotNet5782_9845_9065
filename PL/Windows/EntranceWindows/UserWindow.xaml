@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800">
+        Title="UserWindow" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <Button x:Name="viewProfile" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Margin="620,10,10,330" Height="100" Click="viewProfile_Click" >
             <Image x:Name="viewProfilePhoto" Source="{Binding}"/>

@@ -7,7 +7,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="PL.ManagerWindow"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <Grid>
 
         <Image Opacity="0.35" Height="563" Width="918" Source="/DroneNature.png" Margin="-57,-96,-61,-33"/>

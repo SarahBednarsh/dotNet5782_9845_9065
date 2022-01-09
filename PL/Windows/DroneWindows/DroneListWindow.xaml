@@ -7,7 +7,8 @@
         xmlns:converters="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="880"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <Window.Resources>
         <converters:ColorPercentageConverter x:Key="ColorPercentageConverter" />
     </Window.Resources>

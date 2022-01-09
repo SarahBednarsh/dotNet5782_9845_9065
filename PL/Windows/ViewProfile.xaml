@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
-        Title="ViewProfile" Height="480" Width="400">
+        Title="ViewProfile" Height="480" Width="400"
+        ResizeMode="NoResize">
     <Grid HorizontalAlignment="Left" Width="400">
         <StackPanel Width="300" Margin="50,20,50,200">
 
