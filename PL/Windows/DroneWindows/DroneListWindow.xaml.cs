@@ -77,7 +77,7 @@ namespace PL
             Close();
         }
 
-        private void DataGridCell_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void DataGridCell_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)//open a drone from a grouped list
         {
             if (!((sender as DataGridCell).DataContext is DroneToList))
                 return;

@@ -23,7 +23,9 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
+        Drone thisDrone;
         private readonly IBL bl = BlFactory.GetBL();
+        BackgroundWorker worker;
         /// <summary>
         /// add ctor
         /// </summary>
@@ -42,7 +44,8 @@ namespace PL
             InitializeComponent();
 
             ActionsGrid.Visibility = Visibility.Visible;
-            DataContext = drone;
+            thisDrone = drone;
+            DataContext = thisDrone;
             if (drone.Parcel != null)
             {
                 parcelInTransfer.Visibility = Visibility.Visible;
@@ -87,6 +90,36 @@ namespace PL
                 Actions2.Visibility = Visibility.Hidden;
             }
         }
+        #region simulation
+        private void Auto_Click(object sender, RoutedEventArgs e)
+        {
+            worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.RunWorkerAsync("hello");
+
+        }
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //here we will call the simulator from bl
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //int progress = e.ProgressPercentage;
+            //txt.Text = progress.ToString();
+        }
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //object result = e.Result;
+        }
+
+
+        #endregion
+
+        #region textbox
         private void White_GotFocus(object sender, RoutedEventArgs e)
         {
             MakeTextBoxWhite(sender as TextBox);
@@ -125,14 +158,7 @@ namespace PL
         {
             return text != null && text != "";
         }
-        private void WeightSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void StationIdSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
         private void MakeTextBoxRed(TextBox textBox)
         {
@@ -144,7 +170,16 @@ namespace PL
             textBox.Background = Brushes.White;
             textBox.BorderBrush = Brushes.Blue;
         }
+        #endregion
 
+        private void WeightSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void StationIdSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateId(IdBoxNew.Text) && ValidateModel(ModelBoxNew.Text) && WeightSelectorNew.SelectedIndex != -1 && StationIdSelectorNew.SelectedIndex != -1)
@@ -180,7 +215,8 @@ namespace PL
             {
                 bl.PickUpAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Picked up parcel successfully");
-                Close();
+                DataContext = bl.SearchDrone((DataContext as Drone).Id);
+                //Close();
             }
             catch (Exception exception)
             {
@@ -218,8 +254,11 @@ namespace PL
             try
             {
                 bl.ReleaseCharging((DataContext as Drone).Id);
-                MessageBox.Show("Drone realeased from chraging successfully");
-                Close();
+                MessageBox.Show("Drone realeased from charging successfully");
+                Drone tmp = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
+                thisDrone = tmp;
+                //DataContext = tmp;
+                //Close();
             }
             catch (Exception exception)
             {
@@ -274,6 +313,8 @@ namespace PL
             Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Drone).Parcel.Id));
             new ParcelWindow(parcelToOpen).ShowDialog();
         }
+
+        
     }
 
 }
