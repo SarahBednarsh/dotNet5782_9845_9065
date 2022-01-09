@@ -43,12 +43,13 @@
             <materialDesign:PackIcon Name="stationIdIcon" Kind="Number8BoxMultipleOutline" Grid.Column="3" Margin="16,189,0,0" Height="29" Width="30" Grid.RowSpan="2"/>
         </Grid>
 
-        <Grid x:Name="ActionsGrid" Visibility="Visible">
+
+        <Grid x:Name="ActionsGrid" DataContext="{Binding}" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-
+            <Button x:Name="Auto" Content="Turn on auto" Click="Auto_Click" Margin="619,143,49,143"/>
             <StackPanel Margin="59,0,400,0">
                 <DockPanel HorizontalAlignment="Center" Height="58">
                     <TextBlock x:Name="Title" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="10,28,0,0" Text="Drone " TextWrapping="Wrap" Width="76" Height="61"/>
