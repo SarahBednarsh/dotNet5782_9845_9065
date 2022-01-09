@@ -73,6 +73,7 @@ namespace PL
                 if (!isManager)
                     bl.AddCustomer(user.Id, user.UserName, phoneBox.Text, double.Parse(longitudeBox.Text), double.Parse(latitudeBox.Text));
             }
+            //catch()
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

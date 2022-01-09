@@ -25,7 +25,7 @@
         <DataGrid x:Name="groupingDataGrid" AutoGenerateColumns="False" Visibility="Hidden" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,239,89" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
-                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick_1"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick_Grouped"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -46,7 +46,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <Button x:Name="groupChargeSlots" Content="Group by status" Margin="600,193,48,209" Visibility="{Binding ElementName=stationDataGrid, Path=Visibility}" Click="groupChargeSlots_Click" />
+        <Button x:Name="groupChargeSlots" Content="Group by open charge slots" Margin="531,193,48,209" Visibility="{Binding ElementName=stationDataGrid, Path=Visibility}" Click="groupChargeSlots_Click" />
         <Button x:Name="unGroupChargeSlots" Content="Ungroup" Margin="600,193,48,209" Visibility="{Binding ElementName=groupingDataGrid, Path=Visibility}" Click="unGroupChargeSlots_Click" />
 
         <Button Name="AddStation" Content="Add new station" Margin="491,365,160,37" Click="AddStation_Click" />
