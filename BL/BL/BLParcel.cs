@@ -10,17 +10,23 @@ using WeightCategories = BO.WeightCategories;
 using Drone = BO.Drone;
 using Station = BO.Station;
 using Customer = BO.Customer;
+using System.Runtime.CompilerServices;
+
 namespace BL
 {
     internal partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority)
         {
             try
             {
-                dalAP.SearchCustomer(senderId);
-                dalAP.SearchCustomer(targetId);
-                dalAP.AddParcel(senderId, targetId, (DO.WeightCategories)weight, (DO.Priorities)priority, -1);
+                lock (dalAP)
+                {
+                    dalAP.SearchCustomer(senderId);
+                    dalAP.SearchCustomer(targetId);
+                    dalAP.AddParcel(senderId, targetId, (DO.WeightCategories)weight, (DO.Priorities)priority, -1);
+                }
             }
             catch (ParcelException exception)
             {
@@ -31,6 +37,7 @@ namespace BL
                 throw new KeyDoesNotExist("Sender or target don't exist", exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int parcelId)
         {
 
@@ -39,21 +46,28 @@ namespace BL
                 throw new CannotDelete("Parcel is alreday on the way");
             try
             {
-                dalAP.DeleteParcel(parcelId);
+                lock (dalAP)
+                {
+                    dalAP.DeleteParcel(parcelId);
+                }
             }
             catch (ParcelException exception)
             {
                 throw new KeyDoesNotExist("No such parcel", exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel SearchParcel(int parcelId)
         {
             try
             {
-                DO.Parcel parcel = dalAP.SearchParcel(parcelId);
-                //if equals default exception
-                Parcel BLparcel = CreateParcel(parcel);
-                return BLparcel;
+                lock (dalAP)
+                {
+                    DO.Parcel parcel = dalAP.SearchParcel(parcelId);
+                    //if equals default exception
+                    Parcel BLparcel = CreateParcel(parcel);
+                    return BLparcel;
+                }
             }
             catch (ParcelException exception)
             {
@@ -80,38 +94,45 @@ namespace BL
             parcel.Delivery = old.Delivered;
             return parcel;
         }
-        private Location GetSenderLocation(Parcel p)
+        internal Location GetSenderLocation(Parcel p)
         {
             Customer sender = SearchCustomer(p.Sender.Id);
             return sender.Location;
         }
-        private Location GetTargetLocation(Parcel p)
+        internal Location GetTargetLocation(Parcel p)
         {
             Customer target = SearchCustomer(p.Target.Id);
             return target.Location;
         }
         private ParcelInTransfer CreateParcelInTransfer(int parcelId) //create parcel to be put in drone
         {
-            DO.Parcel parcel = dalAP.SearchParcel(parcelId);
-
-            return new ParcelInTransfer
+            lock (dalAP)
             {
-                Id = parcel.Id,
-                PickedUpAlready = parcel.PickedUp != null,
-                Priority = (Priorities)parcel.Priority,
-                Weight = (WeightCategories)parcel.Weight,
-                Sender = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name },
-                Target = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name },
-                PickUpLocation = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude),
-                Destination = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude),
-                Distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude))
-            };
+                DO.Parcel parcel = dalAP.SearchParcel(parcelId);
+
+                return new ParcelInTransfer
+                {
+                    Id = parcel.Id,
+                    PickedUpAlready = parcel.PickedUp != null,
+                    Priority = (Priorities)parcel.Priority,
+                    Weight = (WeightCategories)parcel.Weight,
+                    Sender = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name },
+                    Target = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name },
+                    PickUpLocation = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude),
+                    Destination = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude),
+                    Distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude))
+                };
+            }
         }
         private IEnumerable<Parcel> YieldParcel() //create list of BL.Parcel
         {
-            return from parcel in dalAP.YieldParcel()
-                   select CreateParcel(parcel);
+            lock (dalAP)
+            {
+                return from parcel in dalAP.YieldParcel()
+                       select CreateParcel(parcel);
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> ListParcel()
         {
             foreach (Parcel parcel in YieldParcel())
@@ -123,15 +144,23 @@ namespace BL
         //           where parcel.Attribution == null //parcel was not attributed yet
         //           select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
         //}
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> ListParcelFromCustomer(int customerId)
         {
-            return from parcel in dalAP.ListParcelConditional(x => x.SenderId == customerId)
-                   select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+            lock (dalAP)
+            {
+                return from parcel in dalAP.ListParcelConditional(x => x.SenderId == customerId)
+                       select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> ListParcelNotAttributed()
         {
-            return from parcel in dalAP.ListParcelConditional(x => x.Scheduled == null)
-                   select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+            lock (dalAP)
+            {
+                return from parcel in dalAP.ListParcelConditional(x => x.Scheduled == null)
+                       select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+            }
         }
         //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate)
         //{

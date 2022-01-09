@@ -10,12 +10,14 @@ using WeightCategories = BO.WeightCategories;
 using Drone = BO.Drone;
 using Station = BO.Station;
 using Customer = BO.Customer;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     internal partial class BL
     {
         internal DroneToList GetReferenceDroneToList(int droneId) => dronesBL.Find(x => x.Id == droneId);
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone SearchDrone(int droneId)
         {
             IEnumerable<DroneToList> drones = from currentDrone in dronesBL
@@ -44,6 +46,7 @@ namespace BL
                 Parcel = parcel
             };
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, WeightCategories maxWeight, int stationIdForCharging)
         {
             try
@@ -60,9 +63,12 @@ namespace BL
                     Status = DroneStatuses.InMaintenance,
                     IdOfParcel = -1
                 };
-                dronesBL.Add(drone);
-                dalAP.AddDrone(id, model, (DO.WeightCategories)maxWeight);
-                dalAP.DroneToCharge(id, stationIdForCharging);
+                lock (dalAP)
+                {
+                    dronesBL.Add(drone);
+                    dalAP.AddDrone(id, model, (DO.WeightCategories)maxWeight);
+                    dalAP.DroneToCharge(id, stationIdForCharging);
+                }
             }
             catch (DO.DroneException exception)
             {
@@ -73,6 +79,7 @@ namespace BL
                 throw new KeyDoesNotExist("Station requested does not exist", exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int droneId)
         {
             Drone drone = SearchDrone(droneId);
@@ -80,34 +87,42 @@ namespace BL
                 throw new CannotDelete($"Drone is {drone.Status}, cannot delete");
             try
             {
-                dronesBL.RemoveAll(x => x.Id == drone.Id);
-                dalAP.DeleteDrone(droneId);
+                lock (dalAP)
+                {
+                    dronesBL.RemoveAll(x => x.Id == drone.Id);
+                    dalAP.DeleteDrone(droneId);
+                }
             }
             catch (DroneException exception)
             {
                 throw new KeyDoesNotExist("No such drone", exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDroneModel(int droneId, string newModel)
         {
-            DO.Drone dalDrone;
-            try
+            lock (dalAP)
             {
-                dalDrone = dalAP.SearchDrone(droneId);
+                DO.Drone dalDrone;
+                try
+                {
+                    dalDrone = dalAP.SearchDrone(droneId);
+                }
+                catch (DO.DroneException exception)
+                {
+                    throw new KeyDoesNotExist("Drone to update does not exist", exception);
+                }
+                //update in DAL - delete old and add new
+                dalAP.DeleteDrone(droneId);
+                dalAP.AddDrone(droneId, newModel, dalDrone.MaxWeight);
+                DroneToList drone = dronesBL.Find(X => X.Id == droneId);
+                drone.Model = newModel;
+                //update in BL - remove old and insert new
+                dronesBL.RemoveAll(X => X.Id == droneId);
+                dronesBL.Add(drone);
             }
-            catch (DO.DroneException exception)
-            {
-                throw new KeyDoesNotExist("Drone to update does not exist", exception);
-            }
-            //update in DAL - delete old and add new
-            dalAP.DeleteDrone(droneId);
-            dalAP.AddDrone(droneId, newModel, dalDrone.MaxWeight);
-            DroneToList drone = dronesBL.Find(X => X.Id == droneId);
-            drone.Model = newModel;
-            //update in BL - remove old and insert new
-            dronesBL.RemoveAll(X => X.Id == droneId);
-            dronesBL.Add(drone);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToCharge(int droneId)
         {
             Drone drone = SearchDrone(droneId);
@@ -139,25 +154,32 @@ namespace BL
             droneInBL.Battery = drone.Battery - minDistance * usage;
             droneInBL.Location = stationToSendTo.Location;
             droneInBL.Status = DroneStatuses.InMaintenance;
-            dalAP.DroneToCharge(drone.Id, stationToSendTo.Id);//in here it also updates the chargeslots in station             
+            lock (dalAP)
+            {
+                dalAP.DroneToCharge(drone.Id, stationToSendTo.Id);//in here it also updates the chargeslots in station             
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ReleaseCharging(int droneId)
         {
-            DroneToList drone = dronesBL.Find(x => x.Id == droneId);
-            if (drone == null)
-                throw new KeyDoesNotExist("No such drone");
-            if (drone.Status != DroneStatuses.InMaintenance) //if drone was not charging
-                throw new CannotReleaseDroneFromCharging("Cannot release drone that is not in maintenence");
-            TimeSpan? timeCharging = DateTime.Now - dalAP.GetBeginningChargeTime(droneId);
-            drone.Battery = Math.Min(drone.Battery + timeCharging.Value.TotalSeconds * chargingPace, 100);
-            drone.Status = DroneStatuses.Available;
-            //update drone in BL
-            //dronesBL.RemoveAll(x => x.Id == droneId);
-            //dronesBL.Add(drone);
-            dalAP.ReleaseCharging(droneId);//in here it also updates the chargeslots in station 
-
+            lock (dalAP)
+            {
+                DroneToList drone = dronesBL.Find(x => x.Id == droneId);
+                if (drone == null)
+                    throw new KeyDoesNotExist("No such drone");
+                if (drone.Status != DroneStatuses.InMaintenance) //if drone was not charging
+                    throw new CannotReleaseDroneFromCharging("Cannot release drone that is not in maintenence");
+                TimeSpan? timeCharging = DateTime.Now - dalAP.GetBeginningChargeTime(droneId);
+                drone.Battery = Math.Min(drone.Battery + timeCharging.Value.TotalSeconds * chargingPace, 100);
+                drone.Status = DroneStatuses.Available;
+                //update drone in BL
+                //dronesBL.RemoveAll(x => x.Id == droneId);
+                //dronesBL.Add(drone);
+                dalAP.ReleaseCharging(droneId);//in here it also updates the chargeslots in station 
+            }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AttributeAParcel(int droneId)
         {
             Drone drone;
@@ -182,8 +204,11 @@ namespace BL
                         droneInBL.Status = DroneStatuses.Delivering; //update status
                         droneInBL.IdOfParcel = p.Id; //update parcel id in BL
                                                      //update attribution of parcel in DAL
-                        dalAP.UpdateParcelsDrone(p.Id, drone.Id);
-                        dalAP.ScheduleParcel(p.Id); //set attribution time of parcel
+                        lock (dalAP)
+                        {
+                            dalAP.UpdateParcelsDrone(p.Id, drone.Id);
+                            dalAP.ScheduleParcel(p.Id); //set attribution time of parcel
+                        }
                         return;
                     }
                 }
@@ -198,6 +223,7 @@ namespace BL
             batteryNeeded += available * LocationStaticClass.CalcDis(GetTargetLocation(p), closest.Location);
             return batteryNeeded <= d.Battery; //drone has enough battery
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickUpAParcel(int droneId)
         {
             Drone drone;
@@ -222,8 +248,12 @@ namespace BL
             dronesBL.RemoveAll(x => x.Id == droneId);
             dronesBL.Add(newDrone);
             //update parcel pick up time
-            dalAP.PickUpParcel(drone.Parcel.Id);
+            lock (dalAP)
+            {
+                dalAP.PickUpParcel(drone.Parcel.Id);
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeliverAParcel(int droneId)
         {
             Drone drone;
@@ -258,6 +288,7 @@ namespace BL
             else if (weight == WeightCategories.Medium) return medium;
             else return heavy;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> ListDrone()
         {
             return from DroneToList drone in dronesBL
@@ -278,6 +309,7 @@ namespace BL
         //           where predicate(drone)
         //           select drone;
         //}
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
     }
 }
