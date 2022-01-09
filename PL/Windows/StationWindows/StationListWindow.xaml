@@ -21,11 +21,34 @@
                 <DataGridTextColumn x:Name="usedChargeSlotsColumn" Binding="{Binding UsedChargeSlots}" Header="Used Charge Slots" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-
-
+        <DataGrid x:Name="groupingDataGrid" AutoGenerateColumns="False" Visibility="Hidden" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,239,89" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick_1"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding OpenChargeSlots , Mode=OneWay}"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="openChargeSlotsColumn" Binding="{Binding OpenChargeSlots}" Header="Open Charge Slots" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="usedChargeSlotsColumn" Binding="{Binding UsedChargeSlots}" Header="Used Charge Slots" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Button x:Name="groupChargeSlots" Content="Group by status" Margin="600,193,48,209" Visibility="{Binding ElementName=stationDataGrid, Path=Visibility}" Click="groupChargeSlots_Click" />
+        <Button x:Name="unGroupChargeSlots" Content="Ungroup" Margin="600,193,48,209" Visibility="{Binding ElementName=groupingDataGrid, Path=Visibility}" Click="unGroupChargeSlots_Click" />
 
         <Button Name="AddStation" Content="Add new station" Margin="491,365,160,37" Click="AddStation_Click" />
-        <Label Grid.Column="0" Content="Show only" HorizontalAlignment="Left" Margin="633,41,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="682,365,0,0" VerticalAlignment="Top" Click="Close_Click" Height="30" Width="74"/>
     </Grid>
 </Window>

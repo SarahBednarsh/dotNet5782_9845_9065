@@ -23,6 +23,8 @@ namespace PL
     public partial class StationListWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        public List<IGrouping<int, StationToList>> GroupingData;
+
         public StationListWindow()
         {
             InitializeComponent();
@@ -49,5 +51,41 @@ namespace PL
             DataContext = (from station in bl.ListStation()
                            select Adapter.StationToListBotoPo(station)).ToList();
         }
+        private void DataGridCell_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("trying");
+            try
+            {
+                if (!((sender as DataGridCell).DataContext is StationToList))
+                    return;
+                DataGridCell cell = sender as DataGridCell;
+                StationToList tmp = cell.DataContext as StationToList;
+                Station sta = Adapter.StationBotoPo(bl.SearchStation(tmp.Id));
+                new StationWindow(sta).ShowDialog();
+                DataContext = (from station in bl.ListStation()
+                               select Adapter.StationToListBotoPo(station)).ToList();
+                GroupingData = (DataContext as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            MessageBox.Show("success?");
+        }
+        private void groupChargeSlots_Click(object sender, RoutedEventArgs e)
+        {
+            GroupingData = (stationDataGrid.ItemsSource as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
+            groupingDataGrid.DataContext = GroupingData;
+            stationDataGrid.Visibility = Visibility.Hidden;
+            groupingDataGrid.Visibility = Visibility.Visible;
+
+        }
+
+        private void unGroupChargeSlots_Click(object sender, RoutedEventArgs e)
+        {
+            groupingDataGrid.Visibility = Visibility.Hidden;
+            stationDataGrid.Visibility = Visibility.Visible;
+        }
+
     }
 }
