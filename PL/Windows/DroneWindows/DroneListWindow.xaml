@@ -66,7 +66,16 @@
                         <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                                <DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader" IsReadOnly="True"/>
+                                <DataGridTemplateColumn x:Name="batteryColumn" Header="Battery" Width="SizeToHeader" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <ProgressBar x:Name="BatteryStatus" Value="{Binding Battery}" Orientation="Horizontal" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top"  SnapsToDevicePixels="True" Background="Transparent"  Foreground="{Binding Battery, Converter={StaticResource ColorPercentageConverter}}" Margin="0" Height="20" Width="80"/>
+                                                <TextBlock Text="{Binding Battery, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn x:Name="latitudeColumn" Binding="{Binding Latitude}" Header="Latitude" Width="SizeToHeader" IsReadOnly="True"/>
                                 <DataGridTextColumn x:Name="longitudeColumn" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader" IsReadOnly="True"/>
                                 <DataGridTextColumn x:Name="maxWeightColumn" Binding="{Binding MaxWeight}" Header="Max Weight" Width="SizeToHeader" IsReadOnly="True"/>
