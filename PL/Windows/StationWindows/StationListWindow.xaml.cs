@@ -51,26 +51,18 @@ namespace PL
             DataContext = (from station in bl.ListStation()
                            select Adapter.StationToListBotoPo(station)).ToList();
         }
-        private void DataGridCell_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void DataGridCell_MouseDoubleClick_Grouped(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("trying");
-            try
-            {
-                if (!((sender as DataGridCell).DataContext is StationToList))
-                    return;
-                DataGridCell cell = sender as DataGridCell;
-                StationToList tmp = cell.DataContext as StationToList;
-                Station sta = Adapter.StationBotoPo(bl.SearchStation(tmp.Id));
-                new StationWindow(sta).ShowDialog();
-                DataContext = (from station in bl.ListStation()
-                               select Adapter.StationToListBotoPo(station)).ToList();
-                GroupingData = (DataContext as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            MessageBox.Show("success?");
+            if ((sender as DataGridCell).DataContext is not StationToList)
+                return;
+            DataGridCell cell = sender as DataGridCell;
+            StationToList tmp = cell.DataContext as StationToList;
+            Station sta = Adapter.StationBotoPo(bl.SearchStation(tmp.Id));
+            new StationWindow(sta).ShowDialog();
+            DataContext = (from station in bl.ListStation()
+                           select Adapter.StationToListBotoPo(station)).ToList();
+            GroupingData = (DataContext as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
+
         }
         private void groupChargeSlots_Click(object sender, RoutedEventArgs e)
         {

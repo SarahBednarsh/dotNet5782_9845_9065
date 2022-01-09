@@ -116,7 +116,15 @@ namespace BL
                                 {
                                     if (counter == index)
                                     {
-                                        dalAP.DroneToCharge(drone.Id, station.Id);
+                                        if (station.ChargeSlots != 0)
+                                        {
+                                            dalAP.DroneToCharge(drone.Id, station.Id);
+                                            
+                                        }
+                                        else
+                                        {
+                                            drone.Status = DroneStatuses.Available; //as if it was released from charging
+                                        }
                                         drone.Location = LocationStaticClass.InitializeLocation(station.Longitude, station.Latitude);
                                         break;
                                     }
