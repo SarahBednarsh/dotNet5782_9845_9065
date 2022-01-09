@@ -278,6 +278,6 @@ namespace BL
         //           where predicate(drone)
         //           select drone;
         //}
-        void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
+        public void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
     }
 }
