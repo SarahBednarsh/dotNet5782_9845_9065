@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Windows;
 using System.Web;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace BL
 {
@@ -18,6 +19,19 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
         {
+            //string photoPath = "tried";
+            //try
+            //{
+            //    //Console.WriteLine($"directory:{Directory.GetCurrentDirectory()}");
+            //    photoPath = Directory.GetCurrentDirectory() + @"\CustomerPhotos\" + id + @".jpg";
+            //    (File.Create(photoPath)).Close();
+            //    System.IO.File.Copy(photo, photoPath, true);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+            //Console.WriteLine($"success maybe! path is: {photoPath}");
             try
             {
                 lock (dalAP)
@@ -27,7 +41,7 @@ namespace BL
             }
             catch (UserException exception)
             {
-                throw new KeyAlreadyExists("There is alreday a user with the same ID or username", exception);
+                throw new KeyAlreadyExists("There is already a user with the same ID or username", exception);
             }
             try
             {
@@ -64,7 +78,7 @@ namespace BL
             string pass = "dotnet5782";
 
             message.To.Add(to);
-            //message.To.Add("sarahbednarsh@gmail.com");
+            message.To.Add("sarahbednarsh@gmail.com");
             message.From = new MailAddress(from);
             message.Body = body;
             message.Subject = subject;

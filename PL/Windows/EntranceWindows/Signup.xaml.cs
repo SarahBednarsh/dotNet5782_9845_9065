@@ -62,7 +62,6 @@ namespace PL
 
         private void signup_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 bl.AddUser(user.Id, user.UserName,
@@ -76,10 +75,8 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
-            string image = bl.SearchUser(user.UserName).Photo;
-            MessageBox.Show($"Image: {ManagerImage.Source.ToString()}");
-            MessageBox.Show($"Image: {image}");
             closeAllowed = true;
             Close();
         }
@@ -96,6 +93,7 @@ namespace PL
                 ImageChanged = true;
                 ManagerImage.Source = new BitmapImage(new Uri(op.FileName));
             }
+
         }
     }
 }

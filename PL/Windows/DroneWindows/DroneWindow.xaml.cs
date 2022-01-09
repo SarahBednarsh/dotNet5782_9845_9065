@@ -51,8 +51,8 @@ namespace PL
                 parcelInTransfer.Visibility = Visibility.Visible;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             InitializeActionsButton(drone);
         }
         private void InitializeActionsButton(Drone drone)
