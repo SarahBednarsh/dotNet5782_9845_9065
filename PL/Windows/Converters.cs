@@ -56,11 +56,11 @@ namespace PL
                 if ((int)value < 20)
                     return Brushes.Tomato;
                 else if ((int)value < 40)
-                    return Brushes.Orange;
-                else if ((int)value < 60)
                     return Brushes.Gold;
-                else if ((int)value < 80)
+                else if ((int)value < 60)
                     return Brushes.Yellow;
+                else if ((int)value < 80)
+                    return Brushes.YellowGreen;
                 else
                     return Brushes.SeaGreen;
             }
