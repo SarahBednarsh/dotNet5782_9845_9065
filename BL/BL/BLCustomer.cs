@@ -8,17 +8,22 @@ using Customer = BO.Customer;
 using Parcel = BO.Parcel;
 using Priorities = BO.Priorities;
 using WeightCategories = BO.WeightCategories;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     internal partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
         {
             //if customer exists then exception-check if there is in dal
             try
             {
-                dalAP.AddCustomer(id, name, phone, longitude, latitude);
+                lock (dalAP)
+                {
+                    dalAP.AddCustomer(id, name, phone, longitude, latitude);
+                }
             }
             catch (CustomerException exception)
             {
@@ -26,6 +31,7 @@ namespace BL
             }
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int customerId)
         {
             Customer customer = SearchCustomer(customerId);
@@ -38,38 +44,48 @@ namespace BL
                 throw new CannotDelete("There are parcels on their way to customer, cannot delete");
             try
             {
-
-                dalAP.DeleteCustomer(customerId);
+                lock (dalAP)
+                {
+                    dalAP.DeleteCustomer(customerId);
+                }
             }
             catch (CustomerException exception)
             {
                 throw new KeyDoesNotExist("No such customer", exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomerInfo(int customerId, string name, string phone)
         {
             try
             {
-                DO.Customer customer = dalAP.SearchCustomer(customerId); //find relevant customer
-                if (name != "")
-                    customer.Name = name;
-                if (phone != "")
-                    customer.Phone = phone;
-                dalAP.DeleteCustomer(customerId);
-                dalAP.AddCustomer(customerId, customer.Name, customer.Phone, StaticSexagesimal.ParseDouble(customer.Longitude), StaticSexagesimal.ParseDouble(customer.Latitude));
+                lock (dalAP)
+                {
+                    DO.Customer customer = dalAP.SearchCustomer(customerId); //find relevant customer
+                    if (name != "")
+                        customer.Name = name;
+                    if (phone != "")
+                        customer.Phone = phone;
+                    dalAP.DeleteCustomer(customerId);
+                    dalAP.AddCustomer(customerId, customer.Name, customer.Phone, StaticSexagesimal.ParseDouble(customer.Longitude), StaticSexagesimal.ParseDouble(customer.Latitude));
+                }
             }
             catch (CustomerException exception)
             {
                 throw new KeyDoesNotExist(string.Format("Customer with id {0} does not exists", customerId), exception);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer SearchCustomer(int customerId)
         {
             try
             {
-                DO.Customer customer = dalAP.SearchCustomer(customerId);
-                Customer BLcustomer = CreateCustomer(customer); //convert DO.Customer to BL.Customer
-                return BLcustomer;
+                lock (dalAP)
+                {
+                    DO.Customer customer = dalAP.SearchCustomer(customerId);
+                    Customer BLcustomer = CreateCustomer(customer); //convert DO.Customer to BL.Customer
+                    return BLcustomer;
+                }
             }
             catch (CustomerException exception)
             {
@@ -78,8 +94,11 @@ namespace BL
         }
         private IEnumerable<Customer> YieldCustomer() //return list of BL customers
         {
-            return from customer in dalAP.YieldCustomer()
-                   select CreateCustomer(customer);
+            lock (dalAP)
+            {
+                return from customer in dalAP.YieldCustomer()
+                       select CreateCustomer(customer);
+            }
         }
         private Customer CreateCustomer(DO.Customer old) //convert DO.Customer to BL.Customer
         {
@@ -92,37 +111,41 @@ namespace BL
             customer.Name = old.Name;
             customer.PhoneNum = old.Phone;
             customer.Location = LocationStaticClass.InitializeLocation(old.Longitude, old.Latitude);
-            foreach (DO.Parcel parcel in dalAP.YieldParcel()) //make list of sent and recieved parcels
+            lock (dalAP)
             {
-                if (customer.Id == parcel.SenderId)//from this customer
+                foreach (DO.Parcel parcel in dalAP.YieldParcel()) //make list of sent and recieved parcels
                 {
-                    States state = States.Created;
-                    Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
-                    if (BLparcel.Delivery != null)
-                        state = States.Delivered;
-                    else if (BLparcel.PickUp != null)
-                        state = States.PickedUp;
-                    else if (BLparcel.Attribution != null)
-                        state = States.Attributed;
-                    CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name };
-                    customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
-                }
-                if (customer.Id == parcel.TargetId)//to this customer
-                {
-                    States state = States.Created;
-                    Parcel BLparcel = SearchParcel(parcel.Id);
-                    if (BLparcel.Delivery != null)
-                        state = States.Delivered;
-                    else if (BLparcel.PickUp != null)
-                        state = States.PickedUp;
-                    else if (BLparcel.Attribution != null)
-                        state = States.Attributed;
-                    CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name };
-                    customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
+                    if (customer.Id == parcel.SenderId)//from this customer
+                    {
+                        States state = States.Created;
+                        Parcel BLparcel = CreateParcel(dalAP.SearchParcel(parcel.Id));
+                        if (BLparcel.Delivery != null)
+                            state = States.Delivered;
+                        else if (BLparcel.PickUp != null)
+                            state = States.PickedUp;
+                        else if (BLparcel.Attribution != null)
+                            state = States.Attributed;
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name };
+                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
+                    }
+                    if (customer.Id == parcel.TargetId)//to this customer
+                    {
+                        States state = States.Created;
+                        Parcel BLparcel = SearchParcel(parcel.Id);
+                        if (BLparcel.Delivery != null)
+                            state = States.Delivered;
+                        else if (BLparcel.PickUp != null)
+                            state = States.PickedUp;
+                        else if (BLparcel.Attribution != null)
+                            state = States.Attributed;
+                        CustomerInParcel tmp = new CustomerInParcel { Id = parcel.SenderId, Name = dalAP.SearchCustomer(parcel.SenderId).Name };
+                        customer.ToCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
+                    }
                 }
             }
             return customer;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> ListCustomer()
         {
             return from Customer customer in YieldCustomer()

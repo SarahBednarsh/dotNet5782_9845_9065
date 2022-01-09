@@ -10,28 +10,39 @@ using WeightCategories = BO.WeightCategories;
 using Drone = BO.Drone;
 using Station = BO.Station;
 using Customer = BO.Customer;
+using System.Runtime.CompilerServices;
+
 namespace BL
 {
     internal partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {
-            dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
+            lock (dalAP)
+            {
+                dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteStation(int stationId)
         {
-            Station station = SearchStation(stationId);
-            if (station.Charging.Count() > 0)
-                throw new CannotDelete("There are drones charging, cannot delete");
-            try
+            lock (dalAP)
             {
-                dalAP.DeleteCustomer(stationId);
-            }
-            catch (StationException exception)
-            {
-                throw new KeyDoesNotExist("No such station", exception);
+                Station station = SearchStation(stationId);
+                if (station.Charging.Count() > 0)
+                    throw new CannotDelete("There are drones charging, cannot delete");
+                try
+                {
+                    dalAP.DeleteCustomer(stationId);
+                }
+                catch (StationException exception)
+                {
+                    throw new KeyDoesNotExist("No such station", exception);
+                }
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStationInfo(int stationId, string name, int chargingSlots)
         {
             Station station;
@@ -52,8 +63,11 @@ namespace BL
                 station.OpenChargeSlots = chargingSlots - station.Charging.Count;
             }
             //update
-            dalAP.DeleteStation(stationId);
-            dalAP.AddStation(station.Id, station.Name, DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), station.OpenChargeSlots + station.Charging.Count);
+            lock (dalAP)
+            {
+                dalAP.DeleteStation(stationId);
+                dalAP.AddStation(station.Id, station.Name, DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), DO.StaticSexagesimal.ParseDouble(station.Location.Longitude), station.OpenChargeSlots + station.Charging.Count);
+            }
         }
         private Station CreateStation(DO.Station old) //convert DO.Station to BL.Station
         {
@@ -63,22 +77,28 @@ namespace BL
             station.Name = old.Name;
             station.OpenChargeSlots = old.ChargeSlots;
             station.Charging = new List<DroneInCharge>();
-            foreach (DroneCharge droneCharge in dalAP.YieldDroneCharges())
-                if (droneCharge.StationId == station.Id)
-                {
-                    DroneToList drone = dronesBL.Find(x => x.Id == droneCharge.DroneId);
-                    station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
-                }
-
+            lock (dalAP)
+            {
+                foreach (DroneCharge droneCharge in dalAP.YieldDroneCharges())
+                    if (droneCharge.StationId == station.Id)
+                    {
+                        DroneToList drone = dronesBL.Find(x => x.Id == droneCharge.DroneId);
+                        station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
+                    }
+            }
             return station;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station SearchStation(int stationId)
         {
             try
             {
-                DO.Station station = dalAP.SearchStation(stationId);
-                Station BLstation = CreateStation(station);
-                return BLstation;
+                lock (dalAP)
+                {
+                    DO.Station station = dalAP.SearchStation(stationId);
+                    Station BLstation = CreateStation(station);
+                    return BLstation;
+                }
             }
             catch (StationException exception)
             {
@@ -87,31 +107,26 @@ namespace BL
         }
         private IEnumerable<Station> YieldStation()
         {
-            return from station in dalAP.YieldStation()
-                   select CreateStation(station);
+            lock (dalAP)
+            {
+                return from station in dalAP.YieldStation()
+                       select CreateStation(station);
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> ListStation()
         {
-            return from station in dalAP.YieldStation()
-                   select new StationToList
-                {
-                Id = station.Id,
-                    Name = station.Name,
-                    OpenChargeSlots = station.ChargeSlots,
-                    UsedChargeSlots = CreateStation(station).Charging.Count()
-                };
-
-            //IEnumerable < DO.Station > stations = dalAP.YieldStation();
-            //foreach (DO.Station station in stations)
-            //{
-            //    yield return new StationToList
-            //    {
-            //        Id = station.Id,
-            //        Name = station.Name,
-            //        OpenChargeSlots = station.ChargeSlots,
-            //        UsedChargeSlots = CreateStation(station).Charging.Count()
-            //    };
-            //}
+            lock (dalAP)
+            {
+                return from station in dalAP.YieldStation()
+                       select new StationToList
+                       {
+                           Id = station.Id,
+                           Name = station.Name,
+                           OpenChargeSlots = station.ChargeSlots,
+                           UsedChargeSlots = CreateStation(station).Charging.Count()
+                       };
+            }
         }
         //public IEnumerable<StationToList> ListStationAvailable()
         //{
@@ -119,10 +134,14 @@ namespace BL
         //           where station.OpenChargeSlots > 0 //station is available
         //           select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
         //}
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> ListStationAvailable()
         {
-            return from station in dalAP.ListStationConditional(x => x.ChargeSlots > 0)
-                   select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = SearchStation(station.Id).Charging.Count };
+            lock (dalAP)
+            {
+                return from station in dalAP.ListStationConditional(x => x.ChargeSlots > 0)
+                       select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = SearchStation(station.Id).Charging.Count };
+            }
         }
         //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate)
         //{

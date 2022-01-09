@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
     partial class DalObject
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
             if (DataSource.Drones.Exists(x => x.Id == id))
@@ -15,6 +17,7 @@ namespace Dal
             Drone tempDrone = new Drone() { Id = id, Model = model, MaxWeight = maxWeight, };
             DataSource.Drones.Add(tempDrone);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int id)
         {
             if (!DataSource.Drones.Exists(x => x.Id == id))
@@ -22,6 +25,7 @@ namespace Dal
             DataSource.Drones.Remove(DataSource.Drones.Find(x => x.Id == id));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateParcelsDrone(int parcelId, int droneId)
         {
             //Drone requestedDrone = DataSource.Drones.Find(x => x.Id == droneId);
@@ -35,6 +39,7 @@ namespace Dal
             DataSource.Parcels[indexParcel] = tempParcel;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToCharge(int droneId, int stationId)
         {
 
@@ -56,6 +61,7 @@ namespace Dal
         /// the station, drone and drone charges accordingly
         /// </summary>
         /// <param name="droneId"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ReleaseCharging(int droneId)
         {
             int indexDrone = DataSource.Drones.FindIndex(x => x.Id == droneId);
@@ -73,6 +79,7 @@ namespace Dal
             DataSource.Stations[indexStation] = tempStation;
             DataSource.DroneCharges.RemoveAt(indexCharge);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DateTime? GetBeginningChargeTime(int droneId)
         {
             int indexCharge = DataSource.DroneCharges.FindIndex(x => x.DroneId == droneId);
@@ -80,16 +87,19 @@ namespace Dal
                 throw new DroneException("Drone was not in charging.");
             return DataSource.DroneCharges[indexCharge].BeginTime;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone SearchDrone(int droneId)
         {
             if (!DataSource.Drones.Exists(x => x.Id == droneId))
                 throw new DroneException("Drone does not exist.");
             return DataSource.Drones.Find(x => x.Id == droneId);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> YieldDrone()
         {
             return new List<Drone>(DataSource.Drones);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<double> ReqPowerConsumption()
         {
             yield return DataSource.Config.available;

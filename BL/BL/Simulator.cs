@@ -71,8 +71,7 @@ namespace BL
             {
                 Parcel parcel = bl.SearchParcel(drone.IdOfParcel);
                 bool pickedUp = parcel.PickUp is not null;
-                int idOfCustomer = pickedUp ? parcel.Target.Id : parcel.Sender.Id;
-                targetLocation = bl.SearchCustomer(idOfCustomer).Location;
+                targetLocation = pickedUp ? bl.GetTargetLocation(parcel) : bl.GetSenderLocation(parcel);
                 Travel();
                 if (distanceFromTarget == 0)
                 {

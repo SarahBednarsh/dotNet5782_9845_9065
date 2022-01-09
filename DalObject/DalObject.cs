@@ -18,8 +18,8 @@ namespace Dal
                 DalObject localRef = instance;
                 if (localRef == null)
                 {
-                    object Lock = new object();
-                    lock (Lock)
+                    object LOCK = new object();
+                    lock (LOCK)
                     {
                         if (instance == null)
                             instance = new DalObject();
