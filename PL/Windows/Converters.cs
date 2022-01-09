@@ -35,7 +35,7 @@ namespace PL
         {
             if (value is bool)
                 return (bool)value ? Visibility.Hidden : Visibility.Visible;
-            return false;
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -45,6 +45,34 @@ namespace PL
             return false;
         }
     }
+
+
+    public class ColorPercentageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int)
+            {
+                if ((int)value < 20)
+                    return Brushes.Tomato;
+                else if ((int)value < 40)
+                    return Brushes.Orange;
+                else if ((int)value < 60)
+                    return Brushes.Gold;
+                else if ((int)value < 80)
+                    return Brushes.Yellow;
+                else
+                    return Brushes.SeaGreen;
+            }
+            return Brushes.White;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    
     //public class VisibiltyToOppositeConverter : IValueConverter
     //{
     //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
