@@ -90,6 +90,8 @@ namespace PL
             DataContext = (from drone in bl.ListDrone()
                            select Adapter.DroneToListBotoPo(drone)).ToList();
             GroupingData = (DataContext as List<DroneToList>).GroupBy(x => x.Status).ToList();
+            groupingDataGrid.DataContext = GroupingData;
+
         }
 
         private void groupStatus_Click(object sender, RoutedEventArgs e)

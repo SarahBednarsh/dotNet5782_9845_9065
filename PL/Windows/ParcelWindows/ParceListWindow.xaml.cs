@@ -29,6 +29,9 @@ namespace PL
     public partial class ParceListWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        public List<IGrouping<string, ParcelToList>> GroupingData;
+        enum GridKind { Normal = 1, Sender , Target }
+        GridKind kind;
         public ParceListWindow()
         {
             InitializeComponent();
@@ -39,6 +42,8 @@ namespace PL
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in parcels
                                           select parcel.TargetName).ToList();
+            kind = GridKind.Normal;
+            refreshGrid(true);
 
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -125,13 +130,67 @@ namespace PL
         private void addParcel_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow().ShowDialog();
-            DataContext = (from parcel in bl.ListParcel()
-                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+            refreshGrid(true);
             SenderSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
                                           select parcel.SenderName).ToList();
             TargetSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
                                           select parcel.TargetName).ToList();
 
+        }
+
+        private void groupSender_Click(object sender, RoutedEventArgs e)
+        {
+            kind = GridKind.Sender;
+            refreshGrid(false);
+        }
+
+        private void unGroupSender_Click(object sender, RoutedEventArgs e)
+        {
+            kind = GridKind.Normal;
+            refreshGrid(false);
+        }
+
+        private void groupTarget_Click(object sender, RoutedEventArgs e)
+        {
+            kind = GridKind.Target;
+            refreshGrid(false);
+        }
+
+        private void unGroupTarget_Click(object sender, RoutedEventArgs e)
+        {
+            kind = GridKind.Normal;
+            refreshGrid(false);
+        }
+        private void refreshGrid(bool needToRenewList)
+        {
+            if(needToRenewList)
+                DataContext = (from parcel in bl.ListParcel()
+                               select Adapter.ParcelToListBotoPo(parcel)).ToList();
+            DataGridBySender.Visibility = Visibility.Hidden;
+            DataGridByTarget.Visibility = Visibility.Hidden;
+            parcelDataGrid.Visibility = Visibility.Hidden;
+
+            switch (kind)
+            {
+
+                case GridKind.Normal:
+                    parcelDataGrid.Visibility = Visibility.Visible;
+                    //thik about the date sort
+                    ;
+                    break;
+                case GridKind.Sender:
+                    DataGridBySender.Visibility = Visibility.Visible;
+                    GroupingData = (parcelDataGrid.ItemsSource as List<ParcelToList>).GroupBy(x => x.SenderName).ToList();
+                    DataGridBySender.DataContext = GroupingData;
+                    break;
+                case GridKind.Target:
+                    DataGridByTarget.Visibility = Visibility.Visible;
+                    GroupingData = (parcelDataGrid.ItemsSource as List<ParcelToList>).GroupBy(x => x.TargetName).ToList();
+                    DataGridByTarget.DataContext = GroupingData;
+                    break;
+
+            }
+            
         }
     }
 }

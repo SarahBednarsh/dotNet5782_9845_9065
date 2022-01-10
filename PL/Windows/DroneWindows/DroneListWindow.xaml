@@ -22,7 +22,6 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                <!--<DataGridTextColumn x:Name="batteryColumn" Binding="{Binding Battery}" Header="Battery" Width="SizeToHeader" IsReadOnly="True"/>-->
                 <DataGridTemplateColumn x:Name="batteryColumn" Header="Battery" Width="SizeToHeader" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

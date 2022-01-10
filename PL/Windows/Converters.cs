@@ -72,21 +72,21 @@ namespace PL
             throw new NotImplementedException();
         }
     }
-    
-    //public class VisibiltyToOppositeConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if (value is Visibility)
-    //            return (Visibility)value==Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-    //        return Visibility.Hidden;
-    //    }
 
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if (value is Visibility)
-    //            return (Visibility)value == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
-    //        return Visibility.Hidden;
-    //    }
-    //}
+    public class VisibiltyToOppositeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Visibility)
+                return (Visibility)value == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            return Visibility.Hidden;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Visibility)
+                return (Visibility)value == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            return Visibility.Hidden;
+        }
+    }
 }
