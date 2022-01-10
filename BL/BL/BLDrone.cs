@@ -16,7 +16,29 @@ namespace BL
 {
     internal partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal DroneToList GetReferenceDroneToList(int droneId) => dronesBL.Find(x => x.Id == droneId);
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public DroneToList SearchDroneToList(int droneId)
+        {
+            IEnumerable<DroneToList> drones = from currentDrone in dronesBL
+                                              where currentDrone.Id == droneId //drone found
+                                              select currentDrone;
+            if (drones.Count() < 1) //no drone with given id was found
+                throw new KeyDoesNotExist("No such drone");
+            DroneToList drone = drones.First();
+            return new DroneToList
+            {
+                Id = drone.Id,
+                Battery = drone.Battery,
+                Location = drone.Location,
+                MaxWeight = drone.MaxWeight,
+                Model = drone.Model,
+                Status = drone.Status,
+                IdOfParcel = drone.IdOfParcel
+            };
+        }
         [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone SearchDrone(int droneId)
         {

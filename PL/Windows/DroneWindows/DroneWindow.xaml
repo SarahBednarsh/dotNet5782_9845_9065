@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:System.Windows.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.DroneWindow"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800"
+        Title="DroneWindow" Height="470" Width="800"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -50,10 +50,9 @@
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Auto" Content="Turn on auto" Click="Auto_Click" Margin="619,143,49,143"/>
             <StackPanel Margin="59,0,400,0">
                 <DockPanel HorizontalAlignment="Center" Height="58">
-                    <TextBlock x:Name="Title" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="10,28,0,0" Text="Drone " TextWrapping="Wrap" Width="76" Height="61"/>
+                    <TextBlock x:Name="Title" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="10,28,0,0" Text="Drone " TextWrapping="Wrap" Width="76"/>
                     <TextBlock x:Name="idofDrone" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="10,28,0,0" Text="{Binding Id}" TextWrapping="Wrap"/>
                 </DockPanel>
                 <DockPanel>
@@ -91,7 +90,7 @@
 
 
             <DockPanel x:Name="parcelInTransfer" Margin="363,14,49,0" Height="308" VerticalAlignment="Top" Visibility="Hidden" Grid.RowSpan="2">
-                <Expander Background="#B7D2B6" Width="312" Height="308" >
+                <Expander IsExpanded="True" Background="#B7D2B6" Width="312" Height="308" >
                     <Expander.Header>
                         <TextBlock Text="Parcel transfered by drone:" FontStyle="Oblique" FontSize="16" TextWrapping="Wrap" Margin="-19,0,0,0" />
                     </Expander.Header>
@@ -140,11 +139,12 @@
 
             </DockPanel>
 
-            <Button IsEnabled="{Binding ElementName=ModelLabel, Path=Background, Converter={StaticResource BackgroundToBoolConverter}}" x:Name="Update" Click="Update_Click" Content="Update" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="133" Margin="451,0,0,0"/>
+            <Button IsEnabled="{Binding ElementName=ModelLabel, Path=Background, Converter={StaticResource BackgroundToBoolConverter}}" x:Name="Update" Click="Update_Click" Content="Update" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="133" Margin="465,49,0,0"/>
+            <Button x:Name="Auto" Content="Simulator" Width="149" Height="39" Click="Auto_Click" Margin="310,50,341,32" Grid.Row="1"/>
 
-            <Button x:Name="Actions" Content="Actions" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="168,0,0,0" Grid.ColumnSpan="2"/>
-            <Button Visibility="Visible" x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,0,0,0"/>
-            <Button x:Name="CloseActions" Click="Close_Click" Content="Close" Height="39" Grid.Row="1" VerticalAlignment="Center" Margin="619,0,49,0"/>
+            <Button x:Name="Actions" Content="Actions" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="155,51,0,0"/>
+            <Button Visibility="Visible" x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,51,0,0"/>
+            <Button x:Name="CloseActions" Click="Close_Click" Content="Close" Height="39" Grid.Row="1" VerticalAlignment="Top" Margin="619,51,49,0"/>
         </Grid>
         <!--<Grid x:Name="wrongActionsGrid" Visibility="Hidden" BindingGroup="{Binding Source, Mode=TwoWay}">
             <Grid.RowDefinitions>

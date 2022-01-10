@@ -108,14 +108,20 @@ namespace BlApi
         /// <param name="password"></param>
         /// <returns></returns>
         public User SearchUser(string userName);
-        
+        /// <summary>
+        /// returns an object of type drone to list with the same ID
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        public DroneToList SearchDroneToList(int droneId);
+
+        #endregion
+
+        #region display list of objects
         /// <summary>
         /// Returns all Stations
         /// </summary>
         /// <returns></returns>
-        #endregion
-
-        #region display list of objects
         public IEnumerable<StationToList> ListStation();
         /// <summary>
         /// Returns all Customers

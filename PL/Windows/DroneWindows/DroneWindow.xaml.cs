@@ -23,8 +23,8 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        Drone thisDrone;
         private readonly IBL bl = BlFactory.GetBL();
+        private int windowIndex;
         BackgroundWorker worker;
         /// <summary>
         /// add ctor
@@ -44,8 +44,8 @@ namespace PL
             InitializeComponent();
 
             ActionsGrid.Visibility = Visibility.Visible;
-            thisDrone = drone;
-            DataContext = thisDrone;
+            DataContext = drone;
+            windowIndex = DroneListWindow.Drones.IndexOf(DroneListWindow.Drones.Where(x => x.Id == drone.Id).FirstOrDefault());
             if (drone.Parcel != null)
             {
                 parcelInTransfer.Visibility = Visibility.Visible;
@@ -158,7 +158,7 @@ namespace PL
         {
             return text != null && text != "";
         }
-       
+
 
         private void MakeTextBoxRed(TextBox textBox)
         {
@@ -189,6 +189,7 @@ namespace PL
                 {
 
                     bl.AddDrone(id, ModelBoxNew.Text, (BO.WeightCategories)WeightSelectorNew.SelectedItem, (int)StationIdSelectorNew.SelectedItem);
+                    DroneListWindow.Drones.Add(Adapter.DroneToListBotoPo(bl.SearchDroneToList(id)));
                     MessageBox.Show("Added drone successfully");
                     this.Close();
                     return;
@@ -216,6 +217,7 @@ namespace PL
                 bl.PickUpAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Picked up parcel successfully");
                 DataContext = bl.SearchDrone((DataContext as Drone).Id);
+                updateView();
                 //Close();
             }
             catch (Exception exception)
@@ -229,7 +231,8 @@ namespace PL
             {
                 bl.DeliverAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Delivered parcel successfully");
-                Close();
+                updateView();
+                //Close();
             }
             catch (Exception exception)
             {
@@ -243,6 +246,7 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
                 MessageBox.Show("Attributed parcel successfully");
+                updateView();
             }
             catch (Exception exception)
             {
@@ -256,8 +260,8 @@ namespace PL
                 bl.ReleaseCharging((DataContext as Drone).Id);
                 MessageBox.Show("Drone realeased from charging successfully");
                 Drone tmp = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
-                thisDrone = tmp;
-                //DataContext = tmp;
+                DataContext = tmp;
+                updateView();
                 //Close();
             }
             catch (Exception exception)
@@ -271,7 +275,8 @@ namespace PL
             {
                 bl.DroneToCharge((DataContext as Drone).Id);
                 MessageBox.Show("Drone sent to charge successfully");
-                Close();
+                updateView();
+                //Close();
             }
             catch (Exception exception)
             {
@@ -290,7 +295,8 @@ namespace PL
                 int.TryParse(IdBox.Text, out int id);
                 bl.UpdateDroneModel(id, ModelBox.Text);
                 MessageBox.Show("Updated model successfully");
-                Close();
+                updateView();
+                //Close();
             }
             catch (Exception exception)
             {
@@ -312,9 +318,16 @@ namespace PL
         {
             Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Drone).Parcel.Id));
             new ParcelWindow(parcelToOpen).ShowDialog();
+            updateView();
+        }
+        private void updateView()
+        {
+            DataContext = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
+            DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
+            InitializeActionsButton(DataContext as Drone);
         }
 
-        
+
     }
 
 }
