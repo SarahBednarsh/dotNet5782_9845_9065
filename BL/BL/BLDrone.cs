@@ -300,7 +300,10 @@ namespace BL
             newDrone.Status = DroneStatuses.Available;
             //update in BL
             dronesBL.RemoveAll(x => x.Id == droneId);
-            dalAP.DeliverToCustomer(drone.Parcel.Id);
+            lock (dalAP)
+            {
+                dalAP.DeliverToCustomer(drone.Parcel.Id);
+            }
             dronesBL.Add(newDrone);
             //update parcel delivery time
         }

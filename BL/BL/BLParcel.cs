@@ -78,8 +78,11 @@ namespace BL
         {
             Parcel parcel = new Parcel();
             parcel.Id = old.Id;
-            parcel.Sender = new CustomerInParcel { Id = old.SenderId, Name = dalAP.SearchCustomer(old.SenderId).Name };
-            parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = dalAP.SearchCustomer(old.TargetId).Name };
+            lock (dalAP)
+            {
+                parcel.Sender = new CustomerInParcel { Id = old.SenderId, Name = dalAP.SearchCustomer(old.SenderId).Name };
+                parcel.Target = new CustomerInParcel { Id = old.TargetId, Name = dalAP.SearchCustomer(old.TargetId).Name };
+            }
             parcel.Weight = (WeightCategories)old.Weight;
             parcel.Priority = (Priorities)old.Priority;
             Drone drone = null;
