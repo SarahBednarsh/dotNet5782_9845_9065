@@ -26,10 +26,10 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Height="434" VerticalAlignment="Center" HorizontalAlignment="Right" Width="800" >
 
 
-        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="500" Height="285" Margin="31,31,269,118" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
+        <DataGrid x:Name="parcelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="500" Height="285" Margin="31,31,269,0" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" VerticalAlignment="Top">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
@@ -71,7 +71,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <DataGrid x:Name="DataGridByTarget" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="500" Margin="31,0,269,118" RowDetailsVisibilityMode="Visible" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" Height="285" VerticalAlignment="Bottom">
+        <DataGrid x:Name="DataGridByTarget" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="500" Margin="31,31,269,118" RowDetailsVisibilityMode="Visible" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TargetName , Mode=OneWay}"/>
             </DataGrid.Columns>
@@ -97,18 +97,18 @@
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="690,377,0,0" VerticalAlignment="Top" Height="30" Width="74" Click="Close_Click"/>
-        <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="31,375,649,0" Width="120" Click="addParcel_Click"/>
-        <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="639,83,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="183,372,0,0" VerticalAlignment="Top" Height="30" Width="74" Click="Close_Click"/>
+        <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="31,370,649,0" Width="120" Click="addParcel_Click"/>
+        <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="640,217,0,0" VerticalAlignment="Top" Width="74"/>
         <DatePicker x:Name="endDate" Width="140" materialDesign:HintAssist.Hint="Pick End Date"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="400,357,260,0" VerticalAlignment="Top" />
-        <DatePicker x:Name="beginDate" Width="140"  materialDesign:HintAssist.Hint="Pick Beginning Date"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="211,357,449,0" VerticalAlignment="Top" />
-        <Button x:Name="groupSender" Content="Group by sender" Margin="688,193,48,209" Visibility="{Binding DataGridBySender,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupSender_Click" />
-        <Button x:Name="unGroupSender" Content="Ungroup" Margin="688,193,48,209" Visibility="{Binding ElementName=DataGridBySender, Path=Visibility}" Click="unGroupSender_Click" />
-        <Button x:Name="groupTarget" Content="Group by target" Margin="688,250,48,209" Visibility="{Binding DataGridByTarget,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupTarget_Click" />
-        <Button x:Name="unGroupTarget" Content="Ungroup" Margin="688,250,48,209" Visibility="{Binding ElementName=DataGridByTarget, Path=Visibility}" Click="unGroupTarget_Click" />
-        <controls:Button x:Name="dateRangeSelector" Content="Select date range" HorizontalAlignment="Left" Click="dateRangeSelector_Click" Margin="545,375,0,0" VerticalAlignment="Top"/>
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="599,100,61,0" VerticalAlignment="Top" />
+        <DatePicker x:Name="beginDate" Width="140"  materialDesign:HintAssist.Hint="Pick Start Date"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="599,45,61,0" VerticalAlignment="Top" />
+        <Button x:Name="groupSender" Content="Sender" Margin="627,251,73,0" Visibility="{Binding DataGridBySender,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupSender_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="unGroupSender" Content="Ungroup" Margin="627,251,73,0" Visibility="{Binding ElementName=DataGridBySender, Path=Visibility}" Click="unGroupSender_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="groupTarget" Content="Target" Margin="627,294,73,0" Visibility="{Binding DataGridByTarget,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupTarget_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="unGroupTarget" Content="Ungroup" Margin="627,294,73,108" Visibility="{Binding ElementName=DataGridByTarget, Path=Visibility}" Click="unGroupTarget_Click" />
+        <controls:Button x:Name="dateRangeSelector" Padding="0" Content="Select date range" HorizontalAlignment="Left" Click="dateRangeSelector_Click" Margin="599,158,0,0" VerticalAlignment="Top" Width="140"/>
 
     </Grid>
 </Window>

@@ -39,7 +39,6 @@ namespace PL
             weightBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityBox.ItemsSource = Enum.GetValues(typeof(Priorities));
 
-
         }
         public ParcelWindow(Parcel parcel, bool isManager = true)
         {
@@ -81,13 +80,7 @@ namespace PL
         }
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
-            //do we need try and catch here? cause if it entered here there should always be a drone
-            //int droneId;
-            //try
-            //{
-            //    droneId = Int32.Parse(plParcel.ParcelDroneId);
-            //}
-            //catch 
+            
             Int32.TryParse((DataContext as Parcel).Drone.Id, out int id);
             bl.DeliverAParcel(id);
             ConfirmAction.IsEnabled = true;
@@ -166,6 +159,7 @@ namespace PL
         private void openTarget_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(Adapter.CustomerBotoPo(bl.SearchCustomer((DataContext as Parcel).Target.Id))).ShowDialog();
+
         }
 
         private void openSender_Click(object sender, RoutedEventArgs e)

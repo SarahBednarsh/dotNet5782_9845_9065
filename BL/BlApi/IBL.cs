@@ -169,6 +169,6 @@ namespace BlApi
         #endregion
         bool UserInfoCorrect(string userName, string password, bool isManager);
         void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop);
-
+        IEnumerable<ParcelToList> ListParcelCreatedInTimeRange(DateTime begin, DateTime end);
     }
 }

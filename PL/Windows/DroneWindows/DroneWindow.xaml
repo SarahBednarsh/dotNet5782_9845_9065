@@ -34,11 +34,11 @@
             <Label x:Name="ModelLabelNew" Content="Enter model:" HorizontalAlignment="Center" Grid.Column="1" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
             <TextBox x:Name="ModelBoxNew" GotFocus="White_GotFocus" LostFocus="ModelBoxNew_LostFocus" HorizontalAlignment="Center" Margin="73,10,0,158" Grid.Column="1" Grid.Row="1" Text="Model" TextWrapping="Wrap" Width="120"/>
             <Label x:Name="WeightLabelNew" Content="Enter maximum weight:" HorizontalAlignment="Center" Grid.Column="2" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
-            <ComboBox x:Name="WeightSelectorNew" Grid.Column="2" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" SelectionChanged="WeightSelectorNew_SelectionChanged" Grid.Row="1"/>
+            <ComboBox x:Name="WeightSelectorNew" Grid.Column="2" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" Grid.Row="1"/>
             <Label x:Name="StationIdLabelNew" Content="Enter station ID:" HorizontalAlignment="Center" Grid.Column="3" Margin="0,131,0,0" VerticalAlignment="Bottom"/>
-            <ComboBox x:Name="StationIdSelectorNew" Grid.Column="3" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" SelectionChanged="StationIdSelectorNew_SelectionChanged" Grid.Row="1"/>
-            <Button x:Name="Add" Click="Add_Click" Content="Add" Grid.Column="3" HorizontalAlignment="Left" Margin="150,168,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5"/>
-            <Button x:Name="CloseAdd" Click="Close_Click" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Height="39" Margin="10,168,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35"/>
+            <ComboBox x:Name="StationIdSelectorNew" Grid.Column="3" HorizontalAlignment="Left" Margin="47,10,0,158" Width="120" Grid.Row="1"/>
+            <Button x:Name="Add" Click="Add_Click" Content="Add" Grid.Column="2" HorizontalAlignment="Left" Margin="107,157,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="100" Grid.ColumnSpan="2"/>
+            <Button x:Name="CloseAdd" Click="Close_Click" Content="Close" Grid.Column="3" Height="39" Margin="47,157,54,0" Grid.Row="1" VerticalAlignment="Top"/>
             <materialDesign:PackIcon Name="ModelIcon" Kind="Abc" Grid.Column="1" Margin="22,181,0,0" Height="41" Width="44" Grid.RowSpan="2"/>
             <materialDesign:PackIcon Name="IdIcon" Kind="IdCardOutline" Grid.Column="0" Margin="33,187,0,0" Height="33" Width="33" Grid.RowSpan="2"/>
             <materialDesign:PackIcon Name="WeightCard" Kind="Weights" Grid.Column="2" Margin="6,189,0,0" Height="29" Width="30" Grid.RowSpan="2"/>
@@ -46,7 +46,7 @@
         </Grid>
 
 
-        <Grid x:Name="ActionsGrid" DataContext="{Binding}" Visibility="Visible">
+        <Grid x:Name="ActionsGrid" DataContext="{Binding}" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
