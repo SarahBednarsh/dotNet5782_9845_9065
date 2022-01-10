@@ -53,7 +53,7 @@ namespace PL
                 parcelInTransfer.Visibility = Visibility.Visible;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
-            
+
             //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             InitializeActionsButton(drone);
@@ -107,7 +107,7 @@ namespace PL
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs args)
         {
-            bl.ActivateDroneSimulator((int)args.Argument/*(DataContext as Drone).Id*/, updateView, () => worker.CancellationPending);
+            bl.ActivateDroneSimulator((int)args.Argument/*(DataContext as Drone).Id*/, beginUpdateProgress, () => worker.CancellationPending);
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -329,12 +329,16 @@ namespace PL
         }
         private void updateView()
         {
+            BO.Drone boDrone;
             lock (bl)
             {
-                DataContext = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
-                DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
-                InitializeActionsButton(DataContext as Drone);
+                boDrone = bl.SearchDrone((DataContext as Drone).Id);
             }
+            DataContext = Adapter.DroneBotoPo(boDrone);
+            DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
+            InitializeActionsButton(DataContext as Drone);
+
+
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
