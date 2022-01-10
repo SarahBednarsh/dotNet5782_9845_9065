@@ -29,19 +29,19 @@ namespace PL
     public partial class ParceListWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
-        public List<IGrouping<string, ParcelToList>> GroupingData;
+        public IEnumerable<IGrouping<string, ParcelToList>> GroupingData;
         enum GridKind { Normal = 1, Sender , Target }
         GridKind kind;
         public ParceListWindow()
         {
             InitializeComponent();
-            List<ParcelToList> parcels = (from parcel in bl.ListParcel()
-                                          select Adapter.ParcelToListBotoPo(parcel)).ToList();
+            IEnumerable<ParcelToList> parcels = (from parcel in bl.ListParcel()
+                                          select Adapter.ParcelToListBotoPo(parcel));
             DataContext = parcels;
-            SenderSelector.ItemsSource = (from parcel in parcels
-                                          select parcel.SenderName).ToList();
-            TargetSelector.ItemsSource = (from parcel in parcels
-                                          select parcel.TargetName).ToList();
+            //SenderSelector.ItemsSource = (from parcel in parcels
+            //                              select parcel.SenderName).ToList();
+            //TargetSelector.ItemsSource = (from parcel in parcels
+            //                              select parcel.TargetName).ToList();
             kind = GridKind.Normal;
             refreshGrid(true);
 
@@ -53,74 +53,74 @@ namespace PL
             Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
             new ParcelWindow(parcelToOpen).ShowDialog();
             DataContext = (from parcel in bl.ListParcel()
-                           select Adapter.ParcelToListBotoPo(parcel)).ToList();
+                           select Adapter.ParcelToListBotoPo(parcel));
         }
 
 
-        private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<ParcelToList> parcels = DataContext as List<ParcelToList>;
-            if ((sender as ComboBox).SelectedIndex == -1)
-                return;
-            else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
-            {
-                //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
-                //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
-                var tmp = from item in parcels
-                          group item by item.SenderName
-                         into g
-                          orderby g.Key
-                          select g;
-                foreach (var item in tmp)
-                    if (item.Key == (string)SenderSelector.SelectedItem)
-                    {
-                        parcelDataGrid.ItemsSource = item.ToList();
-                        break;
-                    }
-            }
-            else
-                parcelDataGrid.ItemsSource = (from parcel in parcels
-                                              where parcel.SenderName == (string)SenderSelector.SelectedItem && parcel.TargetName == (string)TargetSelector.SelectedItem
-                                              select parcel).ToList();
-        }
+        //private void SenderSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    List<ParcelToList> parcels = DataContext as List<ParcelToList>;
+        //    if ((sender as ComboBox).SelectedIndex == -1)
+        //        return;
+        //    else if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
+        //    {
+        //        //parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.SenderName).ToList()
+        //        //       .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+        //        var tmp = from item in parcels
+        //                  group item by item.SenderName
+        //                 into g
+        //                  orderby g.Key
+        //                  select g;
+        //        foreach (var item in tmp)
+        //            if (item.Key == (string)SenderSelector.SelectedItem)
+        //            {
+        //                parcelDataGrid.ItemsSource = item.ToList();
+        //                break;
+        //            }
+        //    }
+        //    else
+        //        parcelDataGrid.ItemsSource = (from parcel in parcels
+        //                                      where parcel.SenderName == (string)SenderSelector.SelectedItem && parcel.TargetName == (string)TargetSelector.SelectedItem
+        //                                      select parcel).ToList();
+        //}
 
-        private void TargetSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<ParcelToList> parcels = DataContext as List<ParcelToList>;
-            DataContext = parcels;
-            if ((sender as ComboBox).SelectedIndex == -1)
-                return;
-            else if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
-                parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.TargetName).ToList()
-                                                .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
-            else
-                parcelDataGrid.ItemsSource = (from parcel in parcels
-                                              where parcel.TargetName == (string)TargetSelector.SelectedItem && parcel.SenderName == (string)SenderSelector.SelectedItem
-                                              select parcel).ToList();
-        }
+        //private void TargetSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    List<ParcelToList> parcels = DataContext as List<ParcelToList>;
+        //    DataContext = parcels;
+        //    if ((sender as ComboBox).SelectedIndex == -1)
+        //        return;
+        //    else if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
+        //        parcelDataGrid.ItemsSource = (from parcel in parcels group parcel by parcel.TargetName).ToList()
+        //                                        .Find(x => x.Key == (string)(sender as ComboBox).SelectedItem);
+        //    else
+        //        parcelDataGrid.ItemsSource = (from parcel in parcels
+        //                                      where parcel.TargetName == (string)TargetSelector.SelectedItem && parcel.SenderName == (string)SenderSelector.SelectedItem
+        //                                      select parcel).ToList();
+        //}
 
-        private void ClearSenderSelection_Click(object sender, RoutedEventArgs e)
-        {
-            SenderSelector.SelectedItem = -1;
-            SenderSelector.Text = "";
-            if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
-            {
-                parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
-                return;
-            }
-            TargetSelector_SelectionChanged(TargetSelector, null);
-        }
-        private void ClearTargetSelection_Click(object sender, RoutedEventArgs e)
-        {
-            TargetSelector.SelectedItem = -1;
-            TargetSelector.Text = "";
-            if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
-            {
-                parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
-                return;
-            }
-            SenderSelector_SelectionChanged(SenderSelector, null);
-        }
+        //private void ClearSenderSelection_Click(object sender, RoutedEventArgs e)
+        //{
+        //    SenderSelector.SelectedItem = -1;
+        //    SenderSelector.Text = "";
+        //    if (TargetSelector == null || TargetSelector.SelectedIndex == -1)
+        //    {
+        //        parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
+        //        return;
+        //    }
+        //    TargetSelector_SelectionChanged(TargetSelector, null);
+        //}
+        //private void ClearTargetSelection_Click(object sender, RoutedEventArgs e)
+        //{
+        //    TargetSelector.SelectedItem = -1;
+        //    TargetSelector.Text = "";
+        //    if (SenderSelector == null || SenderSelector.SelectedIndex == -1)
+        //    {
+        //        parcelDataGrid.ItemsSource = DataContext as List<ParcelToList>;
+        //        return;
+        //    }
+        //    SenderSelector_SelectionChanged(SenderSelector, null);
+        //}
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -131,10 +131,10 @@ namespace PL
         {
             new ParcelWindow().ShowDialog();
             refreshGrid(true);
-            SenderSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
-                                          select parcel.SenderName).ToList();
-            TargetSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
-                                          select parcel.TargetName).ToList();
+            //SenderSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
+            //                              select parcel.SenderName).ToList();
+            //TargetSelector.ItemsSource = (from parcel in DataContext as List<ParcelToList>
+            //                              select parcel.TargetName).ToList();
 
         }
 
@@ -165,32 +165,35 @@ namespace PL
         {
             if(needToRenewList)
                 DataContext = (from parcel in bl.ListParcel()
-                               select Adapter.ParcelToListBotoPo(parcel)).ToList();
+                               select Adapter.ParcelToListBotoPo(parcel));
             DataGridBySender.Visibility = Visibility.Hidden;
             DataGridByTarget.Visibility = Visibility.Hidden;
             parcelDataGrid.Visibility = Visibility.Hidden;
 
             switch (kind)
             {
-
                 case GridKind.Normal:
                     parcelDataGrid.Visibility = Visibility.Visible;
-                    //thik about the date sort
-                    ;
                     break;
                 case GridKind.Sender:
                     DataGridBySender.Visibility = Visibility.Visible;
-                    GroupingData = (parcelDataGrid.ItemsSource as List<ParcelToList>).GroupBy(x => x.SenderName).ToList();
+                    GroupingData = (parcelDataGrid.ItemsSource as IEnumerable<ParcelToList>).GroupBy(x => x.SenderName);
                     DataGridBySender.DataContext = GroupingData;
                     break;
                 case GridKind.Target:
                     DataGridByTarget.Visibility = Visibility.Visible;
-                    GroupingData = (parcelDataGrid.ItemsSource as List<ParcelToList>).GroupBy(x => x.TargetName).ToList();
+                    GroupingData = (parcelDataGrid.ItemsSource as IEnumerable<ParcelToList>).GroupBy(x => x.TargetName);
                     DataGridByTarget.DataContext = GroupingData;
                     break;
-
             }
             
+        }
+
+        private void dateRangeSelector_Click(object sender, RoutedEventArgs e)
+        {
+            parcelDataGrid.ItemsSource = from BO.ParcelToList parcel in bl.ListParcelCreatedInTimeRange(beginDate.DisplayDate, endDate.DisplayDate)
+                                         select Adapter.ParcelToListBotoPo(parcel);
+            refreshGrid(false);
         }
     }
 }

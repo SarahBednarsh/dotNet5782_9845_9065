@@ -55,9 +55,7 @@ namespace PL
                 parcelInTransfer.Visibility = Visibility.Visible;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
-
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            
             InitializeActionsButton(drone);
         }
         private void InitializeActionsButton(Drone drone)
@@ -95,6 +93,7 @@ namespace PL
                 Actions2.Visibility = Visibility.Hidden;
             }
         }
+
         #region simulation
         private void Auto_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +102,6 @@ namespace PL
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-
             worker.RunWorkerAsync((DataContext as Drone).Id);
 
         }
@@ -181,14 +179,6 @@ namespace PL
         }
         #endregion
 
-        private void WeightSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void StationIdSelectorNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateId(IdBoxNew.Text) && ValidateModel(ModelBoxNew.Text) && WeightSelectorNew.SelectedIndex != -1 && StationIdSelectorNew.SelectedIndex != -1)

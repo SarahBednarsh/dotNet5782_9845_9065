@@ -138,12 +138,14 @@ namespace BL
             foreach (Parcel parcel in YieldParcel())
                 yield return new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
         }
-        //public IEnumerable<ParcelToList> ListParcelNotAttributed()
-        //{
-        //    return from parcel in YieldParcel()
-        //           where parcel.Attribution == null //parcel was not attributed yet
-        //           select new ParcelToList { Id = parcel.Id, Priority = parcel.Priority, SenderName = parcel.Sender.Name, TargetName = parcel.Target.Name, Weight = parcel.Weight };
-        //}
+        public IEnumerable<ParcelToList> ListParcelCreatedInTimeRange(DateTime begin, DateTime end)
+        {
+            lock (dalAP)
+            {
+                return from parcel in dalAP.ListParcelConditional(x => x.Requested >= begin && x.Requested < end)
+                       select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
+            }
+        }
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> ListParcelFromCustomer(int customerId)
         {
@@ -162,11 +164,5 @@ namespace BL
                        select new ParcelToList { Id = parcel.Id, Priority = (Priorities)parcel.Priority, SenderName = SearchCustomer(parcel.SenderId).Name, TargetName = SearchCustomer(parcel.TargetId).Name, Weight = (WeightCategories)parcel.Weight };
             }
         }
-        //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate)
-        //{
-        //    return from parcel in ListParcel()
-        //           where predicate(parcel)
-        //           select parcel;
-        //}
     }
 }
