@@ -32,7 +32,7 @@ namespace PL
             if (senderId != -1)
             {
                 senderBox.SelectedItem = senderId;
-                senderBox.IsReadOnly = true;
+                senderBox.IsEnabled = false;
             }
             targetBox.ItemsSource = from customer in bl.ListCustomer()
                                     select customer.Id;
@@ -41,11 +41,12 @@ namespace PL
 
 
         }
-        public ParcelWindow(Parcel parcel)
+        public ParcelWindow(Parcel parcel, bool isManager = true)
         {
             InitializeComponent();
             Width = 600;
             ActionsAndDiplayGrid.Visibility = Visibility.Visible;
+            openDrone.IsEnabled = openSender.IsEnabled = openTarget.IsEnabled = isManager;
             DataContext = parcel;
             InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
