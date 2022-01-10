@@ -29,7 +29,6 @@ namespace PL
 
         private readonly IBL bl = BlFactory.GetBL();
         private int windowIndex;
-        private bool manual = true;
         private bool closingRequested = false;
         private BackgroundWorker worker;
         /// <summary>
@@ -101,7 +100,6 @@ namespace PL
         #region simulation
         private void Auto_Click(object sender, RoutedEventArgs e)
         {
-            manual = false;
             Auto.Visibility = Visibility.Hidden;
             worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.DoWork += Worker_DoWork;
@@ -124,7 +122,6 @@ namespace PL
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            manual = true;
             worker = null;
             closingProgressBar.Visibility = Visibility.Hidden;
             if (closingRequested)
@@ -354,7 +351,6 @@ namespace PL
         private void Manual_Click(object sender, RoutedEventArgs e)
         {
             worker?.CancelAsync();
-            manual = true;
             closingProgressBar.Visibility = Visibility.Visible;
             Auto.Visibility = Visibility.Visible;
         }
