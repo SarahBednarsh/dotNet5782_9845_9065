@@ -30,6 +30,7 @@ namespace PL
         private readonly IBL bl = BlFactory.GetBL();
         private int windowIndex;
         private bool manual = true;
+        private bool closingRequested = false;
         private BackgroundWorker worker;
         /// <summary>
         /// add ctor
@@ -51,13 +52,7 @@ namespace PL
             ActionsGrid.Visibility = Visibility.Visible;
             DataContext = drone;
             windowIndex = DroneListWindow.Drones.IndexOf(DroneListWindow.Drones.Where(x => x.Id == drone.Id).FirstOrDefault());
-            if (drone.Parcel != null)
-            {
-                parcelInTransfer.Visibility = Visibility.Visible;
-                parcelInTransfer.DataContext = drone.Parcel;
-            }
-
-            InitializeActionsButton(drone);
+             InitializeActionsButton(drone);
         }
         private void InitializeActionsButton(Drone drone)
         {
@@ -93,12 +88,21 @@ namespace PL
                 Actions.Click += Pickup_Click;
                 Actions2.Visibility = Visibility.Hidden;
             }
+
+            if (drone.Parcel != null)
+            {
+                parcelInTransfer.Visibility = Visibility.Visible;
+                parcelInTransfer.DataContext = drone.Parcel;
+            }
+            else
+                parcelInTransfer.Visibility = Visibility.Hidden;
         }
 
         #region simulation
         private void Auto_Click(object sender, RoutedEventArgs e)
         {
             manual = false;
+            Auto.Visibility = Visibility.Hidden;
             worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
@@ -117,12 +121,14 @@ namespace PL
         private void beginUpdateProgress()
         {
             worker.ReportProgress(0);
-            //Thread.Sleep(1000);
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             manual = true;
             worker = null;
+            closingProgressBar.Visibility = Visibility.Hidden;
+            if (closingRequested)
+                Close();
         }
 
 
@@ -323,7 +329,10 @@ namespace PL
         }
         private void updateView()
         {
-
+            if(closingRequested)
+            {
+                worker?.CancelAsync();
+            }
             BO.Drone boDrone;
             lock (bl)
             {
@@ -333,14 +342,21 @@ namespace PL
             }
             InitializeActionsButton(DataContext as Drone);
 
-
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            closingRequested = true;
+            closingProgressBar.Visibility = Visibility.Visible;
             e.Cancel = worker is not null;
         }
 
-
+        private void Manual_Click(object sender, RoutedEventArgs e)
+        {
+            worker?.CancelAsync();
+            manual = true;
+            closingProgressBar.Visibility = Visibility.Visible;
+            Auto.Visibility = Visibility.Visible;
+        }
     }
 
 }

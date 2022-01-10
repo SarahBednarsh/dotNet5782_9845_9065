@@ -71,7 +71,7 @@ namespace PL
             DataGridCell cell = sender as DataGridCell;
             DroneToList d = cell.DataContext as DroneToList;
             Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
-            new DroneWindow(dro).ShowDialog();
+            new DroneWindow(dro).Show();
             //DataContext = (from drone in bl.ListDrone()
             //               select Adapter.DroneToListBotoPo(drone)).ToList();
         }
@@ -87,7 +87,7 @@ namespace PL
             DataGridCell cell = sender as DataGridCell;
             DroneToList tmp = cell.DataContext as DroneToList;
             Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(tmp.Id));
-            new DroneWindow(dro).ShowDialog();
+            new DroneWindow(dro).Show();
             //DataContext = (from drone in bl.ListDrone()
             //               select Adapter.DroneToListBotoPo(drone)).ToList();
             GroupingData = (DataContext as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
