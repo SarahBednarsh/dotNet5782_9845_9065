@@ -18,6 +18,7 @@ using PO;
 
 namespace PL
 {
+
     /// <summary>
     /// Interaction logic for DroneListWindow.xaml
     /// </summary>
@@ -69,6 +70,7 @@ namespace PL
             DroneToList d = cell.DataContext as DroneToList;
             Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
             new DroneWindow(dro).ShowDialog();
+
             DataContext = (from drone in bl.ListDrone()
                            select Adapter.DroneToListBotoPo(drone)).ToList();
         }
