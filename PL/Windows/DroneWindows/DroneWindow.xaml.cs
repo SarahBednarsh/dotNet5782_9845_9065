@@ -16,6 +16,8 @@ using System.Globalization;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using PO;
+using System.Windows.Threading;
+
 namespace PL
 {
     /// <summary>
@@ -105,9 +107,9 @@ namespace PL
             worker.RunWorkerAsync((DataContext as Drone).Id);
 
         }
-        private void Worker_DoWork(object sender, DoWorkEventArgs args)
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            bl.ActivateDroneSimulator((int)args.Argument/*(DataContext as Drone).Id*/, beginUpdateProgress, () => worker.CancellationPending);
+            bl.ActivateDroneSimulator((int)e.Argument/*(DataContext as Drone).Id*/, beginUpdateProgress, () => worker.CancellationPending);
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -337,7 +339,6 @@ namespace PL
             DataContext = Adapter.DroneBotoPo(boDrone);
             DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
             InitializeActionsButton(DataContext as Drone);
-
 
         }
         private void Window_Closing(object sender, CancelEventArgs e)
