@@ -8,7 +8,8 @@
         xmlns:controls="clr-namespace:System.Windows.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.DroneWindow"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="470" Width="800"
+    Closing="Window_Closing"    
+    Title="DroneWindow" Height="470" Width="800"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
     <Window.Resources>

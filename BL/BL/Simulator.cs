@@ -19,7 +19,7 @@ namespace BL
         private const double VELOCITY = 1000;
         private const int DELAY_IN_MSEC = 500;
         private const double DISTANCE_ACCURACY = 0.01;
-        private ChargingStages chargingStage = ChargingStages.Initial;
+        private ChargingStages chargingStage = ChargingStages.Charging;
         private Location targetLocation;
         private double distanceFromTarget = 0;
         private DroneToList drone;
@@ -125,9 +125,9 @@ namespace BL
                     }
                     break;
                 case ChargingStages.Charging:
-                    double timePassed = DELAY_IN_MSEC / 1000;
+                    double timePassed = (double)DELAY_IN_MSEC / 1000;
                     drone.Battery += BL.chargingPace * timePassed;
-                    drone.Battery = Max(drone.Battery, 100);
+                    drone.Battery = Min(drone.Battery, 100);
                     if (drone.Battery == 100)
                         lock (bl)
                         { bl.ReleaseCharging(drone.Id); }

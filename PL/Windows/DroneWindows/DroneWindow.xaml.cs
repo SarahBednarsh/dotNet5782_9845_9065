@@ -23,9 +23,11 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
+
         private readonly IBL bl = BlFactory.GetBL();
         private int windowIndex;
-        BackgroundWorker worker;
+        private bool manual = true;
+        private BackgroundWorker worker;
         /// <summary>
         /// add ctor
         /// </summary>
@@ -51,6 +53,7 @@ namespace PL
                 parcelInTransfer.Visibility = Visibility.Visible;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
+            
             //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             InitializeActionsButton(drone);
@@ -93,27 +96,31 @@ namespace PL
         #region simulation
         private void Auto_Click(object sender, RoutedEventArgs e)
         {
-            worker = new BackgroundWorker();
+            manual = false;
+            worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
-            worker.WorkerReportsProgress = true;
-            worker.RunWorkerAsync("hello");
+            worker.RunWorkerAsync((DataContext as Drone).Id);
 
         }
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        private void Worker_DoWork(object sender, DoWorkEventArgs args)
         {
-            //here we will call the simulator from bl
+            bl.ActivateDroneSimulator((int)args.Argument/*(DataContext as Drone).Id*/, updateView, () => worker.CancellationPending);
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //int progress = e.ProgressPercentage;
-            //txt.Text = progress.ToString();
+            updateView();
+        }
+        private void beginUpdateProgress()
+        {
+            worker.ReportProgress(0);
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //object result = e.Result;
+            manual = true;
+            worker = null;
         }
 
 
@@ -322,9 +329,16 @@ namespace PL
         }
         private void updateView()
         {
-            DataContext = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
-            DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
-            InitializeActionsButton(DataContext as Drone);
+            lock (bl)
+            {
+                DataContext = Adapter.DroneBotoPo(bl.SearchDrone((DataContext as Drone).Id));
+                DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
+                InitializeActionsButton(DataContext as Drone);
+            }
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = worker is not null;
         }
 
 

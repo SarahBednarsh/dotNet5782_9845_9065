@@ -26,7 +26,7 @@ namespace PL
     {
         private readonly IBL bl = BlFactory.GetBL();
         public List<IGrouping<DroneStatuses, DroneToList>> GroupingData;
-        public static ObservableCollection<DroneToList> Drones;
+        internal static ObservableCollection<DroneToList> Drones;
         public DroneListWindow()
         {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace PL
             droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
             if (groupingDataGrid.Visibility == Visibility.Visible)
             {
-                GroupingData = (DataContext as List<DroneToList>).GroupBy(x => x.Status).ToList();
+                GroupingData = (DataContext as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
                 groupingDataGrid.DataContext = GroupingData;
             }
         }
@@ -90,7 +90,7 @@ namespace PL
             new DroneWindow(dro).ShowDialog();
             //DataContext = (from drone in bl.ListDrone()
             //               select Adapter.DroneToListBotoPo(drone)).ToList();
-            GroupingData = (DataContext as List<DroneToList>).GroupBy(x => x.Status).ToList();
+            GroupingData = (DataContext as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
             groupingDataGrid.DataContext = GroupingData;
 
         }
@@ -98,7 +98,7 @@ namespace PL
         private void groupStatus_Click(object sender, RoutedEventArgs e)
         {
 
-            GroupingData = (droneDataGrid.ItemsSource as List<DroneToList>).GroupBy(x => x.Status).ToList();
+            GroupingData = (droneDataGrid.ItemsSource as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
             groupingDataGrid.DataContext = GroupingData;
             droneDataGrid.Visibility = Visibility.Hidden;
             groupingDataGrid.Visibility = Visibility.Visible;
