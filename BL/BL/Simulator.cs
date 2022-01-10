@@ -27,7 +27,8 @@ namespace BL
 
         public Simulator(BL bl, int droneId, Action update, Func<bool> stop)
         {
-            drone = bl.GetReferenceDroneToList(droneId);
+            lock (bl)
+            { drone = bl.GetReferenceDroneToList(droneId); }
             do
             {
                 switch (drone)

@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using PO;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace PL
 {
@@ -55,7 +56,7 @@ namespace PL
                 parcelInTransfer.Visibility = Visibility.Visible;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
-            
+
             InitializeActionsButton(drone);
         }
         private void InitializeActionsButton(Drone drone)
@@ -116,6 +117,7 @@ namespace PL
         private void beginUpdateProgress()
         {
             worker.ReportProgress(0);
+            //Thread.Sleep(1000);
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -321,14 +323,16 @@ namespace PL
         }
         private void updateView()
         {
+
             BO.Drone boDrone;
             lock (bl)
             {
                 boDrone = bl.SearchDrone((DataContext as Drone).Id);
+                DataContext = Adapter.DroneBotoPo(boDrone);
+                DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
             }
-            DataContext = Adapter.DroneBotoPo(boDrone);
-            DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
             InitializeActionsButton(DataContext as Drone);
+
 
         }
         private void Window_Closing(object sender, CancelEventArgs e)
