@@ -36,6 +36,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneId"></param>
+        #region initialization
         public DroneWindow()
         {
             InitializeComponent();
@@ -96,6 +97,7 @@ namespace PL
             else
                 parcelInTransfer.Visibility = Visibility.Hidden;
         }
+        #endregion
 
         #region simulation
         private void Auto_Click(object sender, RoutedEventArgs e)
@@ -108,6 +110,13 @@ namespace PL
             worker.RunWorkerAsync((DataContext as Drone).Id);
 
         }
+        private void Manual_Click(object sender, RoutedEventArgs e)
+        {
+            worker?.CancelAsync();
+            closingProgressBar.Visibility = Visibility.Visible;
+            Auto.Visibility = Visibility.Visible;
+        }
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             bl.ActivateDroneSimulator((int)e.Argument, beginUpdateProgress, () => worker.CancellationPending);
@@ -127,7 +136,6 @@ namespace PL
             if (closingRequested)
                 Close();
         }
-
 
         #endregion
 
@@ -184,6 +192,37 @@ namespace PL
         }
         #endregion
 
+        #region controls
+        private void viewParcel_Click(object sender, RoutedEventArgs e)
+        {
+            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Drone).Parcel.Id));
+            new ParcelWindow(parcelToOpen).ShowDialog();
+            updateView();
+        }
+        private void ActionsGrid_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateModel(ModelBox.Text))
+            {
+                MessageBox.Show("Enter a valid model");
+                return;
+            }
+            try
+            {
+                int.TryParse(IdBox.Text, out int id);
+                bl.UpdateDroneModel(id, ModelBox.Text);
+                MessageBox.Show("Updated model successfully");
+                updateView();
+                //Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateId(IdBoxNew.Text) && ValidateModel(ModelBoxNew.Text) && WeightSelectorNew.SelectedIndex != -1 && StationIdSelectorNew.SelectedIndex != -1)
@@ -288,43 +327,8 @@ namespace PL
                 MessageBox.Show(exception.Message);
             }
         }
-        private void Update_Click(object sender, RoutedEventArgs e)
-        {
-            if (!ValidateModel(ModelBox.Text))
-            {
-                MessageBox.Show("Enter a valid model");
-                return;
-            }
-            try
-            {
-                int.TryParse(IdBox.Text, out int id);
-                bl.UpdateDroneModel(id, ModelBox.Text);
-                MessageBox.Show("Updated model successfully");
-                updateView();
-                //Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        #endregion
 
-        private void ActionsGrid_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-
-        }
-
-
-        private void viewParcel_Click(object sender, RoutedEventArgs e)
-        {
-            Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Drone).Parcel.Id));
-            new ParcelWindow(parcelToOpen).ShowDialog();
-            updateView();
-        }
         private void updateView()
         {
             if(closingRequested)
@@ -341,6 +345,10 @@ namespace PL
             InitializeActionsButton(DataContext as Drone);
 
         }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             closingRequested = true;
@@ -348,12 +356,7 @@ namespace PL
             e.Cancel = worker is not null;
         }
 
-        private void Manual_Click(object sender, RoutedEventArgs e)
-        {
-            worker?.CancelAsync();
-            closingProgressBar.Visibility = Visibility.Visible;
-            Auto.Visibility = Visibility.Visible;
-        }
+
     }
 
 }
