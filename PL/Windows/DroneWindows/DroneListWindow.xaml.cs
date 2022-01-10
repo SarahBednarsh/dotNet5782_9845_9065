@@ -98,7 +98,7 @@ namespace PL
         private void groupStatus_Click(object sender, RoutedEventArgs e)
         {
 
-            GroupingData = (droneDataGrid.ItemsSource as List<DroneToList>).GroupBy(x => x.Status).ToList();
+            GroupingData = (droneDataGrid.ItemsSource as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
             groupingDataGrid.DataContext = GroupingData;
             droneDataGrid.Visibility = Visibility.Hidden;
             groupingDataGrid.Visibility = Visibility.Visible;
