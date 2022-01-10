@@ -112,7 +112,7 @@ namespace PL
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            bl.ActivateDroneSimulator((int)e.Argument/*(DataContext as Drone).Id*/, beginUpdateProgress, () => worker.CancellationPending);
+            bl.ActivateDroneSimulator((int)e.Argument, beginUpdateProgress, () => worker.CancellationPending);
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -252,6 +252,7 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
+
                 MessageBox.Show("Attributed parcel successfully");
                 updateView();
             }
