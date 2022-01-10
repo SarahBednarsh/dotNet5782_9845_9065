@@ -108,7 +108,7 @@ namespace PL
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            bl.ActivateDroneSimulator((int)e.Argument/*(DataContext as Drone).Id*/, beginUpdateProgress, () => worker.CancellationPending);
+            bl.ActivateDroneSimulator((int)e.Argument, beginUpdateProgress, () => worker.CancellationPending);
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -246,6 +246,7 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
+
                 MessageBox.Show("Attributed parcel successfully");
                 updateView();
             }
@@ -323,7 +324,6 @@ namespace PL
         }
         private void updateView()
         {
-
             BO.Drone boDrone;
             lock (bl)
             {
@@ -332,7 +332,6 @@ namespace PL
                 DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
             }
             InitializeActionsButton(DataContext as Drone);
-
 
         }
         private void Window_Closing(object sender, CancelEventArgs e)

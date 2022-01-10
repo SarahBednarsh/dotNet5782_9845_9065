@@ -66,7 +66,6 @@ namespace BL
                 dronesBL = new List<DroneToList>();
                 foreach (DO.Drone drone in drones) //initialize list of drones
                 {
-                    //DroneToList tmp = new DroneToList() { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 };
                     dronesBL.Add(new DroneToList { Id = drone.Id, Model = drone.Model, MaxWeight = (WeightCategories)drone.MaxWeight, Status = DroneStatuses.Available, IdOfParcel = -1 });
                 }
                 Random r = new Random();
