@@ -18,6 +18,7 @@ using PO;
 
 namespace PL
 {
+
     /// <summary>
     /// Interaction logic for DroneListWindow.xaml
     /// </summary>
