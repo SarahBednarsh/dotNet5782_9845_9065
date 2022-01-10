@@ -16,8 +16,8 @@ namespace BL
     internal class Simulator
     {
         enum ChargingStages { Initial, Traveling, Charging, Waiting }
-        private const double VELOCITY = 1000;
-        private const int DELAY_IN_MSEC = 2000;
+        private const double VELOCITY = 0.00001;
+        private const int DELAY_IN_MSEC = 500;
         private const double DISTANCE_ACCURACY = 0.01;
         private ChargingStages chargingStage = ChargingStages.Charging;
         private Location targetLocation;

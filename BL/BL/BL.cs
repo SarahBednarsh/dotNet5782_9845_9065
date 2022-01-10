@@ -15,6 +15,7 @@ namespace BL
     {
         #region singleton
         private static IBL instance = null;
+        private static object LOCK = new object();
         internal static IBL Instance
         {
             get
@@ -22,7 +23,7 @@ namespace BL
                 IBL localRef = instance;
                 if (localRef == null)
                 {
-                    object LOCK = new object();
+                    
                     lock (LOCK)
                     {
                         if (instance == null)

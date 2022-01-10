@@ -10,6 +10,7 @@ namespace Dal
 
         #region singleton
         private static DalObject instance = null;
+        private static object LOCK = new object();
         static DalObject() { }
         internal static DalObject Instance
         {
@@ -18,7 +19,6 @@ namespace Dal
                 DalObject localRef = instance;
                 if (localRef == null)
                 {
-                    object LOCK = new object();
                     lock (LOCK)
                     {
                         if (instance == null)

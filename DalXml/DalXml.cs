@@ -15,6 +15,7 @@ namespace Dal
     {
         #region singleton
         private static DalXml instance = null;
+        private static object LOCK = new object();
         static DalXml() { }
         internal static DalXml Instance
         {
@@ -23,7 +24,6 @@ namespace Dal
                 DalXml localRef = instance;
                 if (localRef == null)
                 {
-                    object LOCK = new object();
                     lock (LOCK)
                     {
                         if (instance == null)

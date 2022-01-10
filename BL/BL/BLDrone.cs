@@ -339,7 +339,7 @@ namespace BL
         //           where predicate(drone)
         //           select drone;
         //}
-        [MethodImpl(MethodImplOptions.Synchronized)]
+        //[MethodImpl(MethodImplOptions.Synchronized)]
         public void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
     }
 }
