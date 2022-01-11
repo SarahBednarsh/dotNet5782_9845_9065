@@ -42,7 +42,7 @@ namespace Dal
         private readonly string parcelsPath = @"ParcelsXml.xml"; //XMLSerializer
         private readonly string droneChargesPath = @"DroneChargesXml.xml"; //XMLSerializer
         private readonly string usersPath = @"UsersXml.xml"; //XMLSerializer
-        private readonly string batteryCunsumptionPath = @"BatteryCunsumptionXml.xml"; //XElement
+        private readonly string batteryCunsumptionPath = @"BatteryConsumptionXml.xml"; //XElement
         private readonly string runningNumbersPath = @"RunningNumbersXml.xml"; //XMLSerializer
         private readonly string defaultsPath = @"DefaultsXml.xml"; //XMLElement
         #endregion
@@ -450,9 +450,9 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<double> ReqPowerConsumption()
         {
-            XElement batteryConsumption = XmlTools.LoadListFromXMLElement(batteryCunsumptionPath);
-            return from consumption in batteryConsumption.Elements()
-                   select double.Parse(consumption.Value);
+            List<string> batteryConsumption = XmlTools.LoadListFromXMLSerializer<string>(batteryCunsumptionPath);
+            return from consumption in batteryConsumption
+                   select double.Parse(consumption);
         }
         #endregion
 

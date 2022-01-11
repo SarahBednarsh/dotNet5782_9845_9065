@@ -236,7 +236,7 @@ namespace BL
                     }
                 }
             }
-            throw new CannotAttribute("No parcel to attribute was found (drone might not have enough battery)");
+            throw new CannotAttribute("No parcel to attribute was found (drone might not have enough battery, or there are no more parcels to deliver)");
         }
         private bool CanDeliver(Drone d, Parcel p) //checks if the drone has enough battery for delivering the parcel
         {

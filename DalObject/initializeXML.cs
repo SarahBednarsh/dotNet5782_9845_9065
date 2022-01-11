@@ -119,11 +119,14 @@ namespace Dal
 
         static public void loadXML()
         {
+
             string dronesPath = @"DronesXml.xml"; //XElement
             string stationsPath = @"StationsXml.xml"; //XMLSerializer
             string customersPath = @"CustomersXml.xml"; //XMLSerializer
             string parcelsPath = @"ParcelsXml.xml"; //XMLSerializer
+
             XElement dronesRootElem = XmlTools.LoadListFromXMLElement(dronesPath);
+            dronesRootElem.RemoveAll();
             foreach (DO.Drone drone in DataSource.Drones)
             {
                 XElement droneElem = new XElement("Drone", new XElement("Id", drone.Id),
@@ -131,6 +134,7 @@ namespace Dal
                                       new XElement("MaxWeight", drone.MaxWeight.ToString()));
                 dronesRootElem.Add(droneElem);
             }
+
             XmlTools.SaveListToXMLElement(dronesRootElem, dronesPath);
 
             XmlTools.SaveListToXMLSerializer(DataSource.Customers, customersPath);
