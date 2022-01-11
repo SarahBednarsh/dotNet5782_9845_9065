@@ -29,7 +29,7 @@ namespace PL
             return Brushes.Red;
         }
     }
-    public class BoolToVisibilityIsManagerConverter : IValueConverter
+    public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
