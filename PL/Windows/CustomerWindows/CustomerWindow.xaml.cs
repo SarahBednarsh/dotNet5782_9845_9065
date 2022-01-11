@@ -56,8 +56,15 @@ namespace PL
         {
             DataGridCell cell = sender as DataGridCell;
             ParcelAtCustomer parcelAtCustomer = cell.DataContext as ParcelAtCustomer;
-            Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelAtCustomer.Id));
-            new ParcelWindow(parcel).Show();
+            try
+            {
+                Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelAtCustomer.Id));
+                new ParcelWindow(parcel).Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             Close();
 
 

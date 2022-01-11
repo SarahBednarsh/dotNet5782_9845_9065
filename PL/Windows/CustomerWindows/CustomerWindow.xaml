@@ -9,7 +9,7 @@
         Title="CustomerWindow" Height="450" Width="800"
         ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="addGrid" Visibility="Visible">
+        <Grid x:Name="addGrid" Visibility="Hidden">
             <TextBlock x:Name="addTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="59,28,0,0" Text="New Customer" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
             <TextBlock x:Name="idNewBlock" HorizontalAlignment="Left" Margin="54,80,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="17"/>
             <TextBox x:Name="idNewBox" HorizontalAlignment="Left" Height="32" Margin="186,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
@@ -27,7 +27,7 @@
 
         </Grid>
 
-        <Grid x:Name="actionsGrid" Visibility="Hidden">
+        <Grid x:Name="actionsGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>

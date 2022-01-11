@@ -174,7 +174,7 @@ namespace Dal
                    {
                        Id = int.Parse(d.Element("Id").Value),
                        Model = d.Element("Model").Value,
-                       MaxWeight = (WeightCategories)int.Parse(d.Element("MaxWeight").Value)
+                       MaxWeight = (WeightCategories)Enum.Parse(typeof(WeightCategories),d.Element("MaxWeight").Value)
                    };
         }
         #endregion

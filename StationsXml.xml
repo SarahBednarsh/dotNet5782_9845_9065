@@ -1,4 +1,37 @@
 <?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  
+  <Station>
+    <Id>8691</Id>
+    <Name>station1</Name>
+    <Longitude>
+      <Degrees>30</Degrees>
+      <Minutes>29</Minutes>
+      <Seconds>20</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>34</Degrees>
+      <Minutes>34</Minutes>
+      <Seconds>58</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+    <ChargeSlots>4</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>8184</Id>
+    <Name>station2</Name>
+    <Longitude>
+      <Degrees>30</Degrees>
+      <Minutes>29</Minutes>
+      <Seconds>20</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>34</Degrees>
+      <Minutes>51</Minutes>
+      <Seconds>50</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+    <ChargeSlots>1</ChargeSlots>
+  </Station>
 </ArrayOfStation>

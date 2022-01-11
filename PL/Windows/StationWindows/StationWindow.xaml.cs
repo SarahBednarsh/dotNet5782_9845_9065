@@ -64,8 +64,8 @@ namespace PL
         {
             try
             {
-                ListBox list = sender as ListBox;
-                DroneInCharge droneInCharge = list.DataContext as DroneInCharge;
+                DataGridCell cell = sender as DataGridCell;
+                DroneInCharge droneInCharge = cell.DataContext as DroneInCharge;
                 Drone drone = Adapter.DroneBotoPo(bl.SearchDrone(droneInCharge.Id));
                 new DroneWindow(drone).Show();
             }
