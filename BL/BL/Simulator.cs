@@ -158,9 +158,9 @@ namespace BL
             }
             double timePassed = DELAY_IN_MSEC / 1000;
             double distanceChange = VELOCITY * timePassed;
-            double delta = Min(distanceChange, distanceFromTarget);
-            double proportionalChange = delta / distanceFromTarget;
-            drone.Battery = Max(0.0, drone.Battery - delta * batteryUsage);
+            double change = Min(distanceChange, distanceFromTarget);
+            double proportionalChange = change / distanceFromTarget;
+            drone.Battery = Max(0.0, drone.Battery - change * batteryUsage);
             double droneLat = StaticSexagesimal.ParseDouble(drone.Location.Latitude);
             double droneLong = StaticSexagesimal.ParseDouble(drone.Location.Longitude);
             double targetLat = StaticSexagesimal.ParseDouble(targetLocation.Latitude);

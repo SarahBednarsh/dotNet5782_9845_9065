@@ -67,7 +67,7 @@ namespace PL
             {
                 Actions.Content = "Charge";
                 Actions.Click += Charge_Click;
-                Actions2.Visibility = Visibility.Visible;
+                Actions2.Visibility = Auto.Visibility;
                 Actions2.Content = "Send to delivery";
                 Actions2.Click += SendToDelivery_Click;
             }
@@ -92,7 +92,7 @@ namespace PL
 
             if (drone.Parcel != null)
             {
-                parcelInTransfer.Visibility = Auto.Visibility;
+                parcelInTransfer.Visibility = Visibility.Visible; 
                 parcelInTransfer.DataContext = drone.Parcel;
             }
             else
@@ -104,6 +104,7 @@ namespace PL
         private void Auto_Click(object sender, RoutedEventArgs e)
         {
             Auto.Visibility = Visibility.Hidden;
+            Actions2.Visibility = Visibility.Hidden;
             worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
