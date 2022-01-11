@@ -17,10 +17,11 @@
             <TextBox x:Name="nameNewBox" HorizontalAlignment="Left" Height="32" Margin="186,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
             <TextBlock x:Name="phoneNewBlock" HorizontalAlignment="Left" Margin="54,154,0,0" Text="Phone number:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox x:Name="phoneNewBox" HorizontalAlignment="Left" Height="32" Margin="186,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+
             <TextBlock x:Name="longitudeNewBlock" HorizontalAlignment="Left" Margin="54,193,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
-            <TextBox x:Name="longitudeNewBox" HorizontalAlignment="Left" Height="32" Margin="186,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+            <TextBox x:Name="longitudeNewBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Longitude (between 34.361 and 35.475)" HorizontalAlignment="Left" Height="39" Margin="186,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
             <TextBlock x:Name="latitudeNewBlock" HorizontalAlignment="Left" Margin="56,235,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
-            <TextBox x:Name="latitudeNewBox" HorizontalAlignment="Left" Height="32" Margin="186,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+            <TextBox x:Name="latitudeNewBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Latitude (between 29.489 and 33.154)"  HorizontalAlignment="Left" Height="40" Margin="186,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
             <TextBlock x:Name="slotsNewBlock" HorizontalAlignment="Left" Margin="56,273,0,0" Text="Charge slots:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="79"/>
             <TextBox x:Name="slotsNewBox" HorizontalAlignment="Left" Height="32" Margin="186,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
 
@@ -64,7 +65,7 @@
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>
-           
+
         </Grid>
     </Grid>
 
