@@ -9,7 +9,7 @@ namespace DO
     {
         public int Degrees { get; set; }
         public int Minutes { get; set; }
-        public int Seconds { get; set; }
+        public double Seconds { get; set; }
         public Directions Direction { get; set; }
         public override string ToString()
         {
@@ -20,7 +20,7 @@ namespace DO
                 direction = "E";
             if (Direction == Directions.W)
                 direction = "W";
-            return String.Format("{0}°{1}'{2}''{3}", Degrees, Minutes, Seconds, direction);
+            return String.Format("{0}°{1}'{2}''{3}", Degrees, Minutes, Math.Round(Seconds, 4), direction);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace BL
     internal class Simulator
     {
         enum ChargingStages { Initial, Traveling, Charging, Waiting }
-        private const double VELOCITY = 0.00001;
+        private const double VELOCITY = 40;
         private const int DELAY_IN_MSEC = 500;
         private const double DISTANCE_ACCURACY = 0.01;
         private ChargingStages chargingStage = ChargingStages.Charging;
@@ -59,6 +59,8 @@ namespace BL
                 try { bl.AttributeAParcel(drone.Id); }
                 catch (CannotAttribute)
                 {
+                    if (drone.Battery == 100)
+                        return;
                     drone.Status = DroneStatuses.InMaintenance;
                     chargingStage = ChargingStages.Initial;
                 }
@@ -73,6 +75,26 @@ namespace BL
                 Parcel parcel = bl.SearchParcel(drone.IdOfParcel);
                 bool pickedUp = parcel.PickUp is not null;
                 targetLocation = pickedUp ? bl.GetTargetLocation(parcel) : bl.GetSenderLocation(parcel);
+                if(pickedUp)
+                { 
+                    switch (parcel.Weight)
+                    {
+                        case BO.WeightCategories.Heavy:
+                            batteryUsage = BL.heavy;
+                            break;
+                        case BO.WeightCategories.Medium:
+                            batteryUsage = BL.medium;
+                            break;
+                        case BO.WeightCategories.Light:
+                            batteryUsage = BL.light;
+                            break;
+                        default:
+                            batteryUsage = BL.available;
+                            break;
+                    }
+                }
+                else
+                    batteryUsage = BL.available;
                 Travel();
                 if (distanceFromTarget == 0)
                 {
@@ -150,13 +172,14 @@ namespace BL
         }
         private void Travel()
         {
+            distanceFromTarget = LocationStaticClass.CalcDis(drone.Location, targetLocation);
             if (distanceFromTarget < DISTANCE_ACCURACY)
             {
                 distanceFromTarget = 0;
                 drone.Location = targetLocation;
                 return;
             }
-            double timePassed = DELAY_IN_MSEC / 1000;
+            double timePassed = (double)DELAY_IN_MSEC / 1000;
             double distanceChange = VELOCITY * timePassed;
             double change = Min(distanceChange, distanceFromTarget);
             double proportionalChange = change / distanceFromTarget;

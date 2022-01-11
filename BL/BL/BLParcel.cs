@@ -113,6 +113,17 @@ namespace BL
             {
                 DO.Parcel parcel = dalAP.SearchParcel(parcelId);
 
+                double distance = 0;
+                if (parcel.PickedUp == null)
+                    distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude));
+                else
+                {
+                    Location target = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude);
+                    Location current = (from drone in dronesBL
+                                        where drone.IdOfParcel == parcelId
+                                        select drone).FirstOrDefault().Location;
+                    distance = LocationStaticClass.CalcDis(current, target);
+                }
                 return new ParcelInTransfer
                 {
                     Id = parcel.Id,
@@ -123,7 +134,7 @@ namespace BL
                     Target = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name },
                     PickUpLocation = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude),
                     Destination = LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude),
-                    Distance = LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude))
+                    Distance = distance //LocationStaticClass.CalcDis(LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.SenderId).Longitude, dalAP.SearchCustomer(parcel.SenderId).Latitude), LocationStaticClass.InitializeLocation(dalAP.SearchCustomer(parcel.TargetId).Longitude, dalAP.SearchCustomer(parcel.TargetId).Latitude))
                 };
             }
         }
