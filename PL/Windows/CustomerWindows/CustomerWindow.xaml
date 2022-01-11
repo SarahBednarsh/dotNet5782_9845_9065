@@ -27,7 +27,7 @@
 
         </Grid>
 
-        <Grid x:Name="actionsGrid" Visibility="Visible">
+        <Grid x:Name="actionsGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>

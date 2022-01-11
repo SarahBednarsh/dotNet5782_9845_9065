@@ -37,7 +37,7 @@ namespace Dal
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id == Id))
                     Id = r.Next(1000, 10000);
-                Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.Next(0, 3), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude"), ChargeSlots = r.Next(9) + 1 };
+                Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.NextDouble() + r.Next(0, 2), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude"), ChargeSlots = r.Next(9) + 1 };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslots, and it might be full eventually
             }
             for (int i = 0; i < 10; i++)//adding drones
@@ -54,14 +54,14 @@ namespace Dal
                 Id = r.Next(100000000, 1000000000);
                 while (DataSource.Customers.Exists(x => x.Id == Id))
                     Id = r.Next(100000000, 1000000000);
-                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.Next(0, 3), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude") };
+                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.NextDouble() + r.Next(0, 2), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude") };
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
             for (int i = 0; i < 12; i++)//adding parcels
             {
                 DateTime? start = new DateTime(2020, i + 1, 1,r.Next(24),r.Next(60),r.Next(60));
-                int forScheduled = r.Next() % 8 != 0 ? r.Next(1, 25) : 0;//sarah bug-nvm
+                int forScheduled = r.Next() % 8 != 0 ? r.Next(1, 25) : 0;
                 int forPickedUp = (r.Next() % 4 != 0 && forScheduled != 0) ? forScheduled + 1 : 0;
                 DateTime? delivered = r.Next() % 4 != 0 && forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp + 1) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null;
                 Parcel parcel = new Parcel()
@@ -73,7 +73,7 @@ namespace Dal
                     Priority = (Priorities)r.Next(1, 3),
                     Requested = start,
                     DroneId = forScheduled == 0 ? -1 : Drones[i % 5].Id,//like attribute
-                    Scheduled = forScheduled != 0 ? start + TimeSpan.FromDays(forScheduled) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null,//sarah- is it ok that they are not nullable? cause it wa oroblimatic when I did delivery
+                    Scheduled = forScheduled != 0 ? start + TimeSpan.FromDays(forScheduled) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null,
                     PickedUp = forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null,
                     Delivered = delivered
                 };

@@ -32,6 +32,7 @@ namespace PL
             Width = 800;
             actionsGrid.Visibility = Visibility.Visible;
             actionsTitle.Text = string.Format($"Customer {customer.Id}");
+
         }
         public CustomerWindow()
         {

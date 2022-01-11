@@ -27,7 +27,7 @@ namespace PL
         {
             InitializeComponent();
             addGrid.Visibility = Visibility.Visible;
-            Width = 350;
+            Width = 400;
         }
         public StationWindow(Station station)
         {

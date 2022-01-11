@@ -24,7 +24,7 @@
 
         </Grid>
         
-        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Visible">
+        <Grid x:Name="ActionsAndDiplayGrid" Visibility="Hidden">
             <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="450,53,0,55" VerticalAlignment="Bottom" Height="30" Width="74" Click="Close_Click"/>
             <StackPanel>
                 <Border BorderThickness="30"></Border>
