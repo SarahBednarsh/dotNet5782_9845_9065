@@ -99,13 +99,19 @@ namespace BL
                             //randomly chose battery between minimum for travel and full charge
                             int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location,
                                 LocationStaticClass.InitializeLocation((dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId)).Longitude, dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId).Latitude)) * available) + (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);//sarah-remove search customer
-
+                            
                             drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
 
                         }
                         else //drone is not delivering
                         {
-                            if (r.Next(2) == 1)//makes it be in maintenence
+                            IEnumerable<DO.Customer> customers = dalAP.YieldCustomer();
+                            int numCustomerWithDeliveredParcel = 0;
+                            foreach (DO.Customer customer in customers)
+                                if (HadAParcelDelivered(customer))
+                                    numCustomerWithDeliveredParcel++;
+                            
+                            if (r.Next(2) == 1 || numCustomerWithDeliveredParcel==0)//makes it be in maintenence
                             {
                                 drone.Status = DroneStatuses.InMaintenance;
                                 IEnumerable<DO.Station> stations = dalAP.YieldStation();
@@ -135,11 +141,8 @@ namespace BL
                             else//drone is available
                             {
                                 drone.Status = DroneStatuses.Available;
-                                IEnumerable<DO.Customer> customers = dalAP.YieldCustomer();
-                                int numCustomerWithDeliveredParcel = 0;
-                                foreach (DO.Customer customer in customers)
-                                    if (HadAParcelDelivered(customer))
-                                        numCustomerWithDeliveredParcel++;
+                                
+                                
                                 //set drone location at a random customer that has a parcel delivered
                                 int index = r.Next(numCustomerWithDeliveredParcel);//customers that had parcels delivered to them
                                 int counter = 0;
@@ -153,7 +156,6 @@ namespace BL
                                             break;
                                         }
                                         counter++;
-
                                     }
                                 }
                                 //set battery
@@ -167,10 +169,9 @@ namespace BL
                     }
                     dronesBL = tmp;
                 }
-                catch (Exception exception)//some kind of exception was thrown
+                catch(Exception ex)//some kind of exception was thrown
                 {
-                    Console.WriteLine("Problem with initializing the drones:");
-                    Console.WriteLine(exception.Message);
+                    throw new InternalError("problem with drone initialization", ex);
                 }
             }
         }

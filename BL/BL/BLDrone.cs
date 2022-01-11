@@ -215,6 +215,7 @@ namespace BL
             for (Priorities highest = Priorities.Emergency; highest > 0; highest--) //for each priority, stating with the most urgent
             {
                 IEnumerable<Parcel> relevant = (from parcel in parcels
+                                                where parcel.PickUp == null
                                                 where parcel.Priority == highest && parcel.Weight <= drone.MaxWeight //drone can carry the current parcel
                                                 select parcel).OrderBy(x => LocationStaticClass.CalcDis(GetSenderLocation(x), drone.Location));
                 //sort by increasing order of distance to the drone
@@ -263,12 +264,13 @@ namespace BL
             double distance = LocationStaticClass.CalcDis(drone.Location, drone.Parcel.PickUpLocation);
             if (drone.Battery < distance * usage) //not enough battery
                 throw new NotEnoughBattery("not enough battery to get to sender");
+            //update drone in BL
             DroneToList newDrone = dronesBL.Find(x => x.Id == droneId);
             newDrone.Battery = newDrone.Battery - distance * usage; //update battery
             newDrone.Location = drone.Parcel.PickUpLocation; //update location
-                                                             //update drone in BL
-            dronesBL.RemoveAll(x => x.Id == droneId);
-            dronesBL.Add(newDrone);
+                                                             
+            //dronesBL.RemoveAll(x => x.Id == droneId);
+            //dronesBL.Add(newDrone);
             //update parcel pick up time
             lock (dalAP)
             {
@@ -293,18 +295,19 @@ namespace BL
             double distance = LocationStaticClass.CalcDis(drone.Location, drone.Parcel.Destination);
             if (drone.Battery < distance * usage) //not anough battery to pick up
                 throw new NotEnoughBattery("Not enough battery to get to destination");
+            //update in BL
             DroneToList newDrone = dronesBL.Find(x => x.Id == droneId);
             newDrone.Battery = newDrone.Battery - distance * usage; //update battery
             newDrone.Location = drone.Parcel.Destination; //update location
             newDrone.IdOfParcel = -1;
             newDrone.Status = DroneStatuses.Available;
-            //update in BL
-            dronesBL.RemoveAll(x => x.Id == droneId);
+            
+            //dronesBL.RemoveAll(x => x.Id == droneId);
             lock (dalAP)
             {
                 dalAP.DeliverToCustomer(drone.Parcel.Id);
             }
-            dronesBL.Add(newDrone);
+            //dronesBL.Add(newDrone);
             //update parcel delivery time
         }
         internal double GetUsage(WeightCategories weight) //return battery consumption for requested weight
