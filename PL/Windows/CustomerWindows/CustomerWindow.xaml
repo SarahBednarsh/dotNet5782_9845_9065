@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="CustomerWindow" Height="450" Width="800"
         ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="addGrid" Visibility="Hidden">
+        <Grid x:Name="addGrid" Visibility="Visible">
             <TextBlock x:Name="addTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="59,28,0,0" Text="New Customer" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
             <TextBlock x:Name="idNewBlock" HorizontalAlignment="Left" Margin="54,80,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="17"/>
             <TextBox x:Name="idNewBox" HorizontalAlignment="Left" Height="32" Margin="186,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
@@ -17,16 +18,16 @@
             <TextBlock x:Name="phoneNewBlock" HorizontalAlignment="Left" Margin="52,166,0,0" Text="Phone number:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox x:Name="phoneNewBox" HorizontalAlignment="Left" Height="32" Margin="186,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
             <TextBlock x:Name="longitudeNewBlock" HorizontalAlignment="Left" Margin="54,208,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
-            <TextBox x:Name="longitudeNewBox" HorizontalAlignment="Left" Height="32" Margin="186,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+            <TextBox x:Name="longitudeNewBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Longitude (between 29.489 and 33.154)" HorizontalAlignment="Left" Height="42" Margin="186,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" IsReadOnly="True"/>
             <TextBlock x:Name="latitudeNewBlock" HorizontalAlignment="Left" Margin="54,255,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67"/>
-            <TextBox x:Name="latitudeNewBox" HorizontalAlignment="Left" Height="32" Margin="186,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" IsReadOnly="True"/>
+            <TextBox x:Name="latitudeNewBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Latitude (between 34.361 and 35.475)" HorizontalAlignment="Left" Height="40" Margin="186,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" IsReadOnly="True"/>
 
             <Button x:Name="Add" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="254" Margin="0,300,0,0" Click="Add_Click"/>
             <Button x:Name="addClose" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="254" Margin="0,357,0,0" Click="Close_Click"/>
 
         </Grid>
 
-        <Grid x:Name="actionsGrid" Visibility="Visible">
+        <Grid x:Name="actionsGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="4*"/>
@@ -45,32 +46,32 @@
 
             <Expander x:Name="atCustomerExpander" Header="Parcels sent from customer" Margin="420,42,104,128">
                 <DataGrid x:Name="atCustomerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding AtCustomer}"  ItemBindingGroup="{Binding Source}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridCell}">
-                                <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
                         <DataGridTextColumn x:Name="parcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                            <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
-                            <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
-                            <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <DataGridTextColumn x:Name="parcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="parcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="parcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Expander>
             <Expander x:Name="toCustomerExpander" Header="Parcels sent to customer" Margin="420,217,104,55" Grid.RowSpan="2">
                 <DataGrid x:Name="toCustomerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding ToCustomer}"  ItemBindingGroup="{Binding Source}"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Background="#FFB2EECA">
                     <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridCell}">
-                        <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="MouseDoubleClick" Handler="parcelsList_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
                         <DataGridTextColumn x:Name="toparcelIdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" IsReadOnly="True"/>
-                    <DataGridTextColumn x:Name="toparcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
-                    <DataGridTextColumn x:Name="toparcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
-                    <DataGridTextColumn x:Name="toparcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
-                </DataGrid.Columns>
+                        <DataGridTextColumn x:Name="toparcelWeightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"  IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="toparcelPriorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="toparcelStateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader" IsReadOnly="True"/>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
