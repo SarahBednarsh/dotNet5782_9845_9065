@@ -19,6 +19,10 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {
+            if (longitude < 29.489 || longitude > 33.154 || latitude < 34.361 || latitude > 35.475)
+            { throw new FormatException("The location is not in Isreal"); }
+            if(chargeSlots<1)
+                throw new FormatException("Charging slots amount must be positive");
             lock (dalAP)
             {
                 dalAP.AddStation(id, name, longitude, latitude, chargeSlots);
@@ -76,15 +80,12 @@ namespace BL
             station.Location = new Location { Latitude = old.Latitude, Longitude = old.Longitude };
             station.Name = old.Name;
             station.OpenChargeSlots = old.ChargeSlots;
-            station.Charging = new List<DroneInCharge>();
             lock (dalAP)
             {
-                foreach (DroneCharge droneCharge in dalAP.YieldDroneCharges())
-                    if (droneCharge.StationId == station.Id)
-                    {
-                        DroneToList drone = dronesBL.Find(x => x.Id == droneCharge.DroneId);
-                        station.Charging.Add(new DroneInCharge { Battery = drone.Battery, Id = drone.Id });
-                    }
+                station.Charging = (from DroneCharge droneCharge in dalAP.YieldDroneCharges()
+                                    where droneCharge.StationId == station.Id
+                                    let drone = dronesBL.Find(x => x.Id == droneCharge.DroneId)
+                                    select new DroneInCharge { Battery = drone.Battery, Id = drone.Id }).ToList();
             }
             return station;
         }

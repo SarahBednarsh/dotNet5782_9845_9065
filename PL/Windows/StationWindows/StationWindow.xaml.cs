@@ -52,6 +52,7 @@ namespace PL
                 int.TryParse(slotsNewBox.Text, out int chargeSlots);
                 bl.AddStation(id, nameNewBox.Text, longitude, latitude, chargeSlots);
                 MessageBox.Show("Added station successfully");
+                Close();
             }
             catch (Exception exception)
             {
@@ -67,7 +68,6 @@ namespace PL
                 DroneInCharge droneInCharge = list.DataContext as DroneInCharge;
                 Drone drone = Adapter.DroneBotoPo(bl.SearchDrone(droneInCharge.Id));
                 new DroneWindow(drone).Show();
-
             }
             catch (Exception exception)
             {

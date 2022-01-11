@@ -18,7 +18,7 @@ namespace BL
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
         {
             if (longitude < 29.489 || longitude > 33.154 || latitude < 34.361 || latitude > 35.475)
-                throw new FormatException("The location is not in Isreal");
+             throw new FormatException("The location is not in Isreal"); 
             try
             {
                 lock (dalAP)
