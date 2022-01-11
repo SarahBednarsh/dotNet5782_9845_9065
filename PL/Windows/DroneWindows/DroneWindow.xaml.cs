@@ -60,6 +60,7 @@ namespace PL
             Actions.Click -= ReleaseCharge_Click;
             Actions.Click -= Deliver_Click;
             Actions.Click -= Pickup_Click;
+            Actions2.Click -= SendToDelivery_Click;
             if (drone == null)
                 throw new ArgumentNullException("No drone");
             if (drone.Status == DroneStatuses.Available)
@@ -259,7 +260,6 @@ namespace PL
             {
                 bl.PickUpAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Picked up parcel successfully");
-                DataContext = bl.SearchDrone((DataContext as Drone).Id);
                 updateView();
                 //Close();
             }
