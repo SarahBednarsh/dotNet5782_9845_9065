@@ -17,7 +17,8 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
         {
-            //if customer exists then exception-check if there is in dal
+            if (longitude < 29.489 || longitude > 33.154 || latitude < 34.361 || latitude > 35.475)
+                throw new FormatException("The location is not in Isreal");
             try
             {
                 lock (dalAP)

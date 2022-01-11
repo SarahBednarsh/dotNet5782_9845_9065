@@ -37,7 +37,7 @@ namespace Dal
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id == Id))
                     Id = r.Next(1000, 10000);
-                Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.Next(0, 4), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude"), ChargeSlots = r.Next(9) + 1 };
+                Station station = new Station() { Id = Id, Name = stationNames[i], Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.Next(0, 3), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude"), ChargeSlots = r.Next(9) + 1 };
                 DataSource.Stations.Add(station);//so it is a realistic number of chargeslots, and it might be full eventually
             }
             for (int i = 0; i < 10; i++)//adding drones
@@ -54,7 +54,7 @@ namespace Dal
                 Id = r.Next(100000000, 1000000000);
                 while (DataSource.Customers.Exists(x => x.Id == Id))
                     Id = r.Next(100000000, 1000000000);
-                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(r.NextDouble() + r.Next(-999, 999), "Latitude") };
+                Customer customer = new Customer() { Id = Id, Name = names[i], Phone = r.Next(520000000, 529999999).ToString(), Longitude = StaticSexagesimal.InitializeSexagesimal(29.489 + r.Next(0, 3), "Longitude"), Latitude = StaticSexagesimal.InitializeSexagesimal(34.361 + r.NextDouble(), "Latitude") };
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);

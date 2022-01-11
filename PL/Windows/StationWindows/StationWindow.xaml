@@ -9,7 +9,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="addGrid" Visibility="Hidden">
+        <Grid x:Name="addGrid" Visibility="Visible">
             <TextBlock x:Name="addTitle" HorizontalAlignment="Left" TextAlignment="Center" FontSize="24" FontWeight="Bold" Height="40" Margin="59,28,0,0" Text="New Station" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
             <TextBlock x:Name="idNewBlock" HorizontalAlignment="Left" Margin="54,80,0,0" Text="Number:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="69"/>
             <TextBox x:Name="idNewBox" HorizontalAlignment="Left" Height="32" Margin="186,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>

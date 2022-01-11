@@ -35,7 +35,7 @@
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" />
                 </TextBox.Text>
             </TextBox>
-           
+
             <PasswordBox x:Name="PasswordBox"
                     materialDesign:HintAssist.Hint="Password" VerticalAlignment="Top"
                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="232" Height="40"  Margin="59,194,59,0"  />
@@ -54,10 +54,10 @@
             </Button>
             <TextBox x:Name="incorrect" FlowDirection="RightToLeft" Foreground="Red" Visibility="Hidden" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" HorizontalAlignment="Center" Height="37" Margin="0,190,0,0" Text="שם משתמש או סיסמה אינם נכונים" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
             <CheckBox x:Name="terms" Content="I agree to the company's terms and conditions" HorizontalAlignment="Center" Height="20" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
-            <TextBox  x:Name="longitudeBox" Width="232" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Longitude" Margin="390,75,-272,0" VerticalAlignment="Top"/>
-            <TextBox  x:Name="latitudeBox" Width="232" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Latitude" Margin="390,121,-272,0" VerticalAlignment="Top"/>
+            <TextBox  x:Name="longitudeBox" Width="232" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Longitude (between 34.361 and 35.475)" Margin="390,75,-272,0" VerticalAlignment="Top"/>
+            <TextBox  x:Name="latitudeBox" Width="232" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Latitude (between 29.489 and 33.154)" Margin="390,121,-272,0" VerticalAlignment="Top"/>
             <TextBox  x:Name="phoneBox" Width="232" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" materialDesign:HintAssist.Hint="Phone" Margin="59,238,59,0" VerticalAlignment="Top"/>
-            
+
         </Grid>
         <Grid Margin="350,161,0,0" Height="281" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
@@ -69,7 +69,7 @@
             </Border>
             <Button x:Name="Button_UploadImage" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Upload profile picture" Grid.Row="1" Click="Button_Click_UploadImage" Margin="0,118,0,0"/>
         </Grid>
-        <TextBlock x:Name="locationBlock" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Left" Height="20" Margin="390,53,0,0" Text="Location information:" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="locationBlock" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Left" Height="36" Margin="390,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" FontWeight="Bold" Grid.ColumnSpan="2"><Run Text="Location information: "/><LineBreak/><Run Text="(Please make sure you are located in Isreal)"/></TextBlock>
 
     </Grid>
 
