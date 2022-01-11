@@ -26,12 +26,12 @@ namespace DO
             pos = Math.Abs(pos);
             int degrees = (int)pos % 360;
             int minutes = (int)(pos * 60) % 60;
-            int seconds = (int)(pos * 60 * 60) % 60;
+            double seconds = (double)(pos * 60 * 60) % 60;
             return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = seconds, Direction = dir };
         }
         public static Sexagesimal InitializeSexagesimal(int degrees, int minutes, double seconds, Directions direction)
         {
-            return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = (int)seconds, Direction = direction };
+            return new Sexagesimal { Degrees = degrees, Minutes = minutes, Seconds = seconds, Direction = direction };
         }
         public static Sexagesimal InitializeSexagesimal(Sexagesimal copy)
         {
@@ -44,7 +44,7 @@ namespace DO
             int factor = 1;
             if (coordinate.Direction == Directions.S || coordinate.Direction == Directions.W)
                 factor = -1;
-            return factor * (int)(coordinate.Degrees + (double)coordinate.Minutes / 60 + (double)coordinate.Seconds / 3600);
+            return factor * (double)(coordinate.Degrees + (double)coordinate.Minutes / 60 + (double)coordinate.Seconds / 3600);
         }
         public static double CalcDis(double longitude1, double latitude1, double longitude2, double latitude2)
         {

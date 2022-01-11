@@ -16,11 +16,11 @@ namespace Dal
         internal class Config
         {
             internal static int RunningParcelNumber = 0;
-            internal static double available = 0.0002;
-            internal static double light = 0.0003;
-            internal static double medium = 0.0004;
-            internal static double heavy = 0.0005;
-            internal static double chargingPace = 50;
+            internal static double available = 0.2;
+            internal static double light = 0.3;
+            internal static double medium = 0.4;
+            internal static double heavy = 0.5;
+            internal static double chargingPace = 5;
             internal static string defaultPhoto = "/whitelogo-removebg-preview (3).png";
         }
         /// <summary>

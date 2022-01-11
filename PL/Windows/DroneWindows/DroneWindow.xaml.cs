@@ -52,7 +52,7 @@ namespace PL
             ActionsGrid.Visibility = Visibility.Visible;
             DataContext = drone;
             windowIndex = DroneListWindow.Drones.IndexOf(DroneListWindow.Drones.Where(x => x.Id == drone.Id).FirstOrDefault());
-             InitializeActionsButton(drone);
+            InitializeActionsButton(drone);
         }
         private void InitializeActionsButton(Drone drone)
         {
