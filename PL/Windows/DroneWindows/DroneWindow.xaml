@@ -148,7 +148,7 @@
             <Button x:Name="Manual" Visibility="{Binding ElementName=Auto, Mode=TwoWay, Path = Visibility, Converter={StaticResource VisibiltyToOppositeConverter}}" Content="Switch to manual mode" Height="39" Click="Manual_Click" Margin="270,50,341,32" Grid.Row="1"/>
 
             <Button x:Name="Actions" Content="Actions" Visibility="{Binding ElementName=Auto, Path=Visibility}" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="149" Margin="155,51,0,0"/>
-            <Button x:Name="Actions2" Visibility="{Binding ElementName=Auto, Path=Visibility}" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,51,0,0"/>
+            <Button x:Name="Actions2" Content="Actions2" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="115" Margin="33,51,0,0"/>
             <Button x:Name="CloseActions" Click="Close_Click" Visibility="{Binding ElementName=Auto, Path=Visibility}" Content="Close" Height="39" Grid.Row="1" VerticalAlignment="Top" Margin="619,51,49,0"/>
             <ProgressBar x:Name="closingProgressBar" Visibility="Hidden" IsIndeterminate="True" Margin="0,14,0,103" Grid.Row="1" />
         </Grid>

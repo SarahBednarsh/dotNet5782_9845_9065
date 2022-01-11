@@ -92,7 +92,7 @@ namespace PL
 
             if (drone.Parcel != null)
             {
-                parcelInTransfer.Visibility = Visibility.Visible;
+                parcelInTransfer.Visibility = Auto.Visibility;
                 parcelInTransfer.DataContext = drone.Parcel;
             }
             else
