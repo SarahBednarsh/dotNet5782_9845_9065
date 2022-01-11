@@ -19,19 +19,22 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
         {
-            //string photoPath = "tried";
-            //try
-            //{
-            //    //Console.WriteLine($"directory:{Directory.GetCurrentDirectory()}");
-            //    photoPath = Directory.GetCurrentDirectory() + @"\CustomerPhotos\" + id + @".jpg";
-            //    (File.Create(photoPath)).Close();
-            //    System.IO.File.Copy(photo, photoPath, true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //Console.WriteLine($"success maybe! path is: {photoPath}");
+            string photoPath = "tried";
+            try
+            {         
+                //photoPath = Directory.GetCurrentDirectory() + @"\CustomerPhotos\" + id + @".jpg";
+                photoPath = @"CustomerPhotos\" + id + @".jpg";
+
+                (File.Create(photoPath)).Close();
+                //    (File.Create(photoPath)).Close();
+
+                System.IO.File.Copy(photo, photoPath.Remove(1), true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            Console.WriteLine($"success maybe! path is: {photoPath}");
             try
             {
                 MailMessage message = new MailMessage();
