@@ -40,7 +40,6 @@ namespace PL
                            select Adapter.CustomerToListBotoPo(customer)).ToList();
 
         }
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow().ShowDialog();

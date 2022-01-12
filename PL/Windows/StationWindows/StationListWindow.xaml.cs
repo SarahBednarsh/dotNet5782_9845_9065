@@ -51,19 +51,6 @@ namespace PL
             DataContext = (from station in bl.ListStation()
                            select Adapter.StationToListBotoPo(station)).ToList();
         }
-        private void DataGridCell_MouseDoubleClick_Grouped(object sender, MouseButtonEventArgs e)
-        {
-            if ((sender as DataGridCell).DataContext is not StationToList)
-                return;
-            DataGridCell cell = sender as DataGridCell;
-            StationToList tmp = cell.DataContext as StationToList;
-            Station sta = Adapter.StationBotoPo(bl.SearchStation(tmp.Id));
-            new StationWindow(sta).ShowDialog();
-            DataContext = (from station in bl.ListStation()
-                           select Adapter.StationToListBotoPo(station)).ToList();
-            GroupingData = (DataContext as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
-
-        }
         private void groupChargeSlots_Click(object sender, RoutedEventArgs e)
         {
             GroupingData = (stationDataGrid.ItemsSource as List<StationToList>).GroupBy(x => x.OpenChargeSlots).ToList();
