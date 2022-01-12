@@ -171,4 +171,22 @@
     <Salt>915804646</Salt>
     <HashedPassword>53iMw7qT7giD4+32gHLJWpmPGI/fgZq6yA/ld+5a66cwp8eV0irtY6WYPke1XaN6EjXfgJW+gBeMii0yCtfhXA==</HashedPassword>
   </User>
+  <User>
+    <Id>209779</Id>
+    <UserName>ruchama</UserName>
+    <Photo>file:///C:/Users/sarah/OneDrive/Pictures/Saved Pictures/gallery_04+קבלת+פנים+וצילומי+משפחת+החתן_Riki&amp;Tani-460.jpg</Photo>
+    <Email>sarahbednarsh@gmail.com</Email>
+    <IsManager>true</IsManager>
+    <Salt>534916062</Salt>
+    <HashedPassword>oSeB7THUsuSa5PLUh8kxGqg+8V3JPqfKneJm07oAeQj93YkJkYha4PRm3wJ4c9HPSG39SnI7FKCLP8DBaalCDw==</HashedPassword>
+  </User>
+  <User>
+    <Id>987987</Id>
+    <UserName>mati</UserName>
+    <Photo>file:///C:/Users/sarah/OneDrive/Pictures/Screenshots/Screenshot (7).png</Photo>
+    <Email>sarahbednarsh@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>338608215</Salt>
+    <HashedPassword>HReSQluv6IwY9MZLUTB9BZ+ZwZdkwSs8zbojGEgjA3Js9o62LLrO6zJhH4zxYoAMqVkuHU+GdXKvEb3FKE9v2w==</HashedPassword>
+  </User>
 </ArrayOfUser>

@@ -99,16 +99,18 @@
 
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="183,372,0,0" VerticalAlignment="Top" Height="30" Width="74" Click="Close_Click"/>
         <Button x:Name="addParcel" Content="Add parcel" VerticalAlignment="Top" Margin="31,370,649,0" Width="120" Click="addParcel_Click"/>
-        <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="640,217,0,0" VerticalAlignment="Top" Width="74"/>
+        <Label Grid.Column="0" Content="Group by:" HorizontalAlignment="Left" Margin="633,235,0,0" VerticalAlignment="Top" Width="74"/>
         <DatePicker x:Name="endDate" Width="140" materialDesign:HintAssist.Hint="Pick End Date"
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="599,100,61,0" VerticalAlignment="Top" />
         <DatePicker x:Name="beginDate" Width="140"  materialDesign:HintAssist.Hint="Pick Start Date"
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="599,45,61,0" VerticalAlignment="Top" />
-        <Button x:Name="groupSender" Content="Sender" Margin="627,251,73,0" Visibility="{Binding DataGridBySender,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupSender_Click" Height="32" VerticalAlignment="Top" />
-        <Button x:Name="unGroupSender" Content="Ungroup" Margin="627,251,73,0" Visibility="{Binding ElementName=DataGridBySender, Path=Visibility}" Click="unGroupSender_Click" Height="32" VerticalAlignment="Top" />
-        <Button x:Name="groupTarget" Content="Target" Margin="627,294,73,0" Visibility="{Binding DataGridByTarget,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupTarget_Click" Height="32" VerticalAlignment="Top" />
-        <Button x:Name="unGroupTarget" Content="Ungroup" Margin="627,294,73,108" Visibility="{Binding ElementName=DataGridByTarget, Path=Visibility}" Click="unGroupTarget_Click" />
+        <Button x:Name="groupSender" Content="Sender" Margin="620,263,80,0" Visibility="{Binding DataGridBySender,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupSender_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="unGroupSender" Content="Ungroup" Margin="620,263,80,0" Visibility="{Binding ElementName=DataGridBySender, Path=Visibility}" Click="unGroupSender_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="groupTarget" Content="Target" Margin="620,306,80,0" Visibility="{Binding DataGridByTarget,Converter={StaticResource VisibiltyToOppositeConverter}}" Click="groupTarget_Click" Height="32" VerticalAlignment="Top" />
+        <Button x:Name="unGroupTarget" Content="Ungroup" Margin="620,306,80,96" Visibility="{Binding ElementName=DataGridByTarget, Path=Visibility}" Click="unGroupTarget_Click" />
         <controls:Button x:Name="dateRangeSelector" Padding="0" Content="Select date range" HorizontalAlignment="Left" Click="dateRangeSelector_Click" Margin="599,158,0,0" VerticalAlignment="Top" Width="140"/>
+        <controls:Button x:Name="dateRangeUnSelector" Padding="0" Content="Release date range" HorizontalAlignment="Left" Click="dateRangeUnSelector_Click" Margin="599,195,0,0" VerticalAlignment="Top" Width="140"/>
+        <controls:Label Content="Filter by creation time:" HorizontalAlignment="Left" Margin="606,16,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

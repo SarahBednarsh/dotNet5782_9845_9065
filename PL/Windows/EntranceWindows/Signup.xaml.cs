@@ -62,10 +62,15 @@ namespace PL
 
         private void signup_Click(object sender, RoutedEventArgs e)
         {
+            if (!ImageChanged)
+            {
+                MessageBox.Show("You must upload a profile picture!","ERROR",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 bl.AddUser(user.Id, user.UserName,
-                    ImageChanged ? ManagerImage.Source.ToString() : null, //"/whitelogo-removebg-preview (3).png",
+                    ManagerImage.Source.ToString(),
                     user.Email,
                     PasswordBox.Password,
                     isManager);

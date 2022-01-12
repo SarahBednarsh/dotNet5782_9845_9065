@@ -28,8 +28,10 @@ namespace BL
             try
             {
                 string currentDirectory = Directory.GetCurrentDirectory();
-
-                photoPath = @"\CustomerPhotos\" + id + @".jpg";
+                if(isManager)
+                    photoPath = @"\ManagerPhotos\" + id + @".jpg";
+                else
+                    photoPath = @"\CustomerPhotos\" + id + @".jpg";
                 string absolutePhotoPath = currentDirectory + photoPath;
 
 
