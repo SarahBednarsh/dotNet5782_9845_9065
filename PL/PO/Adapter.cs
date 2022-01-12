@@ -13,6 +13,9 @@ using WeightCategories = PO.WeightCategories;
 
 namespace PL
 {
+    /// <summary>
+    /// A class used to convert from BL entities to PL entities
+    /// </summary>
     internal class Adapter
     {
         public static PO.Drone DroneBotoPo(BO.Drone boDrone)

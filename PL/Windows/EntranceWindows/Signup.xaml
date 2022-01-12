@@ -39,12 +39,6 @@
             <PasswordBox x:Name="PasswordBox"
                     materialDesign:HintAssist.Hint="Password" VerticalAlignment="Top"
                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="232" Height="40"  Margin="59,194,59,0"  />
-
-
-            <!--<TextBox x:Name="userName" FlowDirection="RightToLeft" Language="he-il" HorizontalAlignment="Center" Height="57" Margin="0,60,0,0" Text="שם משתמש" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="userName_GotFocus" LostFocus="userName_LostFocus"/>
-            <Controls:WaterMarkBox x:Name="email" HorizontalAlignment="Center" Height="57" Text="Emali address" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Opacity="0.5" GotFocus="email_GotFocus" LostFocus="email_LostFocus" Margin="0,196,0,0"/>
-            <PasswordBox x:Name="password" FlowDirection="LeftToRight" LostFocus="password_LostFocus" GotFocus="password_GotFocus" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Width="232" Height="50" Margin="0,130,0,0"/>
-            <TextBlock x:Name="passwordText" TextAlignment="Center" HorizontalAlignment="Left" Height="26" Margin="267,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Opacity="0.5"><Run FlowDirection="RightToLeft" Language="he-il" Text="סיסמא"/></TextBlock>-->
             <TextBlock x:Name="title" TextAlignment="Center" HorizontalAlignment="Center" Height="34" FontSize="20" FontWeight="Bold" Text="Manager Signup" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232"/>
             <Button x:Name="signup" IsEnabled="{Binding IsChecked, ElementName=terms}" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="50" Margin="0,325,0,0" VerticalAlignment="Top" Width="232" Click="signup_Click">
                 <Run Text="Signup"/>
@@ -72,8 +66,5 @@
         <TextBlock x:Name="locationBlock" Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Left" Height="36" Margin="390,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" FontWeight="Bold" Grid.ColumnSpan="2"><Run Text="Location information: "/><LineBreak/><Run Text="(Please make sure you are located in Isreal)"/></TextBlock>
 
     </Grid>
-
-
-
 </Window>
 

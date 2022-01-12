@@ -33,8 +33,8 @@ namespace PL
                 false,
                 true,
                 TimeSpan.FromSeconds(3));
-            if (!(manager.UserName=="admin"))
-                viewProfilePhoto.Source =  new BitmapImage(new Uri(manager.Photo));
+            if (!(manager.UserName == "admin"))
+                viewProfilePhoto.Source = new BitmapImage(new Uri(manager.Photo));
         }
 
         private void Drones_Click(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace PL
 
         private void Parcels_Click(object sender, RoutedEventArgs e)
         {
-             new ParceListWindow().ShowDialog();
+            new ParceListWindow().ShowDialog();
         }
 
         private void Customers_Click(object sender, RoutedEventArgs e)

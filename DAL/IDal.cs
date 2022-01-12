@@ -156,12 +156,7 @@ namespace DalApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<double> ReqPowerConsumption();
-       /// <summary>
-       /// Returns the path for default photo
-       /// </summary>
-       /// <returns></returns>
-        public string GetDefaultPhoto();
-        /// <summary>
+        ///<summary>
         /// Returns the beginning time of a droneCharge
         /// </summary>
         /// <param name="droneId"></param>

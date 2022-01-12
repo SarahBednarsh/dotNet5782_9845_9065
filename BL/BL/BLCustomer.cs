@@ -18,7 +18,7 @@ namespace BL
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)//are we supposed to get location here?
         {
             if (longitude < 29.489 || longitude > 33.154 || latitude < 34.361 || latitude > 35.475)
-             throw new FormatException("The location is not in Isreal"); 
+                throw new FormatException("The location is not in Israel");
             try
             {
                 lock (dalAP)
@@ -101,7 +101,7 @@ namespace BL
                        select CreateCustomer(customer);
             }
         }
-        private Customer CreateCustomer(DO.Customer old) //convert DO.Customer to BL.Customer
+        private Customer CreateCustomer(DO.Customer old) //convert DO.Customer to BO.Customer
         {
 
             Customer customer = new Customer();
@@ -161,11 +161,5 @@ namespace BL
                        Sent = customer.AtCustomer.FindAll(x => x.State != States.Delivered).Count
                    };
         }
-        //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate)
-        //{
-        //    return from customer in ListCustomer()
-        //           where predicate(customer)
-        //           select customer;
-        //}
     }
 }

@@ -58,12 +58,5 @@ namespace Dal
             return DataSource.Users.Exists(x => x.UserName == userName && x.IsManager == isManager && PasswordHandler.CheckPassword(password, x.HashedPassword, x.Salt));
 
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public string GetDefaultPhoto()
-        {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string absolutePhotoPath = currentDirectory + @"\"+ DataSource.Config.defaultPhoto;
-            return absolutePhotoPath;
-        }
     }
 }

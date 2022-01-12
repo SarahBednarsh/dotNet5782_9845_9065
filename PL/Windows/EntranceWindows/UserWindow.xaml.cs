@@ -38,7 +38,7 @@ namespace PL
             DataGridCell cell = sender as DataGridCell;
             ParcelToList p = cell.DataContext as ParcelToList;
             Parcel parcelToOpen = Adapter.ParcelBotoPo(bl.SearchParcel(p.Id));
-            new ParcelWindow(parcelToOpen, isManager:false).ShowDialog();
+            new ParcelWindow(parcelToOpen, isManager: false).ShowDialog();
             DataContext = (from parcel in bl.ListParcelFromCustomer(user.Id)
                            select Adapter.ParcelToListBotoPo(parcel)).ToList();
         }

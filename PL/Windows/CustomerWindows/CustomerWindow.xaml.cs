@@ -25,6 +25,10 @@ namespace PL
     public partial class CustomerWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        /// <summary>
+        /// Customer view and edit
+        /// </summary>
+        /// <param name="customer"></param>
         public CustomerWindow(Customer customer)
         {
             InitializeComponent();
@@ -34,6 +38,9 @@ namespace PL
             actionsTitle.Text = string.Format($"Customer {customer.Id}");
 
         }
+        /// <summary>
+        /// Customer adding
+        /// </summary>
         public CustomerWindow()
         {
             InitializeComponent();
@@ -63,7 +70,7 @@ namespace PL
                 new ParcelWindow(parcel).ShowDialog();
                 DataContext = Adapter.CustomerBotoPo(bl.SearchCustomer((DataContext as Customer).Id));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -71,10 +78,7 @@ namespace PL
 
 
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -86,10 +90,14 @@ namespace PL
                 bl.AddCustomer(id, nameNewBox.Text, phoneNewBox.Text, longitude, latitude);
                 MessageBox.Show("Added customer successfully");
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
     }

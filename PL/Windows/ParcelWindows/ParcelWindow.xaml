@@ -23,7 +23,7 @@
             <ComboBox x:Name="priorityBox" HorizontalAlignment="Left" Height="24" Margin="175,233,0,0" VerticalAlignment="Top" Width="113"/>
 
         </Grid>
-        
+
         <Grid x:Name="ActionsAndDiplayGrid" Visibility="Hidden">
             <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="450,53,0,55" VerticalAlignment="Bottom" Height="30" Width="74" Click="Close_Click"/>
             <StackPanel>

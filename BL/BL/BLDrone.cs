@@ -268,9 +268,6 @@ namespace BL
             DroneToList newDrone = dronesBL.Find(x => x.Id == droneId);
             newDrone.Battery = newDrone.Battery - distance * usage; //update battery
             newDrone.Location = drone.Parcel.PickUpLocation; //update location
-                                                             
-            //dronesBL.RemoveAll(x => x.Id == droneId);
-            //dronesBL.Add(newDrone);
             //update parcel pick up time
             lock (dalAP)
             {
@@ -301,14 +298,10 @@ namespace BL
             newDrone.Location = drone.Parcel.Destination; //update location
             newDrone.IdOfParcel = -1;
             newDrone.Status = DroneStatuses.Available;
-            
-            //dronesBL.RemoveAll(x => x.Id == droneId);
             lock (dalAP)
             {
                 dalAP.DeliverToCustomer(drone.Parcel.Id);
             }
-            //dronesBL.Add(newDrone);
-            //update parcel delivery time
         }
         internal double GetUsage(WeightCategories weight) //return battery consumption for requested weight
         {
@@ -336,13 +329,6 @@ namespace BL
                        Status = drone.Status
                    };
         }
-        //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate)
-        //{
-        //    return from drone in ListDrone()
-        //           where predicate(drone)
-        //           select drone;
-        //}
-        //[MethodImpl(MethodImplOptions.Synchronized)]
         public void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop) => new Simulator(this, droneId, update, stop);
     }
 }

@@ -15,7 +15,7 @@ namespace BL
     {
         #region singleton
         private static IBL instance = null;
-        private static object LOCK = new object();
+        private static object LOCK = new object(); //an object used to make sure the singleton is thread safe
         internal static IBL Instance
         {
             get
@@ -23,7 +23,6 @@ namespace BL
                 IBL localRef = instance;
                 if (localRef == null)
                 {
-                    
                     lock (LOCK)
                     {
                         if (instance == null)
@@ -40,7 +39,7 @@ namespace BL
         internal static double light = 0;
         internal static double medium = 0;
         internal static double heavy = 0;
-        internal static double chargingPace = 0; //meters per second
+        internal static double chargingPace = 0; //battery percantage per second
         internal List<DroneToList> dronesBL;
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BL()
@@ -98,8 +97,8 @@ namespace BL
                             Location closestLoc = LocationStaticClass.InitializeLocation(closest.Longitude, closest.Latitude);
                             //randomly chose battery between minimum for travel and full charge
                             int batteryForTravel = (int)(LocationStaticClass.CalcDis(drone.Location,
-                                LocationStaticClass.InitializeLocation((dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId)).Longitude, dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId).Latitude)) * available) + (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);//sarah-remove search customer
-                            
+                                LocationStaticClass.InitializeLocation((dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId)).Longitude, dalAP.SearchCustomer(dalAP.SearchParcel(drone.IdOfParcel).TargetId).Latitude)) * available) + (int)(LocationStaticClass.CalcDis(drone.Location, closestLoc) * available);
+
                             drone.Battery = batteryForTravel + r.Next(0, 100 - batteryForTravel) + r.NextDouble();
 
                         }
@@ -110,8 +109,8 @@ namespace BL
                             foreach (DO.Customer customer in customers)
                                 if (HadAParcelDelivered(customer))
                                     numCustomerWithDeliveredParcel++;
-                            
-                            if (r.Next(2) == 1 || numCustomerWithDeliveredParcel==0)//makes it be in maintenence
+
+                            if (r.Next(2) == 1 || numCustomerWithDeliveredParcel == 0)//makes it be in maintenence
                             {
                                 drone.Status = DroneStatuses.InMaintenance;
                                 IEnumerable<DO.Station> stations = dalAP.YieldStation();
@@ -125,7 +124,7 @@ namespace BL
                                         if (station.ChargeSlots != 0)
                                         {
                                             dalAP.DroneToCharge(drone.Id, station.Id);
-                                            
+
                                         }
                                         else
                                         {
@@ -141,8 +140,8 @@ namespace BL
                             else//drone is available
                             {
                                 drone.Status = DroneStatuses.Available;
-                                
-                                
+
+
                                 //set drone location at a random customer that has a parcel delivered
                                 int index = r.Next(numCustomerWithDeliveredParcel);//customers that had parcels delivered to them
                                 int counter = 0;
@@ -169,7 +168,7 @@ namespace BL
                     }
                     dronesBL = tmp;
                 }
-                catch(Exception ex)//some kind of exception was thrown
+                catch (Exception ex)
                 {
                     throw new InternalError("problem with drone initialization", ex);
                 }

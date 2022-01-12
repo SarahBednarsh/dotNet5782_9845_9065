@@ -36,6 +36,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
+        #region controls
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ObservableCollection<DroneToList> drones = DataContext as ObservableCollection<DroneToList>;
@@ -51,8 +52,6 @@ namespace PL
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow().ShowDialog();
-            //DataContext = (from drone in bl.ListDrone()
-            //               select Adapter.DroneToListBotoPo(drone)).ToList();
             WeightSelector_SelectionChanged(WeightSelector, null);
         }
         private void ClearWeight_Click(object sender, RoutedEventArgs e)
@@ -72,14 +71,10 @@ namespace PL
             DroneToList d = cell.DataContext as DroneToList;
             Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(d.Id));
             new DroneWindow(dro).Show();
-            //DataContext = (from drone in bl.ListDrone()
-            //               select Adapter.DroneToListBotoPo(drone)).ToList();
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        #endregion
 
+        #region grouping
         private void DataGridCell_MouseDoubleClick_Grouped(object sender, MouseButtonEventArgs e)//open a drone from a grouped list
         {
             if ((sender as DataGridCell).DataContext is not DroneToList)
@@ -88,8 +83,6 @@ namespace PL
             DroneToList tmp = cell.DataContext as DroneToList;
             Drone dro = Adapter.DroneBotoPo(bl.SearchDrone(tmp.Id));
             new DroneWindow(dro).Show();
-            //DataContext = (from drone in bl.ListDrone()
-            //               select Adapter.DroneToListBotoPo(drone)).ToList();
             GroupingData = (DataContext as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
             groupingDataGrid.DataContext = GroupingData;
 
@@ -109,7 +102,10 @@ namespace PL
             groupingDataGrid.Visibility = Visibility.Hidden;
             droneDataGrid.Visibility = Visibility.Visible;
         }
-
-        
+        #endregion
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
