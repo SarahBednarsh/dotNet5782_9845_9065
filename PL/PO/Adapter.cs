@@ -81,10 +81,10 @@ namespace PL
                 Weight = (PO.WeightCategories)boParcel.Weight,
                 Priority = (PO.Priorities)boParcel.Priority,
                 Drone = Adapter.DroneInParcelBotoPo(boParcel.Drone),
-                Creation = boParcel.Creation,// == null ? DateTime.MinValue : BoParcel.Creation,
-                Attribution = boParcel.Attribution,// == null ? DateTime.MinValue : BoParcel.Attribution,
-                PickUp = boParcel.PickUp,// == null ? DateTime.MinValue : BoParcel.PickUp,
-                Delivery = boParcel.Delivery// == null ? DateTime.MinValue : BoParcel.Delivery,
+                Creation = boParcel.Creation,
+                Attribution = boParcel.Attribution,
+                PickUp = boParcel.PickUp,
+                Delivery = boParcel.Delivery
             };
         }
         static public PO.ParcelToList ParcelToListBotoPo(BO.ParcelToList boParcel)

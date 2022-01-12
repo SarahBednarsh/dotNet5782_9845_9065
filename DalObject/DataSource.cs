@@ -66,7 +66,7 @@ namespace Dal
                 DateTime? delivered = r.Next() % 4 != 0 && forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp + 1) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null;
                 Parcel parcel = new Parcel()
                 {
-                    Id = ++DataSource.Config.RunningParcelNumber,
+                    Id = DataSource.Config.RunningParcelNumber++,
                     SenderId = Customers[i%10].Id,
                     TargetId = Customers[(12 - i)%10].Id,
                     Weight = (WeightCategories)r.Next(1, 3),
