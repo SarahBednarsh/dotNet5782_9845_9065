@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using System.IO;
 using System.Xml.Linq;
 using System.Runtime.CompilerServices;
@@ -11,6 +10,10 @@ using System.Xml.Serialization;
 
 namespace Dal
 {
+    /// <summary>
+    /// a class for one-time use for us in order to load information that was randomized in DataSource into the xml files
+    /// creating a valid database to work with
+    /// </summary>
     public class XmlTools
     {
         static string dir = @"";
@@ -136,7 +139,6 @@ namespace Dal
             }
 
             XmlTools.SaveListToXMLElement(dronesRootElem, dronesPath);
-
             XmlTools.SaveListToXMLSerializer(DataSource.Customers, customersPath);
             XmlTools.SaveListToXMLSerializer(DataSource.Parcels, parcelsPath);
             XmlTools.SaveListToXMLSerializer(DataSource.Stations, stationsPath);

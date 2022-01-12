@@ -56,11 +56,6 @@ namespace Dal
 
         }
 
-        /// <summary>
-        /// releases a drone from charging by using the drone charges to find the charging station and updating
-        /// the station, drone and drone charges accordingly
-        /// </summary>
-        /// <param name="droneId"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void ReleaseCharging(int droneId)
         {

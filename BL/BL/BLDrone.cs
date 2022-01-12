@@ -219,6 +219,8 @@ namespace BL
                                                 where parcel.Priority == highest && parcel.Weight <= drone.MaxWeight //drone can carry the current parcel
                                                 select parcel).OrderBy(x => LocationStaticClass.CalcDis(GetSenderLocation(x), drone.Location));
                 //sort by increasing order of distance to the drone
+                if (relevant.Count() == 0)
+                    throw new NoRelevantParcels("No parcels left for delivering");
                 foreach (Parcel p in relevant)
                 {
                     if (CanDeliver(drone, p)) //if drone can deliver parcel

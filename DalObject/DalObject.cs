@@ -10,7 +10,8 @@ namespace Dal
 
         #region singleton
         private static DalObject instance = null;
-        private static object LOCK = new object();
+        //an object used to make sure the singleton is thread safe
+        private static object LOCK = new object(); 
         static DalObject() { }
         internal static DalObject Instance
         {

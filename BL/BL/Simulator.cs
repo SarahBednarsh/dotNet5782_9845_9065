@@ -57,10 +57,13 @@ namespace BL
             lock (bl)
             {
                 try { bl.AttributeAParcel(drone.Id); }
+                catch (NoRelevantParcels)
+                { return; }
                 catch (CannotAttribute)
                 {
-                    if (drone.Battery == 100)
+                    if (drone.Battery == 100) //if all parcels were out of range drone ability
                         return;
+                    //not enough battery to get to parcels
                     drone.Status = DroneStatuses.InMaintenance;
                     chargingStage = ChargingStages.Initial;
                 }
@@ -76,23 +79,7 @@ namespace BL
                 bool pickedUp = parcel.PickUp is not null;
                 targetLocation = pickedUp ? bl.GetTargetLocation(parcel) : bl.GetSenderLocation(parcel);
                 if(pickedUp)
-                { 
-                    switch (parcel.Weight)
-                    {
-                        case BO.WeightCategories.Heavy:
-                            batteryUsage = BL.heavy;
-                            break;
-                        case BO.WeightCategories.Medium:
-                            batteryUsage = BL.medium;
-                            break;
-                        case BO.WeightCategories.Light:
-                            batteryUsage = BL.light;
-                            break;
-                        default:
-                            batteryUsage = BL.available;
-                            break;
-                    }
-                }
+                    batteryUsage = bl.GetUsage(parcel.Weight);
                 else
                     batteryUsage = BL.available;
                 Travel();
@@ -103,7 +90,7 @@ namespace BL
                     else
                     {
                         bl.DeliverAParcel(drone.Id);
-                        batteryUsage = bl.GetUsage(parcel.Weight);
+                        batteryUsage = BL.available;
                     }
                 }
             }
@@ -136,6 +123,7 @@ namespace BL
                     }
                     catch (Exception ex) when (ex is CannotSendToCharge || ex is NotEnoughBattery)
                     {
+                        //if the closest station did not have open charging slots
                         drone.Status = DroneStatuses.InMaintenance;
                         chargingStage = ChargingStages.Waiting;
                     }
@@ -155,7 +143,7 @@ namespace BL
                         lock (bl)
                         { bl.ReleaseCharging(drone.Id); }
                     break;
-                case ChargingStages.Waiting:
+                case ChargingStages.Waiting: //try sending drone to charge - waiting until a station close enough has empty charge slots
                     chargingStage = ChargingStages.Initial;
                     break;
                 default:

@@ -14,8 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
 using System.Linq.Expressions;
-using System.Collections.Generic;
-using System.Linq;
 using BlApi;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -61,9 +59,5 @@ namespace PL
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new DroneListWindow().ShowDialog();
-        }
     }
 }
