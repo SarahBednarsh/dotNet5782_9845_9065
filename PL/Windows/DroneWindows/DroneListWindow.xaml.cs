@@ -38,13 +38,13 @@ namespace PL
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<DroneToList> drones = DataContext as List<DroneToList>;
+            ObservableCollection<DroneToList> drones = DataContext as ObservableCollection<DroneToList>;
             if ((sender as ComboBox).SelectedIndex == -1)
                 return;
-            droneDataGrid.ItemsSource = (from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem select drone).ToList();
+            droneDataGrid.ItemsSource = new ObservableCollection<DroneToList>(from drone in drones where drone.MaxWeight == (WeightCategories)WeightSelector.SelectedItem select drone);
             if (groupingDataGrid.Visibility == Visibility.Visible)//updates the datagrid with updated list
             {
-                GroupingData = (droneDataGrid.ItemsSource as List<DroneToList>).GroupBy(x => x.Status).ToList();
+                GroupingData = (droneDataGrid.ItemsSource as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();
                 groupingDataGrid.DataContext = GroupingData;
             }
         }
@@ -59,7 +59,7 @@ namespace PL
         {
             WeightSelector.SelectedItem = -1;
             WeightSelector.Text = "";
-            droneDataGrid.ItemsSource = DataContext as List<DroneToList>;
+            droneDataGrid.ItemsSource = DataContext as ObservableCollection<DroneToList>;
             if (groupingDataGrid.Visibility == Visibility.Visible)
             {
                 GroupingData = (DataContext as ObservableCollection<DroneToList>).GroupBy(x => x.Status).ToList();

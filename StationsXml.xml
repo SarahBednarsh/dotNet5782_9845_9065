@@ -1,37 +1,37 @@
 <?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Station>
-    <Id>1219</Id>
+    <Id>5913</Id>
     <Name>station1</Name>
     <Longitude>
-      <Degrees>31</Degrees>
-      <Minutes>9</Minutes>
-      <Seconds>33.03471376738162</Seconds>
+      <Degrees>30</Degrees>
+      <Minutes>52</Minutes>
+      <Seconds>7.237944913111278</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
-      <Degrees>34</Degrees>
-      <Minutes>38</Minutes>
-      <Seconds>9.0426052409166</Seconds>
+      <Degrees>35</Degrees>
+      <Minutes>13</Minutes>
+      <Seconds>48.77323351333325</Seconds>
       <Direction>N</Direction>
     </Latitude>
-    <ChargeSlots>6</ChargeSlots>
+    <ChargeSlots>7</ChargeSlots>
   </Station>
   <Station>
-    <Id>8503</Id>
+    <Id>2992</Id>
     <Name>station2</Name>
     <Longitude>
       <Degrees>30</Degrees>
-      <Minutes>39</Minutes>
-      <Seconds>31.058424445727724</Seconds>
+      <Minutes>43</Minutes>
+      <Seconds>47.83646080951439</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
-      <Minutes>33</Minutes>
-      <Seconds>47.98979322852392</Seconds>
+      <Minutes>47</Minutes>
+      <Seconds>20.349995382857742</Seconds>
       <Direction>N</Direction>
     </Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <ChargeSlots>5</ChargeSlots>
   </Station>
 </ArrayOfStation>
