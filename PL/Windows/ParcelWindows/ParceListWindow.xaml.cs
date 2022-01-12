@@ -191,8 +191,15 @@ namespace PL
 
         private void dateRangeSelector_Click(object sender, RoutedEventArgs e)
         {
+
             parcelDataGrid.ItemsSource = from BO.ParcelToList parcel in bl.ListParcelCreatedInTimeRange(beginDate.DisplayDate, endDate.DisplayDate)
                                          select Adapter.ParcelToListBotoPo(parcel);
+            refreshGrid(false);
+        }
+
+        private void dateRangeUnSelector_Click(object sender, RoutedEventArgs e)
+        {
+            parcelDataGrid.ItemsSource = DataContext as IEnumerable<ParcelToList>;
             refreshGrid(false);
         }
     }
