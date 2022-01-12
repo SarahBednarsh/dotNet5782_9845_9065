@@ -461,8 +461,11 @@ namespace Dal
         public string GetDefaultPhoto()
         {
             XElement defaultsRoot = XmlTools.LoadListFromXMLElement(defaultsPath);
-            return (from def in defaultsRoot.Elements()
+            string photo = (from def in defaultsRoot.Elements()
                     select def.Value).FirstOrDefault();
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string absolutePhotoPath = currentDirectory + @"\" + photo;
+            return absolutePhotoPath;
         }
         #endregion
     }
