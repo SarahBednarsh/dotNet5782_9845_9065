@@ -49,7 +49,6 @@ namespace PL
             DataContext = parcel;
             InitializeActionsButton(parcel);
             ConfirmAction.IsEnabled = IsEnabled;
-
         }
         private void InitializeActionsButton(Parcel parcel)
         {

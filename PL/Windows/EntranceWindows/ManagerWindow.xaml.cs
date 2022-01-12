@@ -49,7 +49,7 @@ namespace PL
 
         private void Parcels_Click(object sender, RoutedEventArgs e)
         {
-            new ParceListWindow().ShowDialog();
+             new ParceListWindow().ShowDialog();
         }
 
         private void Customers_Click(object sender, RoutedEventArgs e)

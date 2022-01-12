@@ -47,18 +47,14 @@
 
 
         <DataGrid x:Name="DataGridBySender" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="500" Margin="31,31,269,118" RowDetailsVisibilityMode="Visible" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
-            <DataGrid.Columns>
+        <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding SenderName , Mode=OneWay}"/>
-            </DataGrid.Columns>
+        </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
-                            <DataGrid.Resources>
-                                <Style TargetType="{x:Type DataGridCell}">
-                                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
-                                </Style>
-                            </DataGrid.Resources>
+                            
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="80"/>
                                 <DataGridTextColumn Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
@@ -79,11 +75,6 @@
                 <DataTemplate>
                     <StackPanel>
                         <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
-                            <DataGrid.Resources>
-                                <Style TargetType="{x:Type DataGridCell}">
-                                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
-                                </Style>
-                            </DataGrid.Resources>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="80"/>
                                 <DataGridTextColumn Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>

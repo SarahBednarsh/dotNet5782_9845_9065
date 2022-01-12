@@ -32,6 +32,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            new DroneListWindow();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

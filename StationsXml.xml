@@ -15,7 +15,7 @@
       <Seconds>1.7833505677699577</Seconds>
       <Direction>N</Direction>
     </Latitude>
-    <ChargeSlots>2</ChargeSlots>
+    <ChargeSlots>0</ChargeSlots>
   </Station>
   <Station>
     <Id>8096</Id>

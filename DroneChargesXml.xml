@@ -136,11 +136,6 @@
     <BeginTime>2022-01-12T16:02:08.3849515+02:00</BeginTime>
   </DroneCharge>
   <DroneCharge>
-    <DroneId>2019</DroneId>
-    <StationId>8096</StationId>
-    <BeginTime>2022-01-12T16:03:19.0958424+02:00</BeginTime>
-  </DroneCharge>
-  <DroneCharge>
     <DroneId>7988</DroneId>
     <StationId>7435</StationId>
     <BeginTime>2022-01-12T16:03:19.2684809+02:00</BeginTime>
@@ -154,5 +149,20 @@
     <DroneId>2019</DroneId>
     <StationId>8096</StationId>
     <BeginTime>2022-01-12T16:08:16.1852116+02:00</BeginTime>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>2019</DroneId>
+    <StationId>7435</StationId>
+    <BeginTime>2022-01-12T18:34:07.7130252+02:00</BeginTime>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>2019</DroneId>
+    <StationId>7435</StationId>
+    <BeginTime>2022-01-12T18:38:09.5730176+02:00</BeginTime>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>7578</DroneId>
+    <StationId>8096</StationId>
+    <BeginTime>2022-01-12T18:38:09.6295096+02:00</BeginTime>
   </DroneCharge>
 </ArrayOfDroneCharge>
