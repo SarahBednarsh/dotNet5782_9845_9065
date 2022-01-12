@@ -61,7 +61,9 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public string GetDefaultPhoto()
         {
-            return DataSource.Config.defaultPhoto;
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string absolutePhotoPath = currentDirectory + @"\"+ DataSource.Config.defaultPhoto;
+            return absolutePhotoPath;
         }
     }
 }

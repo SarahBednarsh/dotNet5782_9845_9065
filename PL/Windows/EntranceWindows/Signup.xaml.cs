@@ -65,12 +65,17 @@ namespace PL
             try
             {
                 bl.AddUser(user.Id, user.UserName,
-                    ImageChanged ? ManagerImage.Source.ToString() : "/whitelogo-removebg-preview (3).png",
+                    ImageChanged ? ManagerImage.Source.ToString() : null, //"/whitelogo-removebg-preview (3).png",
                     user.Email,
                     PasswordBox.Password,
                     isManager);
                 if (!isManager)
                     bl.AddCustomer(user.Id, user.UserName, phoneBox.Text, double.Parse(longitudeBox.Text), double.Parse(latitudeBox.Text));
+            }
+            catch(BO.SendMailException ex)
+            {
+                MessageBox.Show("Check your email, " + ex.Message);
+                return;
             }
             catch (Exception ex)
             {

@@ -19,22 +19,31 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
         {
-            //string photoPath = "tried";
-            //try
-            //{         
-            //    //photoPath = Directory.GetCurrentDirectory() + @"\CustomerPhotos\" + id + @".jpg";
-            //    photoPath = @"CustomerPhotos\" + id + @".jpg";
+            string photoPath;
+            lock (dalAP)
+            {
+                if (photo == null)
+                    photo = @"file:\\\" + dalAP.GetDefaultPhoto();
+            }
+            try
+            {
+                string currentDirectory = Directory.GetCurrentDirectory();
 
-            //    (File.Create(photoPath)).Close();
-            //    //    (File.Create(photoPath)).Close();
+                photoPath = @"\CustomerPhotos\" + id + @".jpg";
+                string absolutePhotoPath = currentDirectory + photoPath;
 
-            //    System.IO.File.Copy(photo, photoPath.Remove(1), true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //Console.WriteLine($"success maybe! path is: {photoPath}");
+
+                //(File.Create(photoPath)).Close();
+                //    (File.Create(photoPath)).Close();
+                
+                Directory.SetCurrentDirectory(@"C:\");
+                System.IO.File.Copy(photo.Substring(8), absolutePhotoPath, true);
+                Directory.SetCurrentDirectory(currentDirectory);
+            }
+            catch (Exception ex)
+            {
+                throw new UserException("There seem to be a problem with the photo", ex);
+            }
             try
             {
                 MailMessage message = new MailMessage();
@@ -56,9 +65,9 @@ namespace BL
             {
                 SendMail(@"Signup for .DRONE company", $"Hey {userName}! Thank you for signing up to our project! Hope you enjoy.", email);
             }
-            catch (Exception ex)
+            catch (SendMailException ex)
             {
-                throw ex;
+                throw new SendMailException("Sending email failed", ex);
             }
         }
         [MethodImpl(MethodImplOptions.Synchronized)]

@@ -121,9 +121,10 @@ namespace PL
             {
                 bl.DeleteParcel((DataContext as Parcel).Id);
                 Close();
-                MessageBox.Show("Drone deleted succesfully", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Parcel deleted succesfully", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;            
             }
-            MessageBox.Show("Action was cancelleduccesfully", "CANCEL", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Action was cancelled succesfully", "CANCEL", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
