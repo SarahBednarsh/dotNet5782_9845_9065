@@ -109,5 +109,7 @@ namespace PL
             groupingDataGrid.Visibility = Visibility.Hidden;
             droneDataGrid.Visibility = Visibility.Visible;
         }
+
+        
     }
 }

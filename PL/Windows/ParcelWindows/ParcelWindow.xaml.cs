@@ -154,17 +154,19 @@ namespace PL
         private void openDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(Adapter.DroneBotoPo(bl.SearchDrone(Int32.Parse((DataContext as Parcel).Drone.Id)))).ShowDialog();
+            DataContext = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Parcel).Id));
         }
 
         private void openTarget_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(Adapter.CustomerBotoPo(bl.SearchCustomer((DataContext as Parcel).Target.Id))).ShowDialog();
-
+            DataContext = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Parcel).Id));
         }
 
         private void openSender_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(Adapter.CustomerBotoPo(bl.SearchCustomer((DataContext as Parcel).Sender.Id))).ShowDialog();
+            DataContext = Adapter.ParcelBotoPo(bl.SearchParcel((DataContext as Parcel).Id));
         }
     }
 }

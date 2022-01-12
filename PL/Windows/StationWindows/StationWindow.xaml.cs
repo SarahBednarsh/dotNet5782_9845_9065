@@ -67,7 +67,8 @@ namespace PL
                 DataGridCell cell = sender as DataGridCell;
                 DroneInCharge droneInCharge = cell.DataContext as DroneInCharge;
                 Drone drone = Adapter.DroneBotoPo(bl.SearchDrone(droneInCharge.Id));
-                new DroneWindow(drone).Show();
+                new DroneWindow(drone).ShowDialog();
+                DataContext = Adapter.StationBotoPo(bl.SearchStation((DataContext as Station).Id));
             }
             catch (Exception exception)
             {

@@ -1,172 +1,172 @@
 <?xml version="1.0"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <Id>884765891</Id>
+    <Id>346312167</Id>
     <Name>Liorah</Name>
-    <Phone>529387988</Phone>
+    <Phone>523830498</Phone>
     <Longitude>
-      <Degrees>31</Degrees>
-      <Minutes>8</Minutes>
-      <Seconds>17.734282294550212</Seconds>
-      <Direction>E</Direction>
-    </Longitude>
-    <Latitude>
-      <Degrees>35</Degrees>
-      <Minutes>10</Minutes>
-      <Seconds>50.10735983554332</Seconds>
-      <Direction>N</Direction>
-    </Latitude>
-  </Customer>
-  <Customer>
-    <Id>656457694</Id>
-    <Name>Sarah</Name>
-    <Phone>528882571</Phone>
-    <Longitude>
-      <Degrees>31</Degrees>
-      <Minutes>25</Minutes>
-      <Seconds>39.70006709849986</Seconds>
+      <Degrees>30</Degrees>
+      <Minutes>39</Minutes>
+      <Seconds>24.791062541116844</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
-      <Minutes>44</Minutes>
-      <Seconds>16.692686629423406</Seconds>
+      <Minutes>53</Minutes>
+      <Seconds>11.628959231442423</Seconds>
       <Direction>N</Direction>
     </Latitude>
   </Customer>
   <Customer>
-    <Id>849001382</Id>
+    <Id>540240191</Id>
+    <Name>Sarah</Name>
+    <Phone>529232525</Phone>
+    <Longitude>
+      <Degrees>30</Degrees>
+      <Minutes>47</Minutes>
+      <Seconds>15.70650453424605</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>34</Degrees>
+      <Minutes>43</Minutes>
+      <Seconds>57.76221530462499</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+  <Customer>
+    <Id>143199528</Id>
     <Name>Margalit</Name>
-    <Phone>528698843</Phone>
+    <Phone>526194673</Phone>
+    <Longitude>
+      <Degrees>30</Degrees>
+      <Minutes>33</Minutes>
+      <Seconds>6.211644934970536</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>34</Degrees>
+      <Minutes>32</Minutes>
+      <Seconds>54.25743025515112</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+  <Customer>
+    <Id>635628766</Id>
+    <Name>Adi</Name>
+    <Phone>522554360</Phone>
     <Longitude>
       <Degrees>29</Degrees>
+      <Minutes>46</Minutes>
+      <Seconds>53.108637087003444</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>35</Degrees>
+      <Minutes>19</Minutes>
+      <Seconds>28.1105166717025</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+  <Customer>
+    <Id>909492945</Id>
+    <Name>Bilbo Baggins</Name>
+    <Phone>526689706</Phone>
+    <Longitude>
+      <Degrees>30</Degrees>
+      <Minutes>44</Minutes>
+      <Seconds>32.99213858869916</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>35</Degrees>
+      <Minutes>11</Minutes>
+      <Seconds>24.632477688530344</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+  <Customer>
+    <Id>378839405</Id>
+    <Name>Paul</Name>
+    <Phone>522731533</Phone>
+    <Longitude>
+      <Degrees>30</Degrees>
       <Minutes>42</Minutes>
-      <Seconds>27.710862721549347</Seconds>
+      <Seconds>27.770617309288355</Seconds>
+      <Direction>E</Direction>
+    </Longitude>
+    <Latitude>
+      <Degrees>35</Degrees>
+      <Minutes>0</Minutes>
+      <Seconds>24.828145311199478</Seconds>
+      <Direction>N</Direction>
+    </Latitude>
+  </Customer>
+  <Customer>
+    <Id>472668719</Id>
+    <Name>Joseph</Name>
+    <Phone>521693934</Phone>
+    <Longitude>
+      <Degrees>29</Degrees>
+      <Minutes>34</Minutes>
+      <Seconds>3.7614434503775556</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
       <Minutes>35</Minutes>
-      <Seconds>47.42356510300306</Seconds>
+      <Seconds>54.625616500052274</Seconds>
       <Direction>N</Direction>
     </Latitude>
   </Customer>
   <Customer>
-    <Id>474394699</Id>
-    <Name>Adi</Name>
-    <Phone>526699895</Phone>
+    <Id>542829689</Id>
+    <Name>Yoram</Name>
+    <Phone>525526382</Phone>
     <Longitude>
       <Degrees>30</Degrees>
-      <Minutes>9</Minutes>
-      <Seconds>19.125394717761083</Seconds>
+      <Minutes>50</Minutes>
+      <Seconds>59.652589279430686</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
-      <Minutes>41</Minutes>
-      <Seconds>48.32071758317761</Seconds>
+      <Minutes>42</Minutes>
+      <Seconds>0.587669760803692</Seconds>
       <Direction>N</Direction>
     </Latitude>
   </Customer>
   <Customer>
-    <Id>638090241</Id>
-    <Name>Bilbo Baggins</Name>
-    <Phone>523156580</Phone>
+    <Id>349156464</Id>
+    <Name>Devorah</Name>
+    <Phone>529063646</Phone>
     <Longitude>
-      <Degrees>29</Degrees>
-      <Minutes>36</Minutes>
-      <Seconds>25.947873054421507</Seconds>
+      <Degrees>30</Degrees>
+      <Minutes>3</Minutes>
+      <Seconds>30.832742038022843</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
-      <Minutes>52</Minutes>
-      <Seconds>56.752202593692346</Seconds>
+      <Minutes>43</Minutes>
+      <Seconds>26.796668771654367</Seconds>
       <Direction>N</Direction>
     </Latitude>
   </Customer>
   <Customer>
-    <Id>132657211</Id>
-    <Name>Paul</Name>
-    <Phone>523177435</Phone>
-    <Longitude>
-      <Degrees>29</Degrees>
-      <Minutes>32</Minutes>
-      <Seconds>3.449797975947149</Seconds>
-      <Direction>E</Direction>
-    </Longitude>
-    <Latitude>
-      <Degrees>34</Degrees>
-      <Minutes>47</Minutes>
-      <Seconds>37.38193043440697</Seconds>
-      <Direction>N</Direction>
-    </Latitude>
-  </Customer>
-  <Customer>
-    <Id>735118788</Id>
-    <Name>Joseph</Name>
-    <Phone>522704326</Phone>
+    <Id>884775186</Id>
+    <Name>Simcha</Name>
+    <Phone>524489673</Phone>
     <Longitude>
       <Degrees>31</Degrees>
-      <Minutes>28</Minutes>
-      <Seconds>50.47449845321535</Seconds>
+      <Minutes>23</Minutes>
+      <Seconds>40.048704370317864</Seconds>
       <Direction>E</Direction>
     </Longitude>
     <Latitude>
       <Degrees>34</Degrees>
-      <Minutes>56</Minutes>
-      <Seconds>12.743330995494034</Seconds>
-      <Direction>N</Direction>
-    </Latitude>
-  </Customer>
-  <Customer>
-    <Id>668212108</Id>
-    <Name>Yoram</Name>
-    <Phone>526833235</Phone>
-    <Longitude>
-      <Degrees>29</Degrees>
-      <Minutes>42</Minutes>
-      <Seconds>56.987459117444814</Seconds>
-      <Direction>E</Direction>
-    </Longitude>
-    <Latitude>
-      <Degrees>34</Degrees>
-      <Minutes>49</Minutes>
-      <Seconds>41.556303902863874</Seconds>
-      <Direction>N</Direction>
-    </Latitude>
-  </Customer>
-  <Customer>
-    <Id>201891228</Id>
-    <Name>Devorah</Name>
-    <Phone>526571610</Phone>
-    <Longitude>
-      <Degrees>30</Degrees>
-      <Minutes>33</Minutes>
-      <Seconds>26.49054990397417</Seconds>
-      <Direction>E</Direction>
-    </Longitude>
-    <Latitude>
-      <Degrees>35</Degrees>
-      <Minutes>10</Minutes>
-      <Seconds>17.55451553442981</Seconds>
-      <Direction>N</Direction>
-    </Latitude>
-  </Customer>
-  <Customer>
-    <Id>426740196</Id>
-    <Name>Simcha</Name>
-    <Phone>522909474</Phone>
-    <Longitude>
-      <Degrees>30</Degrees>
-      <Minutes>28</Minutes>
-      <Seconds>5.904242966658785</Seconds>
-      <Direction>E</Direction>
-    </Longitude>
-    <Latitude>
-      <Degrees>34</Degrees>
-      <Minutes>42</Minutes>
-      <Seconds>32.53584691960714</Seconds>
+      <Minutes>34</Minutes>
+      <Seconds>2.9903991912287893</Seconds>
       <Direction>N</Direction>
     </Latitude>
   </Customer>

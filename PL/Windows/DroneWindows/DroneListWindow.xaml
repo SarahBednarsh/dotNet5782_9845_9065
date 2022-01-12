@@ -14,7 +14,7 @@
     </Window.Resources>
     <Grid>
 
-        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,19,239,89" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid x:Name="droneDataGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" ItemBindingGroup="{Binding Source}" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="10,10,221,89">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
