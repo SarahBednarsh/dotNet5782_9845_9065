@@ -329,7 +329,7 @@ namespace PL
             }
         }
         #endregion
-
+       
         private void updateView()
         {
             if(closingRequested)
@@ -344,7 +344,6 @@ namespace PL
                 DroneListWindow.Drones[windowIndex] = Adapter.DroneToListBotoPo(bl.SearchDroneToList((DataContext as Drone).Id));
             }
             InitializeActionsButton(DataContext as Drone);
-
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
