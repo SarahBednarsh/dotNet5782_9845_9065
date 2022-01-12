@@ -22,12 +22,10 @@ namespace DalApi
                 throw new DalConfigException($"Wrong Dal type: {dalType}", exception);
             }
             string dalPackageName = dalPackage.PackageName;
-            string dalNameSpace = dalPackage.NameSpace;
-            string dalClassName = dalPackage.ClassName;
 
             try
             {
-                Assembly.Load (dalPackageName);
+                Assembly.Load(dalPackageName);
             }
             catch (Exception ex)
             {

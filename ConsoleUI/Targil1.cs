@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-            DalApi.IDal project = DalFactory.GetDal("DalObject");
+            DalApi.IDal project = DalFactory.GetDal("list");
             Actions option;
             do
             {
