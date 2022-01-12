@@ -127,7 +127,7 @@ namespace BL
                         else if (BLparcel.Attribution != null)
                             state = States.Attributed;
                         CustomerInParcel tmp = new CustomerInParcel { Id = parcel.TargetId, Name = dalAP.SearchCustomer(parcel.TargetId).Name };
-                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = customer.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
+                        customer.AtCustomer.Add(new ParcelAtCustomer { Id = parcel.Id, Customer = tmp, Priority = (Priorities)parcel.Priority, State = state, Weight = (WeightCategories)parcel.Weight });
                     }
                     if (customer.Id == parcel.TargetId)//to this customer
                     {

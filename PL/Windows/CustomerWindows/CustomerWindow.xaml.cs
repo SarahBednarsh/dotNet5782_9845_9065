@@ -60,7 +60,8 @@ namespace PL
             try
             {
                 Parcel parcel = Adapter.ParcelBotoPo(bl.SearchParcel(parcelAtCustomer.Id));
-                new ParcelWindow(parcel).Show();
+                new ParcelWindow(parcel).ShowDialog();
+                DataContext = Adapter.CustomerBotoPo(bl.SearchCustomer((DataContext as Customer).Id));
             }
             catch(Exception ex)
             {
