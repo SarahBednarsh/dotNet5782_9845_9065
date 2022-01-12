@@ -1,53 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDrone>
   <Drone>
-    <Id>5933</Id>
+    <Id>9998</Id>
     <Model>model0</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <Id>1344</Id>
+    <Id>8683</Id>
     <Model>model1</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>3752</Id>
+    <Id>8774</Id>
     <Model>model2</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>8277</Id>
+    <Id>9033</Id>
     <Model>model3</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <Id>6056</Id>
+    <Id>1367</Id>
     <Model>model4</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>9556</Id>
+    <Id>8155</Id>
     <Model>model5</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>8146</Id>
+    <Id>7509</Id>
     <Model>model6</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>4839</Id>
+    <Id>9313</Id>
     <Model>model7</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <Id>9461</Id>
+    <Id>5255</Id>
     <Model>model8</Model>
-    <MaxWeight>Medium</MaxWeight>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <Id>1979</Id>
+    <Id>1019</Id>
     <Model>model9</Model>
-    <MaxWeight>Medium</MaxWeight>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
 </ArrayOfDrone>
