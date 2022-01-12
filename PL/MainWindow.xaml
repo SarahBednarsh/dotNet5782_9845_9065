@@ -18,7 +18,7 @@
             <ColumnDefinition Width="133*"/>
             <ColumnDefinition Width="134*"/>
         </Grid.ColumnDefinitions>
-                <Image Visibility="Visible" HorizontalAlignment="Left" Opacity="0.35" Height="468" VerticalAlignment="Top" Width="851" Source="/DroneNature.png" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-26,0,0,0"/>
+        <Image Visibility="Visible" HorizontalAlignment="Left" Opacity="0.35" Height="468" VerticalAlignment="Top" Width="851" Source="/DroneNature.png" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-26,0,0,0"/>
         <Label x:Name="title" Content="Welcome to the .DRONE company! &#xD;&#xA;Please sign in" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="319,60,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="71" Width="255"/>
         <Separator x:Name="separator"  HorizontalAlignment="Left" Height="100" Margin="393,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="5" Background="#FF8BC836"/>
         <Label x:Name="customerTitle" Content="Customer" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
@@ -29,9 +29,6 @@
         <Button x:Name="managerSignup" Content="Sign up" HorizontalAlignment="Center" Height="34" Margin="0,88,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="170" Click="managerSignup_Click"/>
         <Image Visibility="Hidden" HorizontalAlignment="Left" Height="131" Margin="330,121,0,0" VerticalAlignment="Top" Width="145" Source="/logo.png" Grid.ColumnSpan="2"/>
         <Image HorizontalAlignment="Left" Opacity="0.7" Height="154" Margin="222,6,0,0" VerticalAlignment="Top" Width="175" Source="/whitelogo-removebg-preview (3).png" Grid.Column="1"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="80,60,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <!-- long hand form for setting the message -->
-
-
+                
     </Grid>
 </Window>

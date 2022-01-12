@@ -42,7 +42,7 @@ namespace Dal
         private readonly string parcelsPath = @"ParcelsXml.xml"; //XMLSerializer
         private readonly string droneChargesPath = @"DroneChargesXml.xml"; //XMLSerializer
         private readonly string usersPath = @"UsersXml.xml"; //XMLSerializer
-        private readonly string batteryCunsumptionPath = @"BatteryConsumptionXml.xml"; //XElement
+        private readonly string batteryCunsumptionPath = @"BatteryConsumptionXml.xml"; //XMLSerializer
         private readonly string runningNumbersPath = @"RunningNumbersXml.xml"; //XMLSerializer
         #endregion
 
@@ -173,7 +173,7 @@ namespace Dal
                    {
                        Id = int.Parse(d.Element("Id").Value),
                        Model = d.Element("Model").Value,
-                       MaxWeight = (WeightCategories)Enum.Parse(typeof(WeightCategories),d.Element("MaxWeight").Value)
+                       MaxWeight = (WeightCategories)Enum.Parse(typeof(WeightCategories), d.Element("MaxWeight").Value)
                    };
         }
         #endregion
@@ -445,7 +445,7 @@ namespace Dal
         }
         #endregion
 
-        #region Battery Consumption Data XElement
+        #region Battery Consumption Data XMLSerializer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<double> ReqPowerConsumption()
         {

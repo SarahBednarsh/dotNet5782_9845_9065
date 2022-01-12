@@ -4,6 +4,5 @@
   <dal-packages>
     <list namespace="Dal" class="DalObject">DalObject</list>
     <xml namespace="Dal" class="DalXml">DalXml</xml>
-    <!--something with oracle-->
   </dal-packages>
 </config>

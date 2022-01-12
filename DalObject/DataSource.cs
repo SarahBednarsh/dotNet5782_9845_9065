@@ -78,7 +78,7 @@ namespace Dal
                 };
                 DataSource.Parcels.Add(parcel);
             }
-            initializeXML.loadXML();
+            //initializeXML.loadXML();
         }
     }
 }

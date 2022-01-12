@@ -68,8 +68,6 @@ namespace Dal
         {
             return new List<Parcel>(DataSource.Parcels);
         }
-
-
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> ParcelsWithNoDrone()
         {

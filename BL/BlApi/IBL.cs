@@ -154,10 +154,13 @@ namespace BlApi
         /// <param name="customerId"></param>
         /// <returns></returns>
         public IEnumerable<ParcelToList> ListParcelFromCustomer(int customerId);
-        //public IEnumerable<DroneToList> ListDroneConditional(Predicate<DroneToList> predicate);
-        //public IEnumerable<ParcelToList> ListParcelConditional(Predicate<ParcelToList> predicate);
-        //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate);
-        //public IEnumerable<CustomerToList> ListCustomerConditional(Predicate<CustomerToList> predicate);
+        /// <summary>
+        /// returns all parcels created in time range
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        IEnumerable<ParcelToList> ListParcelCreatedInTimeRange(DateTime begin, DateTime end);
         #endregion
 
         #region deleting
@@ -167,8 +170,23 @@ namespace BlApi
         void DeleteStation(int stationId);
         void DeleteUser(int id);
         #endregion
+
+        /// <summary>
+        /// checks if the user information is correct
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="isManager"></param>
+        /// <returns></returns>
         bool UserInfoCorrect(string userName, string password, bool isManager);
+
+        /// <summary>
+        /// activates the drone simulator in a successful fashion
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="update"></param>
+        /// <param name="stop"></param>
         void ActivateDroneSimulator(int droneId, Action update, Func<bool> stop);
-        IEnumerable<ParcelToList> ListParcelCreatedInTimeRange(DateTime begin, DateTime end);
+
     }
 }
