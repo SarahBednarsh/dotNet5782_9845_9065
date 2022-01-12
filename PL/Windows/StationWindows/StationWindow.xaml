@@ -58,7 +58,6 @@
                 </DataGrid>
 
 
-                <!--<ListBox x:Name="chargingList" MouseDoubleClick="chargingList_MouseDoubleClick" ItemsSource="{Binding Charging}"  Background="#FFB2EECA"/>-->
             </Expander>
             <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="54,21,0,0" Click="Update_Click" Grid.Row="1"/>
             <Button x:Name="actionsClose" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="148" Margin="224,21,0,0" Click="Close_Click" Grid.Row="1"/>

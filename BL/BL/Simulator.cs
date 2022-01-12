@@ -18,7 +18,7 @@ namespace BL
         enum ChargingStages { Initial, Traveling, Charging, Waiting }
         private const double VELOCITY = 40;
         private const int DELAY_IN_MSEC = 500;
-        private const double DISTANCE_ACCURACY = 0.01;
+        private const double DISTANCE_ACCURACY = 0.001;
         private ChargingStages chargingStage = ChargingStages.Charging;
         private Location targetLocation;
         private double distanceFromTarget = 0;
@@ -181,14 +181,14 @@ namespace BL
             }
             double timePassed = (double)DELAY_IN_MSEC / 1000;
             double distanceChange = VELOCITY * timePassed;
-            double change = Min(distanceChange, distanceFromTarget);
+            double change = Min(distanceChange, distanceFromTarget); //in case the drone has theoretically passed the target
             double proportionalChange = change / distanceFromTarget;
             drone.Battery = Max(0.0, drone.Battery - change * batteryUsage);
             double droneLat = StaticSexagesimal.ParseDouble(drone.Location.Latitude);
             double droneLong = StaticSexagesimal.ParseDouble(drone.Location.Longitude);
             double targetLat = StaticSexagesimal.ParseDouble(targetLocation.Latitude);
             double targetLong = StaticSexagesimal.ParseDouble(targetLocation.Longitude);
-            double lat = droneLat + (targetLat - droneLat) * proportionalChange;
+            double lat = droneLat + (targetLat - droneLat) * proportionalChange; //we ignore the shipua of earth
             double lon = droneLong + (targetLong - droneLong) * proportionalChange;
             drone.Location = LocationStaticClass.InitializeLocation(lon, lat);
             distanceFromTarget = LocationStaticClass.CalcDis(drone.Location, targetLocation);

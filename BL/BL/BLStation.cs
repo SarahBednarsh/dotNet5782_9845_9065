@@ -21,7 +21,7 @@ namespace BL
         {
             if (longitude < 29.489 || longitude > 33.154 || latitude < 34.361 || latitude > 35.475)
             { throw new FormatException("The location is not in Isreal"); }
-            if(chargeSlots<1)
+            if (chargeSlots < 1)
                 throw new FormatException("Charging slots amount must be positive");
             lock (dalAP)
             {
@@ -129,12 +129,6 @@ namespace BL
                        };
             }
         }
-        //public IEnumerable<StationToList> ListStationAvailable()
-        //{
-        //    return from station in YieldStation()
-        //           where station.OpenChargeSlots > 0 //station is available
-        //           select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.OpenChargeSlots, UsedChargeSlots = station.Charging.Count };
-        //}
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> ListStationAvailable()
         {
@@ -144,12 +138,6 @@ namespace BL
                        select new StationToList { Id = station.Id, Name = station.Name, OpenChargeSlots = station.ChargeSlots, UsedChargeSlots = SearchStation(station.Id).Charging.Count };
             }
         }
-        //public IEnumerable<StationToList> ListStationConditional(Predicate<StationToList> predicate)
-        //{
-        //    return from station in ListStation()
-        //           where predicate(station)
-        //           select station;
-        //}
     }
 }
 

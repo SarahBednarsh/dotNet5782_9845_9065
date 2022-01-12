@@ -23,12 +23,19 @@ namespace PL
     public partial class StationWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        /// <summary>
+        /// Add station
+        /// </summary>
         public StationWindow()
         {
             InitializeComponent();
             addGrid.Visibility = Visibility.Visible;
             Width = 400;
         }
+        /// <summary>
+        /// Station editing and viewing
+        /// </summary>
+        /// <param name="station"></param>
         public StationWindow(Station station)
         {
             InitializeComponent();

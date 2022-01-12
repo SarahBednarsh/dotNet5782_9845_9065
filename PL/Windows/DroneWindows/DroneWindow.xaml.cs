@@ -31,12 +31,12 @@ namespace PL
         private int windowIndex;
         private bool closingRequested = false;
         private BackgroundWorker worker;
-        /// <summary>
-        /// add ctor
-        /// </summary>
-        /// <param name="bl"></param>
-        /// <param name="droneId"></param>
+
         #region initialization
+
+        /// <summary>
+        /// Add drone
+        /// </summary>
         public DroneWindow()
         {
             InitializeComponent();
@@ -45,6 +45,10 @@ namespace PL
             StationIdSelectorNew.ItemsSource = from station in bl.ListStation()
                                                select station.Id;
         }
+        /// <summary>
+        /// Drone editing and viewing
+        /// </summary>
+        /// <param name="drone"></param>
         public DroneWindow(Drone drone)
         {
             InitializeComponent();

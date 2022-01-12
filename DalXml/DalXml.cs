@@ -44,7 +44,6 @@ namespace Dal
         private readonly string usersPath = @"UsersXml.xml"; //XMLSerializer
         private readonly string batteryCunsumptionPath = @"BatteryConsumptionXml.xml"; //XElement
         private readonly string runningNumbersPath = @"RunningNumbersXml.xml"; //XMLSerializer
-        private readonly string defaultsPath = @"DefaultsXml.xml"; //XMLElement
         #endregion
 
         #region Drones XElement
@@ -456,17 +455,5 @@ namespace Dal
         }
         #endregion
 
-        #region Defaults XElement
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public string GetDefaultPhoto()
-        {
-            XElement defaultsRoot = XmlTools.LoadListFromXMLElement(defaultsPath);
-            string photo = (from def in defaultsRoot.Elements()
-                    select def.Value).FirstOrDefault();
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string absolutePhotoPath = currentDirectory + @"\" + photo;
-            return absolutePhotoPath;
-        }
-        #endregion
     }
 }

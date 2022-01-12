@@ -22,6 +22,10 @@ namespace PL
     public partial class ParcelWindow : Window
     {
         private readonly IBL bl = BlFactory.GetBL();
+        /// <summary>
+        /// Add parcel ctor
+        /// </summary>
+        /// <param name="senderId">the id of user sending a parcel</param>
         public ParcelWindow(int senderId = -1)
         {
             InitializeComponent();
@@ -40,6 +44,11 @@ namespace PL
             priorityBox.ItemsSource = Enum.GetValues(typeof(Priorities));
 
         }
+        /// <summary>
+        /// Parcel editing and viewing
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <param name="isManager">to differentiate between manager's actions and user's permissions</param>
         public ParcelWindow(Parcel parcel, bool isManager = true)
         {
             InitializeComponent();
@@ -79,11 +88,10 @@ namespace PL
         }
         private void Deliver_Click(object sender, RoutedEventArgs e)
         {
-            
+
             Int32.TryParse((DataContext as Parcel).Drone.Id, out int id);
             bl.DeliverAParcel(id);
             ConfirmAction.IsEnabled = true;
-            //InitializeActionsButton(plParcel);
             Close();
 
         }
@@ -121,7 +129,7 @@ namespace PL
                 bl.DeleteParcel((DataContext as Parcel).Id);
                 Close();
                 MessageBox.Show("Parcel deleted succesfully", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;            
+                return;
             }
             MessageBox.Show("Action was cancelled succesfully", "CANCEL", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -144,7 +152,7 @@ namespace PL
                 bl.AddParcel((int)senderBox.SelectedItem, (int)targetBox.SelectedItem, (BO.WeightCategories)weightBox.SelectedItem, (BO.Priorities)priorityBox.SelectedItem);
                 MessageBox.Show("Parcel added successfully");
             }
-            catch(Exception excpetion)
+            catch (Exception excpetion)
             {
                 MessageBox.Show(excpetion.Message);
             }

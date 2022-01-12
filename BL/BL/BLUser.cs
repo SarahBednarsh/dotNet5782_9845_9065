@@ -20,24 +20,16 @@ namespace BL
         public void AddUser(int id, string userName, string photo, string email, string password, bool isManager)
         {
             string photoPath;
-            lock (dalAP)
-            {
-                if (photo == null)
-                    photo = @"file:\\\" + dalAP.GetDefaultPhoto();
-            }
             try
             {
                 string currentDirectory = Directory.GetCurrentDirectory();
-                if(isManager)
+                if (isManager)
                     photoPath = @"\ManagerPhotos\" + id + @".jpg";
                 else
                     photoPath = @"\CustomerPhotos\" + id + @".jpg";
                 string absolutePhotoPath = currentDirectory + photoPath;
 
 
-                //(File.Create(photoPath)).Close();
-                //    (File.Create(photoPath)).Close();
-                
                 Directory.SetCurrentDirectory(@"C:\");
                 System.IO.File.Copy(photo.Substring(8), absolutePhotoPath, true);
                 Directory.SetCurrentDirectory(currentDirectory);
@@ -139,7 +131,7 @@ namespace BL
             }
             return res.ToString();
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteUser(int id)
         {
