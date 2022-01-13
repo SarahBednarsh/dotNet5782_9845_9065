@@ -266,7 +266,6 @@ namespace PL
                 bl.PickUpAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Picked up parcel successfully");
                 updateView();
-                //Close();
             }
             catch (Exception exception)
             {
@@ -280,7 +279,6 @@ namespace PL
                 bl.DeliverAParcel((DataContext as Drone).Id);
                 MessageBox.Show("Delivered parcel successfully");
                 updateView();
-                //Close();
             }
             catch (Exception exception)
             {
@@ -293,7 +291,6 @@ namespace PL
             {
                 int.TryParse(IdBox.Text, out int id);
                 bl.AttributeAParcel(id);
-
                 MessageBox.Show("Attributed parcel successfully");
                 updateView();
             }

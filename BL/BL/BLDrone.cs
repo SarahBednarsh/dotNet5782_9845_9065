@@ -169,7 +169,7 @@ namespace BL
                 throw new CannotSendToCharge("All stations are full");
             if (stationToSendTo.OpenChargeSlots == 0)
                 throw new CannotSendToCharge("All charge slots are taken");
-            double usage = GetUsage(drone.MaxWeight);
+            double usage = available;
             if (drone.Battery < minDistance * usage)
                 throw new NotEnoughBattery("Not enough battery to get to station");
             DroneToList droneInBL = dronesBL.Find(x => x.Id == droneId);
@@ -219,8 +219,8 @@ namespace BL
                                                 where parcel.Priority == highest && parcel.Weight <= drone.MaxWeight //drone can carry the current parcel
                                                 select parcel).OrderBy(x => LocationStaticClass.CalcDis(GetSenderLocation(x), drone.Location));
                 //sort by increasing order of distance to the drone
-                if (relevant.Count() == 0)
-                    throw new NoRelevantParcels("No parcels left for delivering");
+                //if (relevant.Count() == 0)
+                  //  throw new NoRelevantParcels("No parcels left for delivering");
                 foreach (Parcel p in relevant)
                 {
                     if (CanDeliver(drone, p)) //if drone can deliver parcel

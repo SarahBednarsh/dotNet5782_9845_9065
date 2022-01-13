@@ -45,8 +45,8 @@
     <Requested>2020-04-01T15:47:35</Requested>
     <DroneId>9033</DroneId>
     <Scheduled>2020-04-26T11:55:48</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <PickedUp>2022-01-13T01:50:55.5784065+02:00</PickedUp>
+    <Delivered>2022-01-13T01:50:56.716287+02:00</Delivered>
   </Parcel>
   <Parcel>
     <Id>146306541</Id>
@@ -67,8 +67,8 @@
     <Weight>Light</Weight>
     <Priority>Quick</Priority>
     <Requested>2020-06-01T16:54:23</Requested>
-    <DroneId>9998</DroneId>
-    <Scheduled>2020-06-19T14:14:41</Scheduled>
+    <DroneId>7509</DroneId>
+    <Scheduled>2022-01-13T09:03:34.1869755+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
   </Parcel>

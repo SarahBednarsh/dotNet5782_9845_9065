@@ -39,7 +39,7 @@ namespace BL
         internal static double light = 0;
         internal static double medium = 0;
         internal static double heavy = 0;
-        internal static double chargingPace = 0; //battery percantage per second
+        internal static double chargingPace = 0; //battery percentage per second
         internal List<DroneToList> dronesBL;
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BL()

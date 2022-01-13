@@ -30,8 +30,8 @@ namespace Dal
 
             Random r = new Random();
             int Id;
-            string[] stationNames = new string[2] { "station1", "station2" };
-            for (int i = 0; i < 2; i++)//adding stations
+            string[] stationNames = new string[3] { "station1", "station2", "station3" };
+            for (int i = 0; i < 3; i++)//adding stations
             {
                 Id = r.Next(1000, 10000);
                 while (DataSource.Stations.Exists(x => x.Id == Id))
@@ -57,9 +57,9 @@ namespace Dal
                 DataSource.Customers.Add(customer);
             }
             DataSource.Config.RunningParcelNumber = r.Next(1000000, 1000000000);
-            for (int i = 0; i < 12; i++)//adding parcels
+            for (int i = 0; i < 16; i++)//adding parcels
             {
-                DateTime? start = new DateTime(2020, i + 1, 1,r.Next(24),r.Next(60),r.Next(60));
+                DateTime? start = new DateTime(2020, (i + 1)%12+1, 1,r.Next(24),r.Next(60),r.Next(60));
                 int forScheduled = r.Next() % 8 != 0 ? r.Next(1, 25) : 0;
                 int forPickedUp = (r.Next() % 4 != 0 && forScheduled != 0) ? forScheduled + 1 : 0;
                 DateTime? delivered = r.Next() % 4 != 0 && forPickedUp != 0 ? start + TimeSpan.FromDays(forPickedUp + 1) + TimeSpan.FromSeconds(r.Next(60 * 60 * 24)) : null;
@@ -67,7 +67,7 @@ namespace Dal
                 {
                     Id = DataSource.Config.RunningParcelNumber++,
                     SenderId = Customers[i%10].Id,
-                    TargetId = Customers[(12 - i)%10].Id,
+                    TargetId = Customers[(16 - i)%10].Id,
                     Weight = (WeightCategories)r.Next(1, 3),
                     Priority = (Priorities)r.Next(1, 3),
                     Requested = start,
