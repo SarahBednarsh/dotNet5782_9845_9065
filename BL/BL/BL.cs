@@ -45,7 +45,7 @@ namespace BL
         public BL()
         {
 
-            dalAP = DalFactory.GetDal("list");
+            dalAP = DalFactory.GetDal("xml");
 
             lock (dalAP)
             {

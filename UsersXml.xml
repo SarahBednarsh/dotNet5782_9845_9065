@@ -1,4 +1,21 @@
 <?xml version="1.0"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  
+  <User>
+    <Id>209779065</Id>
+    <UserName>sarah</UserName>
+    <Photo>\ManagerPhotos\209779065.jpg</Photo>
+    <Email>sarahbednarsh@gmail.com</Email>
+    <IsManager>true</IsManager>
+    <Salt>1971675022</Salt>
+    <HashedPassword>xNBbKvXArndSY1+YlIsMZDW8BMnGyCgmksbMxvdLzotjbHlOrv1P2X2iQZNRjp7UxEMxPLEYEoHagZ5blXpxJg==</HashedPassword>
+  </User>
+  <User>
+    <Id>214859845</Id>
+    <UserName>liorahma</UserName>
+    <Photo>\CustomerPhotos\214859845.jpg</Photo>
+    <Email>liorahmm@gmail.com</Email>
+    <IsManager>false</IsManager>
+    <Salt>2004554130</Salt>
+    <HashedPassword>xV+1lojLu/5bJKETV3W4yYLzhAZ+3uI5l5TR9DelK/hwX1hcjDbYK/N2zVtsFidyUjMwOi+GawJwAY7B4nc/SQ==</HashedPassword>
+  </User>
 </ArrayOfUser>
