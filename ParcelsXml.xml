@@ -192,4 +192,16 @@
     <PickedUp>2020-05-13T00:42:13</PickedUp>
     <Delivered>2020-05-13T11:51:13</Delivered>
   </Parcel>
+  <Parcel>
+    <Id>40949</Id>
+    <SenderId>214859845</SenderId>
+    <TargetId>148854540</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Normal</Priority>
+    <Requested>2022-01-13T11:43:40.1442224+02:00</Requested>
+    <DroneId>-1</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+  </Parcel>
 </ArrayOfParcel>

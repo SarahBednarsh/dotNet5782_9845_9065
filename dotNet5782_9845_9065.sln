@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E803E9D-BEED-416C-BCAA-9DAC8418D0E2}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		קובץ פירוט בונוסים.docx = קובץ פירוט בונוסים.docx
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleDal", "ConsoleUI\ConsoleDal.csproj", "{487D5D43-950E-481E-AF2C-9BD8D48C75FA}"

@@ -44,7 +44,7 @@ namespace BL
                 message.To.Add(email);
                 lock (dalAP)
                 {
-                    dalAP.AddUser(id, userName, photoPath, email, password, isManager);
+                    dalAP.AddUser(id, userName, photo, email, password, isManager);
                 }
             }
             catch (UserException exception)
